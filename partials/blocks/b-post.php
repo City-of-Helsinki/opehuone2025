@@ -1,0 +1,60 @@
+<?php
+
+$block_title      = isset( $args['title'] ) ? $args['title'] : null;
+$block_url        = isset( $args['url'] ) ? $args['url'] : null;
+$block_media_id   = isset( $args['media_id'] ) ? $args['media_id'] : null;
+$block_excerpt    = isset( $args['excerpt'] ) ? $args['excerpt'] : null;
+$block_date       = isset( $args['date'] ) ? $args['date'] : null;
+$block_categories = isset( $args['categories'] ) ? $args['categories'] : [];
+$block_is_sticky  = isset( $args['is_sticky'] ) ? $args['is_sticky'] : false;
+$block_is_pinned  = isset( $args['is_pinned'] ) ? $args['is_pinned'] : false;
+
+$pin_svg     = 'pin';
+$pinner_aria = 'Aseta uutinen kirjanmerkiksi';
+
+if ( $block_is_pinned ) {
+	$pin_svg     = 'pinned';
+	$pinner_aria = 'Poista uutinen kirjanmerkeistä';
+}
+?>
+<div class="b-post">
+	<?php if ( ! empty( $block_media_id ) ) : ?>
+		<figure class="b-post__figure">
+			<?php echo wp_get_attachment_image( $block_media_id, 'medium', false, [ 'class' => 'b-post__image' ] ); ?>
+			<?php if ( $block_is_sticky ) : ?>
+				<span class="b-post__sticky">Uutisnosto</span>
+			<?php endif; ?>
+			<button class="b-post__pinner" aria-label="<?php echo esc_attr( $pinner_aria ); ?>">
+				<?php \Opehuone\Helpers\the_svg( 'icons/' . $pin_svg ); ?>
+			</button>
+		</figure>
+	<?php endif; ?>
+	<?php if ( ! empty( $block_date ) ) : ?>
+		<time class="b-post__date">
+			<?php echo esc_html( $block_date ); ?>
+		</time>
+	<?php endif; ?>
+	<?php if ( ! empty( $block_url ) && ! empty( $block_title ) ) : ?>
+		<a href="<?php echo esc_url( $block_url ); ?>" class="b-post__title">
+			<?php echo esc_html( $block_title ); ?>
+		</a>
+	<?php endif; ?>
+	<?php if ( ! empty( $block_excerpt ) ) : ?>
+		<p class="b-post__excerpt">
+			<?php echo esc_html( $block_excerpt ); ?>
+		</p>
+	<?php endif; ?>
+	<?php if ( count( $block_categories ) > 0 ) : ?>
+		<ul class="b-post__categories">
+			<?php
+			foreach ( $block_categories as $category ) {
+				?>
+				<li>
+					<?php echo esc_html( $category->name ); ?>
+				</li>
+				<?php
+			}
+			?>
+		</ul>
+	<?php endif; ?>
+</div>

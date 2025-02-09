@@ -9,6 +9,7 @@ $query = new WP_Query( $query_args );
 if ( ! $query->have_posts() ) {
 	return;
 }
+$user_favs = \Opehuone\Utils\get_user_favs();
 ?>
 <h2>
 	Uutiset ja tiedotteet
@@ -26,9 +27,10 @@ if ( ! $query->have_posts() ) {
 			'is_sticky'  => is_sticky(),
 			'categories' => get_the_category(),
 			'date'       => get_the_date(),
+			'is_pinned'  => in_array( get_the_ID(), $user_favs ),
 		];
 
-		get_template_part( 'partials/blocks/b-post' );
+		get_template_part( 'partials/blocks/b-post', '', $block_args );
 	}
 
 	wp_reset_postdata();

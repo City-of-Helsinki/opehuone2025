@@ -1,0 +1,112 @@
+.b-posts-row {
+	display: grid;
+	gap: var(--opehuone--spacing--small);
+	grid-template-columns: auto;
+
+	@include media-breakpoint-up(sm) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@include media-breakpoint-up(md) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	@include media-breakpoint-up(xl) {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.b-post {
+	position: relative;
+
+	&__figure {
+		position: relative;
+		aspect-ratio: 3/2;
+		margin: 0;
+	}
+
+	&__image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		vertical-align: bottom;
+	}
+
+	&__date {
+		display: block;
+		font-size: var(--opehuone--font-size--x-small);
+		line-height: 1;
+		margin-bottom: var(--opehuone--spacing--x-small);
+		margin-top: rem(4px);
+	}
+
+	&__title {
+		display: block;
+		font-size: var(--opehuone--font-size--normal);
+		font-weight: 700;
+		line-height: calc(20 / 16);
+		margin-bottom: var(--opehuone--spacing--x-small);
+		text-decoration: none;
+
+		@include hover-focus {
+			text-decoration: underline;
+		}
+
+		&:before {
+			position: absolute;
+			content: "";
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&__excerpt {
+		display: block;
+		font-size: var(--opehuone--font-size--small);
+		font-weight: 400;
+		line-height: calc(20 / 14);
+		margin-bottom: var(--opehuone--spacing--x-small);
+	}
+
+	&__categories {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: var(--opehuone--spacing--2-x-small);
+		font-size: rem(10px);
+
+		> li {
+			display: block;
+			background-color: #dff7eb;
+			padding: 6px 12px;
+			border-radius: 32px;
+		}
+	}
+
+	&__sticky {
+		display: block;
+		padding: rem(7px 12px);
+		font-size: var(--opehuone--font-size--normal);
+		font-weight: 500;
+		background-color: var(--color-engel);
+		position: absolute;
+		left: 0;
+		bottom: 0;
+	}
+
+	&__pinner {
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
+		position: absolute;
+		z-index: 5;
+		top: 0;
+		right: 0;
+		padding: 4px;
+	}
+}
