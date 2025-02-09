@@ -1,5 +1,7 @@
 <?php
 
+use \Opehuone\Helpers;
+
 /**
  * Require helpers
  */
@@ -18,23 +20,28 @@ function opehuone_theme() {
 /**
  * Require some classes
  */
-require_files( dirname( __FILE__ ) . '/library/classes' );
+Helpers\require_files( dirname( __FILE__ ) . '/library/classes' );
+
+/**
+ * Require utils
+ */
+Helpers\require_files( dirname( __FILE__ ) . '/library/utils' );
 
 /**
  * Require acf options
  */
-require_files( dirname( __FILE__ ) . '/library/acf-options' );
+Helpers\require_files( dirname( __FILE__ ) . '/library/acf-options' );
 
 /**
  * Require custom post types and taxonomies
  */
-require_files( dirname( __FILE__ ) . '/library/custom-posts' );
-require_files( dirname( __FILE__ ) . '/library/taxonomies' );
+Helpers\require_files( dirname( __FILE__ ) . '/library/custom-posts' );
+Helpers\require_files( dirname( __FILE__ ) . '/library/taxonomies' );
 
 /**
  * Hooks
  */
-require_files( dirname( __FILE__ ) . '/library/hooks' );
+Helpers\require_files( dirname( __FILE__ ) . '/library/hooks' );
 
 /**
  * Register local ACF-json
