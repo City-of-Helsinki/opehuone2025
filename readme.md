@@ -16,7 +16,10 @@ This theme is meant to be child theme of [Helsinki parent theme](https://github.
 Install needed node module with `npm install`. Use example [Volta.sh](https://volta.sh/), to automatically set correct node version for the project. If you dont' have volta installed, check node version from package.json.
 
 `npm start` => Do dev work and use livereload to build css/js
+
 `npm run build` ==> Build css/js for production
+
+`npm run pretiier` => format your scss/js to prettier rules
 
 
 Readme updating....

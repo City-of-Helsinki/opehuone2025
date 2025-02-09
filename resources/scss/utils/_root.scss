@@ -1,34 +1,41 @@
 :root {
+	// Opehuone container related
+	--opehuone--container--width: 1410px;
+	--opehuone--container--padding: 1rem;
 
-  // Opehuone container related
-  --opehuone--container--width: 1410px;
-  --opehuone--container--padding: 1rem;
+	// Opehuone colors
+	--opehuone--color--green: #008741;
+	--opehuone--color--green--light: #00d7a7;
+	--opehuone--color--red: #e673a5;
+	--opehuone--color--red--light: #ffdbeb;
+	--opehuone--color--red--light-2: #fff0f7;
+	--opehuone--color--yellow: #ffe977;
+	--opehuone--color--yellow--light: #fff9db;
+	--opehuone--color--blue--light: #b5daf7;
+	--opehuone--color--blue--light-2: #e6f4ff;
+	--opehuone--color--black: #1a1a1a;
+	--opehuone--color--white: #ffffff;
 
-  // Opehuone colors
-  --opehuone--color--green: #008741;
-  --opehuone--color--green--light: #00D7A7;
-  --opehuone--color--red: #E673A5;
-  --opehuone--color--red--light: #FFDBEB;
-  --opehuone--color--red--light-2: #FFF0F7;
-  --opehuone--color--yellow: #FFE977;
-  --opehuone--color--yellow--light: #FFF9DB;
-  --opehuone--color--blue--light: #B5DAF7;
-  --opehuone--color--blue--light-2: #E6F4FF;
-  --opehuone--color--black: #1A1A1A;
-  --opehuone--color--white: #FFFFFF;
+	// Opehuone spacings
+	--opehuone--spacing--x-small: clamp(1rem, 1vw, 1.125rem); // 30px in desktop
+	--opehuone--spacing--small: clamp(1.5rem, 2vw, 1.875rem); // 30px in desktop
+	--opehuone--spacing--normal: clamp(1.8rem, 2vw, 2.5rem); // 40px in desktop
+	--opehuone--spacing--medium: clamp(
+		2.8rem,
+		4vw,
+		3.125rem
+	); // 50px in desktop
+	--opehuone--spacing--large: clamp(3rem, 5vw, 3.75rem); // 60px in desktop
 
-  // Opehuone spacings
-  --opehuone--spacing--x-small: clamp(1rem, 1vw, 1.125rem); // 30px in desktop
-  --opehuone--spacing--small: clamp(1.5rem, 2vw, 1.875rem); // 30px in desktop
-  --opehuone--spacing--normal: clamp(1.8rem, 2vw, 2.5rem); // 40px in desktop
-  --opehuone--spacing--medium: clamp(2.8rem, 4vw, 3.125rem); // 50px in desktop
-  --opehuone--spacing--large: clamp(3rem, 5vw, 3.75rem); // 60px in desktop
-
-  // Opehuone fontsizes
-  --opehuone--font-size--x-small: 0.75rem;
-  --opehuone--font-size--small: 0.875rem;
-  --opehuone--font-size--normal: 1rem;
-  --opehuone--font-size--medium: clamp(1rem, 1vw, 1.125rem);
-  --opehuone--font-size--large: clamp(1.125rem, 2vw, 1.5rem); // 24px in desktop
-  --opehuoen--font-size--x-large: clamp(1.5rem, 3vw, 2rem); // 24px in desktop
+	// Opehuone fontsizes
+	--opehuone--font-size--x-small: 0.75rem;
+	--opehuone--font-size--small: 0.875rem;
+	--opehuone--font-size--normal: 1rem;
+	--opehuone--font-size--medium: clamp(1rem, 1vw, 1.125rem);
+	--opehuone--font-size--large: clamp(
+		1.125rem,
+		2vw,
+		1.5rem
+	); // 24px in desktop
+	--opehuoen--font-size--x-large: clamp(1.5rem, 3vw, 2rem); // 24px in desktop
 }

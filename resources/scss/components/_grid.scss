@@ -1,9 +1,9 @@
 .opehuone-grid {
-  display: grid;
-  grid-template-columns: auto;
-  gap: var(--opehuone--spacing--normal);
+	display: grid;
+	grid-template-columns: auto;
+	gap: var(--opehuone--spacing--normal);
 
-  @include media-breakpoint-up(md) {
-    grid-template-columns: auto 360px;
-  }
+	@include media-breakpoint-up(md) {
+		grid-template-columns: auto 360px;
+	}
 }
