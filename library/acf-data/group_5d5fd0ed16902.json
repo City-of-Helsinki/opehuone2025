@@ -1,0 +1,43 @@
+{
+    "key": "group_5d5fd0ed16902",
+    "title": "Youtube tiedot",
+    "fields": [
+        {
+            "key": "field_5d5fd0f3a1b9a",
+            "label": "Youtube videon ID",
+            "name": "video_id",
+            "type": "text",
+            "instructions": "Jos haluat näyttää kuvan paikalla youtube videon, kopioi tällöin videon ID tähän kenttään.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1566560566
+}

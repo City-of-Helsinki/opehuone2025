@@ -1,0 +1,443 @@
+{
+    "key": "group_5d5a35bbf1e81",
+    "title": "Joustavan sisällön asetukset",
+    "fields": [
+        {
+            "key": "field_5d5a35cb10b75",
+            "label": "Joustava sisältö",
+            "name": "flexible_sections",
+            "type": "flexible_content",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layouts": {
+                "5d5a35d83a598": {
+                    "key": "5d5a35d83a598",
+                    "name": "basic_section",
+                    "label": "Perus sisältö",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5d5a35f110b76",
+                            "label": "Content",
+                            "name": "content",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_5d5a35fd10b77": {
+                    "key": "layout_5d5a35fd10b77",
+                    "name": "services_section",
+                    "label": "Palvelut",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5d5a363a10b78",
+                            "label": "Palvelut",
+                            "name": "services",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "collapsed": "",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "block",
+                            "button_label": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5d5a364910b79",
+                                    "label": "Perustiedot",
+                                    "name": "",
+                                    "type": "tab",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "placement": "top",
+                                    "endpoint": 0
+                                },
+                                {
+                                    "key": "field_5d5a365c10b7a",
+                                    "label": "Nimi",
+                                    "name": "name",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_5d5a366810b7b",
+                                    "label": "Ingressi",
+                                    "name": "ingress",
+                                    "type": "textarea",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "maxlength": "",
+                                    "rows": "",
+                                    "new_lines": ""
+                                },
+                                {
+                                    "key": "field_5d5a368c10b7c",
+                                    "label": "Tuoteomistaja",
+                                    "name": "product_owner",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_5d5a36a710b7d",
+                                    "label": "Kuva",
+                                    "name": "",
+                                    "type": "tab",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "placement": "top",
+                                    "endpoint": 0
+                                },
+                                {
+                                    "key": "field_5d5a36b010b7e",
+                                    "label": "Logo",
+                                    "name": "logo",
+                                    "type": "image",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "preview_size": "thumbnail",
+                                    "library": "all",
+                                    "min_width": "",
+                                    "min_height": "",
+                                    "min_size": "",
+                                    "max_width": "",
+                                    "max_height": "",
+                                    "max_size": "",
+                                    "mime_types": ""
+                                },
+                                {
+                                    "key": "field_5d5a36ce10b7f",
+                                    "label": "Linkit",
+                                    "name": "",
+                                    "type": "tab",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "placement": "top",
+                                    "endpoint": 0
+                                },
+                                {
+                                    "key": "field_5d5a36d810b80",
+                                    "label": "Kirjaudu linkki",
+                                    "name": "sign_in_link",
+                                    "type": "text",
+                                    "instructions": "HUOM! käytä URLin alkuun http:\/\/ tai https:\/\/. Voit käyttää myös mailto: tai tel: linkityksiä.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_5d5a36f110b81",
+                                    "label": "Tukilinkki",
+                                    "name": "support_link",
+                                    "type": "text",
+                                    "instructions": "HUOM! käytä URLin alkuun http:\/\/ tai https:\/\/. Voit käyttää myös mailto: tai tel: linkityksiä.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_5f3bfd6f09a2f",
+                                    "label": "Oppimisympäristön linkki",
+                                    "name": "community_link",
+                                    "type": "text",
+                                    "instructions": "HUOM! käytä URLin alkuun http:\/\/ tai https:\/\/. Voit käyttää myös mailto: tai tel: linkityksiä.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_5e3aca0b42035": {
+                    "key": "layout_5e3aca0b42035",
+                    "name": "teacher_lifts",
+                    "label": "Asiantuntijaopettajien nosto(t)",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5e8c64fea8259",
+                            "label": "Osion nimi (ID)",
+                            "name": "section_name",
+                            "type": "text",
+                            "instructions": "Kirjoita osion nimi ilman välilyönteä. Voi sisältää numeroita ja kirjaimia. Käytetään, jotta hyppylinkit toimivat oikein.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e3aca1e42036",
+                            "label": "Opettaja(t)",
+                            "name": "teachers",
+                            "type": "post_object",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "expert-teachers"
+                            ],
+                            "taxonomy": "",
+                            "allow_null": 0,
+                            "multiple": 1,
+                            "return_format": "id",
+                            "ui": 1
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_5e8c65ddad534": {
+                    "key": "layout_5e8c65ddad534",
+                    "name": "teachers_jump_links",
+                    "label": "Asiantuntijaopettajat, hyppylinkit",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5e8c65f4ad535",
+                            "label": "Hyppylinkit",
+                            "name": "jump_links",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "collapsed": "",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "table",
+                            "button_label": "Lisää linkki",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5e8c6615ad536",
+                                    "label": "Nimi",
+                                    "name": "name",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_5e8c661ead537",
+                                    "label": "Kohde",
+                                    "name": "target",
+                                    "type": "text",
+                                    "instructions": "Osion nimi (kohde). Pitää täsmätä asiantuntojaopettajanostoissa olevaan osion nimeen.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_6014177e868e0": {
+                    "key": "layout_6014177e868e0",
+                    "name": "tutor_teachers",
+                    "label": "Tutor opettajat",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6014177e868e1",
+                            "label": "Ohjeet",
+                            "name": "",
+                            "type": "message",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Tutoropettajat lisätään tähään osioon automaattisesti. Erillisiä asetuksia ei tarvita.",
+                            "new_lines": "wpautop",
+                            "esc_html": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "button_label": "Lisää sisältöä",
+            "min": "",
+            "max": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "custom-templates\/flexible.php"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "custom-templates\/with-sidemenu.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1611929534
+}

@@ -1,0 +1,43 @@
+{
+    "key": "group_5ef9ca4d8ce51",
+    "title": "Hakemiston tiedot",
+    "fields": [
+        {
+            "key": "field_5ef9ca5cf5259",
+            "label": "Hakemistossa oleva otsikko",
+            "name": "directory_title",
+            "type": "text",
+            "instructions": "Jos haluat tämän sivun hakemistosivulle, täytä sivua kuvaava otsikko tähän kenttään.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1593428599
+}

@@ -1,0 +1,72 @@
+/* Add a custom transition when opening/closing. */
+.wp-block-details.is-style-stylish {
+	// transition: all 0.5s ease-in-out;
+	border: 1px solid var(--wp--preset--color--contrast-3);
+	border-radius: 8px;
+}
+
+/* Add horizontal margin to nested blocks/elements. */
+.wp-block-details.is-style-stylish > :where(:not(summary)) {
+	margin-left: 2rem;
+	margin-right: 2rem;
+}
+
+/* If open, add some bottom padding to avoid content butting against the bottom. */
+.wp-block-details.is-style-stylish[open] {
+	padding-bottom: 2rem;
+}
+
+.wp-block-details.is-style-stylish summary {
+	position: relative;
+	transition: all 0.5s ease-in-out;
+	box-sizing: border-box;
+	padding: 2rem;
+	font-weight: 500;
+}
+
+.wp-block-details.is-style-stylish summary {
+	background: var(--wp--preset--color--contrast-3);
+	color: var(--wp--preset--color--base);
+}
+
+.wp-block-details.is-style-stylish summary::marker {
+	content: none;
+}
+
+/* Additional Safari-specific CSS to hide the marker */
+.wp-block-details.is-style-stylish summary::-webkit-details-marker {
+	display: none; /* Safari-specific property */
+}
+
+.wp-block-details.is-style-stylish summary::after,
+.wp-block-details.is-style-stylish summary::before {
+	background-color: var(--wp--preset--color--base);
+	content: "";
+	height: 1rem;
+	position: absolute;
+	transition: transform 0.25s ease-out;
+	width: 1rem;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+}
+
+.wp-block-details.is-style-stylish summary::after {
+	height: 0.1875rem;
+	right: 1.625rem;
+	width: 1rem;
+}
+
+.wp-block-details.is-style-stylish summary::before {
+	height: 1rem;
+	right: 2rem;
+	width: 0.1875rem;
+}
+
+.wp-block-details.is-style-stylish[open] summary::after {
+	transform: rotate(180deg);
+}
+
+.wp-block-details.is-style-stylish[open] summary::before {
+	transform: rotate(90deg);
+}

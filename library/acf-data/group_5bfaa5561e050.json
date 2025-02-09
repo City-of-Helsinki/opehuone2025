@@ -1,0 +1,40 @@
+{
+    "key": "group_5bfaa5561e050",
+    "title": "Linkin asetukset",
+    "fields": [
+        {
+            "key": "field_5bfaa56b4acfd",
+            "label": "Linkki",
+            "name": "link",
+            "type": "link",
+            "instructions": "Määritä linkki tähän. Voit asettaa linkille linkkitekstin ja urlin. Pystyt myös asettamaan linkin avautumaan uuteen välilehteen.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "links"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1649773820
+}

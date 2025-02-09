@@ -1,0 +1,30 @@
+{
+  "name": "opehuone2025",
+  "version": "0.0.2",
+  "private": true,
+  "scripts": {
+    "start": "wp-scripts start --mode development",
+    "dev": "wp-scripts start --mode development",
+    "build": "wp-scripts build",
+    "postinstall": "npm run build",
+    "prettier": "prettier --write 'resources/**/*.{js,jsx,ts,tsx,css,scss}'",
+    "eslint": "eslint 'resources/**/*.{js,jsx,ts,tsx}'"
+  },
+  "devDependencies": {
+    "@wordpress/eslint-plugin": "^17.9.0",
+    "@wordpress/prettier-config": "^3.9.0",
+    "@wordpress/scripts": "^27.3.0",
+    "copy-webpack-plugin": "^12.0.2",
+    "path": "^0.12.7",
+    "sass-rem": "^3.0.0",
+    "webpack-livereload-plugin": "^3.0.2",
+    "webpack-remove-empty-scripts": "^1.0.4"
+  },
+  "volta": {
+    "node": "20.11.1"
+  },
+  "dependencies": {
+    "@10up/block-components": "^1.19.2",
+    "hamburgers": "^1.2.1"
+  }
+}

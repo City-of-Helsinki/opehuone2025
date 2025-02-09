@@ -1,0 +1,161 @@
+{
+    "key": "group_5e3aabb9f1f8f",
+    "title": "Opettajan tiedot",
+    "fields": [
+        {
+            "key": "field_5e3aabcb4f013",
+            "label": "Toimintayksikkö",
+            "name": "operation_unit",
+            "type": "text",
+            "instructions": "Ei käytössä tutoropettajilla. Tutoropettajien toimintayksikkö = koulu(t).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5e3aabef4f014",
+            "label": "Sähköposti",
+            "name": "email",
+            "type": "email",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_5e3aabfe4f015",
+            "label": "Puhelin",
+            "name": "phone",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5e8c2f8a3fc5a",
+            "label": "Lähetä pikaviesti URL (Teams chat)",
+            "name": "teams_chat",
+            "type": "url",
+            "instructions": "Team chat URL",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_601bb5b8bf503",
+            "label": "URL",
+            "name": "url",
+            "type": "link",
+            "instructions": "Esim. linkki opettajan blogiin.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_5e8c3f21af691",
+            "label": "Tiiminvetäjä?",
+            "name": "team_leader",
+            "type": "true_false",
+            "instructions": "Ruksaa, jos tiiminvetäjä. Käytössä asiantuntijaopettajien kanssa.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5e3aac59320b3",
+            "label": "Kuva",
+            "name": "image",
+            "type": "image",
+            "instructions": "Käytä neliömallista kuvaa, noin 500x500px.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "expert-teachers"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "tutor-teachers"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1612428776
+}

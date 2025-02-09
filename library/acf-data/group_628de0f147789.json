@@ -1,0 +1,62 @@
+{
+    "key": "group_628de0f147789",
+    "title": "Kategorian väriteemaus",
+    "fields": [
+        {
+            "key": "field_628de10a47749",
+            "label": "Väriteema",
+            "name": "button_color_theme",
+            "type": "select",
+            "instructions": "Väriteema näkyvissä koulutusnoston kategorialistassa kategoria-tagin taustavärinä.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "metro": "Metro",
+                "fog": "Sumu",
+                "copper": "Kupari",
+                "suomenlinna": "Suomenlinna",
+                "coat": "Vaakuna",
+                "engel": "Engel",
+                "silver": "Hopea"
+            },
+            "default_value": "silver",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "cornerlabels"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "training_theme"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1655706364
+}

@@ -1,0 +1,145 @@
+{
+    "key": "group_61476757374ce",
+    "title": "Koulutuksen lisätiedot",
+    "fields": [
+        {
+            "key": "field_615566d194413",
+            "label": "Koulutuksen alkamispäivä",
+            "name": "training_start_date",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y",
+            "return_format": "d.m.Y",
+            "first_day": 1
+        },
+        {
+            "key": "field_6155672694415",
+            "label": "Kouluksen alkamisaika",
+            "name": "training_start_time",
+            "type": "time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "H:i",
+            "return_format": "H:i"
+        },
+        {
+            "key": "field_6155670994414",
+            "label": "Koulutuksen loppumispäivä",
+            "name": "training_end_date",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y",
+            "return_format": "d.m.Y",
+            "first_day": 1
+        },
+        {
+            "key": "field_6155675994416",
+            "label": "Kouluksen loppumisaika",
+            "name": "training_end_time",
+            "type": "time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "H:i",
+            "return_format": "H:i"
+        },
+        {
+            "key": "field_616e5bbbdc033",
+            "label": "Koulutuksen arkistoitumispäivä",
+            "name": "training_draft_date",
+            "type": "date_picker",
+            "instructions": "Koulutus asetetaan luonnokseksi tämän päivämäärän jälkeen.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y",
+            "return_format": "d.m.Y",
+            "first_day": 1
+        },
+        {
+            "key": "field_616c2edb14b71",
+            "label": "Koulutuksen teemaväri",
+            "name": "image_bg_color",
+            "type": "select",
+            "instructions": "Koulutusnostoon asetetaan tämän värinen yläpalkki.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "brick": "Tiili",
+                "tram": "Spåra",
+                "metro": "Metro",
+                "fog": "Sumu",
+                "bus": "Bussi",
+                "coat": "Vaakuna",
+                "summer": "Kesä",
+                "suomenlinna": "Suomenlinna",
+                "engel": "Engel",
+                "copper": "Kupari",
+                "silver": "Hopea",
+                "gold": "Kulta",
+                "black": "Musta",
+                "white": "Valkoinen"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "training"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1655795009
+}

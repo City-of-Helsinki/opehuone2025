@@ -1,0 +1,52 @@
+// Variables
+
+//Brand colors
+$blocksmith-green: #5b9279 !default;
+$blocksmith-dark-green: #4c7a65 !default;
+$blocksmith-dark: #2e3532 !default;
+$primary: $blocksmith-dark-green;
+
+//fonts
+$font-family--body: "Open Sans", "sans-serif";
+$font-family--heading: "Raleway", "sans-serif";
+
+//Typography related
+$h1-base-font-size: 32px;
+$h2-base-font-size: 26px;
+$h3-base-font-size: 23px;
+$h4-base-font-size: 19px;
+$h5-base-font-size: 17px;
+$h6-base-font-size: 16px;
+
+$heading-md-multiplier: 1.1;
+$heading-lg-multiplier: 1.3;
+$heading-xl-multiplier: 1.6;
+
+//Main menu breakpoint
+$main-menu-breakpoint: "xl";
+
+// Container width
+$main-nav-container-width: 1300px;
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1400px,
+) !default;
+
+$main-nav-bg-color: $blocksmith-dark-green;
+$main-nav-dropdown-theme-color: #fff;
+
+// YIQ color
+$yiq-text-dark: #000;
+$yiq-text-light: #fff;
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+$yiq-contrasted-threshold: 150 !default;

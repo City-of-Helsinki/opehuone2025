@@ -1,0 +1,54 @@
+// Basic button styles
+.wp-block-button {
+	.wp-block-button__link {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--wp--preset--spacing--30);
+		padding: 5px 22px;
+		min-height: 56px;
+		background: var(--wp--preset--color--contrast-3);
+		color: var(--wp--preset--color--base);
+		font-family: var(--wp--preset--font-family--heading);
+		font-weight: 700;
+		font-size: var(--wp--preset--font-size--medium);
+		border-radius: 1.25rem;
+
+		&.has-text-align-center {
+			justify-content: center;
+		}
+
+		> img {
+			width: auto;
+			height: 21px;
+		}
+
+		&:hover,
+		&:focus,
+		&:active {
+			background: var(--wp--preset--color--accent);
+		}
+	}
+}
+
+// Outline button
+@scope (
+.is-style-outline
+
+) {
+	:scope .wp-block-button__link {
+		border: 2px solid var(--wp--preset--color--accent);
+		background: transparent;
+		color: var(--wp--preset--color--accent) !important;
+
+		&:hover,
+		&:focus {
+			color: var(--wp--preset--color--base) !important;
+			box-shadow: none;
+		}
+
+		&:active {
+			color: var(--wp--preset--color--base);
+			box-shadow: none;
+		}
+	}
+}

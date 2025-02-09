@@ -1,0 +1,6 @@
+// Disable automatic margin-block-start for footer
+:where(.wp-site-blocks) {
+	> footer.wp-block-template-part {
+		margin-block-start: 0;
+	}
+}

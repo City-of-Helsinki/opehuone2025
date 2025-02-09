@@ -1,0 +1,124 @@
+@mixin section-paddings() {
+	padding-top: rem(32px);
+	padding-bottom: rem(32px);
+
+	@include media-breakpoint-up(md) {
+		padding-top: rem(40px);
+		padding-bottom: rem(40px);
+	}
+
+	@include media-breakpoint-up(xl) {
+		padding-top: rem(60px);
+		padding-bottom: rem(60px);
+	}
+}
+
+@mixin placeholder($color: $gray) {
+	::-webkit-input-placeholder {
+		color: $color;
+		font-weight: 300;
+	}
+	::-moz-placeholder {
+		color: $color;
+		font-weight: 300;
+	}
+	:-ms-input-placeholder {
+		color: $color;
+		font-weight: 300;
+	}
+}
+
+@mixin image-replace() {
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+@mixin transition($args) {
+	-webkit-transition: $args;
+	-moz-transition: $args;
+	-ms-transition: $args;
+	-o-transition: $args;
+	transition: $args;
+}
+
+@mixin rotate($degrees) {
+	-webkit-transform: rotate($degrees);
+	-moz-transform: rotate($degrees);
+	-ms-transform: rotate($degrees);
+	-o-transform: rotate($degrees);
+	transform: rotate($degrees);
+}
+
+/**
+ * Keyframes
+ */
+@mixin keyframes($animationName) {
+	@-webkit-keyframes #{$animationName} {
+		@content;
+	}
+	@-moz-keyframes #{$animationName} {
+		@content;
+	}
+	@-o-keyframes #{$animationName} {
+		@content;
+	}
+	@keyframes #{$animationName} {
+		@content;
+	}
+}
+
+@mixin animate($name, $duration, $iteration, $direction) {
+	-webkit-animation-duration: $duration;
+	-moz-animation-duration: $duration;
+	-o-animation-duration: $duration;
+	animation-duration: $duration;
+	-webkit-animation-iteration-count: $iteration;
+	-moz-animation-iteration-count: $iteration;
+	-o-animation-iteration-count: $iteration;
+	animation-iteration-count: $iteration;
+	-webkit-animation-name: $name;
+	-moz-animation-name: $name;
+	-o-animation-name: $name;
+	animation-name: $name;
+	-webkit-animation-direction: $direction;
+	-moz-animation-direction: $direction;
+	-o-animation-direction: $direction;
+	animation-direction: $direction;
+}
+
+@include keyframes(blocksmith-arrow-animate) {
+	0% {
+		opacity: 0;
+		@include rotate(-15deg);
+		right: 60%;
+	}
+
+	100% {
+		opacity: 1;
+		@include rotate(-10deg);
+		right: -10%;
+	}
+}
+
+@include keyframes(blocksmith-arrow2-animate) {
+	0% {
+		opacity: 0;
+		@include rotate(-20deg);
+		right: 60%;
+	}
+
+	100% {
+		opacity: 1;
+		@include rotate(-10deg);
+		right: -20%;
+	}
+}
+
+@mixin blocksmith-arrow-animation {
+	@include animate(blocksmith-arrow-animate, 1s, 1, normal);
+}
+
+@mixin blocksmith-arrow2-animation {
+	@include animate(blocksmith-arrow2-animate, 1.5s, 1, normal);
+}

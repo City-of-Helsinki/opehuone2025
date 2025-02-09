@@ -1,0 +1,49 @@
+{
+    "key": "group_625586fd6a6a9",
+    "title": "Hakukentän asetukset",
+    "fields": [
+        {
+            "key": "field_6255872b6c937",
+            "label": "Haun placeholder",
+            "name": "opehuone_search_placeholder",
+            "type": "text",
+            "instructions": "Hakulaatikon placeholder-teksti eli teksti, joka näkyy hakulaatikossa oletuksena. Tämä teksti asetetaan vain yläsivuille, muilla sivuilla sillä ei ole merkitystä. Esim. kun asetat tekstin Digituen pääsivulle, tällöin järjestelmä osaa näyttää tämän tekstin myös alasivuilla.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "top_level"
+            },
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1649773425
+}
