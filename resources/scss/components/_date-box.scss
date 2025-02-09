@@ -1,0 +1,30 @@
+.date-box-row {
+	display: grid;
+	align-items: center;
+	grid-template-columns: auto 90px;
+	gap: rem(12px);
+}
+
+.date-box-row-weather {
+	font-size: var(--opehuone--font-size--medium);
+	font-weight: 700;
+	text-align: center;
+}
+
+.date-box-week {
+	display: block;
+	font-size: var(--opehuone--font-size--medium);
+}
+
+.date-box-month {
+	display: block;
+	font-size: var(--opehuone--font-size--medium);
+	font-weight: 700;
+}
+
+.date-box-info {
+	margin-top: var(--opehuone--spacing--small);
+	display: block;
+	font-weight: 500;
+	font-size: var(--opehuone--font-size--small);
+}

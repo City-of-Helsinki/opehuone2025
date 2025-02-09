@@ -6,7 +6,9 @@
 			?>
 		</main>
 		<aside>
-
+			<?php
+			get_template_part('partials/sidebar/date-box');
+			?>
 		</aside>
 	</div>
 </div>

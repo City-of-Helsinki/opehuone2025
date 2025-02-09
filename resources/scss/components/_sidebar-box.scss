@@ -1,0 +1,15 @@
+.sidebar-box {
+	padding: rem(27px 20px);
+
+	&.sidebar-box--suomenlinna-light {
+		background-color: var(--color-suomenlinna-light);
+	}
+
+	&.sidebar-box--coat-of-arms-light {
+		background-color: var(--color-coat-of-arms-light);
+	}
+
+	&.sidebar-box--engel-light {
+		background-color: var(--color-engel-light);
+	}
+}

@@ -30,7 +30,7 @@ $user_favs = \Opehuone\Utils\get_user_favs();
 			'is_pinned'  => in_array( get_the_ID(), $user_favs ),
 		];
 
-		get_template_part( 'partials/blocks/b-post', '', $block_args );
+		get_template_part( 'partials/template-blocks/b-post', '', $block_args );
 	}
 
 	wp_reset_postdata();
