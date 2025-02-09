@@ -1,6 +1,6 @@
 <?php
 
-use Opehuone\Utils;
+namespace Opehuone\Helpers;
 
 /**
  * Helper-functions
@@ -15,8 +15,12 @@ use Opehuone\Utils;
  *
  * @return string
  */
-function asset_uri( $filename ) {
-	return trailingslashit( get_template_directory_uri() ) . "build/{$filename}";
+function asset_local( $filename ) {
+	return trailingslashit( get_theme_file_path() ) . "build/{$filename}";
+}
+
+function the_svg( $file_name ) {
+	readfile( asset_local( 'images' ) . '/' . $file_name . '.svg' );
 }
 
 /**
@@ -32,7 +36,7 @@ function require_files( $dir, $suffix = 'php' ) {
 		return;
 	}
 
-	$files = new DirectoryIterator( $dir );
+	$files = new \DirectoryIterator( $dir );
 
 	foreach ( $files as $file ) {
 		if ( ! $file->isDot() && $file->getExtension() === $suffix ) {
@@ -54,16 +58,3 @@ function require_files( $dir, $suffix = 'php' ) {
 function get_directories_array( $dir ) {
 	return array_diff( scandir( $dir ), [ '.', '..' ] );
 }
-
-/**
- * Utils-class as function-wrapper
- */
-if ( ! function_exists( 'UTILS' ) ) :
-
-	/**
-	 * UTILS() function to create Utils class in classes/Utils.php
-	 */
-	function UTILS() {
-		return new Utils();
-	}
-endif;
