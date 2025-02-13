@@ -28,6 +28,13 @@ function get_current_weather_minified() {
 	return $string;
 }
 
+function get_user_data_meta() {
+	$user = wp_get_current_user();
+	$meta = get_user_meta( $user->ID, 'user_data', true ) ? get_user_meta( $user->ID, 'user_data', true ) : 'not found';
+
+	return $meta;
+}
+
 function get_month_info() {
     // Set the date to the current time
     $timestamp = new \DateTime();
@@ -48,4 +55,19 @@ function get_month_info() {
 
     // Output formatted date
     return "{$day}. {$month_finnish} {$month_swedish}";
+}
+
+function user_data_meta_exists() {
+	if ( ! is_user_logged_in() ) {
+		return false;
+	}
+
+	$user = wp_get_current_user();
+	$meta = get_user_meta( $user->ID, 'user_data', true );
+
+	if ( ! empty( $meta ) ) {
+		return true;
+	}
+
+	return false;
 }

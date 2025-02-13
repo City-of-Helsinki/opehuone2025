@@ -12,4 +12,11 @@
 	&.sidebar-box--engel-light {
 		background-color: var(--color-engel-light);
 	}
+
+	&__sub-title {
+		margin-top: 0;
+		margin-bottom: var(--opehuone--spacing--small);
+		font-size: var(--opehuone--font-size--large);
+		font-weight: 500;
+	}
 }

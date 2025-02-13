@@ -9,6 +9,7 @@
 			<?php
 			get_template_part('partials/sidebar/intra-box');
 			get_template_part('partials/sidebar/date-box');
+			get_template_part('partials/sidebar/links-box');
 			?>
 		</aside>
 	</div>
