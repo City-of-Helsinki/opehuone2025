@@ -18,5 +18,9 @@
 		margin-bottom: var(--opehuone--spacing--small);
 		font-size: var(--opehuone--font-size--large);
 		font-weight: 500;
+
+		&.sidebar-box__sub-title--margin-top {
+			margin-top: var(--opehuone--spacing--small);
+		}
 	}
 }
