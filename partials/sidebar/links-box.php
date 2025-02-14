@@ -126,11 +126,11 @@ if ( ! is_array( $own_links ) ) {
 	<?php if ( is_user_logged_in() ) : ?>
 		<div class="side-links-list__own-links-functions">
 			<button class="side-links-list__edit-link" id="own-links-modify">
-				<?php esc_html_e( 'Muokkaa ja lisää', 'helsinki-universal' ); ?><?php Helpers\the_svg( 'icons/arrow-right-lg' ); ?>
+				<span><?php esc_html_e( 'Muokkaa ja lisää', 'helsinki-universal' ); ?></span><?php Helpers\the_svg( 'icons/arrow-right-lg' ); ?>
 			</button>
 
 			<div class="side-links-list__form-wrapper">
-				<form id="own-links__add-new-form">
+				<form class="side-links-list__form" id="own-links__add-new-form">
 					<fieldset class="own-links__add-new-form__fieldset">
 						<legend class="own-links__add-new-form__legend">
 							<?php esc_html_e( 'Voit lisätä listan alkuun omia linkkejä.', 'helsinki-universal' ); ?>
@@ -161,12 +161,14 @@ if ( ! is_array( $own_links ) ) {
 						</div>
 					</fieldset>
 				</form>
-				<button class="side-links-list__reset-btn">
-					<?php esc_html_e( 'Palauta alkuperäiset linkit', 'helsinki-universal' ); ?>
-				</button>
-				<button class="side-links-list__reset-btn side-links-list__reset-btn--final">
-					<?php esc_html_e( 'VAROITUS!! Painamalla tästä kaikki luomasi linkit poistetaan ja kaikki alkuperäiset linkit palautetaan. Sivu latautuu automaattisesti uudelleen.', 'helsinki-universal' ); ?>
-				</button>
+				<div class="side-links-list__reset-buttons">
+					<button class="side-links-list__reset-btn">
+						<?php esc_html_e( 'Palauta alkuperäiset linkit', 'helsinki-universal' ); ?>
+					</button>
+					<button class="side-links-list__reset-btn side-links-list__reset-btn--final side-links-list__reset-btn--final--hidden">
+						<?php esc_html_e( 'VAROITUS!! Painamalla tästä kaikki luomasi linkit poistetaan ja kaikki alkuperäiset linkit palautetaan. Sivu latautuu automaattisesti uudelleen.', 'helsinki-universal' ); ?>
+					</button>
+				</div>
 			</div>
 		</div>
 	<?php endif; ?>

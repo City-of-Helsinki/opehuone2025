@@ -1,35 +1,46 @@
-@mixin create-button($button-color: $primary) {
-	display: inline-block;
-	font-family: $font-family--heading;
-	font-weight: $font-weight-bold;
-	color: color-yiq($button-color);
-	background-color: $button-color;
+@mixin create-button(
+	$is_full_width: false,
+	$font-color: #fff,
+	$bg-color: #000,
+	$gap: 10px,
+	$height: 56px
+) {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: $gap;
+	font-weight: 500;
+	color: $font-color;
+	background-color: $bg-color;
 	text-align: center;
-	text-decoration: if($link-decoration == none, null, none);
-	white-space: nowrap;
+	text-decoration: none;
+	white-space: normal;
 	vertical-align: middle;
 	user-select: none;
-	border: none;
-	padding: rem(10px 30px);
-	font-size: rem(18px);
-	border-radius: rem(20px);
+	border: 2px solid $bg-color;
+	padding: rem(10px 32px);
+	font-size: var(--opehuone--font-size--normal);
+	border-radius: 0;
 	line-height: 1.5;
-	@include transition($btn-transition);
+	min-height: $height;
 
-	@include hover() {
-		color: color-yiq($button-color);
+	@if $is_full_width {
+		width: 100%;
+		display: flex; // Ensure full-width buttons behave correctly in flex containers
+	}
+
+	@include hover-focus() {
+		color: $bg-color;
+		background-color: transparent;
 		text-decoration: none;
-		background-color: darken($primary, 7%);
 	}
 
 	&:focus {
 		outline: 0;
 	}
 
-	// Disabled comes first so active can properly restyle
-	&.disabled,
-	&:disabled {
-		opacity: 0.8;
-		@include box-shadow(none);
+	&.is-disabled {
+		opacity: 0.5;
+		pointer-events: none;
 	}
 }

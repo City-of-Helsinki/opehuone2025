@@ -54,7 +54,7 @@
 		font-size: var(--opehuone--font-size--medium);
 		font-weight: 700;
 		text-decoration: none;
-		cursor: pointer;
+		padding: 0;
 
 		@include hover-focus {
 			text-decoration: none;
@@ -72,6 +72,24 @@
 			display: block;
 			margin-top: var(--opehuone--spacing--normal);
 		}
+	}
+
+	&__reset-btn {
+		@include create-button(true, #fff, red);
+
+		&.side-links-list__reset-btn--final--hidden {
+			display: none;
+		}
+	}
+
+	&__reset-buttons {
+		display: grid;
+		grid-template-columns: auto;
+		gap: var(--opehuone--spacing--x-small);
+	}
+
+	&__form {
+		margin-bottom: var(--opehuone--spacing--normal);
 	}
 }
 
@@ -96,25 +114,6 @@
 	}
 
 	&__submit-btn {
-		display: inline-block;
-		padding: rem(5px 15px);
-		color: #000;
-		font-weight: 500;
-		font-size: rem(18px);
-		line-height: rem(24px);
-		border: 2px solid #000;
-		background-color: transparent;
-		width: 100%;
-
-		@include hover-focus {
-			text-decoration: none;
-			color: #fff;
-			background-color: #000;
-		}
-
-		&.is-disabled {
-			opacity: 0.5;
-			pointer-events: none;
-		}
+		@include create-button(true);
 	}
 }

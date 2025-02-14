@@ -1,8 +1,8 @@
 @import "../../node_modules/sass-rem/_rem";
-@import "./common/boot-up";
+@import "common/boot-up";
 
 // Components
-@import "./components/all";
+@import "components/all";
 
 // WP blocks / Gutenberg
-@import "./blocks/blocks";
+@import "blocks/blocks";
