@@ -74,3 +74,47 @@
 		}
 	}
 }
+
+// Own links form styles
+.own-links {
+	&__add-new-form__legend {
+		font-size: rem(16px);
+		font-weight: 600;
+	}
+
+	&__add-new-form__form-group {
+		margin-bottom: rem(16px);
+	}
+
+	&__add-new-form-notifications {
+		margin-top: rem(20px);
+		padding: rem(10px);
+		font-size: rem(15px);
+		display: none;
+		color: #000;
+		border: 1px solid #000;
+	}
+
+	&__submit-btn {
+		display: inline-block;
+		padding: rem(5px 15px);
+		color: #000;
+		font-weight: 500;
+		font-size: rem(18px);
+		line-height: rem(24px);
+		border: 2px solid #000;
+		background-color: transparent;
+		width: 100%;
+
+		@include hover-focus {
+			text-decoration: none;
+			color: #fff;
+			background-color: #000;
+		}
+
+		&.is-disabled {
+			opacity: 0.5;
+			pointer-events: none;
+		}
+	}
+}

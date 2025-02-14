@@ -135,21 +135,21 @@ if ( ! is_array( $own_links ) ) {
 						<legend class="own-links__add-new-form__legend">
 							<?php esc_html_e( 'Voit lisätä listan alkuun omia linkkejä.', 'helsinki-universal' ); ?>
 						</legend>
-						<div class="own-links__add-new-form__form-group">
-							<label for="own-link-name">
+						<div class="opehuone-form-field-group">
+							<label for="own-link-name" class="opehuone-form-label">
 								<?php esc_html_e( 'Linkin nimi', 'helsinki-universal' ); ?>
 							</label>
-							<input id="own-link-name" type="text" class="form-control" autocomplete="own-link-name"
+							<input id="own-link-name" type="text" class="opehuone-form-control"
 								   aria-required="true">
 						</div>
 
-						<div class="own-links__add-new-form__form-group">
-							<label for="own-link-url">
+						<div class="opehuone-form-field-group">
+							<label for="own-link-url" class="opehuone-form-label">
 								<?php esc_html_e( 'Linkin osoite', 'helsinki-universal' ); ?>
 							</label>
-							<input id="own-link-url" type="url" class="form-control" autocomplete="own-link-url"
+							<input id="own-link-url" type="url" class="opehuone-form-control" autocomplete="url"
 								   aria-required="true">
-							<small class="form-text text-muted">
+							<small class="opehuone-form-field-description">
 								<?php esc_html_e( 'Lisääthän osoitteen muodossa https://linkkisi.osoite', 'helsinki-universal' ); ?>
 							</small>
 						</div>
