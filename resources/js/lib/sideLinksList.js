@@ -2,6 +2,17 @@ const mainModifyButton = document.querySelector('.side-links-list__edit-link');
 const sideLinksBox = document.querySelector('.side-links-list-box');
 const modifyButtonText = mainModifyButton?.querySelector('span');
 const resetButtonStage1 = document.querySelector('.side-links-list__reset-btn');
+const resetButtonStage2 = document.querySelector(
+	'.side-links-list__reset-btn--final'
+);
+
+const toggleResetStage2 = () => {
+	resetButtonStage1.addEventListener('click', () => {
+		resetButtonStage2.classList.remove(
+			'side-links-list__reset-btn--final--hidden'
+		);
+	});
+};
 
 const toggleModifyVisibility = () => {
 	if (!mainModifyButton || !sideLinksBox || !modifyButtonText) return;
@@ -24,4 +35,5 @@ const toggleModifyVisibility = () => {
 
 export const sideLinksList = () => {
 	toggleModifyVisibility();
+	toggleResetStage2();
 };
