@@ -307,9 +307,9 @@ add_action( 'wp_ajax_update_user_settings', __NAMESPACE__ . '\\ajax_update_user_
 add_action( 'wp_ajax_nopriv_update_user_settings', __NAMESPACE__ . '\\ajax_update_user_settings' );
 
 function ajax_add_new_own_link() {
-	$url_name = esc_html( $_POST['url_name'] );
+	$url_name = esc_html( $_POST['urlName'] );
 	$url      = esc_url( $_POST['url'] );
-	$user_id  = esc_attr( $_POST['user_id'] );
+	$user_id  = esc_attr( $_POST['userId'] );
 
 	$user_links = \User_settings::get_user_own_links( $user_id );
 
@@ -320,7 +320,8 @@ function ajax_add_new_own_link() {
 
 	update_user_meta( $user_id, 'user_opehuone_own_links', $user_links );
 
-	die();
+	// Send a success response with the added link
+	wp_send_json_success( [ 'message' => 'Linkki lisätty', 'urlName' => $url_name, 'url' => $url ] );
 }
 
 add_action( 'wp_ajax_add_new_own_link', __NAMESPACE__ . '\\ajax_add_new_own_link' );

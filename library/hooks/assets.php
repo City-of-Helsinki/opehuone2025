@@ -7,7 +7,7 @@ namespace Opehuone\Assets;
  *
  * @return void
  */
-function wp_enqueue_scripts() {
+function add_frontend_enqueue_scripts() {
 	$script_asset = require_once \get_theme_file_path( 'build/js/screen.asset.php' );
 	$style_asset  = require_once \get_theme_file_path( 'build/css/screen.asset.php' );
 
@@ -41,7 +41,7 @@ function wp_enqueue_scripts() {
 	wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );
 }
 
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\wp_enqueue_scripts' );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\add_frontend_enqueue_scripts' );
 
 /**
  * Enqueue assets for Gutenberg editor in admin

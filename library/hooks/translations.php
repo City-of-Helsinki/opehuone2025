@@ -88,14 +88,14 @@ add_action(
 	}
 );
 
-// In case you need translations in js code...
-function add_js_translations() {
+// In case you need translations/variables in js code...
+function add_js_variables() {
 	$translation_array = [
 		'restUrl'          => rest_url(),
 		'ajaxUrl'         => admin_url( 'admin-ajax.php' ),
 		'userId'           => is_user_logged_in() ? get_current_user_id() : 0,
-		'addNewFormErrors' => esc_html__( 'Uuden palvelun lisäämisessä on ongelmia. Syötitkö tarvittavat tiedot?', TEXT_DOMAIN ),
-		'newServiceSdded'  => esc_html__( 'Uusi palvelu lisätty onnistuneesti. Palvelu tulee näkyviin, kun sivu ladataan uudelleen.', TEXT_DOMAIN ),
+		'addNewFormErrors' => esc_html__( 'Uuden palvelun lisäämisessä on ongelmia. Syötitkö tarvittavat tiedot?', 'helsinki-universal' ),
+		'newServiceSdded'  => esc_html__( 'Uusi palvelu lisätty onnistuneesti. Palvelu tulee näkyviin, kun sivu ladataan uudelleen.', 'helsinki-universal' ),
 		'opehuone_nonce'   => wp_create_nonce( 'opehuone_nonce' ),
 	];
 
@@ -103,9 +103,9 @@ function add_js_translations() {
 	 * Make translations available to be used in the js-application.
 	 */
 	?>
-	<script id="opehuone-translations"
+	<script id="opehuone-variables"
 			type='application/json'><?php echo \json_encode( $translation_array ); ?></script>
 	<?php
 }
 
-add_action( 'wp_footer', __NAMESPACE__ . '\\add_js_translations' );
+add_action( 'wp_footer', __NAMESPACE__ . '\\add_js_variables' );
