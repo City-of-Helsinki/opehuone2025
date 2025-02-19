@@ -178,9 +178,46 @@ const customLinkRemoval = () => {
 	});
 };
 
+const defaultLinkRemoval = () => {
+	document.addEventListener('click', (e) => {
+		const target = e.target.closest(
+			'.side-links-list__remove-btn--default'
+		);
+		if (!target) return;
+
+		e.preventDefault();
+		const url = target.getAttribute('data-link-url');
+
+		// Remove the closest `.front-side__links-list-item`
+		const listItem = target.closest('.side-links-list__item');
+		if (listItem) {
+			listItem.remove();
+		}
+
+		// Send AJAX request using fetch()
+		fetch(T.ajaxUrl, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: new URLSearchParams({
+				action: 'remove_default_link',
+				userId: T.userId,
+				url,
+				nonce: T.opehuoneNonce,
+			}),
+		})
+			.then((response) => response.json()) // Assuming the response is JSON
+			.then(() => {
+				// eslint-disable-next-line no-alert
+				alert('Linkki poistettu.');
+			})
+			.catch((error) => console.error('AJAX Error:', error));
+	});
+};
+
 export const sideLinksList = () => {
 	toggleModifyVisibility();
 	toggleResetStage2();
 	addNewCustomLink();
 	customLinkRemoval();
+	defaultLinkRemoval();
 };

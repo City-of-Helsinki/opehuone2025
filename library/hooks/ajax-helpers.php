@@ -353,8 +353,9 @@ function ajax_add_new_own_link() {
 add_action( 'wp_ajax_add_new_own_link', __NAMESPACE__ . '\\ajax_add_new_own_link' );
 
 function ajax_remove_default_link() {
+	verify_logged_in_request($_POST['nonce']);
 	$url     = esc_url( $_POST['url'] );
-	$user_id = esc_attr( $_POST['user_id'] );
+	$user_id = esc_attr( $_POST['userId'] );
 
 	$user_links = \User_settings::get_user_own_links( $user_id );
 
@@ -362,11 +363,13 @@ function ajax_remove_default_link() {
 
 	update_user_meta( $user_id, 'user_opehuone_own_links', $user_links );
 
+	// Send a success response with the added link
+	wp_send_json_success( [ 'message' => 'Linkki poistettu', 'url' => $url ] );
+
 	die();
 }
 
 add_action( 'wp_ajax_remove_default_link', __NAMESPACE__ . '\\ajax_remove_default_link' );
-add_action( 'wp_ajax_nopriv_remove_default_link', __NAMESPACE__ . '\\ajax_remove_default_link' );
 
 function ajax_remove_custom_link() {
 	verify_logged_in_request( $_POST['nonce'] );
