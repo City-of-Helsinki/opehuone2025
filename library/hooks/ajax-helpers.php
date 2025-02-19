@@ -24,8 +24,6 @@ function verify_logged_in_request( $nonce ) {
 	if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
 		wp_send_json_error( [ 'message' => 'Invalid nonce' ], 403 );
 	}
-
-	return true;
 }
 
 /**
@@ -353,7 +351,7 @@ function ajax_add_new_own_link() {
 add_action( 'wp_ajax_add_new_own_link', __NAMESPACE__ . '\\ajax_add_new_own_link' );
 
 function ajax_remove_default_link() {
-	verify_logged_in_request($_POST['nonce']);
+	verify_logged_in_request( $_POST['nonce'] );
 	$url     = esc_url( $_POST['url'] );
 	$user_id = esc_attr( $_POST['userId'] );
 
@@ -407,6 +405,8 @@ function ajax_remove_custom_link() {
 add_action( 'wp_ajax_remove_custom_link', __NAMESPACE__ . '\\ajax_remove_custom_link' );
 
 function ajax_reset_own_links() {
+	verify_logged_in_request( $_POST['nonce'] );
+
 	$user_id = esc_attr( $_POST['user_id'] );
 
 	$default_user_own_links = [
@@ -416,11 +416,11 @@ function ajax_reset_own_links() {
 
 	update_user_meta( $user_id, 'user_opehuone_own_links', $default_user_own_links );
 
-	die();
+	// Send a success response
+	wp_send_json_success( [ 'message' => 'Linkit resetoitu.' ] );
 }
 
 add_action( 'wp_ajax_reset_own_links', __NAMESPACE__ . '\\ajax_reset_own_links' );
-add_action( 'wp_ajax_nopriv_reset_own_links', __NAMESPACE__ . '\\ajax_reset_own_links' );
 
 function ajax_copy_training_to_articles() {
 	$post_id = esc_attr( $_POST['postID'] );

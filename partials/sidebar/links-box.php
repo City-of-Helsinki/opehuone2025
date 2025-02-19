@@ -165,7 +165,8 @@ if ( ! is_array( $own_links ) ) {
 					<button class="side-links-list__reset-btn">
 						<?php esc_html_e( 'Palauta alkuperäiset linkit', 'helsinki-universal' ); ?>
 					</button>
-					<button class="side-links-list__reset-btn side-links-list__reset-btn--final side-links-list__reset-btn--final--hidden">
+					<button
+						class="side-links-list__reset-btn side-links-list__reset-btn--final side-links-list__reset-btn--final--hidden">
 						<?php esc_html_e( 'VAROITUS!! Painamalla tästä kaikki luomasi linkit poistetaan ja kaikki alkuperäiset linkit palautetaan. Sivu latautuu automaattisesti uudelleen.', 'helsinki-universal' ); ?>
 					</button>
 				</div>

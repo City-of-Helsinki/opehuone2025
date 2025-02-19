@@ -92,7 +92,14 @@ const addNewCustomLink = () => {
 					nonce: T.opehuoneNonce,
 				}),
 			})
-				.then((response) => response.json()) // Assuming the response is JSON
+				.then((response) => {
+					if (!response.ok) {
+						throw new Error(
+							`HTTP error! Status: ${response.status}`
+						);
+					}
+					return response.json();
+				}) // Assuming the response is JSON
 				.then(() => {
 					submitBtn.classList.remove('is-disabled');
 					urlNameInput.value = '';
@@ -169,7 +176,12 @@ const customLinkRemoval = () => {
 				nonce: T.opehuoneNonce,
 			}),
 		})
-			.then((response) => response.json()) // Assuming the response is JSON
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error(`HTTP error! Status: ${response.status}`);
+				}
+				return response.json();
+			}) // Assuming the response is JSON
 			.then(() => {
 				// eslint-disable-next-line no-alert
 				alert('Linkki poistettu.');
@@ -205,10 +217,41 @@ const defaultLinkRemoval = () => {
 				nonce: T.opehuoneNonce,
 			}),
 		})
-			.then((response) => response.json()) // Assuming the response is JSON
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error(`HTTP error! Status: ${response.status}`);
+				}
+				return response.json();
+			}) // Assuming the response is JSON
 			.then(() => {
 				// eslint-disable-next-line no-alert
 				alert('Linkki poistettu.');
+			})
+			.catch((error) => console.error('AJAX Error:', error));
+	});
+};
+
+const resetAllLinks = () => {
+	resetButtonStage2.addEventListener('click', (e) => {
+		e.preventDefault();
+
+		fetch(T.ajaxUrl, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: new URLSearchParams({
+				action: 'reset_own_links',
+				user_id: T.userId,
+				nonce: T.opehuoneNonce,
+			}),
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error(`HTTP error! Status: ${response.status}`);
+				}
+				return response.json();
+			}) // Assuming the response is JSON
+			.then(() => {
+				location.reload(); // Reload the page after success
 			})
 			.catch((error) => console.error('AJAX Error:', error));
 	});
@@ -220,4 +263,5 @@ export const sideLinksList = () => {
 	addNewCustomLink();
 	customLinkRemoval();
 	defaultLinkRemoval();
+	resetAllLinks();
 };
