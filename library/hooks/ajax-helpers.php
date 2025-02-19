@@ -1,9 +1,32 @@
 <?php
+
 namespace Opehuone\AjaxHelpers;
 
 /**
  * AJAX related stuff
  */
+
+
+/**
+ * Verify helper to verify that user is logged in and nonce is valid
+ *
+ * @param $nonce
+ *
+ * @return true
+ */
+function verify_logged_in_request( $nonce ) {
+	// Check if user is logged in
+	if ( ! is_user_logged_in() ) {
+		wp_send_json_error( [ 'message' => 'Unauthorized request' ], 403 );
+	}
+
+	// Verify nonce
+	if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
+		wp_send_json_error( [ 'message' => 'Invalid nonce' ], 403 );
+	}
+
+	return true;
+}
 
 /**
  * Get weather info
@@ -140,7 +163,7 @@ function ajax_update_tutor_page_schools() {
 	if ( ! is_wp_error( $terms ) ) {
 		?>
 		<option selected="true"
-		        disabled="disabled"><?php _e( 'Valitse koulu', TEXT_DOMAIN ); ?></option>
+				disabled="disabled"><?php _e( 'Valitse koulu', TEXT_DOMAIN ); ?></option>
 		<?php
 		foreach ( $terms as $term ) {
 			?>
@@ -307,6 +330,9 @@ add_action( 'wp_ajax_update_user_settings', __NAMESPACE__ . '\\ajax_update_user_
 add_action( 'wp_ajax_nopriv_update_user_settings', __NAMESPACE__ . '\\ajax_update_user_settings' );
 
 function ajax_add_new_own_link() {
+	// Call the verification function and pass the nonce from $_POST
+	verify_logged_in_request( $_POST['nonce'] );
+
 	$url_name = esc_html( $_POST['urlName'] );
 	$url      = esc_url( $_POST['url'] );
 	$user_id  = esc_attr( $_POST['userId'] );
@@ -325,7 +351,6 @@ function ajax_add_new_own_link() {
 }
 
 add_action( 'wp_ajax_add_new_own_link', __NAMESPACE__ . '\\ajax_add_new_own_link' );
-add_action( 'wp_ajax_nopriv_add_new_own_link', __NAMESPACE__ . '\\ajax_add_new_own_link' );
 
 function ajax_remove_default_link() {
 	$url     = esc_url( $_POST['url'] );
@@ -344,9 +369,11 @@ add_action( 'wp_ajax_remove_default_link', __NAMESPACE__ . '\\ajax_remove_defaul
 add_action( 'wp_ajax_nopriv_remove_default_link', __NAMESPACE__ . '\\ajax_remove_default_link' );
 
 function ajax_remove_custom_link() {
+	verify_logged_in_request( $_POST['nonce'] );
+
 	$url      = esc_url( $_POST['url'] );
-	$url_name = esc_attr( $_POST['url_name'] );
-	$user_id  = esc_attr( $_POST['user_id'] );
+	$url_name = esc_attr( $_POST['urlName'] );
+	$user_id  = esc_attr( $_POST['userId'] );
 
 	$user_links = \User_settings::get_user_own_links( $user_id );
 
@@ -370,11 +397,11 @@ function ajax_remove_custom_link() {
 
 	update_user_meta( $user_id, 'user_opehuone_own_links', $new_meta_array );
 
-	die();
+	// Send a success response with the added link
+	wp_send_json_success( [ 'message' => 'Linkki poistettu', 'urlName' => $url_name, 'url' => $url ] );
 }
 
 add_action( 'wp_ajax_remove_custom_link', __NAMESPACE__ . '\\ajax_remove_custom_link' );
-add_action( 'wp_ajax_nopriv_remove_custom_link', __NAMESPACE__ . '\\ajax_remove_custom_link' );
 
 function ajax_reset_own_links() {
 	$user_id = esc_attr( $_POST['user_id'] );
