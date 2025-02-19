@@ -12,7 +12,7 @@ function custom_post_type() {
 		'archives'              => __( 'Arkistot', 'helsinki-universal' ),
 		'attributes'            => __( 'Arkistot', 'helsinki-universal' ),
 		'parent_item_colon'     => __( 'Yläsivu:', 'helsinki-universal' ),
-		'all_items'             => __( 'Lisää uusi', 'helsinki-universal' ),
+		'all_items'             => __( 'Kaikki linkit', 'helsinki-universal' ),
 		'add_new'               => __( 'Lisää uusi', 'helsinki-universal' ),
 		'new_item'              => __( 'Uusi', 'helsinki-universal' ),
 		'edit_item'             => __( 'Muokkaa', 'helsinki-universal' ),
