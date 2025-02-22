@@ -1,0 +1,71 @@
+.service-failure {
+	position: relative;
+	padding: rem(16px 24px);
+	background-color: var(--color-info-light);
+	margin-bottom: var(--opehuone--spacing--normal);
+
+	&:before {
+		position: absolute;
+		content: "";
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 8px;
+		background-color: var(--color-info);
+	}
+
+	&.service-failure--error {
+		background-color: var(--color-error-light);
+
+		&:before {
+			background-color: var(--color-error);
+		}
+	}
+
+	&__title {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 10px;
+		margin-top: 0;
+		margin-bottom: var(--opehuone--font-size--normal);
+		font-weight: 700;
+		font-size: var(--opehuone--font-size--medium);
+	}
+
+	p {
+		font-size: var(--opehuone--font-size--small);
+		font-weight: 500;
+	}
+
+	&__toggler {
+		display: inline-flex;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 15px;
+		background-color: transparent;
+		border: none;
+		font-size: var(--opehuone--font-size--small);
+		font-weight: 500;
+		padding: 0;
+
+		@include hover-focus {
+			text-decoration: underline;
+		}
+
+		.service-failure--read-more-open & {
+			> svg {
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	&__read-more-section {
+		display: none;
+		margin-top: var(--opehuone--spacing--small);
+
+		.service-failure--read-more-open & {
+			display: block;
+		}
+	}
+}
