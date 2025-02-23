@@ -1,0 +1,62 @@
+.user-favs-list {
+	list-style-type: none;
+	margin: 0 0 var(--opehuone--spacing--medium) 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: auto;
+	gap: rem(22px);
+
+	&__item {
+		position: relative;
+		padding-left: rem(20px);
+
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 8px;
+			height: 100%;
+			background-color: var(--color-tram);
+		}
+	}
+
+	&__link {
+		display: grid;
+		grid-template-columns: auto;
+		gap: rem(5px);
+		text-decoration: none;
+
+		@include hover-focus {
+			text-decoration: underline;
+		}
+	}
+
+	&__link-category {
+		font-size: var(--opehuone--font-size--small);
+		font-weight: 400;
+	}
+
+	&__link-title {
+		font-size: var(--opehuone--font-size--normal);
+		font-weight: 500;
+	}
+
+	&__edit-link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex-wrap: nowrap;
+		gap: rem(10px);
+		background: none;
+		border: none;
+		font-size: var(--opehuone--font-size--medium);
+		font-weight: 700;
+		text-decoration: none;
+		padding: 0;
+
+		@include hover-focus {
+			text-decoration: underline;
+		}
+	}
+}

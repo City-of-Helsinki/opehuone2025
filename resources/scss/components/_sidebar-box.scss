@@ -1,3 +1,9 @@
+.sidebar-boxes {
+	display: flex;
+	flex-direction: column;
+	gap: var(--opehuone--spacing--normal);
+}
+
 .sidebar-box {
 	padding: rem(27px 20px);
 
