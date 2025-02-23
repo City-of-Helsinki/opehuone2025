@@ -60,95 +60,56 @@ add_action( 'wp_ajax_update_users_oppiaste_settings', __NAMESPACE__ . '\\ajax_up
 /**
  * Add post to favs
  */
-function ajax_add_post_to_favorites() {
-	$post_id = $_POST['id'];
-	$user_id = $_POST['user_id'];
+function ajax_favs_add() {
+	verify_logged_in_request( $_POST['nonce'] );
 
-	// is_user_logged_in() not working inside ajax, so need to check if logged in via user_id that was passed...
-	if ( empty( $user_id ) ) {
-		if ( isset( $_COOKIE['opehuone_favs'] ) ) {
-			$posts_array = Utils()->get_favs_from_cache();
+	$post_id = $_POST['postId'];
+	$user_id = $_POST['userId'];
 
-			if ( ! in_array( $post_id, $posts_array ) ) {
-				array_push( $posts_array, $post_id );
-			}
+	$posts = \Opehuone\Utils\get_user_favs();
 
-			setcookie( 'opehuone_favs', json_encode( $posts_array ), time() + ( 86400 * 365 ), '/' );
-
-		} else {
-			$posts_array = [ $post_id ];
-			setcookie( 'opehuone_favs', json_encode( $posts_array ), time() + ( 86400 * 365 ), '/' );
-		}
+	if ( count( $posts ) === 0 ) {
+		$array = [ $post_id ];
+		update_user_meta( $user_id, 'opehuone_favs', $array );
 	} else {
-		//save to user meta
-		$posts = Utils()->get_favs_from_user_meta();
-
-		if ( count( $posts ) === 0 ) {
-			$array = [ $post_id ];
-			update_user_meta( $user_id, 'opehuone_favs', $array );
-		} else {
-			$posts = get_user_meta( $user_id, 'opehuone_favs', true );
-			if ( ! in_array( $post_id, $posts ) ) {
-				array_push( $posts, $post_id );
-			}
-			update_user_meta( $user_id, 'opehuone_favs', $posts );
+		if ( ! in_array( $post_id, $posts ) ) {
+			array_push( $posts, $post_id );
 		}
+		update_user_meta( $user_id, 'opehuone_favs', $posts );
 	}
 
-	\Opehuone\Helpers\the_svg( 'icons/pinned' );
-
-	die();
+	wp_send_json_success( [ 'message' => 'suosikki lisätty', 'postID' => $post_id ] );
 }
 
-add_action( 'wp_ajax_add_post_to_favorites', __NAMESPACE__ . '\\ajax_add_post_to_favorites' );
-add_action( 'wp_ajax_nopriv_add_post_to_favorites', __NAMESPACE__ . '\\ajax_add_post_to_favorites' );
+add_action( 'wp_ajax_favs_add', __NAMESPACE__ . '\\ajax_favs_add' );
 
 /**
- * Add post to favs
+ * Remove post to favs
  */
-function ajax_remove_post_from_favorites() {
-	$post_id = $_POST['id'];
-	$user_id = $_POST['user_id'];
+function ajax_favs_remove() {
+	verify_logged_in_request( $_POST['nonce'] );
 
-	// is_user_logged_in() not working inside ajax, so need to check if logged in via user_id that was passed...
-	if ( empty( $user_id ) ) {
-		if ( isset( $_COOKIE['opehuone_favs'] ) ) {
-			$new_array   = [];
-			$posts_array = Utils()->get_favs_from_cache();
+	$post_id = $_POST['postId'];
+	$user_id = $_POST['userId'];
 
-			foreach ( $posts_array as $post ) {
-				if ( $post_id === $post ) {
-					continue;
-				}
-				array_push( $new_array, $post );
-			}
+	$posts = \Opehuone\Utils\get_user_favs();
 
-			setcookie( 'opehuone_favs', json_encode( $new_array ), time() + ( 86400 * 365 ), '/' );
+	//remove from user meta
+	$new_array = [];
 
+	foreach ( $posts as $post ) {
+		if ( $post_id === $post ) {
+			continue;
 		}
-	} else {
-		//remove from user meta
-		$new_array = [];
-
-		$posts_array = Utils()->get_favs_from_user_meta();
-
-		foreach ( $posts_array as $post ) {
-			if ( $post_id === $post ) {
-				continue;
-			}
-			array_push( $new_array, $post );
-		}
-
-		update_user_meta( $user_id, 'opehuone_favs', $new_array );
+		array_push( $new_array, $post );
 	}
 
-	Utils()->the_svg( 'favorite_border-24px' );
+	update_user_meta( $user_id, 'opehuone_favs', $new_array );
 
-	die();
+	wp_send_json_success( [ 'message' => 'Suosikki poistettu', 'postID' => $post_id ] );
 }
 
-add_action( 'wp_ajax_remove_post_from_favorites', __NAMESPACE__ . '\\ajax_remove_post_from_favorites' );
-add_action( 'wp_ajax_nopriv_remove_post_from_favorites', __NAMESPACE__ . '\\ajax_remove_post_from_favorites' );
+add_action( 'wp_ajax_favs_remove', __NAMESPACE__ . '\\ajax_favs_remove' );
 
 /**
  * Update tutor page schools

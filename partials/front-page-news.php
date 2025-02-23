@@ -20,6 +20,7 @@ $user_favs = \Opehuone\Utils\get_user_favs();
 		$query->the_post();
 
 		$block_args = [
+			'post_id'    => get_the_ID(),
 			'title'      => get_the_title(),
 			'url'        => get_the_permalink(),
 			'media_id'   => get_post_thumbnail_id(),

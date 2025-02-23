@@ -1,5 +1,6 @@
 <?php
 
+$block_post_id    = isset( $args['post_id'] ) ? $args['post_id'] : null;
 $block_title      = isset( $args['title'] ) ? $args['title'] : null;
 $block_url        = isset( $args['url'] ) ? $args['url'] : null;
 $block_media_id   = isset( $args['media_id'] ) ? $args['media_id'] : null;
@@ -9,12 +10,14 @@ $block_categories = isset( $args['categories'] ) ? $args['categories'] : [];
 $block_is_sticky  = isset( $args['is_sticky'] ) ? $args['is_sticky'] : false;
 $block_is_pinned  = isset( $args['is_pinned'] ) ? $args['is_pinned'] : false;
 
-$pin_svg     = 'pin';
-$pinner_aria = 'Aseta uutinen kirjanmerkiksi';
+$pin_svg       = 'pin';
+$pinner_aria   = 'Lisää sivu kirjanmerkiksi';
+$button_action = 'favs_add';
 
 if ( $block_is_pinned ) {
-	$pin_svg     = 'pinned';
-	$pinner_aria = 'Poista uutinen kirjanmerkeistä';
+	$pin_svg       = 'pinned';
+	$pinner_aria   = 'Poista sivu kirjanmerkeistä';
+	$button_action = 'favs_remove';
 }
 ?>
 <div class="b-post">
@@ -24,7 +27,9 @@ if ( $block_is_pinned ) {
 			<?php if ( $block_is_sticky ) : ?>
 				<span class="b-post__sticky">Uutisnosto</span>
 			<?php endif; ?>
-			<button class="b-post__pinner" aria-label="<?php echo esc_attr( $pinner_aria ); ?>">
+			<button class="b-post__pinner" data-action="<?php echo esc_attr( $button_action ); ?>"
+					data-post-id="<?php echo esc_attr( $block_post_id ); ?>"
+					aria-label="<?php echo esc_attr( $pinner_aria ); ?>">
 				<?php \Opehuone\Helpers\the_svg( 'icons/' . $pin_svg ); ?>
 			</button>
 		</figure>
