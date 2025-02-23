@@ -522,3 +522,117 @@ function ajax_pin_own_service() {
 }
 
 add_action( 'wp_ajax_pin_own_service', __NAMESPACE__ . '\\ajax_pin_own_service' );
+
+function ajax_update_front_page_posts() {
+	// Get cornerLabels from POST request
+	$cornerlabel_ids = isset( $_POST['cornerLabels'] ) ? $_POST['cornerLabels'] : '';
+
+	if ( $cornerlabel_ids === '' ) {
+		$cornerlabel_ids = [];
+	}
+
+	$user_id = intval( $_POST['userId'] );
+
+	$current_favs = get_user_meta( $user_id, 'opehuone_favs', true );
+	if ( ! $current_favs ) {
+		$current_favs = [];
+	}
+
+	if ( ! is_array( $cornerlabel_ids ) ) {
+		$cornerlabel_ids = explode( ',', $cornerlabel_ids );
+	}
+
+	// Fetch sticky posts first
+	$sticky_posts = get_option( 'sticky_posts' );
+	$sticky_posts = ! empty( $sticky_posts ) ? array_map( 'intval', $sticky_posts ) : [];
+
+	$query_args = [
+		'post_type'           => 'post',
+		'posts_per_page'      => 8,
+		'ignore_sticky_posts' => true, // Prevent default WP behavior
+	];
+
+	// If there are selected filters, add them to query
+	if ( ! empty( $cornerlabel_ids ) ) {
+		$query_args['tax_query'] = [
+			[
+				'taxonomy' => 'cornerlabels',
+				'field'    => 'term_id',
+				'terms'    => $cornerlabel_ids,
+			],
+		];
+	}
+
+	// Fetch sticky posts first if they match the filters
+	$sticky_query_args = wp_parse_args( [
+		'post__in' => $sticky_posts,
+		'orderby'  => 'post__in', // Keep sticky posts first
+	], $query_args );
+
+	$sticky_query = new \WP_Query( $sticky_query_args );
+
+	// Fetch regular posts, excluding sticky ones
+	$regular_query_args = wp_parse_args( [
+		'post__not_in' => $sticky_posts, // Prevent duplicates
+	], $query_args );
+
+	$regular_query = new \WP_Query( $regular_query_args );
+
+	ob_start();
+
+	// Output sticky posts first
+	if ( $sticky_query->have_posts() ) {
+		while ( $sticky_query->have_posts() ) {
+			$sticky_query->the_post();
+
+			$block_args = [
+				'post_id'    => get_the_ID(),
+				'title'      => get_the_title(),
+				'url'        => get_the_permalink(),
+				'media_id'   => get_post_thumbnail_id(),
+				'excerpt'    => get_the_excerpt(),
+				'is_sticky'  => true, // Force as sticky
+				'categories' => get_the_category(),
+				'date'       => get_the_date(),
+				'is_pinned'  => in_array( get_the_ID(), $current_favs ),
+			];
+
+			get_template_part( 'partials/template-blocks/b-post', null, $block_args );
+		}
+	}
+
+	// Output regular posts after sticky ones
+	if ( $regular_query->have_posts() ) {
+		while ( $regular_query->have_posts() ) {
+			$regular_query->the_post();
+
+			$block_args = [
+				'post_id'    => get_the_ID(),
+				'title'      => get_the_title(),
+				'url'        => get_the_permalink(),
+				'media_id'   => get_post_thumbnail_id(),
+				'excerpt'    => get_the_excerpt(),
+				'is_sticky'  => false, // Regular post
+				'categories' => get_the_category(),
+				'date'       => get_the_date(),
+				'is_pinned'  => in_array( get_the_ID(), $current_favs ),
+			];
+
+			get_template_part( 'partials/template-blocks/b-post', null, $block_args );
+		}
+	} else {
+		echo '<p>Ei uutisia.</p>';
+	}
+
+	$output = ob_get_clean();
+	wp_reset_postdata();
+
+	wp_send_json_success( [
+		'message' => 'Uutiset päivitetty',
+		'output'  => $output
+	] );
+}
+
+add_action( 'wp_ajax_update_front_page_posts', __NAMESPACE__ . '\\ajax_update_front_page_posts' );
+add_action( 'wp_ajax_nopriv_update_front_page_posts', __NAMESPACE__ . '\\ajax_update_front_page_posts' );
+
