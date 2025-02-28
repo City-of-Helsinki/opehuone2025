@@ -38,7 +38,7 @@ const notificationsWrapper = document.querySelector(
 	'.own-links__add-new-form-notifications'
 );
 const addNewForm = document.querySelector('#own-links__add-new-form');
-const customList = document.querySelector('#user-custom-side-links-list');
+const customList = document.querySelector('.side-links-list');
 
 const T = getTranslations('opehuone-variables');
 
