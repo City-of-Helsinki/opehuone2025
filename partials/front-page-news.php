@@ -1,8 +1,23 @@
 <?php
+$cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
+
 $query_args = [
 	'post_type'      => 'post',
 	'posts_per_page' => 8,
 ];
+
+if ( is_array( $cornerlabels ) && count( $cornerlabels ) > 0 ) {
+	$tax_query  = [
+		'tax_query' => [
+			[
+				'taxonomy' => 'cornerlabels',
+				'field'    => 'id',
+				'terms'    => $cornerlabels,
+			],
+		]
+	];
+	$query_args = wp_parse_args( $tax_query, $query_args );
+}
 
 $query = new WP_Query( $query_args );
 

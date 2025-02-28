@@ -1,3 +1,6 @@
+<?php
+$cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
+?>
 <div class="front-page-posts-filter">
 	<form class="front-page-posts-filter__posts-form">
 		<div class="front-page-posts-filter__checkboxes-row">
@@ -12,7 +15,7 @@
 					?>
 					<label class="front-page-posts-filter__checkbox-label">
 						<input type="checkbox" class="front-page-posts-filter__checkbox-input" name="cornerlabels[]"
-							   value="<?php echo esc_attr( $term->term_id ); ?>">
+							   value="<?php echo esc_attr( $term->term_id ); ?>" <?php echo in_array( $term->term_id, $cornerlabels ) ? ' checked' : ''; ?>>
 						<?php echo esc_html( $term->name ); ?>
 					</label>
 					<?php
