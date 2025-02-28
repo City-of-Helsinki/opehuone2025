@@ -55,6 +55,8 @@ const isValidUrl = (string) => {
 };
 
 const addNewCustomLink = () => {
+	if (!addNewForm) return;
+
 	addNewForm.addEventListener('submit', (event) => {
 		event.preventDefault(); // Prevent the page from refreshing
 		let isValidForm = true;
@@ -123,6 +125,8 @@ const addNewCustomLink = () => {
 };
 
 const toggleResetStage2 = () => {
+	if (!resetButtonStage1) return;
+
 	resetButtonStage1.addEventListener('click', () => {
 		resetButtonStage2.classList.remove(
 			'side-links-list__reset-btn--final--hidden'
@@ -232,6 +236,8 @@ const defaultLinkRemoval = () => {
 };
 
 const resetAllLinks = () => {
+	if (!resetButtonStage2) return;
+
 	resetButtonStage2.addEventListener('click', (e) => {
 		e.preventDefault();
 
