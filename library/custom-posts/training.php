@@ -45,7 +45,9 @@ function custom_post_type() {
 		'supports'        => [
 			'title',
 			'editor',
-			'thumbnail'
+			'thumbnail',
+			'custom-fields',
+			'revisions',
 		],
 		'capability_type' => 'post',
 		'rewrite'         => [
@@ -53,8 +55,39 @@ function custom_post_type() {
 			'with_front' => false
 		],
 	);
-	register_post_type( 'training', $args );
+
+	// Register meta fields
+	foreach ( get_meta_fields() as $meta_field ) {
+		\register_post_meta(
+			'training',
+			$meta_field['key'],
+			[
+				'show_in_rest'      => true,
+				'single'            => true,
+				'type'              => $meta_field['type'] ?? 'string',
+				'sanitize_callback' => 'wp_strip_all_tags',
+			]
+		);
+	}
+
+	\register_post_type( 'training', $args );
 
 }
 
 add_action( 'init', __NAMESPACE__ . '\\custom_post_type', 0 );
+
+/**
+ * Get meta fields
+ *
+ * @return array
+ */
+function get_meta_fields(): array {
+	return [
+		// Add needed post meta here...
+		[ 'key' => 'training_start_datetime' ],
+		[ 'key' => 'training_end_datetime' ],
+		[ 'key' => 'training_draft_datetime' ],
+		[ 'key' => 'training_theme_color' ],
+		[ 'key' => 'training_is_online', 'type' => 'boolean' ],
+	];
+}

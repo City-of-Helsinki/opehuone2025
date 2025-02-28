@@ -1,16 +1,3 @@
 {
-  "env": {
-    "browser": true
-  },
-  "extends": [
-    "plugin:@wordpress/eslint-plugin/recommended"
-  ],
-  "rules": {
-    "no-console": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "react/prop-types": "off",
-    "no-unused-vars": "warn",
-    "prefer-arrow-callback": "warn"
-  }
+  "extends": ["./eslint-config.js"]
 }
