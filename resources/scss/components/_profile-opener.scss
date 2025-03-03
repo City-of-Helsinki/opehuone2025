@@ -136,5 +136,9 @@
 		font-size: var(--opehuone--font-size--normal);
 		font-weight: 700;
 		line-height: calc(24 / 16);
+
+		@include hover-focus {
+			display: inline-flex;
+		}
 	}
 }

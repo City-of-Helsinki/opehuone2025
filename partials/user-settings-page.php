@@ -18,6 +18,12 @@ $highlight_theme_colors = [
 $cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
 $user_data    = get_user_meta( $current_user->ID, 'user_data', true );
 $school_name  = OppiSchoolPicker\get_school_name( $user_data );
+
+$user_favs = get_user_meta( get_current_user_id(), 'opehuone_favs', true );
+
+if ( ! $user_favs ) {
+	$user_favs = [];
+}
 ?>
 <article class="content">
 	<div class="hero has-default-style has-koros">
@@ -87,6 +93,33 @@ $school_name  = OppiSchoolPicker\get_school_name( $user_data );
 								class="user-settings-form__submit-button"><?php esc_html_e( 'Tallenna muutos' ); ?></button>
 					</form>
 				</div>
+			</div>
+			<div class="user-settings-page__favorites-wrapper">
+				<h2 class="user-settings-page__secondary-title">
+					<?php esc_html_e( 'Tallennetut sisällöt', 'helsinki-universal' ); ?>
+				</h2>
+				<ul class="user-favs-list user-favs-list--grid">
+					<?php
+					// Loop through favs
+					foreach ( $user_favs as $fav_post_id ) {
+						$category_name = esc_html__( 'Sivut', 'helsinki-universal' );
+
+						if ( get_post_type( $fav_post_id ) === 'post' ) {
+							$category_name = esc_html__( 'Uutiset', 'helsinki-universal' );
+						}
+						?>
+						<li class="user-favs-list__item">
+							<a href="<?php echo esc_url( get_permalink( $fav_post_id ) ); ?>" class="user-favs-list__link">
+						<span
+							class="user-favs-list__link-category"><?php echo esc_html( $category_name ); ?></span>
+								<span
+									class="user-favs-list__link-title"><?php echo esc_html( get_the_title( $fav_post_id ) ); ?></span>
+							</a>
+						</li>
+						<?php
+					}
+					?>
+				</ul>
 			</div>
 		</div>
 	</div>

@@ -6,6 +6,17 @@
 	grid-template-columns: auto;
 	gap: rem(22px);
 
+	&.user-favs-list--grid {
+		margin: 0;
+		@include media-breakpoint-up(sm) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
 	&__item {
 		position: relative;
 		padding-left: rem(20px);
@@ -29,6 +40,7 @@
 
 		@include hover-focus {
 			text-decoration: underline;
+			display: grid;
 		}
 	}
 

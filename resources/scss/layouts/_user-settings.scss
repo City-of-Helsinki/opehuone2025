@@ -5,6 +5,12 @@
 		font-size: var(--opehuone--font-size--2-x-large);
 	}
 
+	&__secondary-title {
+		margin-top: 0;
+		margin-bottom: rem(28px);
+		font-size: var(--opehuone--font-size--x-large);
+	}
+
 	&__settings-row {
 		display: grid;
 		grid-template-columns: auto;
@@ -15,6 +21,13 @@
 		@include media-breakpoint-up(md) {
 			grid-template-columns: 1fr 1fr;
 		}
+	}
+
+	&__favorites-wrapper {
+		margin-top: var(--opehuone--spacing--large);
+		padding: var(--opehuone--spacing--normal)
+			var(--opehuone--spacing--small);
+		background-color: var(--color-engel-light);
 	}
 }
 
