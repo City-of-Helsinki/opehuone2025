@@ -33,10 +33,16 @@
 	--opehuone--font-size--small: 0.875rem;
 	--opehuone--font-size--normal: 1rem;
 	--opehuone--font-size--medium: clamp(1rem, 2vw, 1.125rem);
+	--opehuone--font-size--2-x-medium: clamp(1.125rem, 2vw, 1.25rem);
 	--opehuone--font-size--large: clamp(
 		1.125rem,
 		2vw,
 		1.5rem
 	); // 24px in desktop
-	--opehuoen--font-size--x-large: clamp(1.5rem, 3vw, 2rem); // 24px in desktop
+	--opehuone--font-size--x-large: clamp(1.5rem, 3vw, 2rem); // 32px in desktop
+	--opehuone--font-size--2-x-large: clamp(
+		2.5rem,
+		4vw,
+		3rem
+	); // 32px in desktop
 }

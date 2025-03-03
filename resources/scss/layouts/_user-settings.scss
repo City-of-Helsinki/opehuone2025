@@ -1,0 +1,19 @@
+.user-settings-page {
+	&__main-title {
+		margin-top: 0;
+		margin-bottom: rem(26px);
+		font-size: var(--opehuone--font-size--2-x-large);
+	}
+
+	&__settings-row {
+		display: grid;
+		grid-template-columns: auto;
+		gap: rem(32px);
+		font-size: var(--opehuone--font-size--2-x-medium);
+		font-weight: 500;
+
+		@include media-breakpoint-up(md) {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+}
