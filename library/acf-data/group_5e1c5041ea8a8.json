@@ -171,6 +171,34 @@
             "bidirectional_target": []
         },
         {
+            "key": "field_67c56a5f692f3",
+            "label": "Ota yhteyttä -sivu",
+            "name": "contact_page",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "post_type": [
+                "page"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 1,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        },
+        {
             "key": "field_5e1c5102bc460",
             "label": "Etusivun julkaisunostot",
             "name": "front_page_post_lifts",
@@ -1334,5 +1362,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1740222881
+    "modified": 1740991106
 }

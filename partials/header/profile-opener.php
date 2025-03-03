@@ -49,7 +49,7 @@ $profile_name = strtoupper( $first_initial . $last_initial );
 				</li>
 				<li class="profile-opener-dropdown__link-item">
 					<a class="profile-opener-dropdown__link"
-					   href="<?php echo esc_url( get_permalink( get_field( 'user_settings_page', 'option' ) ) ); ?>">
+					   href="<?php echo esc_url( get_permalink( get_field( 'contact_page', 'option' ) ) ); ?>">
 						<?php Helpers\the_svg( 'icons/envelope' ); ?>
 						<?php esc_html_e( 'Ota yhteyttä Opehuoneeseen', 'helsinki-universal' ); ?>
 					</a>
