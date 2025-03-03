@@ -41,7 +41,7 @@ function add_frontend_enqueue_scripts() {
 	wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );
 }
 
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\add_frontend_enqueue_scripts' );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\add_frontend_enqueue_scripts', 20 );
 
 /**
  * Enqueue assets for Gutenberg editor in admin
@@ -68,7 +68,7 @@ function enqueue_block_editor_assets() {
 	);
 }
 
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\\enqueue_block_editor_assets' );
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\\enqueue_block_editor_assets', 20 );
 
 
 /**
