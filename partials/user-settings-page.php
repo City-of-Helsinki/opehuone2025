@@ -15,10 +15,9 @@ $highlight_theme_colors = [
 	'engel',
 ];
 
-$user_settings    = new User_settings();
-$current_settings = $user_settings->get_user_settings();
-$user_data        = get_user_meta( $current_user->ID, 'user_data', true );
-$school_name      = OppiSchoolPicker\get_school_name( $user_data );
+$cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
+$user_data    = get_user_meta( $current_user->ID, 'user_data', true );
+$school_name  = OppiSchoolPicker\get_school_name( $user_data );
 ?>
 <article class="content">
 	<div class="hero has-default-style has-koros">
@@ -57,11 +56,36 @@ $school_name      = OppiSchoolPicker\get_school_name( $user_data );
 						<?php echo esc_html( $current_user->user_email ); ?>
 					</p>
 					<p>
-						Olet kirjatunut sisään koulutiedolla: <?php echo esc_html( $school_name ); ?>
+						<?php echo esc_html( sprintf( 'Olet kirjatunut sisään koulutiedolla: %s', $school_name ) ); ?>
 					</p>
 				</div>
 				<div>
+					<form class="user-settings-form" id="user-settings">
+						<p><?php esc_html_e( 'Muuta koulutusastetta', 'helsinki-universal' ); ?></p>
+						<div class="front-page-posts-filter__checkboxes-row">
+							<?php
+							$terms = get_terms( [
+								'taxonomy'   => 'cornerlabels',
+								'hide_empty' => true,
+							] );
 
+							if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+								foreach ( $terms as $term ) {
+									?>
+									<label class="front-page-posts-filter__checkbox-label">
+										<input type="checkbox" class="front-page-posts-filter__checkbox-input"
+											   name="cornerlabels[]"
+											   value="<?php echo esc_attr( $term->term_id ); ?>" <?php echo in_array( $term->term_id, $cornerlabels ) ? ' checked' : ''; ?>>
+										<?php echo esc_html( $term->name ); ?>
+									</label>
+									<?php
+								}
+							}
+							?>
+						</div>
+						<button type="submit"
+								class="user-settings-form__submit-button"><?php esc_html_e( 'Tallenna muutos' ); ?></button>
+					</form>
 				</div>
 			</div>
 		</div>

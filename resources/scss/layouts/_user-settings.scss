@@ -17,3 +17,7 @@
 		}
 	}
 }
+
+.user-settings-form__submit-button {
+	@include create-button();
+}

@@ -215,78 +215,28 @@ add_action( 'wp_ajax_update_user_dock', __NAMESPACE__ . '\\ajax_update_user_dock
 add_action( 'wp_ajax_nopriv_update_user_dock', __NAMESPACE__ . '\\ajax_update_user_dock' );
 
 function ajax_update_user_settings() {
-	$form_data                            = $_POST['formData'];
+	// Call the verification function and pass the nonce from $_POST
+	verify_logged_in_request( $_POST['nonce'] );
+
 	$user_id                              = $_POST['userId'];
-	$theme                                = null;
-	$highlight_color                      = null;
-	$header_color                         = null;
-	$what_to_show_categories_category     = [];
-	$what_to_show_categories_article_lang = [];
-	$what_to_show_categories_cornerlabels = [];
 
-	/**
-	 * Example of passed form data, need to modify that
-	 *
-	 * array(4) { [0]=> array(2) { ["name"]=> string(5) "theme" ["value"]=> string(5) "light" } [1]=> array(2) { ["name"]=> string(15) "highlight-color" ["value"]=> string(5) "metro" } [2]=> array(2) { ["name"]=> string(12) "header-color" ["value"]=> string(5) "light" } [3]=> array(2) { ["name"]=> string(23) "what-to-show-categories" ["value"]=> string(7) "varhais" } }
-	 *
-	 */
-
-	foreach ( $form_data as $item ) {
-		if ( $item['name'] === 'theme' ) {
-			$theme = $item['value'];
-		}
-
-		if ( $item['name'] === 'highlight-color' ) {
-			$highlight_color = $item['value'];
-		}
-
-		if ( $item['name'] === 'header-color' ) {
-			$header_color = $item['value'];
-		}
-
-		if ( $item['name'] === 'what-to-show-categories--category' ) {
-			$what_to_show_categories_category[] = $item['value'];
-		}
-
-		if ( $item['name'] === 'what-to-show-categories--cornerlabels' ) {
-			$what_to_show_categories_cornerlabels[] = $item['value'];
-		}
-
-		if ( $item['name'] === 'what-to-show-categories--article_lang' ) {
-			$what_to_show_categories_article_lang[] = $item['value'];
-		}
-	}
-
-	$what_to_show_categories[] = [
-		'category' => $what_to_show_categories_category,
-	];
-
-	$what_to_show_categories[] = [
-		'cornerlabels' => $what_to_show_categories_cornerlabels,
-	];
-
-	$what_to_show_categories[] = [
-		'article_lang' => $what_to_show_categories_article_lang,
-	];
+	// WP sets array from javascript to comma separated string
+	// So changing that to array
+	$cornerlabels = explode( ',', $_POST['cornerLabels'] );
 
 	$new_data = [
-		'theme'                   => $theme,
-		'highlight_color'         => $highlight_color,
-		'header_color'            => $header_color,
 		'what_to_show_categories' => [
-			'category'     => $what_to_show_categories_category,
-			'cornerlabels' => $what_to_show_categories_cornerlabels,
-			'article_lang' => $what_to_show_categories_article_lang,
+			'cornerlabels' => $cornerlabels,
 		],
 	];
 
 	\User_settings::update_user_settings( $new_data, $user_id );
 
-	die();
+	// Send a success response with the added link
+	wp_send_json_success( [ 'message' => 'Asetukset päivitetty' ] );
 }
 
 add_action( 'wp_ajax_update_user_settings', __NAMESPACE__ . '\\ajax_update_user_settings' );
-add_action( 'wp_ajax_nopriv_update_user_settings', __NAMESPACE__ . '\\ajax_update_user_settings' );
 
 function ajax_add_new_own_link() {
 	// Call the verification function and pass the nonce from $_POST
