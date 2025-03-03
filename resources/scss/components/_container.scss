@@ -6,3 +6,29 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+
+// Adjust hds-container to 1410px
+.hds-container {
+	max-width: var(--opehuone--container--width);
+	width: 100%;
+	padding-left: var(--opehuone--container--padding);
+	padding-right: var(--opehuone--container--padding);
+	margin-left: auto;
+	margin-right: auto;
+	box-sizing: border-box;
+
+	@media (min-width: 768px) {
+		padding-left: var(--opehuone--container--padding);
+		padding-right: var(--opehuone--container--padding);
+	}
+
+	@media (min-width: 1248px) {
+		max-width: var(--opehuone--container--width);
+		padding-left: var(--opehuone--container--padding);
+		padding-right: var(--opehuone--container--padding);
+	}
+}
+
+.hds-container--wide {
+	max-width: 1920px;
+}
