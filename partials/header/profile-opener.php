@@ -19,9 +19,9 @@ $last_initial  = substr( $last_name, 0, 1 );
 // Combine initials
 $profile_name = strtoupper( $first_initial . $last_initial );
 ?>
-<div class="profile-wrapper">
+<div class="profile-opener-wrapper">
 	<button class="profile-opener" aria-expanded="false"
-			aria-label="<?php esc_attr_e( 'Avaa profiiliasetukset', 'helsinki-universal' ); ?>">
+			aria-label="<?php esc_attr_e( 'Avaa profiilivalinnat', 'helsinki-universal' ); ?>">
 		<span><?php echo esc_html( $profile_name ); ?></span>
 	</button>
 	<div class="profile-opener-dropdown">

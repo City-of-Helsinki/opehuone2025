@@ -3,6 +3,7 @@ import { sideLinksList } from '../lib/sideLinksList';
 import { serviceFailure } from '../lib/serviceFailure';
 import { userFavs } from '../lib/userFavs';
 import { postsFiltering } from '../lib/postsFiltering';
+import { profileOpener } from '../lib/profileOpener';
 
 export default {
 	init() {
@@ -16,6 +17,8 @@ export default {
 		userFavs();
 		// Posts filtering
 		postsFiltering();
+		// Profile opener
+		profileOpener();
 	},
 	finalize() {
 		// JavaScript to be fired on all pages, after page specific JS is fired
