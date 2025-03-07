@@ -17,5 +17,6 @@
 			?>
 		</aside>
 	</div>
+	<?php get_template_part( 'partials/empty' ); ?>
 </div>
 

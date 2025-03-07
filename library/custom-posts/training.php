@@ -45,7 +45,7 @@ function custom_post_type() {
 		'supports'        => [
 			'title',
 			'editor',
-			'thumbnail',
+			'excerpt',
 			'custom-fields',
 			'revisions',
 		],

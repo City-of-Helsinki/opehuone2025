@@ -81,7 +81,7 @@ const editorSettings = () => {
               { label: 'Hybridikoulutus', value: 'hybrid' },
               { label: 'Verkkokoulutus', value: 'online' }
             ]}
-            onChange={(value) => setPostMeta(themeColor, value)}
+            onChange={(value) => setPostMeta(trainingType, value)}
           />
 				</PanelBody>
 				<PanelBody title="Aloitusaika" initialOpen={false}>

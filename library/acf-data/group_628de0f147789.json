@@ -21,7 +21,7 @@
                 "copper": "Kupari",
                 "engel": "Engel",
                 "bus": "Bussi",
-                "coat": "Vaakuna"
+                "coat-of-arms": "Vaakuna"
             },
             "default_value": "silver",
             "return_format": "value",
@@ -58,5 +58,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1741334528
+    "modified": 1741354928
 }
