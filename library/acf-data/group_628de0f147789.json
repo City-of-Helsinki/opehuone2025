@@ -6,6 +6,7 @@
             "key": "field_628de10a47749",
             "label": "Väriteema",
             "name": "button_color_theme",
+            "aria-label": "",
             "type": "select",
             "instructions": "Väriteema näkyvissä koulutusnoston kategorialistassa kategoria-tagin taustavärinä.",
             "required": 0,
@@ -16,19 +17,18 @@
                 "id": ""
             },
             "choices": {
-                "metro": "Metro",
-                "fog": "Sumu",
-                "copper": "Kupari",
                 "suomenlinna": "Suomenlinna",
-                "coat": "Vaakuna",
+                "copper": "Kupari",
                 "engel": "Engel",
-                "silver": "Hopea"
+                "bus": "Bussi",
+                "coat": "Vaakuna"
             },
             "default_value": "silver",
-            "allow_null": 0,
-            "multiple": 0,
-            "ui": 0,
             "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 1,
+            "ui": 0,
             "ajax": 0,
             "placeholder": ""
         }
@@ -58,5 +58,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1655706364
+    "modified": 1741334528
 }
