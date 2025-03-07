@@ -26,7 +26,7 @@ if ( ! $query->have_posts() ) {
 }
 $user_favs = \Opehuone\Utils\get_user_favs();
 ?>
-<h2>
+<h2 class="front-page-posts-filter__title">
 	<?php esc_html_e( 'Uutiset ja tiedotteet', 'helsini-universal' ); ?>
 </h2>
 <?php get_template_part( 'partials/front-page-news-filters' ); ?>

@@ -1,4 +1,11 @@
 .front-page-posts-filter {
+  &__title {
+    margin-top: 0;
+    margin-bottom: var(--opehuone--spacing--x-small);
+    font-weight: 400;
+    font-size: var(--opehuone--font-size--x-large);
+  }
+
 	&__checkboxes-row {
 		display: flex;
 		flex-direction: row;
