@@ -31,8 +31,16 @@ add_action( 'helsinki_header', function () {
 
 add_filter( 'body_class', function ( $classes ) {
 	if ( is_page_template( 'custom-templates/user-settings.php' ) ) {
-		$classes = array_diff( $classes, ['has-sidebar'] );
+		$classes = array_diff( $classes, [ 'has-sidebar' ] );
 	}
 
 	return $classes;
 }, 999 );
+
+add_filter( 'helsinki_hero_layout_style', function ( $style, $post_id ) {
+	if ( is_front_page() ) {
+		$style = 'has-front-page';
+	}
+
+	return $style;
+}, 9999, 2 );
