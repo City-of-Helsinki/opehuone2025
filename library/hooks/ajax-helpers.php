@@ -218,7 +218,7 @@ function ajax_update_user_settings() {
 	// Call the verification function and pass the nonce from $_POST
 	verify_logged_in_request( $_POST['nonce'] );
 
-	$user_id                              = $_POST['userId'];
+	$user_id = $_POST['userId'];
 
 	// WP sets array from javascript to comma separated string
 	// So changing that to array
@@ -585,4 +585,75 @@ function ajax_update_front_page_posts() {
 
 add_action( 'wp_ajax_update_front_page_posts', __NAMESPACE__ . '\\ajax_update_front_page_posts' );
 add_action( 'wp_ajax_nopriv_update_front_page_posts', __NAMESPACE__ . '\\ajax_update_front_page_posts' );
+
+function ajax_update_front_page_training() {
+	// Get cornerLabels from POST request
+	$cornerlabel_ids = isset( $_POST['cornerLabels'] ) ? $_POST['cornerLabels'] : '';
+
+	if ( $cornerlabel_ids === '' ) {
+		$cornerlabel_ids = [];
+	}
+
+	$user_id = intval( $_POST['userId'] );
+
+	if ( ! is_array( $cornerlabel_ids ) ) {
+		$cornerlabel_ids = explode( ',', $cornerlabel_ids );
+	}
+
+	$query_args = [
+		'post_type'      => 'training',
+		'posts_per_page' => 8,
+		'meta_key'       => 'training_start_datetime', // Define the meta key for ordering
+		'orderby'        => 'meta_value', // Order by meta value
+		'order'          => 'ASC', // Order in ascending order
+	];
+
+	// If there are selected filters, add them to query
+	if ( ! empty( $cornerlabel_ids ) ) {
+		$query_args['tax_query'] = [
+			[
+				'taxonomy' => 'cornerlabels',
+				'field'    => 'term_id',
+				'terms'    => $cornerlabel_ids,
+			],
+		];
+	}
+
+	ob_start();
+
+	$query = new \WP_Query( $query_args );
+
+	// Output regular posts after sticky ones
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+
+			$block_args = [
+				'url'            => get_the_permalink(),
+				'title'          => get_the_title(),
+				'type'           => get_post_meta( get_the_ID(), 'training_type', true ),
+				'theme'          => get_post_meta( get_the_ID(), 'training_theme_color', true ),
+				'start_datetime' => get_post_meta( get_the_ID(), 'training_start_datetime', true ),
+				'end_datetime'   => get_post_meta( get_the_ID(), 'training_end_datetime', true ),
+				'excerpt'        => get_the_excerpt(),
+				'categories'     => get_the_terms( get_the_ID(), 'training_theme' ),
+			];
+
+			get_template_part( 'partials/template-blocks/b-training-post', '', $block_args );
+		}
+	} else {
+		echo '<p>Ei koulutuksia.</p>';
+	}
+
+	$output = ob_get_clean();
+	wp_reset_postdata();
+
+	wp_send_json_success( [
+		'message' => 'Uutiset päivitetty',
+		'output'  => $output
+	] );
+}
+
+add_action( 'wp_ajax_update_front_page_training', __NAMESPACE__ . '\\ajax_update_front_page_training' );
+add_action( 'wp_ajax_nopriv_update_front_page_training', __NAMESPACE__ . '\\ajax_update_front_page_training' );
 
