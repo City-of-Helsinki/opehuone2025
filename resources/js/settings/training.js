@@ -60,10 +60,13 @@ const editorSettings = () => {
         <PanelBody title="Teema" initialOpen={false}>
           <SelectControl
             label="Valitse teema"
-            value={getPostMeta(themeColor) || 'light'} // if meta empty use light
+            value={getPostMeta(themeColor) || 'suomenlinna'} // if meta empty use suomenlinna
             options={[
-              { label: 'Vaalea', value: 'light' },
-              { label: 'Tumma', value: 'dark' },
+              { label: 'Suomenlinna', value: 'suomenlinna' },
+              { label: 'Kupari', value: 'copper' },
+              { label: 'Engel', value: 'engel' },
+              { label: 'Bussi', value: 'bus' },
+              { label: 'Vaakuna', value: 'coat-of-arms' },
             ]}
             onChange={(value) => setPostMeta(themeColor, value)}
           />
