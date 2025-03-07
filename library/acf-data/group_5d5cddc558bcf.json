@@ -1,0 +1,55 @@
+{
+    "key": "group_5d5cddc558bcf",
+    "title": "Kategorian lisäasetukset",
+    "fields": [
+        {
+            "key": "field_5d5cddee97cc1",
+            "label": "Kategorian väriteema",
+            "name": "color_theme",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Valitse kategorian väriteema.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "suomenlinna": "Suomenlinna",
+                "engel": "Engel",
+                "copper": "Kupari",
+                "fog": "Sumu",
+                "bus": "Bussi"
+            },
+            "default_value": "suomenlinna",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 1,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "category"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1741335404
+}
