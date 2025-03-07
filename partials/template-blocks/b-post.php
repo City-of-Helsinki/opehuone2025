@@ -50,11 +50,12 @@ if ( $block_is_pinned ) {
 		</p>
 	<?php endif; ?>
 	<?php if ( count( $block_categories ) > 0 ) : ?>
-		<ul class="b-post__categories">
+		<ul class="post-tags">
 			<?php
 			foreach ( $block_categories as $category ) {
+				$color = ! empty( get_term_meta( $category->term_id, 'color_theme', true ) ) ? get_term_meta( $category->term_id, 'color_theme', true ) : 'suomenlinna';
 				?>
-				<li>
+				<li class="has-post-tag-color-<?php echo esc_attr( $color ); ?>">
 					<?php echo esc_html( $category->name ); ?>
 				</li>
 				<?php

@@ -1,0 +1,22 @@
+.post-tags {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--opehuone--spacing--2-x-small);
+  font-size: rem(10px);
+
+  > li {
+    @each $name, $value in $all-post-tag-theme-colors {
+      &.has-post-tag-color-#{$name} {
+        background-color: $value;
+      }
+    }
+
+    display: block;
+    padding: 6px 12px;
+    border-radius: 32px;
+  }
+}
