@@ -88,6 +88,9 @@ function get_meta_fields(): array {
 		[ 'key' => 'training_end_datetime' ],
 		[ 'key' => 'training_draft_datetime' ],
 		[ 'key' => 'training_theme_color' ],
-		[ 'key' => 'training_is_online', 'type' => 'boolean' ],
+		[ 'key' => 'training_type' ],
+		[ 'key' => 'training_registration_deadline' ],
+		[ 'key' => 'training_more_info' ],
+		[ 'key' => 'training_registration_url' ],
 	];
 }
