@@ -27,6 +27,17 @@ class TrainingHelpers {
 		}
 	}
 
+	public static function get_single_date( $datetime ) {
+		if ( empty( $datetime ) ) {
+			return '';
+		}
+
+		// Convert input datetime strings to DateTime objects
+		$datetime_object = new DateTime( $datetime );
+
+		return $datetime_object->format( 'd.m.Y' );
+	}
+
 	public static function get_training_type( $type ) {
 		if ( empty( $type ) ) {
 			return 'Lähikoulutus';

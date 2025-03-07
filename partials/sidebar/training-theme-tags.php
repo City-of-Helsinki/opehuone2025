@@ -2,12 +2,12 @@
 
 $terms = get_the_terms( get_the_ID(), 'training_theme' );
 
-if ( is_wp_error( $terms ) || count( $terms ) == 0 ) {
+if ( empty( $terms ) || is_wp_error( $terms ) ) {
 	return;
 }
 
 ?>
-<ul class="post-tags">
+<ul class="post-tags post-tags--is-lg">
 	<?php
 	foreach ( $terms as $category ) {
 		$color = ! empty( get_term_meta( $category->term_id, 'button_color_theme', true ) ) ? get_term_meta( $category->term_id, 'button_color_theme', true ) : 'suomenlinna';

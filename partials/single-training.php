@@ -11,6 +11,10 @@
 					<?php
 					get_template_part( 'partials/sidebar/training-theme-tags' );
 					get_template_part( 'partials/sidebar/training-cornerlabels' );
+					get_template_part( 'partials/sidebar/training-date' );
+					get_template_part( 'partials/sidebar/training-type' );
+					get_template_part( 'partials/sidebar/training-last-registration-date' );
+					get_template_part( 'partials/sidebar/training-more-info' );
 					?>
 				</div>
 			</aside>

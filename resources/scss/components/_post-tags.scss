@@ -8,6 +8,11 @@
   gap: var(--opehuone--spacing--2-x-small);
   font-size: rem(10px);
 
+  &.post-tags--is-lg {
+    font-size: var(--opehuone--font-size--small);
+    font-weight: 500;
+  }
+
   > li {
     @each $name, $value in $all-post-tag-theme-colors {
       &.has-post-tag-color-#{$name} {
