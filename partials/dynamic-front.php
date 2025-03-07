@@ -4,6 +4,8 @@
 		<main>
 			<?php
 			get_template_part( 'partials/front-page-news' );
+			get_template_part( 'partials/empty' );
+			get_template_part( 'partials/front-page-training' );
 			?>
 		</main>
 		<aside class="sidebar-boxes">
