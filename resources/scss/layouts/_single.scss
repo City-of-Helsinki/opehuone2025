@@ -1,0 +1,21 @@
+.single-post {
+  &__title {
+    margin-top: 0;
+    margin-bottom: var(--opehuone--spacing--x-small);
+    font-weight: 400;
+    font-size: var(--opehuone--font-size--x-large);
+
+    + .wp-block-image {
+      > img {
+        aspect-ratio: 10 / 3;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &__sidebar-training {
+    display: flex;
+    flex-direction: column;
+    gap: var(--opehuone--spacing--small)
+  }
+}
