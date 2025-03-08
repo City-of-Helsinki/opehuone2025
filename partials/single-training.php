@@ -15,6 +15,7 @@
 					get_template_part( 'partials/sidebar/training-type' );
 					get_template_part( 'partials/sidebar/training-last-registration-date' );
 					get_template_part( 'partials/sidebar/training-more-info' );
+					get_template_part( 'partials/sidebar/training-registration-link' );
 					?>
 				</div>
 			</aside>
