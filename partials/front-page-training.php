@@ -7,6 +7,14 @@ $query_args = [
 	'meta_key'       => 'training_start_datetime', // Define the meta key for ordering
 	'orderby'        => 'meta_value', // Order by meta value
 	'order'          => 'ASC', // Order in ascending order
+	'meta_query'     => [
+		[
+			'key'     => 'training_end_datetime', // Target the correct meta field
+			'value'   => current_time( 'Y-m-d\TH:i:s' ), // Get the current date and time in WordPress timezone
+			'compare' => '>=', // Only include posts where the date is in the future
+			'type'    => 'DATETIME', // Ensure proper comparison as a date-time value
+		],
+	],
 ];
 
 if ( is_array( $cornerlabels ) && count( $cornerlabels ) > 0 ) {
