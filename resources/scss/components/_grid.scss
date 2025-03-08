@@ -2,8 +2,9 @@
 	display: grid;
 	grid-template-columns: auto;
 	gap: var(--opehuone--spacing--normal);
+  width: 100%;
 
 	@include media-breakpoint-up(md) {
-		grid-template-columns: auto 360px;
+		grid-template-columns: 1fr 360px;
 	}
 }
