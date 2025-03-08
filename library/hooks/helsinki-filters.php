@@ -30,7 +30,7 @@ add_action( 'helsinki_header', function () {
 }, 41 );
 
 add_filter( 'body_class', function ( $classes ) {
-	if ( is_page_template( 'custom-templates/user-settings.php' ) ) {
+	if ( is_page_template( 'custom-templates/user-settings.php' ) || is_post_type_archive( 'training' ) ) {
 		$classes = array_diff( $classes, [ 'has-sidebar' ] );
 	}
 

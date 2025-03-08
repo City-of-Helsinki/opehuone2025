@@ -36,7 +36,7 @@ function custom_post_type() {
 		'label'           => __( 'Koulutukset', 'helsinki-universal' ),
 		'labels'          => $labels,
 		'public'          => true,
-		'has_archive'     => false,
+		'has_archive'     => true,
 		'show_ui'         => true,
 		'hierarchical'    => true,
 		'menu_position'   => 20,
@@ -51,7 +51,7 @@ function custom_post_type() {
 		],
 		'capability_type' => 'post',
 		'rewrite'         => [
-			'slug'       => 'koulutus',
+			'slug'       => 'koulutukset',
 			'with_front' => false
 		],
 	);
