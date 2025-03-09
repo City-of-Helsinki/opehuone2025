@@ -8,7 +8,6 @@
 </div>
 <?php
 get_template_part( 'partials/empty' );
-get_template_part('partials/training-archive-filters');
-get_template_part('partials/empty');
-?>
-Tulokset tänne
+get_template_part( 'partials/training-archive-filters' );
+get_template_part( 'partials/empty' );
+get_template_part( 'partials/training-archive-results' );

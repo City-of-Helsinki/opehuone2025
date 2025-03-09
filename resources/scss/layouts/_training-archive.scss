@@ -81,4 +81,11 @@
   &__filters-submit {
     @include create-button(true);
   }
+
+  &__number-of-posts {
+    display: block;
+    font-size: var(--opehuone--font-size--large);
+    font-weight: 500;
+    margin-bottom: var(--opehuone--spacing--small);
+  }
 }
