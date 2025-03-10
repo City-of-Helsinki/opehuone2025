@@ -5,7 +5,7 @@ class Opehuone_user_settings_reader {
 
 	public static function get_user_settings_key( $key ) {
 		if ( empty( $key ) || ! is_user_logged_in() ) {
-			return false;
+			return [];
 		}
 
 		$current_user = wp_get_current_user();
@@ -13,7 +13,7 @@ class Opehuone_user_settings_reader {
 		$user_settings = get_user_meta( $current_user->ID, self::$meta_key, true );
 
 		if ( ! $user_settings ) {
-			return false;
+			return [];
 		}
 
 		return $user_settings['what_to_show_categories'][ $key ];
