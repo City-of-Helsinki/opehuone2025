@@ -1,4 +1,4 @@
-import { getTranslations } from '../lib/translations';
+import { getTranslations } from './translations';
 const T = getTranslations('opehuone-variables');
 
 const numberOfPostsSpan = document.querySelector('#training-archive-number-of-posts');

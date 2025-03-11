@@ -3,6 +3,7 @@ import Router from './util/router';
 import common from './routes/Common';
 import pageTemplateUserSettings from './routes/pageTemplateUserSettings';
 import postTypeArchiveTraining from './routes/postTypeArchiveTraining';
+import blog from './routes/blog';
 
 /**
  *
@@ -14,7 +15,9 @@ const router = new Router({
 	// User settings
 	pageTemplateUserSettings,
   // Training archive
-  postTypeArchiveTraining
+  postTypeArchiveTraining,
+  // Blog
+  blog
 });
 
 // Load Events

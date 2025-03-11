@@ -32,7 +32,7 @@
 					<div class="posts-archive__select-filter-wrapper">
 						<button class="checkbox-filter__filter-btn" aria-expanded="false"
 								aria-label="<?php esc_attr_e( 'Näytä valinnat', 'helsinki-universal' ); ?>">
-							Kaikki
+							<?php esc_html_e( 'Valitse', 'helsinki-universal' ); ?>
 						</button>
 						<div class="checkbox-filter__filter-dropdown">
 							<div class="checkbox-filter__checkboxes-wrapper">
@@ -56,7 +56,7 @@
 								}
 								?>
 							</div>
-							<button class="checkbox-filter__checkboxes-reset-btn is-disabled">
+							<button class="checkbox-filter__checkboxes-reset-btn">
 								<?php esc_html_e( 'Tyhjennä valinnat', 'helsinki-universal' ); ?>
 							</button>
 						</div>

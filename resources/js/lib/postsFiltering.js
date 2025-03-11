@@ -55,6 +55,7 @@ const detectCheckboxChange = (form) => {
 };
 
 export const postsFiltering = () => {
+  // Checkbox changes in front page
   detectCheckboxChange(document.querySelector('#front-page-filter-posts'));
   detectCheckboxChange(document.querySelector('#front-page-filter-training'));
 };
