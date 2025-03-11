@@ -25,33 +25,43 @@
 		foreach ( $filters as $filter ) {
 			?>
 			<div class="posts-archive__single-filter">
-				<label for="posts-archive-<?php echo esc_attr( $filter['taxonomy'] ); ?>"
-					   class="posts-archive__filter-label">
-					<?php echo esc_html( $filter['name'] ); ?>
-				</label>
-				<div class="posts-archive__select-filter-wrapper">
-					<select class="posts-archive__select-filter"
-							id="posts-archive-<?php echo esc_attr( $filter['taxonomy'] ); ?>"
-							name="<?php echo esc_attr( $filter['taxonomy'] ); ?>">
-						<option value=""><?php esc_html_e( 'Kaikki', 'helsinki-universal' ); ?></option>
-						<?php
-						$terms = get_terms( [
-							'taxonomy'   => $filter['taxonomy'],
-							'hide_empty' => false,
-						] );
+				<fieldset>
+					<legend class="posts-archive__filter-label">
+						<?php echo esc_html( $filter['name'] ); ?>
+					</legend>
+					<div class="posts-archive__select-filter-wrapper">
+						<button class="checkbox-filter__filter-btn" aria-expanded="false"
+								aria-label="<?php esc_attr_e( 'Näytä valinnat', 'helsinki-universal' ); ?>">
+							Kaikki
+						</button>
+						<div class="checkbox-filter__filter-dropdown">
+							<div class="checkbox-filter__checkboxes-wrapper">
+								<?php
+								$terms = get_terms( [
+									'taxonomy'   => $filter['taxonomy'],
+									'hide_empty' => true,
+								] );
 
-						if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-							foreach ( $terms as $term ) {
-								printf(
-									'<option value="%d">%s</option>',
-									esc_attr( $term->term_id ),
-									esc_html( $term->name )
-								);
-							}
-						}
-						?>
-					</select>
-				</div>
+								if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+									foreach ( $terms as $term ) {
+										?>
+										<label class="checkbox-filter__checkbox-label">
+											<input type="checkbox" class="checkbox-filter__checkbox-input"
+												   name="<?php echo esc_attr( $filter['taxonomy'] ); ?>[]"
+												   value="<?php echo esc_attr( $term->term_id ); ?>">
+											<?php echo esc_html( $term->name ); ?>
+										</label>
+										<?php
+									}
+								}
+								?>
+							</div>
+							<button class="checkbox-filter__checkboxes-reset-btn is-disabled">
+								<?php esc_html_e( 'Tyhjennä valinnat', 'helsinki-universal' ); ?>
+							</button>
+						</div>
+					</div>
+				</fieldset>
 			</div>
 			<?php
 		}
