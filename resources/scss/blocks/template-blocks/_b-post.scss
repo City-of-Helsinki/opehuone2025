@@ -14,6 +14,14 @@
 	@include media-breakpoint-up(xl) {
 		grid-template-columns: repeat(4, 1fr);
 	}
+
+  &__button-wrapper {
+    margin-top: var(--opehuone--spacing--small);
+  }
+
+  &__more-btn {
+    @include create-button();
+  }
 }
 
 .b-post {

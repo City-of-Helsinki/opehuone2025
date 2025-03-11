@@ -37,6 +37,7 @@
 
 	&:focus {
 		outline: 0;
+    display: inline-flex;
 	}
 
 	&.is-disabled {

@@ -62,4 +62,8 @@ if ( ! $query->have_posts() ) {
 	wp_reset_postdata();
 	?>
 </div>
-
+<div class="b-training-row__button-wrapper">
+	<a href="<?php echo esc_url( get_post_type_archive_link( 'training' ) ); ?>" class="b-training-row__more-btn">
+		<?php esc_html_e( 'Katso kaikki koulutukset', 'helsinki-universal' ); ?>
+	</a>
+</div>

@@ -53,4 +53,9 @@ $user_favs = \Opehuone\Utils\get_user_favs();
 	wp_reset_postdata();
 	?>
 </div>
+<div class="b-posts-row__button-wrapper">
+	<a href="<?php echo esc_url( get_post_type_archive_link( 'post' ) ); ?>" class="b-posts-row__more-btn">
+		<?php esc_html_e( 'Katso kaikki uutiset', 'helsinki-universal' ); ?>
+	</a>
+</div>
 
