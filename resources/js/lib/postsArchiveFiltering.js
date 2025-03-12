@@ -18,35 +18,35 @@ const doFiltering = (event, form) => {
   const categories = getCheckedValues(form, 'category[]');
   const postTags = getCheckedValues(form, 'post_tag[]');
 
-  console.log(cornerlabels);
-
-  // fetch(T.ajaxUrl, {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/x-www-form-urlencoded',
-  //   },
-  //   body: new URLSearchParams({
-  //     action: `update_training_archive_results`,
-  //     cornerLabel: cornerLabels,
-  //     trainingTheme: trainingTheme,
-  //   }),
-  // })
-  //   .then((response) => {
-  //     if (!response.ok) {
-  //       throw new Error(
-  //         `HTTP error! Status: ${response.status}`
-  //       );
-  //     }
-  //     return response.json();
-  //   }) // Assuming the response is JSON
-  //   .then((response) => {
-  //     const postsContainer = document.querySelector('#training-archive-results');
-  //     if (postsContainer) {
-  //       postsContainer.innerHTML = response.data.output;
-  //     }
-  //     numberOfPostsSpan.innerHTML = response.data.totalPosts
-  //   })
-  //   .catch((error) => console.error('AJAX Error:', error));
+  fetch(T.ajaxUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      action: `update_posts_archive_results`,
+      cornerLabels: cornerlabels,
+      categories: categories,
+      postTags: postTags,
+      userId: T.userId
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          `HTTP error! Status: ${response.status}`
+        );
+      }
+      return response.json();
+    }) // Assuming the response is JSON
+    .then((response) => {
+      const postsContainer = document.querySelector('#posts-archive-results');
+      if (postsContainer) {
+        postsContainer.innerHTML = response.data.output;
+      }
+      numberOfPostsSpan.innerHTML = response.data.totalPosts
+    })
+    .catch((error) => console.error('AJAX Error:', error));
 };
 
 const toggleDropdown = () => {
@@ -55,7 +55,8 @@ const toggleDropdown = () => {
   filterButtons.forEach((button) => {
     const originalLabel = button.getAttribute('aria-label') || 'Näytä valinnat'; // Fallback label
 
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
       const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
       // Toggle aria-expanded
@@ -95,7 +96,8 @@ const initializeResetButtons = () => {
   const resetButtons = document.querySelectorAll('.checkbox-filter__checkboxes-reset-btn');
 
   resetButtons.forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
       // Find the closest filter wrapper to scope the reset action
       const filterWrapper = button.closest('.posts-archive__select-filter-wrapper');
 
