@@ -19,4 +19,9 @@ add_action( 'pre_get_posts', function ( $query ) {
 			],
 		] );
 	}
+
+	// In main news archive, show 15 posts per page
+	if ( is_home() && ! is_admin() && $query->is_main_query() ) {
+		$query->set( 'posts_per_page', '15' );
+	}
 } );

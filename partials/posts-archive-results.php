@@ -7,10 +7,12 @@ if ( ! have_posts() ) {
 global $wp_query;
 
 $user_favs = \Opehuone\Utils\get_user_favs();
+$per_page  = 15;
 ?>
 
 <span class="posts-archive__number-of-posts" aria-live="polite">
-	<span id="posts-archive-number-of-posts"><?php echo esc_html($wp_query->found_posts); ?></span> <?php esc_html_e('hakutulosta', 'helsinki-universal'); ?>
+	<span
+		id="posts-archive-number-of-posts"><?php echo esc_html( $wp_query->found_posts ); ?></span> <?php esc_html_e( 'hakutulosta', 'helsinki-universal' ); ?>
 </span>
 
 <div class="b-posts-row" id="posts-archive-results">
@@ -35,4 +37,12 @@ $user_favs = \Opehuone\Utils\get_user_favs();
 
 	wp_reset_postdata();
 	?>
+</div>
+<div class="posts-archive__load-more-wrapper">
+	<button class="posts-archive__load-more-btn"
+			data-total-posts="<?php echo esc_attr( $wp_query->found_posts ); ?>"
+			data-posts-offset="15" data-cornerlabels="" data-categories=""
+			data-post-tags="">
+		<?php esc_html_e( 'Lataa lisää', 'helsinki-universal' ); ?>
+	</button>
 </div>

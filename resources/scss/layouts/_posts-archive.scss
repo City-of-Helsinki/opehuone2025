@@ -77,4 +77,12 @@
     font-weight: 500;
     margin-bottom: var(--opehuone--spacing--small);
   }
+
+  &__load-more-wrapper {
+    margin-top: var(--opehuone--spacing--small);
+  }
+
+  &__load-more-btn {
+    @include create-button();
+  }
 }

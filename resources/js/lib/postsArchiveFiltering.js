@@ -1,8 +1,10 @@
 import {getTranslations} from './translations';
+import {setLoadmoreButtonAttributes, loadMorePosts} from "./loadMoreHelpers";
 
 const T = getTranslations('opehuone-variables');
 
 const numberOfPostsSpan = document.querySelector('#posts-archive-number-of-posts');
+const postsContainer = document.querySelector('#posts-archive-results');
 
 const getCheckedValues = (form, name) => {
   // need to escape the square brackets with double backslashes (\\) in the selector string
@@ -40,11 +42,14 @@ const doFiltering = (event, form) => {
       return response.json();
     }) // Assuming the response is JSON
     .then((response) => {
-      const postsContainer = document.querySelector('#posts-archive-results');
       if (postsContainer) {
         postsContainer.innerHTML = response.data.output;
       }
-      numberOfPostsSpan.innerHTML = response.data.totalPosts
+      numberOfPostsSpan.innerHTML = response.data.totalPosts;
+
+      // Set load more button properties
+      setLoadmoreButtonAttributes(response.data.totalPosts, cornerlabels, categories, postTags);
+
     })
     .catch((error) => console.error('AJAX Error:', error));
 };
@@ -125,5 +130,8 @@ export const postsArchiveFiltering = () => {
 
   // reset buttons
   initializeResetButtons();
+
+  // Load more
+  loadMorePosts('load_more_posts_archive_results', postsContainer);
 };
 
