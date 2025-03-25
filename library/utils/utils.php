@@ -72,3 +72,17 @@ function user_data_meta_exists() {
 
 	return false;
 }
+
+function get_cornerlabels_term_ids( $post_id = null ) {
+	$post_id = $post_id ?: get_the_ID();
+
+	$terms = get_the_terms( $post_id, 'cornerlabels' );
+
+	if ( empty( $terms ) || is_wp_error( $terms ) ) {
+		return '';
+	}
+
+	$term_ids = wp_list_pluck( $terms, 'term_id' );
+
+	return implode( ',', $term_ids );
+}

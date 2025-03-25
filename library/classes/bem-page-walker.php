@@ -87,7 +87,9 @@ class BEM_Page_Walker extends Walker_Page {
 			$aria_label = sprintf( pll_esc_html__( 'Sivu %s, yläsivu %s' ), $page->post_title, $parent_page_title );
 		}
 
-		$output .= $indent . '<li class="' . $class_names . '">';
+		$cornerlabels = \Opehuone\Utils\get_cornerlabels_term_ids( $page->ID );
+
+		$output .= $indent . '<li data-has-cornerlabels="' . esc_attr( $cornerlabels ) . '" class="' . $class_names . '">';
 
 		$output .= '<a class="' . $menu_class . '-lvl-' . $lvl . '__link sidemenu-page-link" href="' . get_permalink( $page->ID ) . '" ' . $aria_current . ' aria-label="' . $aria_label . '">' . $args['link_before'] . apply_filters( 'the_title',
 				$page->post_title, $page->ID ) . $args['link_after'] . '</a>';
