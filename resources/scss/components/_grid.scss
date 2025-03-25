@@ -4,6 +4,12 @@
 	gap: var(--opehuone--spacing--normal);
   width: 100%;
 
+  &.opehuone-grid--reversed {
+    @include media-breakpoint-up(md) {
+      grid-template-columns: 360px 1fr;
+    }
+  }
+
 	@include media-breakpoint-up(md) {
 		grid-template-columns: 1fr 360px;
 	}

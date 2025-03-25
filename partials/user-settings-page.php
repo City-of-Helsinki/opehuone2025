@@ -5,16 +5,6 @@ if ( ! is_user_logged_in() ) {
 }
 
 $current_user = wp_get_current_user();
-
-$highlight_theme_colors = [
-	'metro',
-	'fog',
-	'copper',
-	'suomenlinna',
-	'coat',
-	'engel',
-];
-
 $cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
 $user_data    = get_user_meta( $current_user->ID, 'user_data', true );
 $school_name  = OppiSchoolPicker\get_school_name( $user_data );
