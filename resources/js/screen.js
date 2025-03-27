@@ -2,6 +2,7 @@
 import Router from './util/router';
 import common from './routes/Common';
 import pageTemplateUserSettings from './routes/pageTemplateUserSettings';
+import pageTemplateWithSidemenu from './routes/pageTemplateWithSidemenu';
 import postTypeArchiveTraining from './routes/postTypeArchiveTraining';
 import blog from './routes/blog';
 
@@ -14,6 +15,8 @@ const router = new Router({
 	common,
 	// User settings
 	pageTemplateUserSettings,
+  // Sidemenu page
+  pageTemplateWithSidemenu,
   // Training archive
   postTypeArchiveTraining,
   // Blog

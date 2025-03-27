@@ -26,7 +26,11 @@ class BEM_Page_Walker extends Walker_Page {
 
 		$aria_label = sprintf( pll_esc_html__( 'Avaa sivun %s alanavigaatio' ), $this->curpage->post_title );
 
-		$icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 7"><path d="M5.004 6.504a1 1 0 01-.71-.29l-4-4a1.004 1.004 0 011.42-1.42l3.29 3.31 3.3-3.18a1 1 0 111.38 1.44l-4 3.86a1 1 0 01-.68.28z"></path></svg>';
+		$icon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="24" height="24" fill="#F2F2F2"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12 13.5L17 8.5L18.5 10L12 16.5L5.5 10L7 8.5L12 13.5Z" fill="#1A1A1A"/>
+</svg>
+';
 
 		$output .= "\n$indent<button class=\"${menu_class}-lvl-${button_depth}__sub-menu-toggle sidemenu-toggle\" data-page-nav-toggle=\"sub-menu\" aria-label=\"${aria_label}\" aria-haspopup=\"true\" aria-expanded=\"false\">{$icon}</button>\n";
 

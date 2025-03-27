@@ -1,0 +1,147 @@
+$sidemenu-link-color: var(--color-black-90);
+$sidemenu-active-link-color: var(--color-black-90);
+
+@mixin create-current-page-element {
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    height: 100%;
+    left: -6px;
+    background-color: var(--color-black-90);
+    margin: auto;
+  }
+}
+
+/**
+ * Sidemenu general
+ */
+.sidemenu-nav-lvl {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidemenu-nav-lvl-2,
+.sidemenu-nav-lvl-3,
+.sidemenu-nav-lvl-4 {
+  display: none;
+}
+
+/**
+ * Toggle btn
+ */
+.sidemenu-toggle {
+  position: absolute;
+  right: 5px;
+  top: 15px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  svg {
+    width: 24px;
+    height: auto;
+  }
+}
+
+/**
+ * Item
+ */
+.sidemenu-page-item {
+  position: relative;
+  display: block;
+
+  > .sidemenu-toggle {
+  }
+
+  &.sidemenu-page-item--opened {
+    > .sidemenu-nav-lvl {
+      display: block;
+    }
+
+    > .sidemenu-toggle {
+      > svg {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+}
+
+.sidemenu-nav-lvl-1__item {
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #CCCCCC;
+  }
+}
+
+.sidemenu-current-page, .sidemenu-current-page-ancestor {
+  > .sidemenu-nav-lvl-1__link,
+  > .sidemenu-nav-lvl-2__link,
+  > .sidemenu-nav-lvl-3__link {
+    color: $sidemenu-active-link-color;
+    font-weight: 700;
+    @include create-current-page-element();
+  }
+}
+
+/**
+ * Link definitions
+ */
+.sidemenu-nav-lvl-1__link {
+  display: block;
+  position: relative;
+  font-size: var(--opehuone--font-size--medium);
+  font-weight: 400;
+  line-height: calc(28 / 18);
+  padding: rem(16px 35px 16px 16px);
+  text-decoration: none;
+  color: $sidemenu-link-color;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $sidemenu-active-link-color;
+    text-decoration: underline;
+  }
+}
+
+.sidemenu-nav-lvl-2__link {
+  display: block;
+  position: relative;
+  font-size: var(--opehuone--font-size--normal);
+  font-weight: 400;
+  line-height: calc(24 / 16);
+  text-decoration: none;
+  padding: rem(6px 35px 6px 12px);
+  color: $sidemenu-link-color;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $sidemenu-active-link-color;
+    text-decoration: underline;
+  }
+}
+
+/**
+ * Submenus
+ */
+.sidemenu-nav-lvl-2 {
+  margin: 5px 0 5px 12px;
+}
+
+.sidemenu-nav-lvl-3,
+.sidemenu-nav-lvl-4 {
+  margin: 5px 0 5px 0;
+}
