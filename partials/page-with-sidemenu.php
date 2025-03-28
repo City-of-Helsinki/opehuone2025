@@ -1,5 +1,6 @@
 <article class="content">
 	<div class="content__container hds-container">
+		<?php get_template_part( 'partials/breadcrumbs' ); ?>
 		<div class="opehuone-grid opehuone-grid--reversed">
 			<aside>
 				<?php get_template_part( 'partials/sidemenu' ); ?>
