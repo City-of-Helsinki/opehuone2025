@@ -1,7 +1,7 @@
 $sidemenu-link-color: var(--color-black-90);
 $sidemenu-active-link-color: var(--color-black-90);
 
-@mixin create-current-page-element {
+@mixin create-current-page-element($left: -2px) {
   &:before {
     content: "";
     position: absolute;
@@ -9,7 +9,7 @@ $sidemenu-active-link-color: var(--color-black-90);
     bottom: 0;
     width: 2px;
     height: 100%;
-    left: -6px;
+    left: $left;
     background-color: var(--color-black-90);
     margin: auto;
   }
@@ -83,15 +83,25 @@ $sidemenu-active-link-color: var(--color-black-90);
     height: 1px;
     background-color: #CCCCCC;
   }
+
+  &.sidemenu-page-item--opened {
+    border-left: 1px solid #ccc;
+  }
 }
 
 .sidemenu-current-page, .sidemenu-current-page-ancestor {
   > .sidemenu-nav-lvl-1__link,
-  > .sidemenu-nav-lvl-2__link,
-  > .sidemenu-nav-lvl-3__link {
+  > .sidemenu-nav-lvl-2__link, {
     color: $sidemenu-active-link-color;
     font-weight: 700;
+  }
+
+  > .sidemenu-nav-lvl-1__link {
     @include create-current-page-element();
+  }
+
+  > .sidemenu-nav-lvl-2__link, {
+    @include create-current-page-element(-14px);
   }
 }
 
