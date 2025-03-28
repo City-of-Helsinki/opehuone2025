@@ -23,6 +23,7 @@ ol.breadcrumbs {
     color: var(--color-black-90);
     font-size: var(--wp--preset--font-size--normal);
     line-height: calc(24/16);
+    text-wrap: auto;
 
     &.breadcrumbs__list-item--active {
       font-weight: 700;
