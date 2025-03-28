@@ -46,10 +46,16 @@
     margin-bottom: var(--opehuone--spacing--small);
   }
 
-  &__sidebar-training, &__sidebar-post {
+  &__sidebar-training {
     display: flex;
     flex-direction: column;
     gap: var(--opehuone--spacing--normal)
+  }
+
+  &__sidebar-post {
+    display: flex;
+    flex-direction: column;
+    gap: var(--opehuone--spacing--2-x-large)
   }
 
   &__sidebar-link {

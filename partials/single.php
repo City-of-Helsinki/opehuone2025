@@ -35,11 +35,13 @@
 				</div>
 				<?php the_post_thumbnail( 'large', [ 'class' => 'single-post__featured-image' ] ); ?>
 				<?php the_content(); ?>
+				TÄNNE VIELÄ TAKSONOMIA LINKIT
 			</section>
 			<aside>
 				<div class="single-post__sidebar-post">
 					<?php
-
+					get_template_part( 'partials/sidebar/post-latest-news' );
+					get_template_part( 'partials/sidebar/post-most-read-news' );
 					?>
 				</div>
 			</aside>
