@@ -1,8 +1,8 @@
 <article class="content">
 	<div class="content__container hds-container">
+		<?php get_template_part( 'partials/breadcrumbs' ); ?>
 		<div class="opehuone-grid">
 			<section>
-				<p>MURUPOLKU TÄHÄN</p>
 				<h1 class="single-post__title"><?php the_title(); ?></h1>
 				<?php the_content(); ?>
 			</section>
