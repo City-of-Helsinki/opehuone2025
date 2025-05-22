@@ -2,6 +2,8 @@
 
 use \Opehuone\Helpers;
 
+define( 'TEXT_DOMAIN', 'opehuone2025' );
+
 /**
  * Require helpers
  */

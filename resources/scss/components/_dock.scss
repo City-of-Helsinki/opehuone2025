@@ -1,0 +1,335 @@
+$dock-animation-speed: 0.3s;
+$opehuone-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.19);
+$hel-metro: red;
+$body-color: white;
+
+.dock {
+  background-color: #FFF;
+  position: relative;
+  z-index: 1;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  border-radius: 0;
+  box-shadow: $opehuone-box-shadow;
+  padding: rem(10px 15px 10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: rem(20px);
+
+  .dock-info-text {
+    display: none;
+    color: #707070;
+    min-width: rem(90px);
+    padding-left: rem(10px);
+
+    @include media-breakpoint-up(md) {
+      display: initial;
+    }
+
+    .has-theme-dark & {
+      color: #FFF;
+    }
+  }
+
+  .has-theme-dark & {
+    background-color: #000;
+    //box-shadow: $opehuone-box-shadow-dark-mode;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  @media print {
+    display: none;
+  }
+}
+
+.dock-list {
+  list-style-type: none;
+  margin: 0 auto;
+  padding: rem(5px 0);
+  white-space: nowrap;
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+  @include media-breakpoint-up(xl) {
+    padding: rem(0);
+  }
+}
+
+.dock-item {
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8em;
+  width: 75px;
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  .dock-item-title {
+    color: #707070;
+    margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    .has-theme-dark & {
+      color: #FFF;
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding: rem(6px 8px);
+
+    &.dock-item--desktop-hidden {
+      display: none;
+    }
+  }
+
+  &.dock-item--toggler {
+    position: relative;
+    display: none;
+
+    svg {
+      color: #000;
+
+      .has-theme-dark & {
+        color: #FFF;
+      }
+    }
+
+    @include media-breakpoint-up(xl) {
+      display: block;
+      padding: rem(10px 8px);
+    }
+  }
+}
+
+.dock-icon {
+  width: 40px;
+  height: 40px;
+
+  @include media-breakpoint-up(xl) {
+    width: 35px;
+    height: 35px;
+    //@include transition(all $dock-animation-speed ease);
+
+    &:hover {
+      transform: scale(1.3);
+    }
+  }
+}
+
+.dock-icon-char {
+  width: 40px;
+  height: 40px;
+  background-color: $hel-metro;
+  color: #FFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include media-breakpoint-up(xl) {
+    width: 35px;
+    height: 35px;
+    //@include transition(all 0.2s ease);
+
+    &:hover {
+      transform: scale(1.3);
+    }
+  }
+}
+
+.dock-link {
+  display: block;
+}
+
+/**
+ * The whole dock, when opened
+ */
+.whole-dock {
+  display: none;
+  visibility: hidden;
+  background-color: transparentize(#6F6F6F, 0.1);
+  position: fixed;
+  z-index: 1050;
+  width: 100%;
+  height: calc(100% - 60px);
+  left: 0;
+  right: 0;
+  top: rem(60px);
+  bottom: 0;
+  padding: rem(50px 15px 15px 50px);
+  overflow-y: auto;
+
+  .logged-in & {
+    top: rem(60px + 32px);
+  }
+
+  .logged-in.subscriber & {
+    top: initial;
+  }
+
+
+  @include media-breakpoint-up(xl) {
+    display: block;
+  }
+
+  .whole-dock-opened & {
+    left: 0;
+    visibility: visible;
+    overflow: hidden;
+  }
+
+  &__content {
+    position: relative;
+    max-width: rem(977px);
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFF;
+    padding: rem(15px);
+    box-shadow: $opehuone-box-shadow;
+    border-radius: 0;
+
+    .has-theme-dark & {
+      background-color: #000;
+      //box-shadow: $opehuone-box-shadow-dark-mode;
+    }
+  }
+
+  &__actions {
+    padding: rem(20px 0);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    &.whole-dock__action--spacebetween {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+    }
+
+    svg {
+      width: rem(24px);
+      height: auto;
+      margin-left: rem(10px);
+      margin-right: rem(20px);
+    }
+  }
+}
+
+.whole-dock-list {
+  list-style-type: none;
+  margin: rem(0 -7.5px);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.whole-dock-item {
+  //@include make-col-ready(7.5px);
+  //@include make-col(1.5); // 12.5%
+  margin-bottom: rem(7.5px);
+}
+
+.services-column__toggler {
+  width: 35px;
+  border: 0;
+  background: transparent;
+  position: absolute;
+  right: 1.2em;
+  z-index: 1;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.whole-dock-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $body-color;
+  opacity: 1;
+  background: #F5F5F5;
+  padding: rem(24px 15px);
+  //@include transition(opacity 0.2s ease);
+  border-radius: rem(15px);
+
+  &:hover, &:focus, &:active {
+    color: $body-color;
+    opacity: 0.7;
+    text-decoration: none;
+
+    .has-theme-dark & {
+      color: #000;
+    }
+  }
+}
+
+.whole-dock-icon-char {
+  width: 35px;
+  height: 35px;
+  background-color: $hel-metro;
+  color: #FFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.whole-dock-icon {
+  width: 35px;
+  height: 35px;
+}
+
+.whole-dock-item-title {
+  padding-top: rem(10px);
+  font-weight: bold;
+  font-size: rem(13px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  text-align: center;
+}
+
+.whole-dock__actions {
+  a {
+    color: #000;
+
+    .has-theme-dark & {
+      color: #FFF;
+    }
+  }
+  .rounded-plus-icon {
+    fill: #000;
+    stroke: #000;
+
+    .has-theme-dark & {
+      fill: #FFF;
+      stroke: #000;
+    }
+  }
+  .dock-toggler {
+    svg {
+      width: rem(35px);
+      height: auto;
+    }
+  }
+}
+
+.dock-box-front {
+  position: relative;
+  margin-bottom: 1em;
+}
