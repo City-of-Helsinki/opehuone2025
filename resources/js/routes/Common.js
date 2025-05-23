@@ -5,11 +5,29 @@ import { userFavs } from '../lib/userFavs';
 import { postsFiltering } from '../lib/postsFiltering';
 import { profileOpener } from '../lib/profileOpener';
 
+function toggleAria($element, attribute) {
+	const isHidden = $element.attr(attribute) === 'true';
+	$element.attr(attribute, isHidden ? 'false' : 'true');
+}
+
+function toggleTabIndex($element) {
+	$element.find('a, button, input, select, textarea').each(function () {
+		const $el = jQuery(this);
+		const tabIndex = $el.attr('tabindex');
+		if (typeof tabIndex === 'undefined' || tabIndex === '0') {
+			$el.attr('tabindex', '-1');
+		} else {
+			$el.attr('tabindex', '0');
+		}
+	});
+}
+
+
 export default {
 	init() {
-		jQuery(function($) {
-		const $dock = $('.dock');
-		const $wholeDock = $('.whole-dock');
+		jQuery(function(jQuery) {
+		const $dock = jQuery('.dock');
+		const $wholeDock = jQuery('.whole-dock');
 
 		// Hashtag smooth scrolls
 		hashTagFunctions();
@@ -24,9 +42,9 @@ export default {
 		// Profile opener
 		profileOpener();
 
-		$('.dock-toggler').on('click', (e) => {
+		jQuery('.dock-toggler').on('click', (e) => {
 			e.preventDefault();
-			$('body').toggleClass('whole-dock-opened');
+			jQuery('body').toggleClass('whole-dock-opened');
 			toggleAria($dock, 'aria-hidden');
 			toggleAria($wholeDock, 'aria-hidden');
 			toggleTabIndex($dock);
