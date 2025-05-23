@@ -1,6 +1,7 @@
 <?php 
 require_once get_stylesheet_directory() . '/library/classes/Utils.php';
 use LuuptekWP\Utils;
+use Opehuone\Helpers;
 
 $utils = new Utils();
 ?>
@@ -28,7 +29,7 @@ $utils = new Utils();
         </div>
         <button type="submit" class="add-new-service-form__btn add-new-service-form__btn--submit">
             <?php _e( 'Tallenna', TEXT_DOMAIN ); ?>
-            <?php $utils->the_svg( 'loop-icon' ); ?>
+            <?php //Helpers\the_svg( 'loop-icon' ); ?>
         </button>
         <div class="add-new-service-form__notifications"></div>
     </form>
