@@ -1,9 +1,8 @@
 /* eslint-disable no-console,no-undef */
-
-const nameInput = $('#service-name-input');
-const urlInput = $('#service-url-input');
-const newServiceWrapper = $('.add-new-service-form__wrapper');
-const newServiceOpenBtn = $('.open-new-service-wrapper');
+const nameInput = jQuery('#service-name-input');
+const urlInput = jQuery('#service-url-input');
+const newServiceWrapper = jQuery('.add-new-service-form__wrapper');
+const newServiceOpenBtn = jQuery('.open-new-service-wrapper');
 
 const clearInputs = () => {
 	nameInput.val('');
@@ -11,14 +10,14 @@ const clearInputs = () => {
 };
 
 const removeOwnService = () => {
-	$(document).on('click', '.dock-settings-list__remove', (e) => {
+	jQuery(document).on('click', '.dock-settings-list__remove', (e) => {
 		e.preventDefault();
-		const target = $(e.currentTarget);
+		const target = jQuery(e.currentTarget);
 		const li = target.closest('.dock-settings-list__item');
 		const ownId = li.attr('data-id');
 		const ownIdentifier = li.attr('data-hash');
 
-		$.ajax({
+		jQuery.ajax({
 			url: opehuone_js.ajax_url,
 			type: 'POST',
 			data: ({
@@ -37,9 +36,9 @@ const removeOwnService = () => {
 }
 
 const pinOwnService = () => {
-	$(document).on('click', '.dock-settings-list__star', (e) => {
+	jQuery(document).on('click', '.dock-settings-list__star', (e) => {
 		e.preventDefault();
-		const target = $(e.currentTarget);
+		const target = jQuery(e.currentTarget);
     const li = target.closest('.dock-settings-list__item');
 		const ownId = li.attr('data-id');
 		let setVisible = li.attr('data-active');
@@ -51,7 +50,7 @@ const pinOwnService = () => {
 		  setVisible = '0';
     }
 
-		$.ajax({
+		jQuery.ajax({
 			url: opehuone_js.ajax_url,
 			type: 'POST',
 			data: ({
@@ -83,8 +82,8 @@ export const ownServices = () => {
 }
 
 export const addNewOwnService = () => {
-  const form = $("#add-new-service-form");
-  const notifications = $('.add-new-service-form__notifications');
+  const form = jQuery("#add-new-service-form");
+  const notifications = jQuery('.add-new-service-form__notifications');
   form.submit(function (event) {
     event.preventDefault();
     notifications.hide();
@@ -99,7 +98,7 @@ export const addNewOwnService = () => {
 
     form.addClass('form-loading');
 
-    $.ajax({
+  	jQuery.ajax({
       url: opehuone_js.ajax_url,
       type: 'POST',
       data: ({

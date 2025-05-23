@@ -71,7 +71,7 @@ function render_dock_updater_button_in_acf( $field ) {
 }
 
 // Update dock button to dock items acf field
-add_action( 'acf/render_field/name=dock_items', 'render_dock_updater_button_in_acf' );
+add_action( 'acf/render_field/name=dock_items', __NAMESPACE__ . '\render_dock_updater_button_in_acf');
 
 function render_dock_updater_js_admin_footer() {
     ?>
@@ -145,4 +145,4 @@ function render_dock_updater_js_admin_footer() {
     <?php
 }
 
-add_action( 'admin_footer', 'render_dock_updater_js_admin_footer' );
+add_action( 'admin_footer', __NAMESPACE__ . '\render_dock_updater_js_admin_footer' );
