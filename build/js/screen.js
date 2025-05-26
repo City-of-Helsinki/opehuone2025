@@ -1014,17 +1014,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_userFavs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/userFavs */ "./resources/js/lib/userFavs.js");
 /* harmony import */ var _lib_postsFiltering__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/postsFiltering */ "./resources/js/lib/postsFiltering.js");
 /* harmony import */ var _lib_profileOpener__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/profileOpener */ "./resources/js/lib/profileOpener.js");
+/* harmony import */ var _lib_ownServices__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/ownServices */ "./resources/js/lib/ownServices.js");
 
 
 
 
 
 
+
+function toggleAria($element, attribute) {
+  const isHidden = $element.attr(attribute) === 'true';
+  $element.attr(attribute, isHidden ? 'false' : 'true');
+}
+function toggleTabIndex($element) {
+  $element.find('a, button, input, select, textarea').each(function () {
+    const $el = jQuery(this);
+    const tabIndex = $el.attr('tabindex');
+    if (typeof tabIndex === 'undefined' || tabIndex === '0') {
+      $el.attr('tabindex', '-1');
+    } else {
+      $el.attr('tabindex', '0');
+    }
+  });
+}
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   init() {
-    jQuery(function ($) {
-      const $dock = $('.dock');
-      const $wholeDock = $('.whole-dock');
+    jQuery(function (jQuery) {
+      const $dock = jQuery('.dock');
+      const $wholeDock = jQuery('.whole-dock');
 
       // Hashtag smooth scrolls
       (0,_lib_scrollTo__WEBPACK_IMPORTED_MODULE_0__.hashTagFunctions)();
@@ -1038,9 +1055,12 @@ __webpack_require__.r(__webpack_exports__);
       (0,_lib_postsFiltering__WEBPACK_IMPORTED_MODULE_4__.postsFiltering)();
       // Profile opener
       (0,_lib_profileOpener__WEBPACK_IMPORTED_MODULE_5__.profileOpener)();
-      $('.dock-toggler').on('click', e => {
+      // Own service functions
+      (0,_lib_ownServices__WEBPACK_IMPORTED_MODULE_6__.handleAddNewServiceClick)();
+      (0,_lib_ownServices__WEBPACK_IMPORTED_MODULE_6__.addNewOwnService)();
+      jQuery('.dock-toggler').on('click', e => {
         e.preventDefault();
-        $('body').toggleClass('whole-dock-opened');
+        jQuery('body').toggleClass('whole-dock-opened');
         toggleAria($dock, 'aria-hidden');
         toggleAria($wholeDock, 'aria-hidden');
         toggleTabIndex($dock);
@@ -1100,9 +1120,9 @@ __webpack_require__.r(__webpack_exports__);
     // Own service functions
     (0,_lib_ownServices__WEBPACK_IMPORTED_MODULE_1__.ownServices)();
     const el = document.getElementById("dock-settings-list");
-    const moveupButton = $('.dock-settings-list__move-up');
-    const moveDownButton = $('.dock-settings-list__move-down');
-    const newDockListInput = $('#new-dock-list');
+    const moveupButton = jQuery('.dock-settings-list__move-up');
+    const moveDownButton = jQuery('.dock-settings-list__move-down');
+    const newDockListInput = jQuery('#new-dock-list');
     const sortedList = sortablejs__WEBPACK_IMPORTED_MODULE_0__["default"].create(el, {
       handle: '.dock-settings-list__drag',
       dragClass: "dock-settings-list__item--drag-item",
@@ -1143,26 +1163,26 @@ __webpack_require__.r(__webpack_exports__);
     const clickUpHandler = () => {
       moveupButton.on('click', e => {
         e.preventDefault();
-        const target = $(e.currentTarget);
+        const target = jQuery(e.currentTarget);
         moveElement(target.closest('.dock-settings-list__item'), 'up');
       });
     };
     const clickDownHandler = () => {
       moveDownButton.on('click', e => {
         e.preventDefault();
-        const target = $(e.currentTarget);
+        const target = jQuery(e.currentTarget);
         moveElement(target.closest('.dock-settings-list__item'), 'down');
       });
     };
-    const form = $('#dock-settings');
-    const submitBtn = $('#settings-submit');
+    const form = jQuery('#dock-settings');
+    const submitBtn = jQuery('#settings-submit');
     form.submit(function (event) {
       submitBtn.addClass('is-disabled');
       event.preventDefault();
-      const notifications = $('#user-settings-notifications');
+      const notifications = jQuery('#user-settings-notifications');
       notifications.html('Asetuksia päivitetään...');
       notifications.fadeIn('100');
-      $.ajax({
+      jQuery.ajax({
         url: opehuone_js.ajax_url,
         type: 'POST',
         data: {

@@ -4,6 +4,7 @@ import { serviceFailure } from '../lib/serviceFailure';
 import { userFavs } from '../lib/userFavs';
 import { postsFiltering } from '../lib/postsFiltering';
 import { profileOpener } from '../lib/profileOpener';
+import { addNewOwnService, handleAddNewServiceClick } from '../lib/ownServices'
 
 function toggleAria($element, attribute) {
 	const isHidden = $element.attr(attribute) === 'true';
@@ -41,6 +42,9 @@ export default {
 		postsFiltering();
 		// Profile opener
 		profileOpener();
+		// Own service functions
+		handleAddNewServiceClick();
+		addNewOwnService();
 
 		jQuery('.dock-toggler').on('click', (e) => {
 			e.preventDefault();

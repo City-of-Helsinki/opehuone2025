@@ -176,6 +176,84 @@ button {
   color: var(--wp--preset--color--accent-2);
 }
 
+.add-new-service-form__wrapper {
+  display: none;
+  margin-bottom: 1.25rem;
+}
+.add-new-service-form__title {
+  font-size: 1.5625rem;
+  margin-top: 0;
+  margin-bottom: 0.9375rem;
+}
+.add-new-service-form__subtitle {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+.add-new-service-form__field-group {
+  margin-bottom: 1.25rem;
+}
+.add-new-service-form__label {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.375;
+  color: #000;
+  font-weight: bold;
+}
+.has-theme-dark .add-new-service-form__label {
+  color: #FFF;
+}
+.add-new-service-form__form-field {
+  width: 100%;
+  border: 0.125rem solid #000;
+  background-color: transparent;
+  color: #000;
+  font-size: 1rem;
+  padding: 0.625rem 0.9375rem;
+}
+.has-theme-dark .add-new-service-form__form-field {
+  border: 0.125rem solid #FFF;
+  color: #FFF;
+}
+.add-new-service-form__form-field:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.3125rem rgba(0, 0, 0, 0.25);
+  border: 0.125rem solid transparent;
+}
+.has-theme-dark .add-new-service-form__form-field:focus {
+  box-shadow: 0 0 0 0.3125rem rgba(255, 255, 255, 0.25);
+}
+.add-new-service-form__btn {
+  display: inline-block;
+  border: none;
+  padding: 0.4375rem 1.0625rem;
+  font-size: 1rem;
+  line-height: 1.375;
+  font-weight: bold;
+}
+.add-new-service-form__btn.add-new-service-form__btn--submit {
+  color: #FFF;
+  background-color: #000;
+}
+.has-theme-dark .add-new-service-form__btn.add-new-service-form__btn--submit {
+  color: #000;
+  background-color: #FFF;
+}
+.add-new-service-form__notifications {
+  display: none;
+  margin-top: 1.25rem;
+  border: 0.125rem solid #000;
+  padding: 0.9375rem;
+  color: #000;
+  font-size: 1rem;
+  line-height: 1.375;
+}
+.has-theme-dark .add-new-service-form__notifications {
+  border: 0.125rem solid #FFF;
+  color: #FFF;
+}
+
 .side-links-list {
   list-style-type: none;
   margin: 0;
@@ -1070,31 +1148,42 @@ ol.breadcrumbs .icon-separator-breadcrumb {
 }
 
 .dock {
-  background-color: #FFF;
+  background-color: #FFF9DB;
   position: relative;
   z-index: 1;
   overflow-x: scroll;
   overflow-y: hidden;
   border-radius: 0;
-  box-shadow: -5px 6px 5px 0px rgba(0, 0, 0, 0.19);
   padding: 0.625rem 0.9375rem 0.625rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1.25rem;
+  width: 100%;
+  flex-direction: column;
 }
-.dock .dock-info-text {
+.dock > .row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.dock .dock-title {
   display: none;
-  color: #707070;
+  color: #000;
+  margin: 0;
   min-width: 5.625rem;
   padding-right: 0.625rem;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 @media (min-width: 768px) {
-  .dock .dock-info-text {
+  .dock .dock-title {
     display: initial;
   }
 }
-.has-theme-dark .dock .dock-info-text {
+.has-theme-dark .dock .dock-title {
   color: #FFF;
 }
 .has-theme-dark .dock {
@@ -1115,12 +1204,13 @@ ol.breadcrumbs .icon-separator-breadcrumb {
 
 .dock-list {
   list-style-type: none;
-  margin: 0 auto;
+  margin: 1rem auto;
   padding: 0.3125rem 0;
   white-space: nowrap;
   text-align: center;
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 @media (min-width: 1200px) {
   .dock-list {
@@ -1130,10 +1220,14 @@ ol.breadcrumbs .icon-separator-breadcrumb {
 
 .dock-item {
   display: flex;
-  justify-content: center;
   padding: 0.2rem 0.5rem;
   font-size: 0.8em;
-  width: 75px;
+  width: 68px;
+  height: 68px;
+  background: white;
+  border-radius: 50%; /* Makes it round */
+  align-items: center; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
 }
 .dock-item a:hover {
   text-decoration: none;
@@ -1156,32 +1250,31 @@ ol.breadcrumbs .icon-separator-breadcrumb {
     display: none;
   }
 }
-.dock-item.dock-item--toggler {
-  position: relative;
-  display: none;
-}
-.dock-item.dock-item--toggler svg {
-  color: #000;
-}
-.has-theme-dark .dock-item.dock-item--toggler svg {
-  color: #FFF;
-}
 @media (min-width: 1200px) {
-  .dock-item.dock-item--toggler {
+  .dock-item {
     display: block;
     padding: 0.625rem 0.5rem;
   }
 }
 
+.dock-toggler {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-decoration: none;
+  position: relative;
+  padding: 0.5rem 0 0 2rem;
+}
+
 .dock-icon {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
+  max-width: 70%;
+  max-height: 70%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 @media (min-width: 1200px) {
-  .dock-icon {
-    width: 35px;
-    height: 35px;
-  }
   .dock-icon:hover {
     transform: scale(1.3);
   }
@@ -1207,8 +1300,17 @@ ol.breadcrumbs .icon-separator-breadcrumb {
   }
 }
 
-.dock-link {
-  display: block;
+.dock-link:hover {
+  text-decoration: underline;
+}
+.dock-link svg {
+  color: #000;
+  position: absolute;
+  top: 0.8rem;
+  left: 0;
+}
+.has-theme-dark .dock-link svg {
+  color: #FFF;
 }
 
 /**
