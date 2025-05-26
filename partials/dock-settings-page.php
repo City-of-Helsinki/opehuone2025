@@ -1,7 +1,18 @@
+<?php
+
+
+
+require_once get_stylesheet_directory() . '/library/classes/Utils.php';
+use LuuptekWP\Utils;
+use Opehuone\Helpers;
+
+$utils = new Utils();
+?>
+
 <section>
     <div class="container">
         <div
-            class="directory-page-inner-content<?php echo Utils()->has_post_cornerlabels() ? ' page-inner-content--has-cornerlabels' : ''; ?>">
+            class="directory-page-inner-content<?php echo $utils->has_post_cornerlabels() ? ' page-inner-content--has-cornerlabels' : ''; ?>">
             <?php get_template_part( 'partials/corner-labels' ); ?>
             <article>
                 <form id="dock-settings">
@@ -70,15 +81,15 @@
                                             <div class="dock-settings-list__item-actions">
                                                 <button class="dock-settings-list__move dock-settings-list__move-down"
                                                         aria-label="<?php _e( 'Siirrä alas', TEXT_DOMAIN ); ?>">
-                                                    <?php Utils()->the_svg( 'angle-down' ); ?>
+                                                        <?php Helpers\the_svg( 'icons/angle-down' ); ?>
                                                 </button>
                                                 <button class="dock-settings-list__move dock-settings-list__move-up"
                                                         aria-label="<?php _e( 'Siirrä ylös', TEXT_DOMAIN ); ?>">
-                                                    <?php Utils()->the_svg( 'angle-up' ); ?>
+                                                    <?php Helpers\the_svg( 'icons/angle-up' ); ?>
                                                 </button>
                                                 <button class="dock-settings-list__drag" aria-hidden="true"
                                                         tabindex="-1">
-                                                    <?php Utils()->the_svg( 'drag-icon' ); ?>
+                                                    <?php Helpers\the_svg( 'icons/drag-icon' ); ?>
                                                 </button>
                                             </div>
                                         </li>
@@ -103,3 +114,4 @@
         </div>
     </div>
 </section>
+<?php
