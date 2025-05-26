@@ -9,10 +9,10 @@ export default {
     ownServices();
 
     const el = document.getElementById("dock-settings-list");
-    const moveupButton = $('.dock-settings-list__move-up');
-    const moveDownButton = $('.dock-settings-list__move-down');
+    const moveupButton = jQuery('.dock-settings-list__move-up');
+    const moveDownButton = jQuery('.dock-settings-list__move-down');
 
-    const newDockListInput = $('#new-dock-list');
+    const newDockListInput = jQuery('#new-dock-list');
 
     const sortedList = Sortable.create(el, {
       handle: '.dock-settings-list__drag',
@@ -57,7 +57,7 @@ export default {
     const clickUpHandler = () => {
       moveupButton.on('click', (e) => {
         e.preventDefault();
-        const target = $(e.currentTarget);
+        const target = jQuery(e.currentTarget);
         moveElement(target.closest('.dock-settings-list__item'), 'up');
       });
     };
@@ -65,22 +65,22 @@ export default {
     const clickDownHandler = () => {
       moveDownButton.on('click', (e) => {
         e.preventDefault();
-        const target = $(e.currentTarget);
+        const target = jQuery(e.currentTarget);
         moveElement(target.closest('.dock-settings-list__item'), 'down');
       });
     };
 
-    const form = $('#dock-settings');
-    const submitBtn = $('#settings-submit');
+    const form = jQuery('#dock-settings');
+    const submitBtn = jQuery('#settings-submit');
 
     form.submit(function (event) {
       submitBtn.addClass('is-disabled');
       event.preventDefault();
-      const notifications = $('#user-settings-notifications');
+      const notifications = jQuery('#user-settings-notifications');
       notifications.html('Asetuksia päivitetään...');
       notifications.fadeIn('100');
 
-      $.ajax({
+      jQuery.ajax({
         url: opehuone_js.ajax_url,
         type: 'POST',
         data: ({
