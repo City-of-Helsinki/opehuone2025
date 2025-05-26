@@ -28,18 +28,8 @@ global $wp_query;
 		];
 
 		get_template_part( 'partials/template-blocks/b-training-post', '', $block_args );
-	} ?>
-    <div class="pagination">
-	<?php
-	echo paginate_links( [
-		'total'   => $wp_query->max_num_pages,
-		'current' => max( 1, get_query_var( 'paged' ) ),
-		'prev_text' => __('« Previous', 'helsinki-universal'),
-		'next_text' => __('Next »', 'helsinki-universal'),
-	] );
-	?>
-</div>
-<?php
+	}
+
 	wp_reset_postdata();
 	?>
 </div>
