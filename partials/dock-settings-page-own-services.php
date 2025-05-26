@@ -1,6 +1,8 @@
 <?php
-$own_pinned       = Utils()->get_user_own_services( 1 );
-$own_not_pinned   = Utils()->get_user_own_services( 0 );
+$utils = new \LuuptekWP\Utils();
+
+$own_pinned       = $utils->get_user_own_services( 1 );
+$own_not_pinned   = $utils->get_user_own_services( 0 );
 $all_own_services = array_merge( $own_pinned, $own_not_pinned );
 
 if ( count( $all_own_services ) === 0 ) {
