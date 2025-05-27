@@ -1,5 +1,6 @@
 <?php
 $utils = new \LuuptekWP\Utils();
+use Opehuone\Helpers;
 
 $own_pinned       = $utils->get_user_own_services( 1 );
 $own_not_pinned   = $utils->get_user_own_services( 0 );
@@ -52,11 +53,11 @@ if ( count( $all_own_services ) === 0 ) {
                     <div class="dock-settings-list__item-actions">
                         <button class="dock-settings-list__star"
                                 aria-label="<?php echo esc_attr( $star_aria_label ); ?>">
-                            <?php Utils()->the_svg( 'star-fill' ); ?>
+                            <?php Helpers\the_svg( 'icons/star-fill' ); ?>
                         </button>
                         <button class="dock-settings-list__remove"
                                 aria-label="<?php _e( 'Poista tämä palvelu', TEXT_DOMAIN ); ?>">
-                            <?php Utils()->the_svg( 'cross' ); ?>
+                            <?php Helpers\the_svg( 'icons/cross' ); ?>
                         </button>
                     </div>
                 </li>

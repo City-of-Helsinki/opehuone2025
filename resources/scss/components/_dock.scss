@@ -268,7 +268,14 @@ $body-color: white;
 .whole-dock-item {
   //@include make-col-ready(7.5px);
   //@include make-col(1.5); // 12.5%
-  margin-bottom: rem(7.5px);
+  position: relative;
+  width: 100%;
+  padding-right: 3.75px;
+  padding-left: 3.75px;
+  flex: 0 0 12.5%;
+  max-width: 12.5%;
+  margin-bottom: .46875rem;
+  color: #1a1a1a;
 }
 
 .services-column__toggler {
@@ -288,17 +295,17 @@ $body-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: $body-color;
+  color: #000;
   opacity: 1;
   background: #F5F5F5;
   padding: rem(24px 15px);
   //@include transition(opacity 0.2s ease);
   border-radius: rem(15px);
-
+  text-decoration: none;
   &:hover, &:focus, &:active {
-    color: $body-color;
+    color: #000;
     opacity: 0.7;
-    text-decoration: none;
+    text-decoration: underline;
 
     .has-theme-dark & {
       color: #000;

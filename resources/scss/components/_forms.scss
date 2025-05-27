@@ -252,3 +252,17 @@
 		}
 	}
 }
+
+.user-settings-notifications {
+	padding: rem(20px);
+	font-size: rem(16px);
+	margin-top: rem(30px);
+	margin-bottom: rem(20px);
+	display: none;
+  
+	//@each $name, $value in $highlight-theme-colors {
+	//  .has-highlight-color-#{$name} & {
+	//	border: 2px solid $value;
+	//  }
+	//}
+} 

@@ -20,17 +20,9 @@ $utils = new Utils();
                         <h1 class="page-inner-content__title">
                             <?php the_title(); ?>
                         </h1>
-                        <div class="">
-                            <button class="is-highlight-button" id="settings-submit">
-                                <?php _e( 'Tallenna muutokset', TEXT_DOMAIN ); ?>
-                            </button>
-                            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="is-highlight-button">
-                                <?php esc_html_e( 'Sulje', TEXT_DOMAIN ); ?>
-                            </a>
-                        </div>
+                        
                     </div>
-                    <div class="user-settings-notifications"
-                         id="user-settings-notifications"><?php _e( 'Asetuksia päivitetään...', TEXT_DOMAIN ); ?></div>
+                    
                     <?php
                     $user_settings = new User_settings();
                     $dock_items    = $user_settings::get_user_dock();
@@ -109,6 +101,15 @@ $utils = new Utils();
                     }
                     get_template_part( 'partials/dock-settings-page-own-services' );
                     ?>
+                    <div class="form-actions-row">
+                        <button class="is-highlight-button" id="settings-submit">
+                            <?php _e( 'Tallenna muutokset', TEXT_DOMAIN ); ?>
+                        </button>
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="is-highlight-button">
+                            <?php esc_html_e( 'Peruuta ja palaa etusivulle', TEXT_DOMAIN ); ?>
+                        </a>
+                    </div>
+                    <div class="user-settings-notifications" id="user-settings-notifications"><?php _e( 'Asetuksia päivitetään...', TEXT_DOMAIN ); ?></div>
                 </form>
             </article>
         </div>
