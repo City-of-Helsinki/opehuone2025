@@ -1,0 +1,75 @@
+.page-template-landing-page {
+    .hero__container {
+        padding-top: var(--spacing-s);
+
+        .breadcrumbs {
+            margin-bottom: var(--opehuone--spacing--2-x-small);
+        }
+
+        .hero__content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+    
+            .hero__title {
+                font-size: 2.5rem;
+                font-weight: 500;
+                color: var(--color-black-90) !important;
+                width: 100%;
+
+                &__sve {
+                    font-size: var(--opehuone--font-size--large);
+                    font-weight: 500;
+                    margin-top: var(--opehuone--spacing--x-small);
+                    width: 100%;
+                }
+            } 
+
+            img {
+                max-width: 100%;
+                max-height: 200px;
+                position: absolute;
+                left: 50%;
+                top: 0;
+                z-index: 999;            
+            }
+        }
+    }
+
+    .opehuone-content-container {
+
+        h2 {
+            font-size: 2rem;
+            margin-top: var(--spacing-xs);
+            margin-bottom: var(--spacing-l);
+        }
+        .single-post__featured-image  {
+            aspect-ratio: 1000 / 335;
+        }
+    }
+
+    .theme {
+        &__primary {
+            &.hero {
+                background-color: var(--primary-color-medium);
+
+                .hds-koros {
+                    path {
+                        fill: var(--primary-color-medium);
+                    }
+                }
+            }
+            
+            &.quick-links-container {
+                .quick-links-box {
+                    background-color: var(--primary-color-light);
+                    border-left: 6px solid var(--primary-color);
+                }
+            }
+        }
+    }
+}
+
+
+
+
