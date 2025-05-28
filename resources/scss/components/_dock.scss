@@ -123,6 +123,14 @@ $body-color: white;
   text-decoration: none;
   position: relative;
   padding: 0.5rem 2rem 0 0;
+  &.dock-toggler-close {
+    padding: 0;
+    margin-top: -2rem;
+    margin-right: -0.5rem;
+    svg {
+      margin: 0;
+    }
+  }
 }
 
 .dock-icon {
@@ -236,7 +244,7 @@ $body-color: white;
   }
 
   &__actions {
-    padding: rem(20px 0);
+    padding: 1rem 0 2rem 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -253,6 +261,15 @@ $body-color: white;
       height: auto;
       margin-left: rem(10px);
       margin-right: rem(20px);
+      margin-bottom: -0.4rem;
+    }
+  }
+  button {
+    border: 2px solid #fff;
+    &:hover {
+      background-color: #FFF;
+      color: #000;
+      border: 2px solid #000;
     }
   }
 }

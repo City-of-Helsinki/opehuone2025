@@ -135,7 +135,7 @@ if ( count( $dock_items ) > 0 ) {
                         <?php _e( 'Muokkaa', TEXT_DOMAIN ); ?><?php Helpers\the_svg( 'icons/settings' ); ?>
                     </a>
                 </div>
-                <a href="#" class="dock-toggler" role="button"
+                <a href="#" class="dock-toggler dock-toggler-close" role="button"
                    aria-label="<?php _e( 'Sulje dock-asetukset', TEXT_DOMAIN ); ?>">
                    <?php Helpers\the_svg( 'icons/close-24px' ); ?>
                 </a>
