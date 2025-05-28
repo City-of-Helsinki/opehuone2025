@@ -1,91 +1,91 @@
 .training-archive {
-  &__sidebar-title {
-    position: relative;
-    margin: 0;
-    font-weight: 400;
-    font-size: var(--opehuone--font-size--x-large);
-    padding-bottom: var(--opehuone--spacing--small);
+	&__sidebar-title {
+		position: relative;
+		margin: 0;
+		font-weight: 400;
+		font-size: var(--opehuone--font-size--x-large);
+		padding-bottom: var(--opehuone--spacing--small);
 
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 1px;
-      background-color: #000;
-    }
-  }
+		&:after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			width: 100%;
+			height: 1px;
+			background-color: #000;
+		}
+	}
 
-  &__section-title {
-    position: relative;
-    margin: 0;
-    font-weight: 400;
-    font-size: var(--opehuone--font-size--x-large);
-    margin-bottom: var(--opehuone--spacing--small);
-  }
+	&__section-title {
+		position: relative;
+		margin: 0;
+		font-weight: 400;
+		font-size: var(--opehuone--font-size--x-large);
+		margin-bottom: var(--opehuone--spacing--small);
+	}
 
-  &__filters {
-    display: grid;
-    grid-template-columns: auto;
-    gap: var(--opehuone--spacing--small);
+	&__filters {
+		display: grid;
+		grid-template-columns: auto;
+		gap: var(--opehuone--spacing--small);
 
-    @include media-breakpoint-up(sm) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+		@include media-breakpoint-up(sm) {
+			grid-template-columns: repeat(2, 1fr);
+		}
 
-    @include media-breakpoint-up(lg) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+		@include media-breakpoint-up(lg) {
+			grid-template-columns: repeat(2, 1fr);
+		}
 
-    @include media-breakpoint-up(xl) {
-      grid-template-columns: repeat(4, 1fr);
-    }
+		@include media-breakpoint-up(xl) {
+			grid-template-columns: repeat(4, 1fr);
+		}
 
-    // Viimeinen elementti omalle riville
-    & > *:last-child {
-      grid-column-start: 1;
-    }
-  }
+		// Viimeinen elementti omalle riville
+		& > *:last-child {
+			grid-column-start: 1;
+		}
+	}
 
-  &__filter-label {
-    display: block;
-    font-size: var(--opehuone--font-size--normal);
-    font-weight: 500;
-    line-height: calc(24/16);
-  }
+	&__filter-label {
+		display: block;
+		font-size: var(--opehuone--font-size--normal);
+		font-weight: 500;
+		line-height: calc(24 / 16);
+	}
 
-  &__select-filter-wrapper {
-    position: relative;
-  }
+	&__select-filter-wrapper {
+		position: relative;
+	}
 
-  &__select-filter {
-    width: 100%;
-    height: rem(56px);
-    padding: rem(15px 16px);
-    font-size: var(--opehuone--font-size--medium);
-    line-height: calc(27/18);
-    font-weight: 400;
-    background-color: transparent;
-    border: 2px solid #808080;
-    appearance: none;
+	&__select-filter {
+		width: 100%;
+		height: rem(56px);
+		padding: rem(15px 16px);
+		font-size: var(--opehuone--font-size--medium);
+		line-height: calc(27 / 18);
+		font-weight: 400;
+		background-color: transparent;
+		border: 2px solid #808080;
+		appearance: none;
 
-    // Custom bg
-    background-image: url("data:image/svg+xml,%3Csvg width='14' height='9' viewBox='0 0 14 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7 5.5L12 0.5L13.5 2L7 8.5L0.5 2L2 0.5L7 5.5Z' fill='black'/%3E%3C/svg%3E%0A");
-    background-repeat: no-repeat;
-    background-position: right rem(16px) center;
-    background-size: rem(14px) rem(9px);
-  }
+		// Custom bg
+		background-image: url("data:image/svg+xml,%3Csvg width='14' height='9' viewBox='0 0 14 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7 5.5L12 0.5L13.5 2L7 8.5L0.5 2L2 0.5L7 5.5Z' fill='black'/%3E%3C/svg%3E%0A");
+		background-repeat: no-repeat;
+		background-position: right rem(16px) center;
+		background-size: rem(14px) rem(9px);
+	}
 
-  &__filters-submit {
-    @include create-button(true);
-  }
+	&__filters-submit {
+		@include create-button(true);
+	}
 
-  &__number-of-posts {
-    display: block;
-    font-size: var(--opehuone--font-size--large);
-    font-weight: 500;
-    margin-bottom: var(--opehuone--spacing--small);
-  }
+	&__number-of-posts {
+		display: block;
+		font-size: var(--opehuone--font-size--large);
+		font-weight: 500;
+		margin-bottom: var(--opehuone--spacing--small);
+	}
 }

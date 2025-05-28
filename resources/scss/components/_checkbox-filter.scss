@@ -1,120 +1,120 @@
 .checkbox-filter {
-  &__filter-btn {
-    position: relative;
-    width: 100%;
-    height: rem(56px);
-    padding: rem(15px 16px);
-    font-size: var(--opehuone--font-size--medium);
-    line-height: calc(27/18);
-    font-weight: 400;
-    background-color: transparent;
-    border: 2px solid #1A1A1A;
-    text-align: left;
+	&__filter-btn {
+		position: relative;
+		width: 100%;
+		height: rem(56px);
+		padding: rem(15px 16px);
+		font-size: var(--opehuone--font-size--medium);
+		line-height: calc(27 / 18);
+		font-weight: 400;
+		background-color: transparent;
+		border: 2px solid #1a1a1a;
+		text-align: left;
 
-    &:after {
-      position: absolute;
-      content: '';
-      top: 0;
-      bottom: 0;
-      right: rem(9px);
-      width: rem(14px);
-      height: rem(9px);
-      margin: auto;
-      background-image: url("data:image/svg+xml,%3Csvg width='14' height='9' viewBox='0 0 14 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7 5.5L12 0.5L13.5 2L7 8.5L0.5 2L2 0.5L7 5.5Z' fill='black'/%3E%3C/svg%3E%0A");
-      background-repeat: no-repeat;
-    }
+		&:after {
+			position: absolute;
+			content: "";
+			top: 0;
+			bottom: 0;
+			right: rem(9px);
+			width: rem(14px);
+			height: rem(9px);
+			margin: auto;
+			background-image: url("data:image/svg+xml,%3Csvg width='14' height='9' viewBox='0 0 14 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7 5.5L12 0.5L13.5 2L7 8.5L0.5 2L2 0.5L7 5.5Z' fill='black'/%3E%3C/svg%3E%0A");
+			background-repeat: no-repeat;
+		}
 
-    &[aria-expanded="true"] {
-      border-bottom-color: #999;
+		&[aria-expanded="true"] {
+			border-bottom-color: #999;
 
-      + .checkbox-filter__filter-dropdown {
-        display: block;
-        position: relative;
-        top: -1px;
-      }
+			+ .checkbox-filter__filter-dropdown {
+				display: block;
+				position: relative;
+				top: -1px;
+			}
 
-      &:after {
-        transform: rotate(180deg);
-      }
-    }
-  }
+			&:after {
+				transform: rotate(180deg);
+			}
+		}
+	}
 
-  &__filter-dropdown {
-    display: none;
-    border: 2px solid;
-    border-color: transparent #1A1A1A #1A1A1A #1A1A1A;
-  }
+	&__filter-dropdown {
+		display: none;
+		border: 2px solid;
+		border-color: transparent #1a1a1a #1a1a1a #1a1a1a;
+	}
 
-  &__checkboxes-wrapper {
-    padding: rem(12px);
-    height: rem(280px);
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    gap: rem(24px);
-  }
+	&__checkboxes-wrapper {
+		padding: rem(12px);
+		height: rem(280px);
+		overflow-y: scroll;
+		display: flex;
+		flex-direction: column;
+		gap: rem(24px);
+	}
 
-  &__checkboxes-reset-btn {
-    position: relative;
-    width: 100%;
-    height: rem(56px);
-    padding: rem(15px 16px);
-    font-size: var(--opehuone--font-size--medium);
-    line-height: calc(27/18);
-    font-weight: 400;
-    background-color: transparent;
-    border: none;
-    border-top: 2px solid #808080;
+	&__checkboxes-reset-btn {
+		position: relative;
+		width: 100%;
+		height: rem(56px);
+		padding: rem(15px 16px);
+		font-size: var(--opehuone--font-size--medium);
+		line-height: calc(27 / 18);
+		font-weight: 400;
+		background-color: transparent;
+		border: none;
+		border-top: 2px solid #808080;
 
-    &.is-disabled {
-      opacity: 0.5;
-      pointer-events: none;
-    }
-  }
+		&.is-disabled {
+			opacity: 0.5;
+			pointer-events: none;
+		}
+	}
 }
 
 .checkbox-filter__checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: var(--opehuone--font-size--medium);
-  font-weight: 400;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: var(--opehuone--font-size--medium);
+	font-weight: 400;
 
-  @include hover {
-    .checkbox-filter__checkbox-input {
-      border: 2px solid #1A1A1A;
-    }
-  }
+	@include hover {
+		.checkbox-filter__checkbox-input {
+			border: 2px solid #1a1a1a;
+		}
+	}
 }
 
 .checkbox-filter__checkbox-input {
-  // Remove default styles
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: #fff;
-  margin: 0;
-  // Custom styling
-  position: relative;
-  font: inherit;
-  color: currentColor;
-  width: 22px;
-  height: 22px;
-  border: 2px solid #808080;
-  border-radius: 0;
-  flex-shrink: 0;
+	// Remove default styles
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #fff;
+	margin: 0;
+	// Custom styling
+	position: relative;
+	font: inherit;
+	color: currentColor;
+	width: 22px;
+	height: 22px;
+	border: 2px solid #808080;
+	border-radius: 0;
+	flex-shrink: 0;
 
-  &:checked {
-    background-color: #0072c6;
-    border: 2px solid #0072c6;
+	&:checked {
+		background-color: #0072c6;
+		border: 2px solid #0072c6;
 
-    &:before {
-      content: "";
-      display: block;
-      width: 18px;
-      height: 18px;
-      background-position: center;
-      background-size: auto;
-      background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='3' y='3' width='18' height='18' fill='%2300005E' stroke='%2300005E' stroke-width='2'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M18.5 6.83203L9.33333 15.9987L4.75 11.4154L6 10.1654L9.33333 13.4987L17.25 5.58203L18.5 6.83203Z' fill='white'/%3E%3Crect x='1' y='1' width='20' height='20' stroke='%230072C6' stroke-width='2'/%3E%3C/svg%3E%0A");
-    }
-  }
+		&:before {
+			content: "";
+			display: block;
+			width: 18px;
+			height: 18px;
+			background-position: center;
+			background-size: auto;
+			background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='3' y='3' width='18' height='18' fill='%2300005E' stroke='%2300005E' stroke-width='2'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M18.5 6.83203L9.33333 15.9987L4.75 11.4154L6 10.1654L9.33333 13.4987L17.25 5.58203L18.5 6.83203Z' fill='white'/%3E%3Crect x='1' y='1' width='20' height='20' stroke='%230072C6' stroke-width='2'/%3E%3C/svg%3E%0A");
+		}
+	}
 }

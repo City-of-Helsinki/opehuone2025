@@ -1,40 +1,33 @@
 .icon-detail {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: var(--opehuone--spacing--x-small);
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	gap: var(--opehuone--spacing--x-small);
+	height: 100%;
 
-  &.icon-detail--align-center {
-    align-items: center;
-  }
+	> svg {
+		width: rem(32px);
+		height: auto;
+		flex-shrink: 0;
+	}
 
-  > svg {
-    width: rem(32px);
-    height: auto;
-    flex-shrink: 0;
-  }
+	&__title {
+		display: block;
+		font-size: var(--opehuone--font-size--medium);
+		line-height: calc(28 / 18);
+		font-weight: 700;
+		margin-bottom: rem(10px);
 
-  &__text-content {
+		&.icon-detail__title--no-margin {
+			margin-bottom: 0;
+		}
+	}
 
-  }
-
-  &__title {
-    display: block;
-    font-size: var(--opehuone--font-size--medium);
-    line-height: calc(28/18);
-    font-weight: 700;
-    margin-bottom: rem(10px);
-
-    &.icon-detail__title--no-margin {
-      margin-bottom: 0;
-    }
-  }
-
-  &__subtitle {
-    display: block;
-    font-size: var(--opehuone--font-size--small);
-    line-height: calc(24/14);
-    font-weight: 500;
-    margin-bottom: 0;
-  }
+	&__subtitle {
+		display: block;
+		font-size: var(--opehuone--font-size--small);
+		line-height: calc(24 / 14);
+		font-weight: 500;
+		margin-bottom: 0;
+	}
 }

@@ -16,6 +16,9 @@
 		];
 
 		foreach ( $filters as $filter ) {
+            // Check if query parameter exists and select the correct option in the dropdowns
+            $query_param = 'filter_' . $filter['taxonomy'];
+            $selected_filter = isset( $_GET[ $query_param ] ) ? intval( $_GET[ $query_param ] ) : null;
 			?>
 			<div class="training-archive__single-filter">
 				<label for="training-archive-<?php echo esc_attr( $filter['taxonomy'] ); ?>"
@@ -36,10 +39,11 @@
 						if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 							foreach ( $terms as $term ) {
 								printf(
-									'<option value="%d">%s</option>',
-									esc_attr( $term->term_id ),
-									esc_html( $term->name )
-								);
+                                    '<option value="%d"%s>%s</option>',
+                                    esc_attr( $term->term_id ),
+                                    selected( $term->term_id, $selected_filter, false ),
+                                    esc_html( $term->name )
+                                );
 							}
 						}
 						?>

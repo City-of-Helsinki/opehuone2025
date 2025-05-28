@@ -1,71 +1,69 @@
-
-
 p.breadcrumbs {
-  margin: 0;
+	margin: 0;
 }
 
 ol.breadcrumbs {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  white-space: nowrap;
-  padding-inline-start: 0;
-  margin-bottom: var(--opehuone--spacing--large);
+	list-style-type: none;
+	padding-left: 0;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	white-space: nowrap;
+	padding-inline-start: 0;
+	margin-bottom: var(--opehuone--spacing--large);
 
-  li {
-    display: inline-flex;
-    align-items: center;
-    text-align: left;
-    margin-right: var(--opehuone--spacing--2-x-small);
-    color: var(--color-black-90);
-    font-size: var(--wp--preset--font-size--normal);
-    line-height: calc(24/16);
-    text-wrap: auto;
+	li {
+		display: inline-flex;
+		align-items: center;
+		text-align: left;
+		margin-right: var(--opehuone--spacing--2-x-small);
+		color: var(--color-black-90);
+		font-size: var(--wp--preset--font-size--normal);
+		line-height: calc(24 / 16);
+		text-wrap: auto;
 
-    &.breadcrumbs__list-item--active {
-      font-weight: 700;
-    }
+		&.breadcrumbs__list-item--active {
+			font-weight: 700;
+		}
 
-    a {
-      font-weight: 400;
-      color: var(--color-black-90);
-      text-decoration: underline;
+		a {
+			font-weight: 400;
+			color: var(--color-black-90);
+			text-decoration: underline;
 
-      &:hover,
-      &:focus,
-      &:active {
-        text-decoration: underline;
-        background-color: transparent;
-        color: var(--color-black-90);
-      }
-    }
-  }
+			&:hover,
+			&:focus,
+			&:active {
+				text-decoration: underline;
+				background-color: transparent;
+				color: var(--color-black-90);
+			}
+		}
+	}
 
-  li.breadcrumbs__divider {
-    margin-bottom: 0;
+	li.breadcrumbs__divider {
+		margin-bottom: 0;
 
-    svg {
-      path {
-        fill: var(--color-black-90);
-      }
-    }
+		svg {
+			path {
+				fill: var(--color-black-90);
+			}
+		}
 
-    &.breadcrumbs__divider--last {
-      display: none;
-    }
-  }
+		&.breadcrumbs__divider--last {
+			display: none;
+		}
+	}
 
-  .icon-separator-breadcrumb,
-  .icon-home-breadcrumb {
-    margin-right: var(--wp--preset--spacing--30);
-  }
+	.icon-separator-breadcrumb,
+	.icon-home-breadcrumb {
+		margin-right: var(--wp--preset--spacing--30);
+	}
 
-  .icon-separator-breadcrumb {
-    margin-top: 3px;
-    width: 6px;
-    height: 12px;
-  }
+	.icon-separator-breadcrumb {
+		margin-top: 3px;
+		width: 6px;
+		height: 12px;
+	}
 }

@@ -15,12 +15,12 @@ const router = new Router({
 	common,
 	// User settings
 	pageTemplateUserSettings,
-  // Sidemenu page
-  pageTemplateWithSidemenu,
-  // Training archive
-  postTypeArchiveTraining,
-  // Blog
-  blog
+	// Sidemenu page
+	pageTemplateWithSidemenu,
+	// Training archive
+	postTypeArchiveTraining,
+	// Blog
+	blog,
 });
 
 // Load Events
