@@ -9,7 +9,7 @@ $date             = TrainingHelpers::get_training_date( $args['start_datetime'],
 ?>
 <li class="b-reg-deadline-training-list__item">
 	<?php
-	if ( count( $block_categories ) > 0 ) {
+	if ( ! empty( $block_categories ) && count( $block_categories ) > 0 ) {
 		$array = [];
 		foreach ( $block_categories as $category ) {
 			$array[] = $category->name;
