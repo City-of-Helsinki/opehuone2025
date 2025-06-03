@@ -28,8 +28,12 @@
 		svg {
 			margin-left: var(--opehuone--spacing--2-x-small);
 			width: 1.25rem;
-			height: auto;
-		}
+			height: 1rem;
+
+			path {
+				fill: #000;
+			}
+		}	
 	}
 
 	&__remove-btn {

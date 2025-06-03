@@ -30,11 +30,17 @@ $description = get_field('links_description');
 			$link_title = $row['link_title'];
            	?>
                 <li class="side-links-list__item">
-                    <a href="<?php echo esc_url( $link_url ); ?>"
-                       class="side-links-list__link"
-                       target="<?php echo esc_attr( $link_target ?: '_self' ); ?>">
-                        <?php echo esc_html( $link_title ); ?>
-						<?php Helpers\the_svg( 'icons/arrow-right-lg' ); ?>
+                    <a class="side-links-list__link"
+						href="<?php echo esc_url( $link_url ); ?>"
+                    	target="<?php echo esc_attr( $link_target ?: '_self' ); ?>">
+						<?php 
+						echo esc_html( $link_title );
+						if( $link_target === "_self" ) :
+							Helpers\the_svg( 'icons/arrow-right-lg' );
+						else :
+							Helpers\the_svg( 'icons/arrow-top-right' );
+						endif;
+						?>
                     </a>
                 </li>
             <?php

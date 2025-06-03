@@ -50,7 +50,7 @@ $quick_links_header = get_field('quick_links_header');
 			<?php
 			get_template_part( 'partials/empty' );
 			get_template_part( 'partials/sidebar/landing-links-box' );
-			get_template_part( 'partials/sidebar/post-latest-news' );
+			get_template_part( 'partials/sidebar/landing-latest-news' );
 			?>
 		</aside>
 	</div>

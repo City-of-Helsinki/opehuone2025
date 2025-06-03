@@ -84,9 +84,9 @@
     "location": [
         [
             {
-                "param": "post_type",
+                "param": "post_template",
                 "operator": "==",
-                "value": "page"
+                "value": "custom-templates\/landing-page.php"
             }
         ]
     ],
@@ -99,5 +99,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1748370157
+    "modified": 1748953285
 }

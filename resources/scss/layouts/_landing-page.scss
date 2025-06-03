@@ -27,11 +27,20 @@
 
             img {
                 max-width: 100%;
-                max-height: 200px;
+                max-height: 190px;
                 position: absolute;
                 left: 50%;
                 top: 0;
-                z-index: 999;            
+                z-index: 999;
+
+                @include media-breakpoint-down(sm) {
+                    display: none;
+                }
+                
+                @include media-breakpoint-down(md) {
+                    max-height: 175px;
+                    top: initial;
+                }      
             }
         }
     }
@@ -67,8 +76,104 @@
                 }
             }
         }
+
+        &__suomenlinna {
+            &.hero {
+                background-color: var(--color-suomenlinna-medium-light);
+
+                .hds-koros {
+                    path {
+                        fill: var(--color-suomenlinna-medium-light);
+                    }
+                }
+            }
+            
+            &.quick-links-container {
+                .quick-links-box {
+                    background-color: var(--color-suomenlinna-light);
+                    border-left: 6px solid var(--color-suomenlinna-dark);
+                }
+            }
+        }
+
+        &__engel {
+            &.hero {
+                background-color: var(--color-engel-medium-light);
+
+                .hds-koros {
+                    path {
+                        fill: var(--color-engel-medium-light);
+                    }
+                }
+            }
+            
+            &.quick-links-container {
+                .quick-links-box {
+                    background-color: var(--color-engel-light);
+                    border-left: 6px solid var(--color-engel-dark);
+                }
+            }
+        }
+
+        &__kupari {
+            &.hero {
+                background-color: var(--color-copper-medium-light);
+
+                .hds-koros {
+                    path {
+                        fill: var(--color-copper-medium-light);
+                    }
+                }
+            }
+            
+            &.quick-links-container {
+                .quick-links-box {
+                    background-color: var(--color-copper-light);
+                    border-left: 6px solid var(--color-copper-dark);
+                }
+            }
+        }
+
+        &__sumu {
+            &.hero {
+                background-color: var(--color-fog-medium-light);
+
+                .hds-koros {
+                    path {
+                        fill: var(--color-fog-medium-light);
+                    }
+                }
+            }
+            
+            &.quick-links-container {
+                .quick-links-box {
+                    background-color: var(--color-fog-light);
+                    border-left: 6px solid var(--color-fog-dark);
+                }
+            }
+        }
+
+        &__bussi {
+            &.hero {
+                background-color: var(--color-bus-medium-light);
+
+                .hds-koros {
+                    path {
+                        fill: var(--color-bus-medium-light);
+                    }
+                }
+            }
+            
+            &.quick-links-container {
+                .quick-links-box {
+                    background-color: var(--color-bus-light);
+                    border-left: 6px solid var(--color-bus-dark);
+                }
+            }
+        }
     }
 }
+
 
 
 
