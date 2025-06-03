@@ -41,7 +41,9 @@ const doFiltering = (event) => {
 			if (postsContainer) {
 				postsContainer.innerHTML = response.data.output;
 			}
+			if (numberOfPostsSpan) {
 			numberOfPostsSpan.innerHTML = response.data.totalPosts;
+			}
 		})
 		.catch((error) => console.error('AJAX Error:', error));
 };
