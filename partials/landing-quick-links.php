@@ -21,8 +21,11 @@ if ( $rows ) :
 			<?php endif; ?>
 			</div>
 			<div class="quick-links-box__content">
-				<a class="quick-links-box__title side-links-list__link" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ?: '_self' ); ?>">			
-					<?php echo esc_html( $link_title ?: '' );
+				<a class="quick-links-box__title side-links-list__link" 
+					href="<?php echo esc_url( $link_url ); ?>" 
+					target="<?php echo esc_attr( $link_target ?: '_self' ); ?>">			
+					<?php 
+					echo esc_html( $link_title );
 					if( $link_target === "_self" ) :
 						Helpers\the_svg( 'icons/arrow-right-lg' );
 					else :
