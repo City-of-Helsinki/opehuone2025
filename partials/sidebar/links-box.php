@@ -17,7 +17,7 @@ if ( ! is_array( $own_links ) ) {
 }
 ?>
 <div class="sidebar-box sidebar-box--engel-light side-links-list-box">
-	<h3 class="sidebar-box__sub-title">Oikopolut</h3>
+	<h3 class="sidebar-box__sub-title">Omat pikalinkit</h3>
 
 	<ul class="side-links-list">
 		<?php
@@ -111,9 +111,8 @@ if ( ! is_array( $own_links ) ) {
 	</ul>
 	<?php if ( is_user_logged_in() ) : ?>
 		<div class="side-links-list__own-links-functions">
-			<button class="side-links-list__edit-link" id="own-links-modify">
-				<span><?php esc_html_e( 'Muokkaa ja lisää', 'helsinki-universal' ); ?></span><?php Helpers\the_svg( 'icons/arrow-right-lg' ); ?>
-			</button>
+			
+
 
 			<div class="side-links-list__form-wrapper">
 				<form class="side-links-list__form" id="own-links__add-new-form">
@@ -148,15 +147,19 @@ if ( ! is_array( $own_links ) ) {
 					</fieldset>
 				</form>
 				<div class="side-links-list__reset-buttons">
-					<button class="side-links-list__reset-btn">
-						<?php esc_html_e( 'Palauta alkuperäiset linkit', 'helsinki-universal' ); ?>
-					</button>
+
 					<button
 						class="side-links-list__reset-btn side-links-list__reset-btn--final side-links-list__reset-btn--final--hidden">
 						<?php esc_html_e( 'VAROITUS!! Painamalla tästä kaikki luomasi linkit poistetaan ja kaikki alkuperäiset linkit palautetaan. Sivu latautuu automaattisesti uudelleen.', 'helsinki-universal' ); ?>
 					</button>
 				</div>
+				
 			</div>
+
+			<button class="side-links-list__edit-link" id="own-links-modify">
+				<span><?php esc_html_e( 'Muokkaa ja lisää', 'helsinki-universal' ); ?></span>
+			</button>
+
 		</div>
 	<?php endif; ?>
 </div>
