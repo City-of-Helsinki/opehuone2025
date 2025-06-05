@@ -48,6 +48,7 @@ function custom_post_type() {
 			'excerpt',
 			'custom-fields',
 			'revisions',
+            'thumbnail'
 		],
 		'capability_type' => 'post',
 		'rewrite'         => [
@@ -92,5 +93,6 @@ function get_meta_fields(): array {
 		[ 'key' => 'training_registration_deadline' ],
 		[ 'key' => 'training_more_info' ],
 		[ 'key' => 'training_registration_url' ],
+        [ 'key' => 'training_schedule' ],
 	];
 }

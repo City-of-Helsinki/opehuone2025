@@ -14,7 +14,11 @@
 		3.125rem
 	); // 50px in desktop
 	--opehuone--spacing--large: clamp(3rem, 5vw, 3.75rem); // 60px in desktop
-  --opehuone--spacing--2-x-large: clamp(5rem, 7vw, 7.5rem); // 120px in desktop
+	--opehuone--spacing--2-x-large: clamp(
+		5rem,
+		7vw,
+		7.5rem
+	); // 120px in desktop
 
 	// Opehuone fontsizes
 	--opehuone--font-size--x-small: 0.75rem;
@@ -28,7 +32,11 @@
 		1.5rem
 	); // 24px in desktop
 	--opehuone--font-size--x-large: clamp(1.5rem, 3vw, 2rem); // 32px in desktop
-  --opehuone--font-size--2-x-large: clamp(2rem, 3.5vw, 2.5rem); // 40px in desktop
+	--opehuone--font-size--2-x-large: clamp(
+		2rem,
+		3.5vw,
+		2.5rem
+	); // 40px in desktop
 	--opehuone--font-size--3-x-large: clamp(
 		2.5rem,
 		4vw,
