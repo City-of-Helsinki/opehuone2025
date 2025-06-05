@@ -34,7 +34,9 @@ $type_svg      = TrainingHelpers::get_training_type_svg( $args['type'] );
 				<?php echo esc_html( $block_excerpt ); ?>
 			</p>
 		<?php endif; ?>
+    
 		<?php if ( ! empty( $block_categories ) && count( $block_categories ) > 0 ) : ?>
+
 			<ul class="post-tags">
 				<?php
 				foreach ( $block_categories as $category ) {

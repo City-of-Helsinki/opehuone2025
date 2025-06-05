@@ -10,6 +10,7 @@ namespace Opehuone\Assets;
 function add_frontend_enqueue_scripts() {
 	$script_asset = require_once \get_theme_file_path( 'build/js/screen.asset.php' );
 	$style_asset  = require_once \get_theme_file_path( 'build/css/screen.asset.php' );
+    $utils = new \LuuptekWP\Utils();
 
 	\wp_enqueue_script(
 		'opehuone-screen',
@@ -25,6 +26,16 @@ function add_frontend_enqueue_scripts() {
 		$style_asset['dependencies'],
 		$style_asset['version']
 	);
+
+    wp_localize_script( 'opehuone-screen', 'opehuone_js', [
+            'ajax_url'            => admin_url( 'admin-ajax.php' ),
+            'user_id'             => is_user_logged_in() ? get_current_user_id() : 1,
+            'add_new_form_errors' => esc_html__( 'Uuden palvelun lisäämisessä on ongelmia. Syötitkö tarvittavat tiedot?', TEXT_DOMAIN ),
+            'new_service_added'   => esc_html__( 'Uusi palvelu lisätty onnistuneesti. Palvelu tulee näkyviin, kun sivu ladataan uudelleen.', TEXT_DOMAIN ),
+            'unread_posts_number' => $utils->get_number_of_posts_since( $utils->get_last_visited_archive_year(), $utils->get_last_visited_archive_month(), $utils->get_last_visited_archive_day() ),
+            'opehuone_nonce'      => wp_create_nonce( 'opehuone_nonce' ),
+        ]
+    );
 
 	// Livereload
 	if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG && ! \is_admin() ) {
