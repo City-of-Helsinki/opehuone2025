@@ -84,7 +84,7 @@ const addNewCustomLink = () => {
 			fetch(T.ajaxUrl, {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
+					'Content-Type': 'application/x-www-form-urlencoded', 
 				},
 				body: new URLSearchParams({
 					action: 'add_new_own_link',
@@ -109,17 +109,17 @@ const addNewCustomLink = () => {
 					customList.appendChild(ownLinkItem(url, urlName));
 
 					setTimeout(() => {
-						notificationsWrapper.innerHTML = 'Linkki lisätty.';
+						notificationsWrapper.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M21 7L10 18L4.5 12.5L6 11L10 15L19.5 5.5L21 7Z" fill="black"/></svg> Linkki lisätty.';
 
 						setTimeout(() => {
 							notificationsWrapper.style.display = 'none';
-						}, 300);
-					}, 100);
+						}, 3000);
+					}, 1000);
 				})
 				.catch((error) => console.error('AJAX Error:', error));
 		} else {
-			notificationsWrapper.textContent =
-				'Linkin lisääminen ei onnistunut. Annoithan linkille nimen ja osoitteen. Huomaathan, että linkin pitää alkaa joko http:// tai https://.';
+			notificationsWrapper.innerHTML =
+				'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 7.5L13.5 12L18 16.5L16.5 18L12 13.5L7.5 18L6 16.5L10.5 12L6 7.5L7.5 6L12 10.5L16.5 6L18 7.5Z" fill="black"/></svg> Linkin lisääminen ei onnistunut. Annoithan linkille nimen ja osoitteen. Huomaathan, että linkin pitää alkaa joko http:// tai https://.';
 		}
 	});
 };
@@ -155,14 +155,21 @@ const toggleModifyVisibility = () => {
 
 const customLinkRemoval = () => {
 	document.addEventListener('click', (e) => {
-		const target = e.target.closest('.side-links-list__remove-btn--custom');
+		const target = e.target.closest(
+			'.side-links-list__remove-btn--custom'
+		);
 		if (!target) return;
 
 		e.preventDefault();
+
+		// Ask for confirmation
+		const confirmed = confirm('Haluatko varmasti poistaa tämän linkin?');
+		if (!confirmed) return;
+
 		const url = target.getAttribute('data-custom-link-url');
 		const urlName = target.getAttribute('data-custom-link-name');
 
-		// Remove the closest `.front-side__links-list-item`
+		// Remove the closest `.side-links-list__item`
 		const listItem = target.closest('.side-links-list__item');
 		if (listItem) {
 			listItem.remove();
@@ -185,14 +192,14 @@ const customLinkRemoval = () => {
 					throw new Error(`HTTP error! Status: ${response.status}`);
 				}
 				return response.json();
-			}) // Assuming the response is JSON
+			})
 			.then(() => {
-				// eslint-disable-next-line no-alert
 				alert('Linkki poistettu.');
 			})
 			.catch((error) => console.error('AJAX Error:', error));
 	});
 };
+	
 
 const defaultLinkRemoval = () => {
 	document.addEventListener('click', (e) => {

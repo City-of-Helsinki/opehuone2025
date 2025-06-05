@@ -117,13 +117,29 @@
 	&__add-new-form-notifications {
 		margin-top: rem(20px);
 		padding: rem(10px);
+		padding-left: 2rem;
 		font-size: rem(15px);
 		display: none;
 		color: #000;
-		border: 1px solid #000;
+		//border: 1px solid #000;
+		position: relative;
+		svg {
+			position: absolute;
+			left: 0;
+		}
 	}
 
 	&__submit-btn {
 		@include create-button(true);
+	}
+}
+
+.side-links-list-box--modification-ongoing {
+	.side-links-list__edit-link {
+		width: 100%;
+		text-align: right;
+		span {
+			width: 100%;
+		}
 	}
 }
