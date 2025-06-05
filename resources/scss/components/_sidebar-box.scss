@@ -19,6 +19,14 @@
 		background-color: var(--color-engel-light);
 	}
 
+	&.sidebar-box--bus-light {
+		background-color: var(--color-bus-light);
+	}
+
+	&.sidebar-box--fog-light {
+		background-color: var(--color-fog-light);
+	}
+
 	&__sub-title {
 		margin-top: 0;
 		margin-bottom: var(--opehuone--spacing--small);
@@ -28,5 +36,11 @@
 		&.sidebar-box__sub-title--margin-top {
 			margin-top: var(--opehuone--spacing--small);
 		}
+	}
+
+	&__description {
+		font-size: var(--opehuone--font-size--small);
+		font-weight: 500;
+		margin-top: var(--opehuone--spacing--small);
 	}
 }
