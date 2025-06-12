@@ -665,6 +665,88 @@ function ajax_update_front_page_training() {
 add_action( 'wp_ajax_update_front_page_training', __NAMESPACE__ . '\\ajax_update_front_page_training' );
 add_action( 'wp_ajax_nopriv_update_front_page_training', __NAMESPACE__ . '\\ajax_update_front_page_training' );
 
+// Side-menu Ajax update for pages only
+function ajax_update_front_page_pages() {
+
+	$cornerlabel_ids = isset($_POST['cornerLabels']) ? $_POST['cornerLabels'] : [];
+	if (!is_array($cornerlabel_ids)) {
+		$cornerlabel_ids = explode(',', $cornerlabel_ids);
+	}
+
+	$no_filter = empty($cornerlabel_ids) || (count($cornerlabel_ids) === 1 && $cornerlabel_ids[0] === '');
+	
+	$current_id = isset($_POST['currentPageId']) ? intval($_POST['currentPageId']) : 0;
+	if (!$current_id || !get_post($current_id)) {
+		wp_send_json_success(['output' => '<p class="error">Sivun ID puuttuu tai virheellinen.</p>']);
+	}
+	
+	$ancestors = array_reverse(get_post_ancestors($current_id));
+	if (count($ancestors) < 1) {
+		wp_send_json_success(['output' => '<p class="error">Sivun hierarkia ei ole riittävä.</p>']);
+	}
+	
+	$target_parent_id = $ancestors[1];
+	
+	$all_pages = get_pages([
+	'child_of'     => $target_parent_id,
+	'sort_column'  => 'menu_order',
+	'sort_order'   => 'asc',
+	'hierarchical' => true,
+	]);
+	
+	$filtered_ids = [];
+	
+	foreach ($all_pages as $page) {
+		$page_terms = wp_get_post_terms($page->ID, 'cornerlabels', ['fields' => 'ids']);
+
+		if (empty($cornerlabel_ids) || array_intersect($cornerlabel_ids, $page_terms)) {
+			
+			$filtered_ids[] = $page->ID;	
+			$ancestors = get_post_ancestors($page->ID);
+			
+			foreach ($ancestors as $ancestor_id) {
+				
+				if (!in_array($ancestor_id, $filtered_ids)) {
+					$filtered_ids[] = $ancestor_id;
+				}
+			}
+		}
+	}
+	
+	if (empty($filtered_ids)) {
+		wp_send_json_success(['output' => '<p>Ei sivuja valituilla suodattimilla.</p>']);
+	}
+	
+	$args = [
+		'title_li'     => '',
+		'sort_column'  => 'menu_order',
+		'order'        => 'asc',
+		'child_of'     => $target_parent_id,
+		'depth'        => 4,
+		'walker'       => new \BEM_Page_Walker(),
+		];
+		
+		if (!$no_filter) {
+			$args['include'] = $filtered_ids;
+		}
+		
+	ob_start();
+	echo '<nav aria-label="' . esc_attr__('Sivuvalikko', 'helsinki-universal') . '">';
+	echo '<ul class="sidemenu-nav-lvl-1 sidemenu-nav-lvl" id="sidebar-nav">';
+	wp_list_pages($args);
+	echo '</ul>';
+	echo '</nav>';
+	$output = ob_get_clean();
+	
+	wp_send_json_success([
+		'message' => 'Sivuvalikko päivitetty',
+		'output'  => $output,
+	]);
+}
+
+add_action( 'wp_ajax_update_front_page_pages', __NAMESPACE__ . '\\ajax_update_front_page_pages' );
+add_action( 'wp_ajax_nopriv_update_front_page_pages', __NAMESPACE__ . '\\ajax_update_front_page_pages' );
+
 function ajax_update_training_archive_results() {
 	// Get filter values from POST request
 	$cornerlabel    = isset( $_POST['cornerLabel'] ) ? intval( $_POST['cornerLabel'] ) : '';
