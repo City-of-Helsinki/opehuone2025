@@ -5,15 +5,15 @@ $current_id = get_the_ID();
 $ancestors = get_post_ancestors( $current_id );
 $ancestors = array_reverse( $ancestors ); // niin että top-level on ensimmäisenä
 
-// Varmistetaan että sivu on vähintään kolmannella tasolla (eli on olemassa top, mid, current)
-if ( count( $ancestors ) < 2 ) {
+// Varmistetaan että sivu on vähintään toisella tasolla (eli on olemassa top, current)
+if ( count( $ancestors ) < 1 ) {
 	echo '<p class="error">Sivun hierarkia ei ole riittävän syvä – valikkoa ei voida näyttää.</p>';
 
 	return;
 }
 
-// Haetaan se sivu, joka on 1. tason jälkeen ketjussa – eli "top-level parentin" lapsi
-$target_parent_id = $ancestors[1];
+// Haetaan se sivu, joka on 1. tason jälkeen ketjussa – eli "top-level parent".
+$target_parent_id = $ancestors[0];
 
 // Varmistetaan, että tuo sivu on olemassa
 if ( ! get_post( $target_parent_id ) ) {
@@ -28,7 +28,7 @@ $args = [
 	'sort_column' => 'menu_order',
 	'order'       => 'asc',
 	'child_of'    => $target_parent_id,
-	'depth'       => 2,
+	'depth'       => 4, // Syvyys = päätaso + 4 alatasoa
 	'walker'      => new BEM_Page_Walker(),
 ];
 
