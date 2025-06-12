@@ -1,0 +1,71 @@
+#main-menu-nav {
+    border-bottom: none;
+    #main-menu {
+        border-bottom: 1px solid black;
+        width: 100%;
+    }
+}
+.menu .menu__item {
+    position: unset;
+}
+.menu__item--active {
+    .menu--sub {
+        display: none;
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+}
+//.menu .menu__item.open > .menu, 
+.menu .menu__item--hover > .menu {
+    display: none;
+}
+#main-menu-lvl-2 {
+    background-color: var(--primary-color-light);
+    gap: 0 0;
+    list-style-type: none;
+    margin: 0;
+    .menu--sub-lvl2 {
+        list-style-type: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+    .menu__item {
+        border-bottom: 4px solid rgba(0,0,0,0);
+        &.menu__item--active {
+            border-bottom: 4px solid rgba(0,0,0,1);
+        }
+        .menu__link {
+            padding: 1rem var(--spacing-m);
+        }
+    }
+    a {
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    &.theme-primary {
+        background-color: var(--primary-color-light);
+    }
+    &.theme-suomenlinna {
+        background-color: var(--color-suomenlinna-light);
+    }
+    &.theme-engel {
+        background-color: var(--color-engel-light);
+    }
+    &.theme-copper {
+        background-color: var(--color-copper-light);
+    }
+    &.theme-fog {
+        background-color: var(--color-fog-light);
+    }
+    &.theme-bus {
+        background-color: var(--color-bus-light);
+    }
+    &.theme-vihrea {
+        background-color: var(--color-vihrea-light);
+    }
+}
