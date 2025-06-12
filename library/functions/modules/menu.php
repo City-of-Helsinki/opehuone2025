@@ -25,6 +25,7 @@ function opehuone_menu_config(string $location)
 		$desktop_depth = 3;
 		$mobile_depth = 3;
 	}
+	$subwalker = new Opehuone_Submenu_Walker();
 
 	switch ($location) {
 		case 'topbar_menu':
@@ -81,9 +82,11 @@ function opehuone_menu_config(string $location)
 				'theme_location'  => 'main_menu', // Use same menu
 				'container'       => false,
 				'depth'           => 2,
+				'menu_id'         => 'main-menu-lvl-2',
 				'echo'            => false,
-				'menu_class'      => 'menu menu--subi',
-				'walker'          => new Opehuone_Submenu_Walker(), // new walker (see below)
+				//'menu_class'      => 'menu menu--subi',
+				'menu_class'     => 'sub-menu ' . $subwalker->parent_theme_color_class,
+				'walker'          => $subwalker
 			);
 			break;
 			

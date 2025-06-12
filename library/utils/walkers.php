@@ -260,67 +260,90 @@ class Opehuone_Menu_Walker extends Walker_Nav_Menu
 }
 
 class Opehuone_Submenu_Walker extends Walker_Nav_Menu {
-
     private $parent_id = 0;
+    private $allowed_ids = [];
+    public $parent_theme_color_class = '';
 
     public function __construct() {
-		$locations = get_nav_menu_locations();
-	
-		if (!isset($locations['main_menu'])) {
-			return;
-		}
-	
-		$menu = wp_get_nav_menu_object($locations['main_menu']);
-		$menu_items = wp_get_nav_menu_items($menu->term_id);
-		$current_url = trailingslashit(home_url(add_query_arg([], $_SERVER['REQUEST_URI'])));
-		
-		$current_item_id = 0;
-		$parent_item_id = 0;
-	
-		// First try to match by object_id (for pages/posts)
-		$queried_id = get_queried_object_id();
-		foreach ($menu_items as $item) {
-			if ((int)$item->object_id === $queried_id && $item->object !== 'custom') {
-				$current_item_id = $item->ID;
-				break;
-			}
-		}
-	
-		// If no match, try matching by URL (important for archives)
-		if (!$current_item_id) {
-			foreach ($menu_items as $item) {
-				if (trailingslashit($item->url) === $current_url) {
-					$current_item_id = $item->ID;
-					break;
-				}
-			}
-		}
-	
-		// Walk up to top-level parent
-		if ($current_item_id) {
-			foreach ($menu_items as $item) {
-				if ($item->ID === $current_item_id && $item->menu_item_parent != 0) {
-					$parent_item_id = $item->menu_item_parent;
-					break;
-				}
-			}
-	
-			if ($parent_item_id === 0) {
-				$parent_item_id = $current_item_id;
-			}
-	
-			$this->parent_id = $parent_item_id;
-		}
-	}
-	
-	
-	
+        $locations = get_nav_menu_locations();
+        if (!isset($locations['main_menu'])) return;
+
+        $menu = wp_get_nav_menu_object($locations['main_menu']);
+        $menu_items = wp_get_nav_menu_items($menu->term_id);
+        if (!$menu_items) return;
+
+        $current_object_id = get_queried_object_id();
+        $current_menu_item = null;
+
+        // Find current menu item
+        foreach ($menu_items as $item) {
+            if ((int)$item->object_id === $current_object_id && $item->object !== 'custom') {
+                $current_menu_item = $item;
+                break;
+            }
+        }
+
+        // If not found, match by URL
+        if (!$current_menu_item) {
+            $current_url = trailingslashit(home_url(add_query_arg([], $_SERVER['REQUEST_URI'])));
+            foreach ($menu_items as $item) {
+                if (trailingslashit($item->url) === $current_url) {
+                    $current_menu_item = $item;
+                    break;
+                }
+            }
+        }
+
+        if (!$current_menu_item) return;
+
+        // Walk up to top-level parent
+        $this->parent_id = $current_menu_item->ID;
+        while ($current_menu_item->menu_item_parent) {
+            foreach ($menu_items as $item) {
+                if ($item->ID == $current_menu_item->menu_item_parent) {
+                    $current_menu_item = $item;
+                    $this->parent_id = $item->ID;
+                    break;
+                }
+            }
+        }
+
+        // Find children of parent
+        foreach ($menu_items as $item) {
+            if ((int)$item->menu_item_parent === $this->parent_id) {
+                $this->allowed_ids[] = $item->ID;
+            }
+        }
+
+        // Get theme_color from page
+        foreach ($menu_items as $item) {
+            if ($item->ID === $this->parent_id) {
+                $theme_color = get_field('theme_color', $item->object_id);
+                if ($theme_color) {
+                    $this->parent_theme_color_class = 'theme-' . sanitize_html_class($theme_color);
+                }
+                break;
+            }
+        }
+
+        // Debug
+        /*error_log('Walker Parent ID: ' . $this->parent_id);
+        error_log('Allowed IDs: ' . implode(',', $this->allowed_ids));*/
+    }
+
+    public function start_lvl(&$output, $depth = 0, $args = []) {
+        $output .= "\n<ul class=\"menu--sub-lvl2\">\n";
+    }
+
+    public function end_lvl(&$output, $depth = 0, $args = []) {
+        $output .= "</ul>\n";
+    }
 
     public function start_el(&$output, $item, $depth = 0, $args = [], $id = 0) {
-        if ($depth !== 1 || $item->menu_item_parent != $this->parent_id) return;
+        if (!in_array($item->ID, $this->allowed_ids, true)) return;
 
         $classes = ['menu__item'];
-        if (in_array('current-menu-item', $item->classes)) {
+        if (in_array('current-menu-item', $item->classes) || in_array('current_page_item', $item->classes)) {
             $classes[] = 'menu__item--active';
         }
 
@@ -329,7 +352,9 @@ class Opehuone_Submenu_Walker extends Walker_Nav_Menu {
     }
 
     public function end_el(&$output, $item, $depth = 0, $args = []) {
-        if ($depth !== 1 || $item->menu_item_parent != $this->parent_id) return;
-        $output .= '</li>';
+        if (!in_array($item->ID, $this->allowed_ids, true)) return;
+        $output .= "</li>\n";
     }
 }
+
+

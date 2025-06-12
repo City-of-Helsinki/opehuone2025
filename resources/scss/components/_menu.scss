@@ -1,6 +1,9 @@
-#main-menu-nav #main-menu {
-    border-bottom: 1px solid black;
-    width: 100%;
+#main-menu-nav {
+    border-bottom: none;
+    #main-menu {
+        border-bottom: 1px solid black;
+        width: 100%;
+    }
 }
 .menu .menu__item {
     position: unset;
@@ -17,9 +20,12 @@
 .menu .menu__item--hover > .menu {
     display: none;
 }
-.menu--subi {
+#main-menu-lvl-2 {
+    background-color: var(--primary-color-light);
     gap: 0 0;
-    .sub-menu {
+    list-style-type: none;
+    margin: 0;
+    .menu--sub-lvl2 {
         list-style-type: none;
         display: flex;
         flex-direction: row;
@@ -35,7 +41,31 @@
             padding: 1rem var(--spacing-m);
         }
     }
-    a:hover {
-        text-decoration: underline;
+    a {
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    &.theme-primary {
+        background-color: var(--primary-color-light);
+    }
+    &.theme-suomenlinna {
+        background-color: var(--color-suomenlinna-light);
+    }
+    &.theme-engel {
+        background-color: var(--color-engel-light);
+    }
+    &.theme-copper {
+        background-color: var(--color-copper-light);
+    }
+    &.theme-fog {
+        background-color: var(--color-fog-light);
+    }
+    &.theme-bus {
+        background-color: var(--color-bus-light);
+    }
+    &.theme-vihrea {
+        background-color: var(--color-vihrea-light);
     }
 }
