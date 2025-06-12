@@ -1,0 +1,41 @@
+#main-menu-nav #main-menu {
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+.menu .menu__item {
+    position: unset;
+}
+.menu__item--active {
+    .menu--sub {
+        display: none;
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+}
+//.menu .menu__item.open > .menu, 
+.menu .menu__item--hover > .menu {
+    display: none;
+}
+.menu--subi {
+    gap: 0 0;
+    .sub-menu {
+        list-style-type: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+    .menu__item {
+        border-bottom: 4px solid rgba(0,0,0,0);
+        &.menu__item--active {
+            border-bottom: 4px solid rgba(0,0,0,1);
+        }
+        .menu__link {
+            padding: 1rem var(--spacing-m);
+        }
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+}
