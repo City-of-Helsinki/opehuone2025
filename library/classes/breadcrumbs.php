@@ -332,7 +332,8 @@ class Opehuone_Breadcrumbs {
 					$queried_object                              = get_queried_object();
 					$this->breadcrumb['archive_events_calendar'] = $this->template( $queried_object->labels->name, 'current' );
 				} else {
-					$post_type_label                          = get_post_type_object( $post_type )->labels->name;
+					$post_type_object = get_post_type_object( $post_type );
+					$post_type_label = $post_type_object ? $post_type_object->labels->name : 'Koulutukset'; //TODO
 					$this->breadcrumb["archive_{$post_type}"] = $this->template( $post_type_label, 'current' );
 				}
 			} elseif ( is_author() ) { // Author archive

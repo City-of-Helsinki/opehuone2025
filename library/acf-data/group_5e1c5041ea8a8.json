@@ -46,6 +46,35 @@
             "mime_types": ""
         },
         {
+            "key": "field_684ef3f81a61f",
+            "label": "Koulutukset sivu",
+            "name": "trainings_page",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        },
+        {
             "key": "field_5e1c544c5492d",
             "label": "Suosikit sivu",
             "name": "favorites_page",
@@ -1362,5 +1391,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1740991106
+    "modified": 1750004889
 }
