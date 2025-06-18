@@ -9,6 +9,7 @@ define( 'TEXT_DOMAIN', 'opehuone2025' );
  */
 require dirname( __FILE__ ) . '/library/functions/helpers.php';
 require dirname( __FILE__ ) . '/library/functions/polylang-fallbacks.php';
+require dirname( __FILE__ ) . '/library/functions/template-functions.php';
 
 /**
  * Set theme name which will be referenced from style & script registrations
