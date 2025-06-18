@@ -2,7 +2,9 @@
 
 use Opehuone\Helpers;
 
-$rows = get_field('quick_links');
+$page = $args['page'] ?? null;
+
+$rows = get_field('quick_links', $page);
 
 if ( $rows ) :
 	foreach ( $rows as $row ) : 

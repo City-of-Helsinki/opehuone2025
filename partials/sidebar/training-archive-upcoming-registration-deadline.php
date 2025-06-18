@@ -22,9 +22,9 @@ $query_args = [
 
 $query = new WP_Query( $query_args );
 
-if ( ! $query->have_posts() ) {
-	return;
-}
+// if ( ! $query->have_posts() ) {
+// 	return;
+// }
 ?>
 <h2 class="training-archive__sidebar-title">
 	<?php esc_html_e( 'Vielä ehdit ilmoittautua mukaan', 'helsinki-universal' ); ?>

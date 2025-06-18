@@ -18,6 +18,7 @@ require dirname( __FILE__ ) . '/library/functions/helpers.php';
 require dirname( __FILE__ ) . '/library/functions/modules/menu.php';
 require dirname( __FILE__ ) . '/library/utils/walkers.php';
 require dirname( __FILE__ ) . '/library/functions/polylang-fallbacks.php';
+require dirname( __FILE__ ) . '/library/functions/template-functions.php';
 
 // calls for menu template part
 if ( ! function_exists('opehuone_header_main_menu') ) {

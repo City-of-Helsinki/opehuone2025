@@ -2,10 +2,12 @@
 
 namespace Opehuone\CustomPosts\Training;
 
+const TRAINING_SLUG = 'training';
+
 function custom_post_type() {
 
 	$labels = array(
-		'name'                  => _x( 'Koulutukset', 'Post Type General Name', 'helsinki-universal' ),
+		'name'                  => _x( 'Koulutus ja osaaminen', 'Post Type General Name', 'helsinki-universal' ),
 		'singular_name'         => _x( 'Koulutus', 'Post Type Singular Name', 'helsinki-universal' ),
 		'menu_name'             => __( 'Koulutukset', 'helsinki-universal' ),
 		'name_admin_bar'        => __( 'Koulutukset', 'helsinki-universal' ),
