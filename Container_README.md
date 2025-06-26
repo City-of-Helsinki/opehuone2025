@@ -7,7 +7,8 @@
 
 opehuone-stage-new-ui.edu.hel.fi:
 
-`ls -1 wp-content/plugins/
+```
+ls -1 wp-content/plugins/
 
 PDFEmbedder-premium
 advanced-custom-fields-pro
@@ -43,21 +44,27 @@ wp-security-audit-log
 wpo365-login
 wpo365-login-intranet
 wpo365-login-intranet-12.5.zip
-wpo365-samesite`
+wpo365-samesite
+```
 
-`ls -1 wp-content/themes/
+```
+ls -1 wp-content/themes/
 
 opehuone
 opehuone-broken
-wordpress-helfi-helsinkiteema`
+wordpress-helfi-helsinkiteema
+```
 
-`ls -1 wp-content/mu-plugins/
+```
+ls -1 wp-content/mu-plugins/
 
-hm-require-password-master`
+hm-require-password-master
+```
 
 base image:
 
-`ls -1 wp-content/mu-plugins/
+```
+ls -1 wp-content/mu-plugins/
 LICENSE
 composer.json
 wordpress-helfi-site-core
@@ -65,7 +72,8 @@ wp-mu-autoloader.phpls -1 wp-content/mu-plugins/
 LICENSE
 composer.json
 wordpress-helfi-site-core
-wp-mu-autoloader.php`
+wp-mu-autoloader.php
+```
 
 ## Opehuone Dockerfile
 
