@@ -2,6 +2,8 @@
 
 - Base image wp-content/mu-plugins/ content is different from opehuone-stage-new-ui.edu.hel.fi.
 - Devops: components/opehuone/vars/opehuone-development.yml & staging wp vars missing
+- Dockerfile is missing some variable definitions
+- https://github.com/City-of-Helsinki/wordpress-helfi-plugin-wpo365-login-intranet workaround to have access to plugin. No versioning or updates.
 
 ### Plugins and themes
 
@@ -68,10 +70,6 @@ ls -1 wp-content/mu-plugins/
 LICENSE
 composer.json
 wordpress-helfi-site-core
-wp-mu-autoloader.phpls -1 wp-content/mu-plugins/
-LICENSE
-composer.json
-wordpress-helfi-site-core
 wp-mu-autoloader.php
 ```
 
@@ -81,7 +79,7 @@ wp-mu-autoloader.php
 ### 📦 Plugins
 
 - [ ] PDFEmbedder-premium
-- [ ] advanced-custom-fields-pro
+- [x] advanced-custom-fields-pro
 - [ ] ajax-load-more
 - [ ] ajax-load-more-for-relevanssi
 - [ ] ajax-load-more-rest-api
@@ -92,29 +90,28 @@ wp-mu-autoloader.php
 - [ ] jonradio-private-site
 - [ ] onelogin-saml-sso
 - [ ] onesignal-free-web-push-notifications
-- [ ] oppi-school-picker
+- [x] oppi-school-picker
 - [ ] relevanssi
-- [ ] remove-dashboard-access-for-non-admins
-- [ ] safe-svg
+- [x] remove-dashboard-access-for-non-admins
+- [x] safe-svg
 - [ ] simple-comment-editing
 - [ ] simple-comment-editing-fi.mo
 - [ ] simple-comment-editing-fi.po
-- [ ] simple-page-ordering
+- [x] simple-page-ordering
 - [ ] smtp-mailer
 - [ ] stadin-ao-articles
 - [ ] stop-emails
 - [ ] super-progressive-web-apps
 - [ ] tablepress
 - [ ] taxonomy-terms-order
-- [ ] wordfence
-- [ ] wordpress-helfi-hds-wp
+- [x] wordfence
+- [x] wordpress-helfi-hds-wp
 - [ ] wordpress-importer
-- [ ] wp-piwik
+- [x] wp-piwik
 - [ ] wp-security-audit-log
-- [ ] wpo365-login
-- [ ] wpo365-login-intranet
-- [ ] wpo365-login-intranet-12.5.zip
-- [ ] wpo365-samesite
+- [x] wpo365-login
+- [x] wpo365-login-intranet
+- [x] wpo365-samesite
 
 ### 🎨 Themes
 

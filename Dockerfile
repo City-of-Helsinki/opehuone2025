@@ -52,7 +52,7 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require wpo365/wpo365-login-intranet && \
     rm -f /opt/app-root/src/.config/composer/auth.json
 
-    # ? ?
+    # ? ? Old site
     Ajax Load More
     Ajax Load More for Relevanssi
     Better Search Replace
