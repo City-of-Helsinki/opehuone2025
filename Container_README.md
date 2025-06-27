@@ -75,38 +75,37 @@ wp-mu-autoloader.php
 
 ## Opehuone Dockerfile
 
-
 ### 📦 Plugins
 
 - [ ] PDFEmbedder-premium
 - [x] advanced-custom-fields-pro
-- [ ] ajax-load-more
-- [ ] ajax-load-more-for-relevanssi
-- [ ] ajax-load-more-rest-api
-- [ ] better-search-replace
-- [ ] classic-editor
+- [x] ajax-load-more
+- [?] ajax-load-more-for-relevanssi
+- [?] ajax-load-more-rest-api
+- [x] better-search-replace
+- [x] classic-editor
 - [ ] easy-basic-authentication
 - [ ] findkit
 - [ ] jonradio-private-site
 - [ ] onelogin-saml-sso
 - [ ] onesignal-free-web-push-notifications
 - [x] oppi-school-picker
-- [ ] relevanssi
+- [x] relevanssi
 - [x] remove-dashboard-access-for-non-admins
 - [x] safe-svg
 - [ ] simple-comment-editing
 - [ ] simple-comment-editing-fi.mo
 - [ ] simple-comment-editing-fi.po
 - [x] simple-page-ordering
-- [ ] smtp-mailer
+- [x] smtp-mailer
 - [ ] stadin-ao-articles
-- [ ] stop-emails
-- [ ] super-progressive-web-apps
-- [ ] tablepress
-- [ ] taxonomy-terms-order
+- [x] stop-emails
+- [x] super-progressive-web-apps
+- [x] tablepress
+- [x] taxonomy-terms-order
 - [x] wordfence
 - [x] wordpress-helfi-hds-wp
-- [ ] wordpress-importer
+- [x] wordpress-importer
 - [x] wp-piwik
 - [ ] wp-security-audit-log
 - [x] wpo365-login
@@ -115,6 +114,5 @@ wp-mu-autoloader.php
 
 ### 🎨 Themes
 
-- [ ] opehuone
-- [ ] opehuone-broken
-- [ ] wordpress-helfi-helsinkiteema
+- [x] opehuone
+- [x] wordpress-helfi-helsinkiteema
