@@ -2,7 +2,7 @@ import { FindkitUI, html, css, } from "@findkit/ui";
 
 
 const findkitUI = new FindkitUI({
-    publicToken: '<PUBLIC TOKEN HERE>',
+    publicToken: 'pJMDjLEOE',
     container: '.findkit-overlay-container',
     infiniteScroll: false,
     header: false,
@@ -61,6 +61,7 @@ const findkitUI = new FindkitUI({
         },
         Results(props) {
             console.log(props);
+            console.log(props.parts.Footer?.loadMore)
             return html`
                 <${props.parts.BackLink} ...${props}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 23 18" fill="none">
@@ -74,12 +75,9 @@ const findkitUI = new FindkitUI({
                 <h2 class="findkit--group-title">${props.title}</h2>
                 <p class="findkit-total-results-count">${props.total} hakutulosta</p>
                 <${props.parts.Hits} />
-                <${props.parts.Footer}/>
-                <${props.parts.Footer} ...${props}>
-                    <span>Hello</span>
-                </${props.parts.Footer}>
+                <${props.parts.Footer} />
             `;
-        }
+        },
     },
     css: css`
         :host {
@@ -172,12 +170,45 @@ const findkitUI = new FindkitUI({
             //margin-top: 0;
             padding-top: 0;
         }
+        
+        .findkit--hover-bg {
+            display: none;
+        }
+        
+        .findkit--footer {
+            padding-left: 0px;  
+        }
+        
+        .findkit--load-more-button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: #fff;
+            background-color: #000;
+            text-align: center;
+            text-decoration: none;
+            white-space: normal;
+            vertical-align: middle;
+            user-select: none;
+            border: 2px solid #000;
+            padding: 10px 32px;
+            font-size: 1rem;
+            border-radius: 0;
+            line-height: 1.5;
+            min-height: 56px;
+            cursor: pointer;
+        }
+
+        .findkit--load-more-button:hover {
+            color: #000;
+            background-color: transparent;
+            text-decoration: none;
+        }
     `,
 })
 
-// @TODO: "Takaisin" napin padding näkyy hoverissa, ota hoveri pois.
-// @TODO: "Lataa lisää" napin viimeistely
-// @TODO: Tarkista spacingit
 // @TODO: Tarvittavan metatiedon indeksointi
 
 
