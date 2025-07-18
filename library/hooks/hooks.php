@@ -146,3 +146,13 @@ function render_dock_updater_js_admin_footer() {
 }
 
 add_action( 'admin_footer', __NAMESPACE__ . '\render_dock_updater_js_admin_footer' );
+
+add_action( 'after_setup_theme', function () {
+    register_nav_menus([
+        'footer_top_menu' => __('Alatunnisteen ylävalikko', 'helsinki-universal'),
+    ]);
+} );
+
+add_action('helsinki_footer_bottom', function() {
+
+}, 10);

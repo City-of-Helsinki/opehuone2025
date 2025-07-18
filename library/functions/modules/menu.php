@@ -125,6 +125,22 @@ function opehuone_menu_config(string $location)
 			);
 			break;
 
+        case 'footer_top_menu':
+            return array(
+                'theme_location'    => $location,
+                'container'         => false,
+                'container_class'   => '',
+                'container_id'      => '',
+                'depth'             => 1,
+                'menu_id'           => 'footer-top-menu',
+                'menu_class'        => 'menu--footer-top-menu',
+                'echo'              => false,
+                'fallback_cb'       => false,
+                'item_spacing'      => 'discard',
+                'walker'            => new Artcloud_Menu_Walker(),
+            );
+            break;
+
 		default:
 			return array();
 			break;

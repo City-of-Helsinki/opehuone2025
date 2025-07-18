@@ -44,3 +44,8 @@ add_filter( 'helsinki_hero_layout_style', function ( $style, $post_id ) {
 
 	return $style;
 }, 9999, 2 );
+
+
+add_action('helsinki_footer', function() {
+    get_template_part('partials/footer/footer-top');
+}, 11);
