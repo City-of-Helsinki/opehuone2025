@@ -38,10 +38,24 @@
   &__bottom {
     margin-top: 0px !important;
     padding-top: 12px !important;
-    a {
-      text-decoration: none;
-      &:hover {
-        text-decoration: underline;
+    li.menu__item {
+      a {
+        text-decoration: none;
+        font-size: 14px !important;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .footer__copyright {
+      font-size: 14px !important;
+    }
+
+
+    #back-top {
+      a[href="#masthead"] {
+        font-size: 20px;
       }
     }
   }
