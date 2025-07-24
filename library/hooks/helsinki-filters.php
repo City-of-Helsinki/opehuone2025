@@ -16,13 +16,17 @@ add_filter( 'helsinki_wp_disallowed_blocks', function () {
 } );
 
 // Remove topbar from header
-function remove_helsinki_topbar() {
+function remove_helsinki_theme_actions() {
 	if ( has_action( 'helsinki_header_top', 'helsinki_topbar' ) ) {
 		remove_action( 'helsinki_header_top', 'helsinki_topbar', 10 );
 	}
+
+    if ( has_action ('helsinki_footer_bottom', 'helsinki_footer_logo' ) ) {
+        remove_action('helsinki_footer_bottom', 'helsinki_footer_logo', 10);
+    }
 }
 
-add_action( 'wp_head', __NAMESPACE__ . '\\remove_helsinki_topbar' );
+add_action( 'wp_head', __NAMESPACE__ . '\\remove_helsinki_theme_actions' );
 
 
 add_action( 'helsinki_header', function () {
@@ -49,3 +53,7 @@ add_filter( 'helsinki_hero_layout_style', function ( $style, $post_id ) {
 add_action('helsinki_footer', function() {
     get_template_part('partials/footer/footer-top');
 }, 11);
+
+add_action('helsinki_footer_bottom', function() {
+    get_template_part('partials/footer/logo' );
+}, 10);

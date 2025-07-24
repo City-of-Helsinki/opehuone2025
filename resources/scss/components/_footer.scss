@@ -40,11 +40,7 @@
     padding-top: 12px !important;
     li.menu__item {
       a {
-        text-decoration: none;
         font-size: 14px !important;
-        &:hover {
-          text-decoration: underline;
-        }
       }
     }
 
@@ -56,6 +52,10 @@
     #back-top {
       a[href="#masthead"] {
         font-size: 20px;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
