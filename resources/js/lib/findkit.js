@@ -60,8 +60,6 @@ const findkitUI = new FindkitUI({
             `;
         },
         Results(props) {
-            console.log(props);
-            console.log(props.parts.Footer?.loadMore)
             return html`
                 <${props.parts.BackLink} ...${props}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 23 18" fill="none">
@@ -208,9 +206,6 @@ const findkitUI = new FindkitUI({
         }
     `,
 })
-
-// @TODO: Tarvittavan metatiedon indeksointi
-
 
 findkitUI.bindInput('#header-search-input');
 
