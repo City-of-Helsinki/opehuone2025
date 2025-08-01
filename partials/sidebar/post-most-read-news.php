@@ -1,17 +1,16 @@
+<?php
+
+use function \Opehuone\TemplateFunctions\get_top_monthly_posts;
+
+?>
 <div class="b-sidebar-news-lifts">
 	<h3 class="b-sidebar-news-lifts__title">
-		<?php esc_html_e( 'Luetuimmat uutiset (tähän joku logiikka, nyt antaa vain viimeisimmät', 'helsinki-universal' ); ?>
+		<?php esc_html_e( 'Kuukauden luetimmat uutiset', 'helsinki-universal' ); ?>
 	</h3>
 	<ul class="b-sidebar-news-lift__list">
 		<?php
-		$args = [
-			'post_type'           => 'post',
-			'posts_per_page'      => 5,
-			'ignore_sticky_posts' => 1,
-			'post__not_in'        => [ get_the_ID() ],
-		];
+		$query = get_top_monthly_posts();
 
-		$query = new WP_Query( $args );
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) {
 				$query->the_post();

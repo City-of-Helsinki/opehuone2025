@@ -19,3 +19,26 @@ function displayBannerWaveLineSvg(): void {
     </div>';
 }
 
+function get_top_monthly_posts($limit = 5) {
+    $current_month = date('Y-m');
+
+    $args = [
+        'post_type' => 'post',
+        'posts_per_page' => $limit,
+        'ignore_sticky_posts' => 1,
+        'post__not_in'        => [ get_the_ID() ],
+        'meta_key' => 'monthly_views_count',
+        'orderby' => 'meta_value_num',
+        'order' => 'DESC',
+        'meta_query' => [
+            [
+                'key' => 'monthly_views_timestamp',
+                'value' => $current_month,
+                'compare' => '='
+            ]
+        ]
+    ];
+
+    return new \WP_Query( $args );
+}
+
