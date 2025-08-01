@@ -757,3 +757,28 @@ function ajax_update_training_archive_results() {
 
 add_action( 'wp_ajax_update_training_archive_results', __NAMESPACE__ . '\\ajax_update_training_archive_results' );
 add_action( 'wp_ajax_nopriv_update_training_archive_results', __NAMESPACE__ . '\\ajax_update_training_archive_results' );
+
+function ajax_load_concentration() {
+    $post_id = isset( $_POST['postId'] ) ? wp_unslash( $_POST['postId'] ) : null;
+
+    if ( ! $post_id ) {
+        die();
+    }
+
+    $content   = apply_filters( 'the_content', get_the_content( null, false, $post_id ) );
+    $bg_url    = get_the_post_thumbnail_url( $post_id, 'full' );
+    $duration  = get_field( 'concentration_duration', $post_id );
+    $track_url = get_field( 'concentration_music', $post_id );
+
+    $array = [
+        'content'   => $content,
+        'bg_url'    => $bg_url,
+        'duration'  => $duration,
+        'track_url' => $track_url,
+    ];
+
+    die( json_encode( $array ) );
+}
+
+add_action( 'wp_ajax_load_concentration', __NAMESPACE__ . '\\ajax_load_concentration' );
+add_action( 'wp_ajax_nopriv_load_concentration', __NAMESPACE__ . '\\ajax_load_concentration' );
