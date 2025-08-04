@@ -1,0 +1,32 @@
+#header-search {
+  margin-top: 4rem;
+  #header-search-input {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  #header-search {
+    #header-search-input {
+      width: 50%;
+    }
+  }
+}
+
+.header-search-outer-findkit-container {
+  background-color: #EFEFF0;
+}
+
+.header-search-box-container {
+  margin-bottom: 4rem;
+
+  .search-title {
+    margin-bottom: 2rem;
+  }
+
+  label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+}

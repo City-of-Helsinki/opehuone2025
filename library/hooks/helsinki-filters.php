@@ -8,7 +8,7 @@ add_filter( 'helsinki_default_scheme', function () {
 } );
 
 // Enable search
-add_filter( 'helsinki_header_search_enabled', '__return_true' );
+add_filter( 'helsinki_header_search_enabled', '__return_false' );
 
 // Allow all blocks, especially classic (core/freeform) block
 add_filter( 'helsinki_wp_disallowed_blocks', function () {
@@ -30,6 +30,7 @@ add_action( 'wp_head', __NAMESPACE__ . '\\remove_helsinki_theme_actions' );
 
 
 add_action( 'helsinki_header', function () {
+    get_template_part( 'partials/header/search-button' );
 	get_template_part( 'partials/header/profile-opener' );
 }, 41 );
 

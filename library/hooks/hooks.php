@@ -153,6 +153,28 @@ add_action( 'after_setup_theme', function () {
     ]);
 } );
 
-add_action('helsinki_footer_bottom', function() {
+// add_action('helsinki_footer_bottom', function() {
 
-}, 10);
+// }, 10);
+
+function increment_monthly_post_views() {
+    if ( ! is_single() ) return; // only for single post pages
+
+    global $post;
+    if ( get_post_type( $post ) !== 'post' ) return;
+
+    $post_id = $post->ID;
+    $current_month = date('Y-m'); // e.g. 2025-08
+
+    $stored_month = get_post_meta( $post_id, 'monthly_views_timestamp', true );
+    $count = (int) get_post_meta( $post_id, 'monthly_views_count', true );
+
+    if ( $stored_month !== $current_month ) {
+        $count = 0;
+        update_post_meta( $post_id, 'monthly_views_timestamp', $current_month );
+    }
+
+    $count++;
+    update_post_meta( $post_id, 'monthly_views_count', $count );
+}
+add_action( 'wp', __NAMESPACE__ . '\increment_monthly_post_views' );
