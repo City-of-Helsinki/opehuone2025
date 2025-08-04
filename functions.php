@@ -10,7 +10,9 @@ function remove_parent_menu() {
 }
 add_action('wp_loaded', 'remove_parent_menu');
 
-
+add_action( 'helsinki_header_bottom', function() {
+    get_template_part( 'partials/components/findkit' );
+}, 21);
 /**
  * Require helpers
  */
@@ -84,3 +86,6 @@ add_filter(
 		return '<span id="footer-thankyou">' . opehuone_theme()->Name . ' by: <a href="' . opehuone_theme()->AuthorURI . '" target="_blank">' . opehuone_theme()->Author . '</a><span>';
 	}
 );
+
+// Site is hidden from search engines, but Findkit needs the sitemap ==> lets enable it
+add_filter( 'wp_sitemaps_enabled', '__return_true' );
