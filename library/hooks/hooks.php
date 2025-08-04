@@ -147,6 +147,16 @@ function render_dock_updater_js_admin_footer() {
 
 add_action( 'admin_footer', __NAMESPACE__ . '\render_dock_updater_js_admin_footer' );
 
+add_action( 'after_setup_theme', function () {
+    register_nav_menus([
+        'footer_top_menu' => __('Alatunnisteen ylävalikko', 'helsinki-universal'),
+    ]);
+} );
+
+// add_action('helsinki_footer_bottom', function() {
+
+// }, 10);
+
 function increment_monthly_post_views() {
     if ( ! is_single() ) return; // only for single post pages
 
@@ -167,5 +177,4 @@ function increment_monthly_post_views() {
     $count++;
     update_post_meta( $post_id, 'monthly_views_count', $count );
 }
-
 add_action( 'wp', __NAMESPACE__ . '\increment_monthly_post_views' );
