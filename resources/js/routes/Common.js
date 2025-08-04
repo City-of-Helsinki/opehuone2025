@@ -5,6 +5,7 @@ import { userFavs } from '../lib/userFavs';
 import { postsFiltering } from '../lib/postsFiltering';
 import { profileOpener } from '../lib/profileOpener';
 import { addNewOwnService, handleAddNewServiceClick } from '../lib/ownServices'
+import { concentrationFunctions } from "../lib/concentration";
 import { findkitUI } from "../lib/findkit";
 
 function toggleAria($element, attribute) {
@@ -46,6 +47,8 @@ export default {
 		// Own service functions
 		handleAddNewServiceClick();
 		addNewOwnService();
+		// Concentration functions
+		concentrationFunctions();
 
 		jQuery('.dock-toggler').on('click', (e) => {
 			e.preventDefault();
