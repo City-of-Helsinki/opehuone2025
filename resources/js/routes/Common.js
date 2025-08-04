@@ -6,6 +6,7 @@ import { postsFiltering } from '../lib/postsFiltering';
 import { profileOpener } from '../lib/profileOpener';
 import { addNewOwnService, handleAddNewServiceClick } from '../lib/ownServices'
 import { concentrationFunctions } from "../lib/concentration";
+import { findkitUI } from "../lib/findkit";
 
 function toggleAria($element, attribute) {
 	const isHidden = $element.attr(attribute) === 'true';

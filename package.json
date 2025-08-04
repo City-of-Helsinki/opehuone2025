@@ -18,15 +18,16 @@
     "copy-webpack-plugin": "^12.0.2",
     "path": "^0.12.7",
     "sass-rem": "^3.0.0",
+    "sortablejs": "^1.12.0",
     "webpack-livereload-plugin": "^3.0.2",
-    "webpack-remove-empty-scripts": "^1.0.4",
-    "sortablejs": "^1.12.0"
+    "webpack-remove-empty-scripts": "^1.0.4"
   },
   "volta": {
     "node": "20.11.1"
   },
   "dependencies": {
     "@10up/block-components": "^1.19.2",
+    "@findkit/ui": "^1.6.1",
     "hamburgers": "^1.2.1"
   }
 }
