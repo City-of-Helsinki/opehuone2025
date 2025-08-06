@@ -6,6 +6,8 @@
 
 .sidebar-box {
 	padding: rem(27px 20px);
+	background-position: top 2rem right;
+	background-repeat: no-repeat;
 
 	&.sidebar-box--suomenlinna-light {
 		background-color: var(--color-suomenlinna-light);
@@ -43,4 +45,37 @@
 		font-weight: 500;
 		margin-top: var(--opehuone--spacing--small);
 	}
+
+	&__sub-content {
+		font-size: var(--opehuone--font-size--normal);
+		p, li {
+			font-size: var(--opehuone--font-size--normal);
+		}
+	}
+
+	&__sub-links {
+		ul {
+			list-style: none;
+			margin-left: 3px;
+			li {
+				margin-bottom: .5rem;
+			}
+		}
+		a {
+			font-weight: 600;
+			text-decoration: none;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		svg {
+			margin-left: 1rem;
+		}
+	}
+	&__sub-button {
+		svg.icon {
+			width: 11px !important;
+		}
+	}
+
 }
