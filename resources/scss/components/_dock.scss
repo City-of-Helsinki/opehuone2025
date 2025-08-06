@@ -183,6 +183,7 @@ $body-color: white;
     position: absolute;
     top: 0.8rem;
     right: 0;
+    max-width: 18px;
     .has-theme-dark & {
       color: #FFF;
     }

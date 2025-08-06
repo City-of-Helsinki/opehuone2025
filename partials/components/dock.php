@@ -23,7 +23,7 @@ if ( count( $dock_items ) > 0 ) {
             <div class="dock-item--toggler">
                 <a href="#" target="_blank" class="dock-link dock-toggler"
                     aria-label="<?php _e( 'Avaa dock asetukset', TEXT_DOMAIN ); ?>" role="button">
-                    <?php _e( 'Muokkaa ja lisää', TEXT_DOMAIN ); ?><?php Helpers\the_svg( 'icons/arrow-right-lg' ); ?>
+                    <?php _e( 'Muokkaa', TEXT_DOMAIN ); ?><?php Helpers\the_svg( 'icons/dock' ); ?>
                 </a>
             </div>
         </div>
