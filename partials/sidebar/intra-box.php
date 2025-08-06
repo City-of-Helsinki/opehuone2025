@@ -1,22 +1,26 @@
-<?php if( get_field('intrabox_bgimage','options') ):
-    $bgimage = get_field('intrabox_bgimage','options');
-endif; ?>
+<?php
+$intrabox_title = get_field('intrabox_title','options');
+$intrabox_content = get_field('intrabox_content','options');
 
-<div class="sidebar-box sidebar-box--suomenlinna-light" style="background-image: url(<?php echo $bgimage ?>)">
+if( $intrabox_title || $intrabox_content ):
+
+    $bgimage = get_field('intrabox_bgimage','options');
+?>
+
+<div class="sidebar-box sidebar-box--suomenlinna-light" style="background-image: url(<?php echo esc_url($bgimage); ?>)">
 	<h3 class="sidebar-box__sub-title">
-		<?php echo esc_html( get_field('intrabox_title','options') ); ?>
+		<?php echo esc_html( $intrabox_title ); ?>
 	</h3>
 	<div class="sidebar-box__sub-content">
-		<?php the_field('intrabox_content','options'); ?>
+		<?php echo $intrabox_content; ?>
 	</div>
 	<div class="sidebar-box__sub-links">
-
 		<?php if( have_rows('intrabox_links','options') ): ?>
 			<ul>
-			<?php while( have_rows('intrabox_links','options') ): the_row(); 
+			<?php while( have_rows('intrabox_links','options') ): the_row();
 				$link = get_sub_field('intrabox_link','options');
-				
-				if( $link ): 
+
+				if( $link ):
 					$link_url = $link['url'];
 					$link_title = $link['title'];
 					$link_target = $link['target'] ? $link['target'] : '_self';
@@ -26,12 +30,11 @@ endif; ?>
 			<?php endwhile; ?>
 			</ul>
 		<?php endif; ?>
-
 	</div>
 	<div class="sidebar-box__sub-button">
-		<?php 
+		<?php
 		$link = get_field('intrabox_loginbtn','options');
-		if( $link ): 
+		if( $link ):
 			$link_url = $link['url'];
 			$link_title = $link['title'];
 			$link_target = $link['target'] ? $link['target'] : '_self';
@@ -40,3 +43,5 @@ endif; ?>
 		<?php endif; ?>
 	</div>
 </div>
+
+<?php endif; ?>
