@@ -25,12 +25,15 @@
     gap: 0 0;
     list-style-type: none;
     margin: 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
     .menu--sub-lvl2 {
         list-style-type: none;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        margin: 0;
+        margin: 0 auto;
+        max-width: 1920px;
     }
     .menu__item {
         border-bottom: 4px solid rgba(0,0,0,0);
