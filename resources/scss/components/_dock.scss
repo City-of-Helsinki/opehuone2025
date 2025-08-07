@@ -69,6 +69,7 @@ $body-color: white;
   display: flex;
   justify-content: space-between;
   width: 100%;
+  flex-wrap: wrap;
 
   @include media-breakpoint-up(xl) {
     padding: rem(0);
@@ -105,6 +106,11 @@ $body-color: white;
   @include media-breakpoint-up(xl) {
     padding: rem(6px 8px);
 
+    &.dock-item--desktop-hidden {
+      display: none;
+    }
+  }
+  @include media-breakpoint-down(xl) {
     &.dock-item--desktop-hidden {
       display: none;
     }

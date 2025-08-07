@@ -33,7 +33,7 @@ if ( count( $dock_items ) > 0 ) {
 
                 foreach ( $own_active_services as $own_service ) {
                     $dock_item_class = 'dock-item';
-                    if ( $i > 10 ) {
+                    if ( $i > 9 ) {
                         $dock_item_class = 'dock-item dock-item--desktop-hidden';
                     }
                     $dock_title = $own_service->service_name;
@@ -63,7 +63,7 @@ if ( count( $dock_items ) > 0 ) {
 
                 foreach ( $dock_items as $dock_item ) {
                     $dock_item_class = 'dock-item';
-                    if ( $i > 10 ) {
+                    if ( $i > 9 ) {
                         $dock_item_class = 'dock-item dock-item--desktop-hidden';
                     }
                     $dock_title = $dock_item['title'];
@@ -92,7 +92,7 @@ if ( count( $dock_items ) > 0 ) {
 
                 foreach ( $own_non_active_services as $own_service ) {
                     $dock_item_class = 'dock-item';
-                    if ( $i > 10 ) {
+                    if ( $i > 9 ) {
                         $dock_item_class = 'dock-item dock-item--desktop-hidden';
                     }
                     $dock_title = $own_service->service_name;
