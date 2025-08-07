@@ -387,3 +387,9 @@ $body-color: white;
   position: relative;
   margin-bottom: 1em;
 }
+
+.whole-dock-opened {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
