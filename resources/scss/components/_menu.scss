@@ -70,17 +70,25 @@
     }
 }
 
+.sidemenu-heading {
+  font-size: clamp(rem(20px), 2vw, rem(25px));
+  font-weight: 500;
+  padding: 0 1rem 1rem;
+  line-height: 1.2;
+  border-bottom: 1px solid #ccc;
+}
+
 .sidemenu-nav-lvl-3,
 .sidemenu-nav-lvl-4 {
     font-size: 16px;
     text-decoration: none;
-    padding: 0.25rem 0.5rem 0.5rem;
+    padding: 0rem 0.5rem 0rem 0;
     border-left: 1px solid #ccc;
     .sidemenu-nav-lvl-3__link,
     .sidemenu-nav-lvl-4__link {
         &.sidemenu-page-link {
             text-decoration: none;
-            padding: 0.3rem 0.3rem;
+            padding: 0.5rem 0.3rem 0.5rem 0.6rem;
             &:hover {
                 text-decoration: underline;
             }
@@ -88,6 +96,7 @@
     }
     .sidemenu-current-page {
         font-weight: bold;
+        border-left: 2px solid #000;
     }
     .sidemenu-current-page-parent {
         > a {
