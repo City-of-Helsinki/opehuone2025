@@ -2,7 +2,7 @@ import { FindkitUI, html, css, } from "@findkit/ui";
 
 
 const findkitUI = new FindkitUI({
-    publicToken: 'p3lv6Rmvy:eu-north-1',
+    publicToken: 'pLZGwMPvn:eu-north-1',
     container: '.findkit-overlay-container',
     infiniteScroll: false,
     header: false,
