@@ -430,13 +430,18 @@ class Opehuone_Breadcrumbs {
         $post_type_object = get_post_type_object( $post_type );
         $post_type_label = $post_type_object->labels->name;
 
-        if ( $post_type_object->name === $taxonomy_slug ) {
+        if ( $acf_field ) {
             $page_id = get_field( $acf_field, 'option' );
 
             if ( $page_id ) {
                 $post_type_label = get_the_title( $page_id );
             }
         }
+
+        if ( ! $post_type_label ) {
+            return '';
+        }
+
         return $post_type_label;
     }
 }
