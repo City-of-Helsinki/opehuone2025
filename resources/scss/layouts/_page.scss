@@ -1,0 +1,38 @@
+
+.opehuone-page {
+	.page-title {
+		font-size: var(--opehuone--font-size--3-x-large);
+		margin-top: 0;
+		margin-bottom: var(--opehuone--spacing--small);
+	}
+
+	.featured-image {
+		aspect-ratio: 899 / 558;
+		object-fit: cover;
+		margin-bottom: var(--opehuone--spacing--small);
+	}
+}
+
+h1 {
+	font-size: clamp(rem(32px), 3vw, rem(48px));
+}
+
+h2 {
+	font-size: clamp(rem(26px), 3vw, rem(40px));
+}
+
+h3 {
+	font-size: clamp(rem(24px), 3vw, rem(32px));
+}
+
+h4 {
+	font-size: clamp(rem(21px), 3vw, rem(24px));
+}
+
+h5 {
+	font-size: clamp(rem(18px), 3vw, rem(21px));
+}
+
+h6 {
+	font-size: clamp(rem(17px), 3vw, rem(18px));
+}

@@ -1,0 +1,30 @@
+.break-corner-box {
+  &__button {
+    @include create-button(true, '#00000', '#FFFFF');
+    margin-bottom: 3rem;
+    background-color: #fff;
+  }
+  &__svg {
+    margin-right: 1rem;
+  }
+
+  &__wikipedia {
+    background-color: #D9D9D9;
+    padding: 1rem;
+
+    &-title {
+      font-weight: 500;
+    }
+    ul {
+      margin-left: 0;
+    }
+    li {
+      list-style: none;
+    }
+
+    &-extract {
+      font-size: 16px;
+    }
+
+  }
+}

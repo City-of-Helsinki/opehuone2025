@@ -1,8 +1,12 @@
 <?php
+
+use function Opehuone\TemplateFunctions\displayBannerWavelineSvg;
+
 $theme_color = get_field('theme_color');
 $theme_image = get_field('theme_image');
 $header_sve = get_field('header_sve');
 $quick_links_header = get_field('quick_links_header');
+$landing_links_header = get_field('links_header');
 ?>
 
 <div class="hero has-default-style has-koros landing-page <?php echo !empty($theme_color) ? 'theme__' . esc_attr($theme_color) : ''; ?>">
@@ -18,18 +22,10 @@ $quick_links_header = get_field('quick_links_header');
 			<?php endif; ?>
 		</div>
 	</div>
-	<div class="hds-koros hds-koros--basic hds-koros--flip-horizontal">
-		<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="100%" height="42">
-			<defs>
-				<pattern id="koros_basic-page_hero" x="0" y="0" width="53" height="42"
-							patternUnits="userSpaceOnUse">
-					<path transform="scale(2.65)" d="M0,800h20V0c-4.9,0-5,2.6-9.9,2.6S5,0,0,0V800z"></path>
-				</pattern>
-			</defs>
-			<rect fill="url(#koros_basic-page_hero)" width="100%" height="42"></rect>
-		</svg>
-	</div>
+	<?php displayBannerWavelineSvg(); ?>
 </div>
+
+
 <div class="opehuone-content-container">
 	<div class="opehuone-grid">
 		<main>
@@ -49,7 +45,9 @@ $quick_links_header = get_field('quick_links_header');
 		<aside class="sidebar-boxes">
 			<?php
 			get_template_part( 'partials/empty' );
-			get_template_part( 'partials/sidebar/landing-links-box' );
+			if ( !empty( $landing_links_header ) ):
+				get_template_part( 'partials/sidebar/landing-links-box' );
+			endif;
 			get_template_part( 'partials/sidebar/landing-latest-news' );
 			?>
 		</aside>

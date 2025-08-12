@@ -1,5 +1,7 @@
 <?php
 
+use const Opehuone\CustomPosts\Training\TRAINING_SLUG;
+
 /**
  * Opehuone Breadbcrumbs
  *
@@ -167,7 +169,8 @@ class Opehuone_Breadcrumbs {
 		// Post Type Archive as index.
 		if ( ( $is_singular && 'post' !== $post_type ) || ( is_archive() && ! is_post_type_archive() && $is_home ) || is_search() || $this->options['show_pagenum'] ) {
 			if ( $post_type_link = get_post_type_archive_link( $post_type ) ) {
-				$post_type_label                          = get_post_type_object( $post_type )->labels->name;
+				$post_type_label = $this->get_archive_page_breadcrumb_label( $post_type, TRAINING_SLUG, 'trainings_page' );
+
 				$this->breadcrumb["archive_{$post_type}"] = $this->template(
 					[
 						'link'  => $post_type_link,
@@ -205,7 +208,6 @@ class Opehuone_Breadcrumbs {
 							if ( 0 != $term->parent ) {
 								$this->generate_tax_parents( $term->term_id, $taxonomy );
 							}
-
 							$this->breadcrumb["archive_{$taxonomy}"] = $this->template(
 								[
 									'link'  => get_term_link( $term->slug, $taxonomy ),
@@ -332,8 +334,9 @@ class Opehuone_Breadcrumbs {
 					$queried_object                              = get_queried_object();
 					$this->breadcrumb['archive_events_calendar'] = $this->template( $queried_object->labels->name, 'current' );
 				} else {
-					$post_type_label                          = get_post_type_object( $post_type )->labels->name;
-					$this->breadcrumb["archive_{$post_type}"] = $this->template( $post_type_label, 'current' );
+                    $post_type_label = $this->get_archive_page_breadcrumb_label( $post_type, TRAINING_SLUG, 'trainings_page');
+
+                    $this->breadcrumb["archive_{$post_type}"] = $this->template( $post_type_label, 'current' );
 				}
 			} elseif ( is_author() ) { // Author archive
 				$this->breadcrumb['archive_author'] = $this->template( $queried_object->display_name, 'current' );
@@ -406,4 +409,39 @@ class Opehuone_Breadcrumbs {
 			);
 		}
 	}
+
+    /**
+     * @param mixed $post_type
+     *
+     * @return string
+     *
+     */
+    public function get_archive_page_breadcrumb_label(mixed $post_type, string $taxonomy_slug, string $acf_field): string
+    {
+        // NOTE: This function could be made more dynamic by setting taxonomy slugs and acf_field values to an array of some sort,
+        // then we could map to these values based on post_type. Then the function could only contain the $post_type parameter
+        // $post_types = array(
+        //  'training' => array(
+        //  'taxonomy' => 'trainings_page',
+        //  'acf_option' => 'trainings_page'
+        //  ),
+        // ...
+        // );
+        $post_type_object = get_post_type_object( $post_type );
+        $post_type_label = $post_type_object->labels->name;
+
+        if ( $acf_field ) {
+            $page_id = get_field( $acf_field, 'option' );
+
+            if ( $page_id ) {
+                $post_type_label = get_the_title( $page_id );
+            }
+        }
+
+        if ( ! $post_type_label ) {
+            return '';
+        }
+
+        return $post_type_label;
+    }
 }

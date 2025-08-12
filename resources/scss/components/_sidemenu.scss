@@ -14,6 +14,9 @@ $sidemenu-active-link-color: var(--color-black-90);
 		margin: auto;
 	}
 }
+.sidemenu-current-page-ancestor > .sidemenu-nav-lvl-2__link::before {
+	content: none !important;
+}
 
 /**
  * Sidemenu general
@@ -24,6 +27,7 @@ $sidemenu-active-link-color: var(--color-black-90);
 	padding: 0;
 	display: flex;
 	flex-direction: column;
+	border-left: 1px solid #ccc;
 }
 
 .sidemenu-nav-lvl-2,
@@ -95,6 +99,7 @@ $sidemenu-active-link-color: var(--color-black-90);
 	> .sidemenu-nav-lvl-2__link {
 		color: $sidemenu-active-link-color;
 		font-weight: 700;
+		border-left: 2px solid black;
 	}
 
 	> .sidemenu-nav-lvl-1__link {
@@ -150,6 +155,7 @@ $sidemenu-active-link-color: var(--color-black-90);
  */
 .sidemenu-nav-lvl-2 {
 	margin: 5px 0 5px 12px;
+	border-left: 1px solid #ccc; 
 }
 
 .sidemenu-nav-lvl-3,

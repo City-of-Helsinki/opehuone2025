@@ -4,11 +4,30 @@ use \Opehuone\Helpers;
 
 define( 'TEXT_DOMAIN', 'opehuone2025' );
 
+// removes main menu action from Helsinki theme
+function remove_parent_menu() {
+    remove_action('helsinki_header_bottom', 'opehuone_header_main_menu', 20);
+}
+add_action('wp_loaded', 'remove_parent_menu');
+
+add_action( 'helsinki_header_bottom', function() {
+    get_template_part( 'partials/components/findkit' );
+}, 21);
 /**
  * Require helpers
  */
 require dirname( __FILE__ ) . '/library/functions/helpers.php';
+require dirname( __FILE__ ) . '/library/functions/modules/menu.php';
+require dirname( __FILE__ ) . '/library/utils/walkers.php';
 require dirname( __FILE__ ) . '/library/functions/polylang-fallbacks.php';
+require dirname( __FILE__ ) . '/library/functions/template-functions.php';
+
+// calls for menu template part
+if ( ! function_exists('opehuone_header_main_menu') ) {
+	function opehuone_header_main_menu() {
+		get_template_part('partials/header/menu');
+	}
+}
 
 /**
  * Set theme name which will be referenced from style & script registrations
@@ -67,3 +86,6 @@ add_filter(
 		return '<span id="footer-thankyou">' . opehuone_theme()->Name . ' by: <a href="' . opehuone_theme()->AuthorURI . '" target="_blank">' . opehuone_theme()->Author . '</a><span>';
 	}
 );
+
+// Site is hidden from search engines, but Findkit needs the sitemap ==> lets enable it
+add_filter( 'wp_sitemaps_enabled', '__return_true' );

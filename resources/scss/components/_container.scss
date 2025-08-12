@@ -3,6 +3,7 @@
 	width: 100%;
 	padding-left: var(--opehuone--container--padding);
 	padding-right: var(--opehuone--container--padding);
+	padding-top: var(--spacing-layout-xs);
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -16,6 +17,11 @@
 	margin-left: auto;
 	margin-right: auto;
 	box-sizing: border-box;
+
+	&.opehuone-page {
+		padding-top: var(--spacing-layout-xs);
+        padding-bottom: var(--spacing-layout-xl);
+	}
 
 	@media (min-width: 768px) {
 		padding-left: var(--opehuone--container--padding);
@@ -32,3 +38,10 @@
 .hds-container--wide {
 	max-width: 1920px;
 }
+
+.layout-wrap {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: none;
+}
+

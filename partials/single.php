@@ -28,14 +28,14 @@
 
 					if ( ! empty( $cornerlabels ) && ! is_wp_error( $cornerlabels ) ) {
 						foreach ( $cornerlabels as $term ) {
-							echo '<span class="single-post__date-row-cornerlabel">' . esc_html( $term->name ) . '</span>';
+							echo '<span data-fdk-tags class="single-post__date-row-cornerlabel">' . esc_html( $term->name ) . '</span>';
 						}
 					}
 					?>
 				</div>
 				<?php the_post_thumbnail( 'large', [ 'class' => 'single-post__featured-image' ] ); ?>
 				<?php the_content(); ?>
-				TÄNNE VIELÄ TAKSONOMIA LINKIT
+				<?php get_template_part( 'partials/sidebar/post-category-tags' );  ?>
 			</section>
 			<aside>
 				<div class="single-post__sidebar-post">
