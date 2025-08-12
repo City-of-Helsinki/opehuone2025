@@ -1,6 +1,10 @@
-<article class="content">
+<article class="content" data-current-page-id="<?php echo get_the_ID(); ?>">
 	<div class="hds-container opehuone-page opehuone-content-container">
 		<?php get_template_part( 'partials/breadcrumbs' ); ?>
+		<div class="filters-container">
+			<p>Suodata sisältöä oppiasteen mukaan</p>
+			<?php get_template_part( 'partials/page-filters' ); ?>
+		</div>
 		<div class="opehuone-grid opehuone-grid--reversed">
 			<aside>
 				<?php get_template_part( 'partials/sidemenu' ); ?>

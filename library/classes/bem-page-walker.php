@@ -24,7 +24,7 @@ class BEM_Page_Walker extends Walker_Page {
 		$parent_depth = $depth + 2;
 		$button_depth = $parent_depth - 1;
 
-		$aria_label = sprintf( pll_esc_html__( 'Avaa sivun %s alanavigaatio' ), $this->curpage->post_title );
+		$aria_label = sprintf( esc_html__( 'Avaa sivun %s alanavigaatio' ), $this->curpage->post_title );
 
 		$icon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="24" height="24" fill="#F2F2F2"/>
@@ -49,6 +49,9 @@ class BEM_Page_Walker extends Walker_Page {
 	 * @see Walker::start_el()
 	 */
 	function start_el( &$output, $page, $depth = 0, $args = array(), $current_page = 0 ) {
+	
+		$args['link_before'] = isset($args['link_before']) ? $args['link_before'] : '';
+		$args['link_after'] = isset($args['link_after']) ? $args['link_after'] : '';
 
 		$this->curpage = $page;
 
@@ -64,14 +67,16 @@ class BEM_Page_Walker extends Walker_Page {
 
 		if ( ! empty( $current_page ) ) {
 			$_current_page = get_post( $current_page );
-			if ( in_array( $page->ID, $_current_page->ancestors, true ) ) {
-				$class_names[] = sprintf( '%s-lvl-%s__item--current-page-ancestor sidemenu-current-page-ancestor', $menu_class, $lvl );
-			}
-			if ( $page->ID === $current_page ) {
-				$class_names[] = sprintf( '%s-lvl-%s__item--current sidemenu-current-page', $menu_class, $lvl );
-			} elseif ( $_current_page && $page->ID === $_current_page->post_parent ) {
-				$class_names[] = sprintf( '%s-lvl-%s__item--current-page-parent sidemenu-current-page-parent', $menu_class, $lvl );
-			}
+			
+		if ( in_array( $page->ID, $_current_page->ancestors, true ) ) {
+			$class_names[] = sprintf( '%s-lvl-%s__item--current-page-ancestor sidemenu-current-page-ancestor', $menu_class, $lvl );
+		}
+		if ( $page->ID === $current_page ) {
+			$class_names[] = sprintf( '%s-lvl-%s__item--current sidemenu-current-page', $menu_class, $lvl );
+		} elseif ( $_current_page && $page->ID === $_current_page->post_parent ) {
+			$class_names[] = sprintf( '%s-lvl-%s__item--current-page-parent sidemenu-current-page-parent', $menu_class, $lvl );
+		}
+			
 		} elseif ( get_option( 'page_for_posts' ) === $page->ID ) {
 			$class_names[] = sprintf( '%s-lvl-%s__item--current-page-parent', $menu_class, $lvl );
 		}
@@ -86,9 +91,9 @@ class BEM_Page_Walker extends Walker_Page {
 
 		// Add aria-label to describe path of current item.
 		$parent_page_title = get_the_title( wp_get_post_parent_id( $page->ID ) );
-		$aria_label        = sprintf( pll_esc_html__( 'Sivu %s' ), $page->post_title );
+		$aria_label        = sprintf( esc_html__( 'Sivu %s' ), $page->post_title );
 		if ( $parent_page_title ) {
-			$aria_label = sprintf( pll_esc_html__( 'Sivu %s, yläsivu %s' ), $page->post_title, $parent_page_title );
+			$aria_label = sprintf( esc_html__( 'Sivu %s, yläsivu %s' ), $page->post_title, $parent_page_title );
 		}
 
 		$cornerlabels = \Opehuone\Utils\get_cornerlabels_term_ids( $page->ID );
