@@ -40,7 +40,8 @@ resources:
       type: git
       # Azure DevOps project/repository
       name: opehuone/opehuone-pipelines
-      ref: refs/heads/github-access-token # remove this when/if changes are merged
+      # remove ref when/if changes are merged
+      ref: refs/heads/github-access-token
 
 extends:
   # Filename in Azure DevOps Repository
