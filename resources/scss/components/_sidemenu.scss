@@ -14,8 +14,11 @@ $sidemenu-active-link-color: var(--color-black-90);
 		margin: auto;
 	}
 }
-.sidemenu-current-page-ancestor > .sidemenu-nav-lvl-2__link::before {
-	content: none !important;
+.sidemenu-current-page-ancestor,
+.sidemenu-current-page {
+	> .sidemenu-nav-lvl-2__link::before {
+		content: none !important;
+	}
 }
 
 /**
