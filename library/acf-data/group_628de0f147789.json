@@ -21,7 +21,13 @@
                 "copper": "Kupari",
                 "engel": "Engel",
                 "bus": "Bussi",
-                "coat-of-arms": "Vaakuna"
+                "coat-of-arms": "Vaakuna",
+                "fog": "Sumu",
+                "gold": "Kulta",
+                "silver": "Hopea",
+                "metro": "Metro",
+                "summer": "Kesä",
+                "tram": "Spåra"
             },
             "default_value": "silver",
             "return_format": "value",
@@ -30,7 +36,9 @@
             "allow_in_bindings": 1,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         }
     ],
     "location": [
@@ -58,5 +66,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1741354928
+    "modified": 1755002477
 }
