@@ -6,6 +6,7 @@ $theme_color = get_field('theme_color');
 $theme_image = get_field('theme_image');
 $header_sve = get_field('header_sve');
 $quick_links_header = get_field('quick_links_header');
+$landing_links_header = get_field('links_header');
 ?>
 
 <div class="hero has-default-style has-koros landing-page <?php echo !empty($theme_color) ? 'theme__' . esc_attr($theme_color) : ''; ?>">
@@ -44,7 +45,9 @@ $quick_links_header = get_field('quick_links_header');
 		<aside class="sidebar-boxes">
 			<?php
 			get_template_part( 'partials/empty' );
-			get_template_part( 'partials/sidebar/landing-links-box' );
+			if ( !empty( $landing_links_header ) ):
+				get_template_part( 'partials/sidebar/landing-links-box' );
+			endif;
 			get_template_part( 'partials/sidebar/landing-latest-news' );
 			?>
 		</aside>
