@@ -36,3 +36,12 @@ h5 {
 h6 {
 	font-size: clamp(rem(17px), 3vw, rem(18px));
 }
+
+.filters-container {
+
+	margin-bottom: var(--spacing-layout-xl);
+
+	p {
+		font-weight: bold;
+	}
+}
