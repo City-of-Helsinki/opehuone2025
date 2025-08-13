@@ -119,6 +119,10 @@ const findkitUI = new FindkitUI({
             text-decoration: none;
         }
 
+        .findkit--hit h2 > a:hover {
+            text-decoration: underline;
+        }
+
         .findkit--group-title {
             font-size: 2rem;
             font-weight: 400;
