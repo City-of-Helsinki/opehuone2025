@@ -30,6 +30,36 @@
       }
     }
   }
+
+  .search-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    &__title {
+      margin-top: 0;
+    }
+
+
+    &__close-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      span {
+        font-size: 1.25rem;
+        font-weight: 500;
+      }
+
+      svg {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
 }
 
 @media (min-width: 1024px) {
@@ -45,7 +75,7 @@
 }
 
 .header-search-box-container {
-  margin-top: 3rem;
+  margin-top: 7rem;
   margin-bottom: 4rem;
 
   .search-title {
