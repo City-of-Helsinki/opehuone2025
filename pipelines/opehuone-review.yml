@@ -42,6 +42,13 @@ resources:
       name: opehuone/opehuone-pipelines
       # remove ref when/if changes are merged
       ref: refs/heads/github-access-token
+    # Azure DevOps repository
+    - repository: pipeline-templates
+      type: git
+      # Azure DevOps project/repository
+      name: devops-toolchain/pipeline-templates
+      # remove ref when/if changes are merged
+      ref: refs/heads/github-access-token
 
 extends:
   # Filename in Azure DevOps Repository
