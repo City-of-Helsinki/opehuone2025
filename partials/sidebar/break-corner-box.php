@@ -17,7 +17,11 @@ use function \Opehuone\TemplateFunctions\fetchWikipediaFeaturedArticles;
     </button>
 
     <div class="break-corner-box__wikipedia">
-        <p class="break-corner-box__wikipedia-title"><?php esc_html_e('Wikipedian viikon suosituimmat artikkelit', 'helsinki-universal'); ?></p>
+        <div class="break-corner-box__wikipedia-header">
+        <?php \Opehuone\Helpers\the_svg('icons/' . 'wiki'); ?>
+        <span class="break-corner-box__wikipedia-title"><?php esc_html_e('Wikipedia viikon suosituimmat artikkelit', 'helsinki-universal'); ?></span>
+
+        </div>
         <?php fetchWikipediaFeaturedArticles(); ?>
     </div>
 </div>

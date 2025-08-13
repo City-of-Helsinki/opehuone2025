@@ -9,21 +9,38 @@
   }
 
   &__wikipedia {
-    background-color: #D9D9D9;
-    padding: 1rem;
+    background-color: #fff;
+    padding: 1.75rem 1rem;
+    border: 2px solid #000;
+
+    &-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+
+      svg {
+        display: block;
+        flex-shrink: 0;
+      }
+    }
 
     &-title {
       font-weight: 500;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
     }
-    ul {
-      margin-left: 0;
-    }
-    li {
-      list-style: none;
+    &-list {
+      margin: 0;
+
+      li {
+        list-style: none;
+      }
     }
 
-    &-extract {
-      font-size: 16px;
+    &-extract, a {
+      font-size: 14px;
+      line-height: 1.5rem;
     }
 
   }
