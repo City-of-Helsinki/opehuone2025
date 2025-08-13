@@ -212,8 +212,9 @@ findkitUI.bindInput('#header-search-input');
 
 
 const searchToggle = document.getElementById('header-search-toggle');
-
 const mobilePanelToggle = document.getElementById('mobile-panel-toggle');
+const searchInput = document.getElementById('header-search-input');
+const clearBtn = document.getElementById('clear-search');
 
 /**
  * Hide the main content area when the search is expanded.
@@ -222,12 +223,17 @@ const mobilePanelToggle = document.getElementById('mobile-panel-toggle');
 searchToggle?.addEventListener('click', (e) => {
     const isExpanded = searchToggle.getAttribute('aria-expanded') === 'true';
     const main = document.getElementById('main');
+    const menu = document.getElementById('main-menu-nav');
     const footerSvg = document.querySelector('footer .hds-koros' );
+    const searchInput = document.getElementById('header-search-input')
 
     if (isExpanded) {
+        searchInput?.focus(); // Focus the input element when the search window is opened
+        menu.style.display = 'none';
         main.style.display = 'none';
         footerSvg.style.backgroundColor = '#EFEFF0';
     } else {
+        menu.style.display = 'block';
         main.style.display = 'block';
         footerSvg.style.backgroundColor = '#FFFFFF';
     }
@@ -242,6 +248,20 @@ mobilePanelToggle?.addEventListener('click', (e) => {
     const main = document.getElementById('main');
     main.style.display = 'block';
 })
+
+
+clearBtn?.addEventListener('click', () => {
+    if (!searchInput) {
+        return;
+    }
+
+    searchInput.value = '';
+    searchInput.focus();
+
+    // Trigger Findkit to update (empty query)
+    const event = new Event('input', { bubbles: true });
+    searchInput.dispatchEvent(event);
+});
 
 
 
