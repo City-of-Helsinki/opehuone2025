@@ -17,13 +17,13 @@
 			</span>
 		</span>
         <span class="js-toggle__close">
-			<?php helsinki_svg_icon( 'cross' ); ?>
-			<span class="text" aria-hidden="true">
-				<?php echo esc_html_x( 'Close', 'verb', 'helsinki-universal' ); ?>
-			</span>
-			<span class="screen-reader-text">
-				<?php echo esc_html_x( 'Close site search', 'Label - Toggle - Search', 'helsinki-universal' ); ?>
-			</span>
+            <?php helsinki_svg_icon( 'search' ); ?>
+            <span class="text" aria-hidden="true">
+                <?php echo esc_html_x( 'Search', 'verb', 'helsinki-universal' ); ?>
+            </span>
+            <span class="screen-reader-text">
+                <?php echo esc_html_x( 'Search from site', 'Label - Toggle - Search', 'helsinki-universal' ); ?>
+            </span>
 		</span>
     </button>
 </div>
