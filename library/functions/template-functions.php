@@ -19,26 +19,27 @@ function displayBannerWaveLineSvg(): void {
     </div>';
 }
 
-function fetchWikipediaFeaturedArticles() {
+function fetch_wikipedia_featured_articles(): void {
     $cache_key = 'wikipedia_most_read_articles';
     $articles = get_transient($cache_key);
 
     if ( $articles === false ) {
         $date = date('Y/m/d' );
         $url = "https://fi.wikipedia.org/api/rest_v1/feed/featured/{$date}";
+
         $response = wp_remote_get( $url, array(
             'timeout' => 3
         ) );
 
         if ( is_wp_error( $response ) ) {
-            echo '<p>'. esc_html_e('Virhe haettaessa artikkeleita', 'helsinki-universal')  .'</p>';
+            echo '<i>'. esc_html('Virhe haettaessa artikkeleita', 'helsinki-universal')  .'</i>';
             return;
         }
 
-        $data = json_decode(wp_remote_retrieve_body($response), true);
-        $articles = [];
+        $data = json_decode( wp_remote_retrieve_body( $response ), true );
 
-        if (!empty($data['mostread']['articles'])) {
+        $articles = [];
+        if (! empty( $data['mostread']['articles'] ) ) {
             $top_results = array_slice( $data['mostread']['articles'], 0, 3 );
             foreach ( $top_results as $item ) {
                 $articles[] = [
@@ -49,7 +50,10 @@ function fetchWikipediaFeaturedArticles() {
             }
         }
 
-        set_transient( $cache_key, $articles, 12 * HOUR_IN_SECONDS );
+        // Only cache articles if they exist
+        if ( count( $articles ) > 0 ) {
+            set_transient( $cache_key, $articles, 2 * HOUR_IN_SECONDS );
+        }
     }
 
     if ( ! empty( $articles ) ) {
@@ -65,11 +69,11 @@ function fetchWikipediaFeaturedArticles() {
         }
         echo '</ul>';
     } else {
-        echo '<p>'. esc_html_e('Ei artikkeleita', 'helsinki-universal') .'</p>';
+        echo '<i>'. esc_html('Ei löytynyt artikkeleita', 'helsinki-universal') .'</i>';
     }
 }
 
-function get_top_monthly_posts($limit = 5) {
+function get_top_monthly_posts($limit = 5): \WP_Query {
     $current_month = date('Y-m');
 
     $args = [

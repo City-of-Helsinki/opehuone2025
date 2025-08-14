@@ -185,65 +185,13 @@ $concentration-breakpoint: 'lg';
 }
 
 .concentration-opener {
-  position: fixed;
-  z-index: 21;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  max-height: 80%;
-  height: auto;
-  -webkit-transition:left 0.2s ease;
-  -moz-transition: left 0.2s ease;
-  -ms-transition: left 0.2s ease;
-  -o-transition: left 0.2s ease;
-  transition: left 0.2s ease;
-
-  @include media-breakpoint-up($concentration-breakpoint) {
-    top: 0;
-    left: -100%;
-    width: rem(550px);
-    height: 100%;
-    max-height: 100%;
-  }
-
-  .concentration-settings-opened & {
-    left: 0;
-  }
-
-  &__wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding: rem(35px 10px);
-    background-color: transparentize($concentration-bg-color, 0.05);
-    color: #000;
-    overflow-y: auto;
-
-    @include media-breakpoint-up($concentration-breakpoint) {
-      padding: rem(100px 50px);
-    }
-  }
+  display: none;
 
   &__title {
+    font-size: 1.25rem;
+    font-weight: 500;
     text-align: center;
-    margin-top: 0;
-    margin-bottom: rem(25px);
-    font-size: rem(25px);
-
-    @include media-breakpoint-up($concentration-breakpoint) {
-      font-size: rem(35px);
-    }
-  }
-
-  &__items {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    @include media-breakpoint-up($concentration-breakpoint) {
-      justify-content: space-between;
-      height: 100%;
-    }
+    margin-top: rem(32px);
   }
 
   &__list {
@@ -253,12 +201,9 @@ $concentration-breakpoint: 'lg';
   }
 
   &__list-item {
-    &:not(:last-child) {
-      margin-bottom: rem(5px);
-
-      @include media-breakpoint-up($concentration-breakpoint) {
-        margin-bottom: rem(10px);
-      }
+      margin-bottom: 1rem;
+    &:last-child {
+      margin-bottom: 2.5rem;
     }
   }
 
@@ -270,35 +215,27 @@ $concentration-breakpoint: 'lg';
     border: 2px solid #000;
     width: 100%;
     padding: 0;
-
-    @include media-breakpoint-up($concentration-breakpoint) {
-      grid-template-columns: rem(100px) 1fr;
-    }
+    height: 56px;
 
     &.concentration-opener__list-item-button--selected {
       .concentration-opener__list-item-button__name {
-        background-color: #fff;
+        background-color: #E6F4FF;
       }
 
       .concentration-opener__list-item-button__time {
-        background-color: #fff;
+        background-color: #E6F4FF;
       }
     }
   }
 
   &__list-item-button__time {
     grid-column: 1 / 2;
-    height: 100%;
-    font-size: rem(20px);
-    font-weight: bold;
-    background-color:  #dedfe1;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #fff;
     color: #000;
-    padding: rem(10px);
+    height: 100%;
     border-right: 2px solid #000;
-
-    @include media-breakpoint-up($concentration-breakpoint) {
-      padding: rem(20px);
-    }
   }
 
   &__list-item-button__time__center {
@@ -311,44 +248,21 @@ $concentration-breakpoint: 'lg';
 
   &__list-item-button__name {
     grid-column: 2 / 3;
-    font-size: 1.125rem;
-    font-weight: bold;
-    text-align: left;
-    background-color:  #dedfe1;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #fff;
     color: #000;
-    padding: rem(10px);
     height: 100%;
-
-    @include media-breakpoint-up($concentration-breakpoint) {
-      padding: rem(20px);
-    }
   }
 
-  &__button {
-    width: 100%;
-    text-align: center;
-    background-color: #000;
-    color: $concentration-selection-color;
-    border: none;
-    border-radius: 0;
-    padding: rem(15px 50px);
-    font-weight: bold;
-    font-size: rem(16px);
-    margin-top: rem(25px);
-
-    @include media-breakpoint-up($concentration-breakpoint) {
-      font-size: rem(20px);
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      pointer-events: none;
-      border: 4px solid #fff;
-    }
-
-    @include hover-focus {
-      color: $concentration-selection-color;
-      background-color: lighten(#000, 7.5%);
+  .start-concentration {
+    @include create-button('#FFFFFF');
+    &:hover {
+      background: #FFFFFF;
     }
   }
+  //
+  //&__button {
+  //  width: 100%;
+  //}
 }
