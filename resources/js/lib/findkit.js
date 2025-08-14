@@ -265,6 +265,8 @@ clearBtn?.addEventListener('click', () => {
 });
 
 function handleSearchWindowVisibility() {
+    document.body.style.position = 'initial'; // body is fixed by default when opened and it causes problems on mobile
+
     const isExpanded = searchToggle.getAttribute('aria-expanded') === 'true';
     const main = document.getElementById('main');
     const menu = document.getElementById('main-menu-nav');

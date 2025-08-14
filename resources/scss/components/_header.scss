@@ -88,3 +88,45 @@
     margin-bottom: 0.25rem;
   }
 }
+
+.js-toggle {
+  // Hide close toggle by default
+  .js-toggle__close {
+    display: none !important;
+  }
+
+  // Window is opened, hide open toggle and show hide toggle
+  &[aria-expanded="true"] {
+    .js-toggle__open {
+      display: none !important;
+      svg, .text, .screen-reader-text {
+        display: none !important;
+      }
+    }
+
+    .js-toggle__close {
+      display: inline !important;
+      svg, .text, .screen-reader-text {
+        display: block !important;
+      }
+    }
+  }
+
+  // Window is closed, show open toggle and hide hide toggle
+  &[aria-expanded="false"] {
+    .js-toggle__close {
+      display: none !important;
+      svg, .text, .screen-reader-text {
+        display: none !important;
+      }
+    }
+
+    .js-toggle__open {
+      display: inline !important;
+      svg, .text, .screen-reader-text {
+        display: block !important;
+      }
+    }
+  }
+}
+
