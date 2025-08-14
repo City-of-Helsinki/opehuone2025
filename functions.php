@@ -12,7 +12,7 @@ add_action('wp_loaded', 'remove_parent_menu');
 
 add_action( 'helsinki_header_bottom', function() {
     get_template_part( 'partials/components/findkit' );
-}, 19);
+}, 10);
 /**
  * Require helpers
  */
