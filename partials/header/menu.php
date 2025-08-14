@@ -11,8 +11,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php echo opehuone_menu('main_menu'); ?>
 		<?php echo opehuone_menu('sub_menu'); ?>
 	</div>
-	<button class="button-reset js-close hide-for-l" type="button">
-		<span class="screen-reader-text"><?php esc_html_e('Close Menu', 'helsinki-universal'); ?></span>
-		<?php helsinki_svg_icon('cross'); ?>
-	</button>
 </nav>
