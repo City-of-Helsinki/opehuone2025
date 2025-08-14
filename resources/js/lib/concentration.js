@@ -14,6 +14,8 @@ const stopConcentrationBtn = jQuery('.stop-concentration');
 const textCloseBtn = jQuery('.concentration__text-close');
 const muteBtn = jQuery('.mute-concentration');
 
+const concentrationsList = jQuery('.concentration-opener');
+
 let timeoutId;
 
 const muteAudio = () => {
@@ -43,8 +45,11 @@ const actionButtonToggler = () => {
 
     button.on('click', (e) => {
         e.preventDefault();
-        body.toggleClass('concentration-settings-opened');
-        concentration.toggleClass('concentration--open');
+        console.log('clicked');
+        // body.toggleClass('concentration-settings-opened');
+        // concentration.toggleClass('concentration--open');
+        concentrationsList.toggle();
+
     });
 };
 
@@ -55,6 +60,7 @@ const setMusicTrack = (url) => {
 const clickDuration = () => {
     durationSelectionButton.on('click', (e) => {
         e.preventDefault();
+        console.log('clickDuration')
         const target = jQuery(e.currentTarget);
         startConcentrationBtn.attr('disabled', false);
         durationSelectionButton.each((i, e) => {
@@ -71,6 +77,7 @@ const clickDuration = () => {
 const startConcentration = () => {
     startConcentrationBtn.on('click', (e) => {
         e.preventDefault();
+        console.log('start duration');
         enableFullScreen();
         const postId = jQuery('.concentration-opener__list-item-button[aria-pressed="true"]').attr('data-post-id');
         concentrationLoading.show();
