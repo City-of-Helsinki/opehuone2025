@@ -19,7 +19,6 @@
             // Concentration related components
             get_template_part( 'partials/sidebar/break-corner-box' );
             get_template_part( 'partials/audios' );
-            get_template_part( 'partials/components/concentration' );
 			?>
 		</aside>
 	</div>

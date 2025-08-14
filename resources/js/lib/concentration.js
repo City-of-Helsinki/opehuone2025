@@ -14,6 +14,8 @@ const stopConcentrationBtn = jQuery('.stop-concentration');
 const textCloseBtn = jQuery('.concentration__text-close');
 const muteBtn = jQuery('.mute-concentration');
 
+const concentrationsList = jQuery('.concentration-opener');
+
 let timeoutId;
 
 const muteAudio = () => {
@@ -43,8 +45,8 @@ const actionButtonToggler = () => {
 
     button.on('click', (e) => {
         e.preventDefault();
-        body.toggleClass('concentration-settings-opened');
-        concentration.toggleClass('concentration--open');
+        button.toggleClass('open'); // Toggle chevron icon styles
+        concentrationsList.toggle();
     });
 };
 
@@ -76,6 +78,9 @@ const startConcentration = () => {
         concentrationLoading.show();
         body.toggleClass('concentration-settings-opened');
         setButtonsInitialStatus();
+
+        body.toggleClass('concentration-settings-opened');
+        concentration.toggleClass('concentration--open');
 
         jQuery.ajax({
             url: opehuone_js.ajax_url,
