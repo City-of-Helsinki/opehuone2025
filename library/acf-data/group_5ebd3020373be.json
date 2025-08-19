@@ -6,6 +6,7 @@
             "key": "field_5ebd303c4326a",
             "label": "Vastuuhenkilö 1",
             "name": "responsible_person_1",
+            "aria-label": "",
             "type": "email",
             "instructions": "Vastuuhenkilön email.",
             "required": 0,
@@ -24,6 +25,7 @@
             "key": "field_5ebd30664326b",
             "label": "Vastuuhenkilö 2",
             "name": "responsible_person_2",
+            "aria-label": "",
             "type": "email",
             "instructions": "Vastuuhenkilön email.",
             "required": 0,
@@ -42,9 +44,16 @@
     "location": [
         [
             {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ],
+        [
+            {
                 "param": "post_template",
                 "operator": "==",
-                "value": "custom-templates\/with-sidemenu.php"
+                "value": "default"
             }
         ]
     ],
@@ -54,7 +63,8 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "modified": 1589457012
+    "show_in_rest": 0,
+    "modified": 1755500932
 }

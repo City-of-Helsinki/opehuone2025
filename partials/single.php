@@ -36,6 +36,12 @@
 				<?php the_post_thumbnail( 'large', [ 'class' => 'single-post__featured-image' ] ); ?>
 				<?php the_content(); ?>
 				<?php get_template_part( 'partials/sidebar/post-category-tags' );  ?>
+                <?php
+                // Load the comment template if comments are open
+                if ( comments_open() ) {
+                    helsinki_comment_form();
+                }
+                ?>
 			</section>
 			<aside>
 				<div class="single-post__sidebar-post">
