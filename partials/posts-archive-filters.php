@@ -1,15 +1,12 @@
 <h2 class="posts-archive__section-title">
 	<?php esc_html_e( 'Hae uutisia suodattamalla', 'helsinki-universal' ); ?>
 </h2>
-<p class="posts-archive__filters-ingress">
-	<?php esc_html_e( 'Selaa uutisia aikajärjestyksessä tai hae uutisia oppiasteen, kategorian tai aiheen perusteella.', 'helsinki-universal' ); ?>
-</p>
 <form class="posts-archive-filtering">
 	<div class="posts-archive__filters">
 		<?php
 		$filters = [
 			[
-				'name'     => esc_html__( 'Oppiaste', 'helsinki-universal' ),
+				'name'     => esc_html__( 'Opetusaste', 'helsinki-universal' ),
 				'taxonomy' => 'cornerlabels',
 			],
 			[
@@ -18,50 +15,44 @@
 			],
 			[
 				'name'     => esc_html__( 'Aihe', 'helsinki-universal' ),
-				'taxonomy' => 'post_tag',
+				'taxonomy' => 'post_theme',
 			],
 		];
 
 		foreach ( $filters as $filter ) {
+            // Check if query parameter exists and select the correct option in the dropdowns
+            $query_param = 'filter_' . $filter['taxonomy'];
+            $selected_filter = isset( $_GET[ $query_param ] ) ? intval( $_GET[ $query_param ] ) : null;
 			?>
 			<div class="posts-archive__single-filter">
-				<fieldset>
-					<legend class="posts-archive__filter-label">
-						<?php echo esc_html( $filter['name'] ); ?>
-					</legend>
-					<div class="posts-archive__select-filter-wrapper">
-						<button class="checkbox-filter__filter-btn" aria-expanded="false"
-								aria-label="<?php esc_attr_e( 'Näytä valinnat', 'helsinki-universal' ); ?>">
-							<?php esc_html_e( 'Valitse', 'helsinki-universal' ); ?>
-						</button>
-						<div class="checkbox-filter__filter-dropdown">
-							<div class="checkbox-filter__checkboxes-wrapper">
-								<?php
-								$terms = get_terms( [
-									'taxonomy'   => $filter['taxonomy'],
-									'hide_empty' => true,
-								] );
+				<label for="posts-archive-<?php echo esc_attr( $filter['taxonomy'] ); ?>"
+					   class="posts-archive__filter-label">
+					<?php echo esc_html( $filter['name'] ); ?>
+				</label>
+				<div class="posts-archive__select-filter-wrapper">
+					<select class="posts-archive__select-filter"
+							id="posts-archive-<?php echo esc_attr( $filter['taxonomy'] ); ?>"
+							name="<?php echo esc_attr( $filter['taxonomy'] ); ?>">
+						<option value=""><?php esc_html_e( 'Kaikki', 'helsinki-universal' ); ?></option>
+						<?php
+						$terms = get_terms( [
+							'taxonomy'   => $filter['taxonomy'],
+							'hide_empty' => true,
+						] );
 
-								if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-									foreach ( $terms as $term ) {
-										?>
-										<label class="checkbox-filter__checkbox-label">
-											<input type="checkbox" class="checkbox-filter__checkbox-input"
-												   name="<?php echo esc_attr( $filter['taxonomy'] ); ?>[]"
-												   value="<?php echo esc_attr( $term->term_id ); ?>">
-											<?php echo esc_html( $term->name ); ?>
-										</label>
-										<?php
-									}
-								}
-								?>
-							</div>
-							<button class="checkbox-filter__checkboxes-reset-btn">
-								<?php esc_html_e( 'Tyhjennä valinnat', 'helsinki-universal' ); ?>
-							</button>
-						</div>
-					</div>
-				</fieldset>
+						if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+							foreach ( $terms as $term ) {
+								printf(
+                                    '<option value="%d"%s>%s</option>',
+                                    esc_attr( $term->term_id ),
+                                    selected( $term->term_id, $selected_filter, false ),
+                                    esc_html( $term->name )
+                                );
+							}
+						}
+						?>
+					</select>
+				</div>
 			</div>
 			<?php
 		}

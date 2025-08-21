@@ -41,8 +41,12 @@ $per_page  = 15;
 <div class="posts-archive__load-more-wrapper">
 	<button class="posts-archive__load-more-btn"
 			data-total-posts="<?php echo esc_attr( $wp_query->found_posts ); ?>"
-			data-posts-offset="15" data-cornerlabels="" data-categories=""
-			data-post-tags="">
+			data-posts-offset="15"
+			data-cornerlabels=""
+			data-categories=""
+			data-post-themes="">
 		<?php esc_html_e( 'Lataa lisää', 'helsinki-universal' ); ?>
 	</button>
 </div>
+
+
