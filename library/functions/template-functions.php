@@ -95,3 +95,13 @@ function get_top_monthly_posts($limit = 5): \WP_Query {
 
     return new \WP_Query( $args );
 }
+
+function get_top_parent_page_title( $post_id = null ): ?string {
+    $post_id = $post_id ?: get_the_ID();
+    $ancestors = get_post_ancestors( $post_id );
+    $top_parent = $ancestors ? end( $ancestors ) : $post_id;
+
+    return $top_parent ? get_the_title( $top_parent ) : null;
+}
+
+
