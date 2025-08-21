@@ -866,6 +866,104 @@ function ajax_update_training_archive_results() {
 add_action( 'wp_ajax_update_training_archive_results', __NAMESPACE__ . '\\ajax_update_training_archive_results' );
 add_action( 'wp_ajax_nopriv_update_training_archive_results', __NAMESPACE__ . '\\ajax_update_training_archive_results' );
 
+// Post-archive filters
+
+function ajax_update_post_archive_results() {
+
+	// Get filter values from POST request
+	$cornerlabel    = isset( $_POST['cornerLabel'] ) ? intval( $_POST['cornerLabel'] ) : '';
+	$category = isset( $_POST['category'] ) ? intval( $_POST['category'] ) : '';
+	$post_theme = isset( $_POST['postTheme'] ) ? intval( $_POST['postTheme'] ) : '';
+
+	// Get filter values from POST request
+	$current_favs = \Opehuone\Utils\get_user_favs();
+
+	$query_args = [
+		'post_type'      => 'post',
+		'posts_per_page' => 15,
+	];
+
+	// Initialize tax_query array
+	$tax_query = [];
+
+	// Add cornerlabel filter if available
+	if ( ! empty( $cornerlabel ) ) {
+		$tax_query[] = [
+			'taxonomy' => 'cornerlabels',
+			'field'    => 'term_id',
+			'terms'    => $cornerlabel,
+		];
+	}
+
+	if ( ! empty( $category ) ) {
+		$tax_query[] = [
+			'taxonomy' => 'category',
+			'field'    => 'term_id',
+			'terms'    => $category,
+		];
+	}
+
+	// Add training_theme filter if available
+	if ( ! empty( $post_theme ) ) {
+		$tax_query[] = [
+			'taxonomy' => 'post_theme',
+			'field'    => 'term_id',
+			'terms'    => $post_theme,
+		];
+	}
+
+	// Apply tax_query if any filters are set
+	if ( ! empty( $tax_query ) ) {
+		// If both filters are set, use 'AND' to require both terms
+		if ( count( $tax_query ) > 1 ) {	
+			$query_args['tax_query'] = array_merge( [ 'relation' => 'AND' ], $tax_query );
+		} else {
+			$query_args['tax_query'] = $tax_query;
+		}
+	}
+
+	ob_start();
+
+	$query = new \WP_Query( $query_args );
+
+	// Output regular posts after sticky ones
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+
+			$block_args = [
+				'post_id'    => get_the_ID(),
+				'title'      => get_the_title(),
+				'url'        => get_the_permalink(),
+				'media_id'   => get_post_thumbnail_id(),
+				'excerpt'    => get_the_excerpt(),
+				'is_sticky'  => is_sticky(),
+				'categories' => get_the_category(),
+				'date'       => get_the_date(),
+				'is_pinned'  => in_array( get_the_ID(), $current_favs ),
+			];
+
+			get_template_part( 'partials/template-blocks/b-post', null, $block_args );
+		}
+	} else {
+		echo '<p>Ei uutisia.</p>';
+	}
+
+	$output      = ob_get_clean();
+	$total_posts = $query->found_posts; // Get the total number of posts found
+
+	wp_reset_postdata();
+
+	wp_send_json_success( [
+		'message'     => 'Uutiset päivitetty',
+		'output'      => $output,
+		'totalPosts' => $total_posts, // Include total number of posts
+	] );
+}
+
+add_action( 'wp_ajax_update_post_archive_results', __NAMESPACE__ . '\\ajax_update_post_archive_results' );
+add_action( 'wp_ajax_nopriv_update_post_archive_results', __NAMESPACE__ . '\\ajax_update_post_archive_results' );
+
 function ajax_load_concentration() {
     $post_id = isset( $_POST['postId'] ) ? wp_unslash( $_POST['postId'] ) : null;
 
