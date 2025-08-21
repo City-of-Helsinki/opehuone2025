@@ -171,22 +171,24 @@ function set_tax_query( $cornerlabels = [], $categories = [], $post_themes = [] 
 // add_action( 'wp_ajax_update_posts_archive_results', __NAMESPACE__ . '\\ajax_update_posts_archive_results' );
 // add_action( 'wp_ajax_nopriv_update_posts_archive_results', __NAMESPACE__ . '\\ajax_update_posts_archive_results' );
 
+function get_post_array( $key ) {
+    if ( ! isset( $_POST[$key] ) || $_POST[$key] === 'null' || $_POST[$key] === '' ) {
+        return [];
+    }
+
+    return array_filter(
+        explode( ',', sanitize_text_field( $_POST[$key] ) )
+    );
+}
+
 function ajax_load_more_posts_archive_results() {
 	$current_favs = \Opehuone\Utils\get_user_favs();
 
 	$offset = isset( $_POST['offset'] ) ? intval( $_POST['offset'] ) : 0;
 
-	$cornerlabels = ( isset( $_POST['cornerLabel'] ) && $_POST['cornerLabel'] !== 'null' && $_POST['cornerLabel'] !== '' )
-		? array_filter( explode( ',', sanitize_text_field( $_POST['cornerLabel'] ) ) )
-		: [];
-
-	$categories = ( isset( $_POST['category'] ) && $_POST['category'] !== 'null' && $_POST['category'] !== '' )
-		? array_filter( explode( ',', sanitize_text_field( $_POST['category'] ) ) )
-		: [];
-
-	$post_themes = ( isset( $_POST['postTheme'] ) && $_POST['postTheme'] !== 'null' && $_POST['postTheme'] !== '' )
-		? array_filter( explode( ',', sanitize_text_field( $_POST['postTheme'] ) ) )
-		: [];
+    $cornerlabels = get_post_array('cornerLabel');
+    $categories   = get_post_array('category');
+    $post_themes  = get_post_array('postTheme');
 
 	$tax_query = set_tax_query( $cornerlabels, $categories, $post_themes );
 
