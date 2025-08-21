@@ -50,12 +50,15 @@ const findkitUI = new FindkitUI({
             `;
         },
         Hit(props) {
+            const tags = props.hit.tags.filter(tag => tag.startsWith('opehuone-search-label/'));
+
             return html`
                 <div>
+                    ${tags.length > 0 && html`<div className="findkit-result-tag">${tags.map(tag => html`<span>${tag}</span>`)}</div>`}
                     <h2 class="findkit-result-header">
                         <a class="findkit-result-link" href=${props.hit.url}>${props.hit.title}</a>
                     </h2>
-                    <${props.parts.Highlight} />
+                    <${props.parts.Highlight}/>
                 </div>
             `;
         },
@@ -207,6 +210,18 @@ const findkitUI = new FindkitUI({
             color: #000;
             background-color: transparent;
             text-decoration: none;
+        }
+        
+        .findkit-result-tag {
+            color: black;
+            display: inline-block;
+            background-color: #cce0ff;
+            font-size: 10px;
+            line-height: 24px;
+            border-radius: 24px;
+            padding: 0px 12px;
+            margin-bottom: 10px;
+            font-weight: 500;
         }
     `,
 })
