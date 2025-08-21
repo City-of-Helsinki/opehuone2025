@@ -41,7 +41,7 @@ resources:
       # Azure DevOps project/repository
       name: opehuone/opehuone-pipelines
       # remove ref when/if changes are merged
-      ref: refs/heads/github-access-token
+      # ref: refs/heads/github-access-token
 
 extends:
   # Filename in Azure DevOps Repository
