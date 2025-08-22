@@ -69,11 +69,15 @@
             "choices": {
                 "metro": "Metro",
                 "fog": "Sumu",
-                "copper": "Kupari",
                 "suomenlinna": "Suomenlinna",
-                "coat": "Vaakuna",
                 "engel": "Engel",
-                "silver": "Hopea"
+                "copper": "Kupari",
+                "silver": "Hopea",
+                "gold": "Kulta",
+                "bus": "Bussi",
+                "coat-of-arms": "Vaakuna",
+                "summer": "Kesä",
+                "tram": "Spåra"
             },
             "default_value": "silver",
             "return_format": "value",
@@ -105,5 +109,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1755776158
+    "modified": 1755851317
 }

@@ -41,6 +41,7 @@ $landing_links_header = get_field('links_header');
 			the_post_thumbnail( 'large', [ 'class' => 'single-post__featured-image' ] );		
 			the_content();
 			?>
+            <?php get_template_part( 'partials/components/landing-page-link-element-box'); ?>
 		</main>
 		<aside class="sidebar-boxes">
 			<?php
