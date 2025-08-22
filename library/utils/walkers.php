@@ -240,33 +240,78 @@ class Opehuone_Submenu_Walker extends Walker_Nav_Menu {
 		$locations = get_nav_menu_locations();
 		if (!isset($locations['main_menu'])) return;
 
-		$menu = wp_get_nav_menu_object($locations['main_menu']);
+		$menu       = wp_get_nav_menu_object($locations['main_menu']);
 		$menu_items = wp_get_nav_menu_items($menu->term_id);
 		if (!$menu_items) return;
 
-		$current_object_id = get_queried_object_id();
-		$current_post_ancestors = get_post_ancestors($current_object_id);
 		$current_menu_item = null;
 
-		// Try a direct match
-		foreach ($menu_items as $item) {
-			if ((int)$item->object_id === $current_object_id && $item->object !== 'custom') {
-				$current_menu_item = $item;
-				break;
-			}
-		}
-
-		// If no direct match, search for menu pages in the ancestors of the current page
-		if (!$current_menu_item && !empty($current_post_ancestors)) {
+		// 1) Singular: match by object_id (allow custom too, just in case)
+		if (is_singular()) {
+			$current_object_id = get_queried_object_id();
 			foreach ($menu_items as $item) {
-				if (in_array((int)$item->object_id, array_map('intval', $current_post_ancestors), true)) {
+				if ((int)$item->object_id === (int)$current_object_id) {
 					$current_menu_item = $item;
 					break;
 				}
 			}
+			// If no direct match, try any ancestor page that appears in the menu
+			if (!$current_menu_item) {
+				$anc = get_post_ancestors($current_object_id);
+				if (!empty($anc)) {
+					foreach ($menu_items as $item) {
+						if (in_array((int)$item->object_id, array_map('intval', $anc), true)) {
+							$current_menu_item = $item;
+							break;
+						}
+					}
+				}
+			}
 		}
 
-		// Try URL comparison
+		// 2) Post type archives (e.g., /news/ for "news" CPT)
+		if (!$current_menu_item && is_post_type_archive()) {
+			$pt         = get_query_var('post_type') ?: get_post_type();
+			$archive_url = $pt ? get_post_type_archive_link($pt) : '';
+			if ($archive_url) {
+				$archive_url = trailingslashit($archive_url);
+				foreach ($menu_items as $item) {
+					if (trailingslashit($item->url) === $archive_url) {
+						$current_menu_item = $item;
+						break;
+					}
+				}
+			}
+		}
+
+		// 3) Blog index and post archives (categories/tags/date)
+		if (!$current_menu_item && (is_home() || is_category() || is_tag() || is_date() || is_author())) {
+			$posts_page_id = (int) get_option('page_for_posts');
+			if ($posts_page_id) {
+				foreach ($menu_items as $item) {
+					if ((int)$item->object_id === $posts_page_id) {
+						$current_menu_item = $item;
+						break;
+					}
+				}
+			}
+		}
+
+		// 4) Custom taxonomy archives
+		if (!$current_menu_item && is_tax()) {
+			$term = get_queried_object();
+			if ($term && !is_wp_error($term)) {
+				$term_url = trailingslashit(get_term_link($term));
+				foreach ($menu_items as $item) {
+					if (trailingslashit($item->url) === $term_url) {
+						$current_menu_item = $item;
+						break;
+					}
+				}
+			}
+		}
+
+		// 5) Fallback: compare full current URL to menu URLs
 		if (!$current_menu_item) {
 			$current_url = trailingslashit(home_url(add_query_arg([], $_SERVER['REQUEST_URI'])));
 			foreach ($menu_items as $item) {
@@ -279,29 +324,29 @@ class Opehuone_Submenu_Walker extends Walker_Nav_Menu {
 
 		if (!$current_menu_item) return;
 
-		// Find top level parent
+		// Find top-level ancestor of the matched item
 		$this->parent_id = $current_menu_item->ID;
 		while ($current_menu_item->menu_item_parent) {
-			foreach ($menu_items as $item) {
-				if ($item->ID == $current_menu_item->menu_item_parent) {
-					$current_menu_item = $item;
-					$this->parent_id = $item->ID;
+			foreach ($menu_items as $mi) {
+				if ($mi->ID == $current_menu_item->menu_item_parent) {
+					$current_menu_item = $mi;
+					$this->parent_id   = $mi->ID;
 					break;
 				}
 			}
 		}
 
-		// Collect second level parents
-		foreach ($menu_items as $item) {
-			if ((int)$item->menu_item_parent === $this->parent_id) {
-				$this->allowed_ids[] = $item->ID;
+		// Collect second-level children under that top-level parent
+		foreach ($menu_items as $mi) {
+			if ((int)$mi->menu_item_parent === (int)$this->parent_id) {
+				$this->allowed_ids[] = $mi->ID;
 			}
 		}
 
-		// Theme color
-		foreach ($menu_items as $item) {
-			if ($item->ID === $this->parent_id) {
-				$theme_color = get_field('theme_color', $item->object_id);
+		// Theme color from the top parent page (if any)
+		foreach ($menu_items as $mi) {
+			if ($mi->ID === $this->parent_id) {
+				$theme_color = get_field('theme_color', $mi->object_id);
 				if ($theme_color) {
 					$this->parent_theme_color_class = 'theme-' . sanitize_html_class($theme_color);
 				}
@@ -309,6 +354,7 @@ class Opehuone_Submenu_Walker extends Walker_Nav_Menu {
 			}
 		}
 	}
+
 
 	public function start_lvl(&$output, $depth = 0, $args = []) {
 		$output .= "\n<ul class=\"menu--sub-lvl2\">\n";
@@ -322,17 +368,67 @@ class Opehuone_Submenu_Walker extends Walker_Nav_Menu {
 		if (!in_array($item->ID, $this->allowed_ids, true)) return;
 
 		$classes = ['menu__item'];
+
+		$active = false;
+
+		// 1) Exact match on singular (page/post/CPT)
+		if (is_singular() && (int) $item->object_id === (int) get_queried_object_id()) {
+			$active = true;
+		}
+
+		// 2) Core classes (when WP sets them)
+		$item_classes = (array) ($item->classes ?? []);
 		if (
-			in_array('current-menu-item', $item->classes) ||
-			in_array('current_page_item', $item->classes) ||
-			$this->is_current_page_child_of_menu_item($item)
+			in_array('current-menu-item', $item_classes, true) ||
+			in_array('current_page_item', $item_classes, true) ||
+			in_array('current-menu-ancestor', $item_classes, true) ||
+			in_array('current_page_parent', $item_classes, true)
 		) {
+			$active = true;
+		}
+
+		// 3) Child-of-current page (your helper)
+		if ($this->is_current_page_child_of_menu_item($item)) {
+			$active = true;
+		}
+
+		// 4) Archives (CPT archive, blog index, tax archives)
+		if (is_post_type_archive()) {
+			$pt = get_query_var('post_type') ?: get_post_type();
+			$archive_url = $pt ? get_post_type_archive_link($pt) : '';
+			if ($archive_url && trailingslashit($item->url) === trailingslashit($archive_url)) {
+				$active = true;
+			}
+		}
+		if (is_home()) {
+			$posts_page_id = (int) get_option('page_for_posts');
+			if ($posts_page_id && (int) $item->object_id === $posts_page_id) {
+				$active = true;
+			}
+		}
+		if (is_tax() || is_category() || is_tag()) {
+			$qo = get_queried_object();
+			if ($qo && !is_wp_error($qo)) {
+				$term_url = trailingslashit(get_term_link($qo));
+				if (trailingslashit($item->url) === $term_url) {
+					$active = true;
+				}
+			}
+		}
+
+		// 5) Optional: highlight the top parent on archives
+		if ($item->ID === $this->parent_id) {
+			$active = true;
+		}
+
+		if ($active) {
 			$classes[] = 'menu__item--active';
 		}
 
 		$output .= '<li class="' . esc_attr(implode(' ', $classes)) . '">';
 		$output .= '<a href="' . esc_url($item->url) . '" class="menu__link">' . esc_html($item->title) . '</a>';
 	}
+
 
 	public function end_el(&$output, $item, $depth = 0, $args = []) {
 		if (!in_array($item->ID, $this->allowed_ids, true)) return;
