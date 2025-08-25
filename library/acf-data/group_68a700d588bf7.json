@@ -42,7 +42,9 @@
                 "page",
                 "post"
             ],
-            "post_status": "",
+            "post_status": [
+                "publish"
+            ],
             "taxonomy": "",
             "return_format": "id",
             "multiple": 1,
@@ -109,5 +111,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1755851317
+    "modified": 1756121540
 }
