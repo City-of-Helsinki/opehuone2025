@@ -1,0 +1,27 @@
+.home {
+    .hero__container {
+        .hero__content {
+            min-height: 150px;
+            align-content: center;
+            img {
+                top: auto;
+            }
+        }
+    }
+    .theme {
+        &__primary {
+            &.hero {
+                background-color: var(--primary-color);
+
+                .hds-koros {
+                    path {
+                        fill: var(--primary-color);
+                    }
+                }
+                h1, h2, .hero__title {
+                    color: white !important;
+                }
+            }
+        }
+    }
+}
