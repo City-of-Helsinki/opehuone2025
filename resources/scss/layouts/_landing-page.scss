@@ -63,6 +63,21 @@
         }
     }
 
+    .link-element-box {
+        background-color: #F7F7F7;
+        border-left: 12px solid;
+        padding: 24px 46px;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            li {
+                font-size: var(--opehuone--font-size--2-x-medium);
+                margin-bottom: 18px;
+            }
+        }
+    }
+
     .theme {
         &__primary {
             &.hero {
@@ -100,6 +115,10 @@
                     border-left: 6px solid var(--color-suomenlinna-dark);
                 }
             }
+
+            &.link-element-box {
+                border-color: var(--color-suomenlinna);
+            }
         }
 
         &__engel {
@@ -118,6 +137,10 @@
                     background-color: var(--color-engel-light);
                     border-left: 6px solid var(--color-engel-dark);
                 }
+            }
+
+            &.link-element-box {
+                border-color: var(--color-engel);
             }
         }
 
@@ -138,6 +161,10 @@
                     border-left: 6px solid var(--color-copper-dark);
                 }
             }
+
+            &.link-element-box {
+                border-color: var(--color-copper);
+            }
         }
 
         &__fog {
@@ -157,6 +184,10 @@
                     border-left: 6px solid var(--color-fog-dark);
                 }
             }
+
+            &.link-element-box {
+                border-color: var(--color-fog);
+            }
         }
 
         &__bus {
@@ -175,6 +206,46 @@
                     background-color: var(--color-bus-light);
                     border-left: 6px solid var(--color-bus-dark);
                 }
+            }
+
+            &.link-element-box {
+                border-color: var(--color-bus);
+            }
+        }
+
+        &__metro {
+            &.link-element-box {
+                border-color: var(--color-metro);
+            }
+        }
+
+        &__coat-of-arms {
+            &.link-element-box {
+                border-color: var(--color-coat-of-arms);
+            }
+        }
+
+        &__silver {
+            &.link-element-box {
+                border-color: var(--color-silver);
+            }
+        }
+
+        &__gold {
+            &.link-element-box {
+                border-color: var(--color-gold);
+            }
+        }
+
+        &__summer {
+            &.link-element-box {
+                border-color: var(--color-summer);
+            }
+        }
+
+        &__tram {
+            &.link-element-box {
+                border-color: var(--color-tram);
             }
         }
     }
