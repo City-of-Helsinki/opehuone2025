@@ -44,7 +44,6 @@ $landing_links_header = get_field('links_header');
 		</main>
 		<aside class="sidebar-boxes">
 			<?php
-			get_template_part( 'partials/empty' );
 			if ( !empty( $landing_links_header ) ):
 				get_template_part( 'partials/sidebar/landing-links-box' );
 			endif;

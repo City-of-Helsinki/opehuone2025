@@ -1,6 +1,16 @@
 .page-template-landing-page, .post-type-archive {
+
+    .sidebar-boxes {
+        margin-top: var(--opehuone--spacing--medium);
+    }
+
+    .hero {
+            margin-bottom: var(--opehuone--spacing--x-small);
+    }
+
     .hero__container {
         padding-top: var(--spacing-s);
+        min-height: 150px;
 
         .breadcrumbs {
             margin-bottom: var(--opehuone--spacing--2-x-small);
@@ -29,17 +39,12 @@
                 max-width: 100%;
                 max-height: 190px;
                 position: absolute;
-                left: 50%;
+                right: calc(130px + 1rem);
                 top: 0;
                 z-index: 999;
-
-                @include media-breakpoint-down(sm) {
-                    display: none;
-                }
                 
                 @include media-breakpoint-down(md) {
-                    max-height: 175px;
-                    top: initial;
+                    display: none;
                 }      
             }
         }
