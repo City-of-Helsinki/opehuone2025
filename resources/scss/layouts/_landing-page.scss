@@ -11,6 +11,7 @@
     .hero__container {
         padding-top: var(--spacing-s);
         min-height: 150px;
+        position: relative;
 
         .breadcrumbs {
             margin-bottom: var(--opehuone--spacing--2-x-small);
