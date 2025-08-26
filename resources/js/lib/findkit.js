@@ -50,11 +50,13 @@ const findkitUI = new FindkitUI({
             `;
         },
         Hit(props) {
-            const tags = props.hit.tags.filter(tag => tag.startsWith('opehuone-search-label/'));
+            const tags = props.hit.tags
+                .filter(tag => tag.startsWith('opehuone-search-label/'))
+                .map(tag => tag.replace('opehuone-search-label/', ''));
 
             return html`
                 <div>
-                    ${tags.length > 0 && html`<div className="findkit-result-tag">${tags.map(tag => html`<span>${tag}</span>`)}</div>`}
+                    ${tags.length > 0 && tags.map(tag => html`<div className="findkit-result-tag"><span>${tag}</span></div>`)}
                     <h2 class="findkit-result-header">
                         <a class="findkit-result-link" href=${props.hit.url}>${props.hit.title}</a>
                     </h2>
@@ -222,6 +224,7 @@ const findkitUI = new FindkitUI({
             padding: 0px 12px;
             margin-bottom: 10px;
             font-weight: 500;
+            margin-right: 12px;
         }
     `,
 })

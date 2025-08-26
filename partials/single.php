@@ -16,7 +16,8 @@ use function \Opehuone\TemplateFunctions\get_favorite_article_button;
                 if ( ! empty( $cornerlabels ) && ! is_wp_error( $cornerlabels ) ) {
                     echo '<div class="single-post__date-row-cornerlabel-container">';
                     foreach ( $cornerlabels as $term ) {
-                        echo '<span data-fdk-tags="opehuone-search-label/'. esc_html( $term->name ) .'" class="single-post__date-row-cornerlabel">' . esc_html( $term->name ) . '</span>';
+                        echo '<span class="single-post__date-row-cornerlabel">' . esc_html( $term->name ) . '</span>';
+                        echo '<span data-fdk-tags style="display: none;">opehuone-search-label/' . esc_html( $term->name ) .'</span>';
                     }
                     echo '</div>';
                 }

@@ -20,9 +20,17 @@ class Opehuone_Menu_Walker extends Walker_Nav_Menu {
 			$indent = str_repeat("\t", $depth);
 		}
 
-		$classes = array('menu__item', 'menu__depth-' . $depth);
+        // Keep only custom CSS classes from the menu editor
+        $custom_classes = array_filter((array) $item->classes, function ( $class ) {
+            return ! preg_match('/^(menu\-item|current\-|menu\-item\-type|menu\-item\-object)/', $class );
+        });
 
-		if (
+        $classes = $custom_classes;
+        $classes[] = 'menu__item';
+        $classes[] = 'menu__depth-' . $depth;
+
+
+        if (
 			$item->current == 1 ||
 			$item->current_item_ancestor == true ||
 			$this->is_current_page_child_of_menu_item($item)

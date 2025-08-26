@@ -1,4 +1,15 @@
 <?php
+
+// Get the root page slug and return if it's not 'pedagogiikka'
+if ( $post->post_parent ) {
+
+    $root_page_id = end( get_post_ancestors( $post->ID ) );
+
+    if ( get_post_field( 'post_name', $root_page_id ) !== 'pedagogiikka' ) {
+        return;
+    }
+} 
+
 $terms = get_terms(
 	array(
     'taxonomy' => 'cornerlabels',
@@ -6,6 +17,8 @@ $terms = get_terms(
 ));
 
 if (!empty($terms) && !is_wp_error($terms)) {
+
+    echo '<p>Suodata sisältöä oppiasteen mukaan</p>';
     echo '<form id="front-page-filter-pages" class="front-page-posts-filter" data-target="pages">';
     echo '<div class="front-page-posts-filter__checkboxes-row">';
 
