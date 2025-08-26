@@ -1,0 +1,115 @@
+{
+    "key": "group_68a700d588bf7",
+    "title": "Laskeutumissivun linkkilaatikko",
+    "fields": [
+        {
+            "key": "field_68a700d5b0967",
+            "label": "Otsikko",
+            "name": "opehuone_link_element_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68a700f7b0968",
+            "label": "Linkit",
+            "name": "opehuone_link_element_pages",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "training",
+                "page",
+                "post"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 1,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_68a7017fb0969",
+            "label": "Väriteema",
+            "name": "opehuone_link_element_color",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "metro": "Metro",
+                "fog": "Sumu",
+                "suomenlinna": "Suomenlinna",
+                "engel": "Engel",
+                "copper": "Kupari",
+                "silver": "Hopea",
+                "gold": "Kulta",
+                "bus": "Bussi",
+                "coat-of-arms": "Vaakuna",
+                "summer": "Kesä",
+                "tram": "Spåra"
+            },
+            "default_value": "silver",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_template",
+                "operator": "==",
+                "value": "custom-templates\/landing-page.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1756121540
+}
