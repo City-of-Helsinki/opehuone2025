@@ -30,7 +30,7 @@ use function \Opehuone\TemplateFunctions\get_favorite_article_button;
 				<?php get_template_part('partials/page-meta' ); ?>
 				<?php the_post_thumbnail( 'large', [ 'class' => 'single-post__featured-image' ] ); ?>
 				<?php the_content(); ?>
-				<?php get_template_part( 'partials/sidebar/post-category-tags' );  ?>
+				<?php get_template_part( 'partials/post-category-tags' );  ?>
                 <?php
                 // Load the comment template if comments are open
                 if ( comments_open() ) {
