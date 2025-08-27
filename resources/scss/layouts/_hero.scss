@@ -7,11 +7,16 @@
         margin-bottom: 3rem;
     }
     .hero__container {
+        .hero__title {
+            font-size: clamp(rem(32px), 3vw, rem(48px)) !important;
+            font-weight: 400 !important;
+            margin-bottom: 0.3rem;
+        }
         .hero__content {
             min-height: 150px;
             align-content: center;
             img {
-                top: auto;
+                top: 1rem;
             }
         }
     }

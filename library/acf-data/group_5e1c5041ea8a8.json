@@ -1594,6 +1594,27 @@
             "append": ""
         },
         {
+            "key": "field_68aec419b7ad7",
+            "label": "Heron alaotsikko (rivi 2)",
+            "name": "home_hero_subtitle_2",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_68ac58fa48ba2",
             "label": "Heron kuva",
             "name": "home_hero_image",
@@ -1671,5 +1692,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1756199087
+    "modified": 1756284044
 }
