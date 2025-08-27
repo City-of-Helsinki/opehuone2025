@@ -189,3 +189,9 @@ add_action( 'template_redirect', function() {
         exit;
     }
 });
+
+// Remove post tags from posts
+function remove_tags_from_posts() {
+    unregister_taxonomy_for_object_type( 'post_tag', 'post' );
+}
+add_action( 'init', __NAMESPACE__ . '\remove_tags_from_posts' );
