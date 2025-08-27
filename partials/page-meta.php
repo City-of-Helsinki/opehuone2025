@@ -1,3 +1,7 @@
+<?php
+use function \Opehuone\TemplateFunctions\get_favorite_article_button;
+?>
+
 <div class="single-post__date-row">
     <span>
         <?php
@@ -5,11 +9,15 @@
         $published = get_the_date( 'U' ); // Unix timestamp of publish date
         $modified  = get_the_modified_date( 'U' ); // Unix timestamp of modified date
 
-        // echo string: "| Päivitetty date", if modifed date differs from publish date
+        // Display modified date string if it differs from the published date
         if ( $modified !== $published ) {
-            echo ' | Päivitetty ' . get_the_modified_date();
+            echo '<span class="single-post__date-row-modified-date">Päivitetty ' . get_the_modified_date() . '</span>';
         }
 
         ?>
     </span>
+    <?php
+        // Display the favorite article button
+        get_favorite_article_button();
+    ?>
 </div>

@@ -2,6 +2,8 @@
 
 namespace Opehuone\TemplateFunctions;
 
+use function \Opehuone\Utils\get_user_favs;
+
 /**
  * @return void
  */
@@ -104,4 +106,17 @@ function get_top_parent_page_title( $post_id = null ): ?string {
     return $top_parent ? get_the_title( $top_parent ) : null;
 }
 
+// Function which displays the bookmark icon
+function get_favorite_article_button(): void {
+    $user_favs = get_user_favs();
+    $block_is_pinned = in_array( get_the_ID(), $user_favs );
 
+    $pinner_aria = $block_is_pinned ? 'Poista sivu kirjanmerkeistä' : 'Lisää sivu kirjanmerkiksi';
+    $button_action = $block_is_pinned ? 'favs_remove' : 'favs_add';
+
+    get_template_part('partials/components/pin-favorite-button', null, array(
+        'block_is_pinned' => $block_is_pinned,
+        'pinner_aria' => $pinner_aria,
+        'button_action' => $button_action,
+    ));
+}

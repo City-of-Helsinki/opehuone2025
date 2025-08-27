@@ -1,7 +1,7 @@
 .single-post {
 	&__title {
 		margin-top: 0;
-		margin-bottom: var(--opehuone--spacing--normal);
+		margin-bottom: 1rem;
 		font-weight: 400;
 		font-size: var(--opehuone--font-size--x-large);
 
@@ -21,16 +21,22 @@
 	&__date-row {
 		display: flex;
 		flex-direction: row;
-		flex-wrap: wrap;
+		justify-content: space-between;
 		align-items: center;
-		gap: var(--opehuone--spacing--small);
 		font-size: var(--opehuone--font-size--normal);
 		line-height: calc(24 / 16);
 		margin-bottom: var(--opehuone--spacing--x-small);
 	}
 
+	&__date-row-modified-date {
+		padding-left: 1rem;
+	}
+
+	&__date-row-cornerlabel-container {
+		margin-bottom: 1rem;
+	}
+
 	&__date-row-cornerlabel {
-		display: block;
 		color: var(--color-black-90);
 		font-weight: 500;
 		line-height: calc(24 / 14);
@@ -38,6 +44,7 @@
 		background-color: #efeff0;
 		padding: rem(6px 15px);
 		border-radius: 16px;
+		margin-right: 26px;
 	}
 
 	&__featured-image {
@@ -74,3 +81,31 @@
 		}
 	}
 }
+
+// Large pin button styles
+.pin-btn {
+	border: none;
+	background: none;
+}
+
+.pin-btn .icon {
+	display: none;
+	width: 100%;
+}
+.pin-btn .icon-default {
+	display: inline-block;
+}
+
+/* Hover state */
+.pin-btn:hover .icon-default { display: none; }
+.pin-btn:hover .icon-hover { display: inline-block; }
+
+/* Pinned state */
+.pin-btn.pinned .icon-default,
+.pin-btn.pinned .icon-hover {
+	display: none;
+}
+.pin-btn.pinned .icon-pinned {
+	display: inline-block;
+}
+
