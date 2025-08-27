@@ -78,6 +78,19 @@ add_filter( 'acf/settings/load_json', function ( $paths ) {
 } );
 
 /**
+ * Remove certain levels from Heading block
+ */
+function example_modify_heading_levels_globally( $args, $block_type ) {
+    if ( 'core/heading' !== $block_type ) {
+        return $args;
+    }
+    // Remove H1, H5, and H6.
+    $args['attributes']['levelOptions']['default'] = [ 2, 3, 4 ];
+    return $args;
+}
+add_filter( 'register_block_type_args', 'example_modify_heading_levels_globally', 10, 2 );
+
+/**
  * Add text to theme footer
  */
 add_filter(
