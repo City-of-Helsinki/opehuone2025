@@ -178,3 +178,14 @@ function increment_monthly_post_views() {
     update_post_meta( $post_id, 'monthly_views_count', $count );
 }
 add_action( 'wp', __NAMESPACE__ . '\increment_monthly_post_views' );
+
+// If we try to access training archive page, redirect to the correct page
+add_action( 'template_redirect', function() {
+    if ( is_post_type_archive( 'training' ) ) {
+        $page_id  = (int) get_field( 'trainings_page', 'option' );
+        $page_url = get_permalink( $page_id );
+
+        wp_safe_redirect( $page_url ?: home_url(), 301 );
+        exit;
+    }
+});

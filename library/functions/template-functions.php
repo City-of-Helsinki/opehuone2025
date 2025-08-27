@@ -120,3 +120,40 @@ function get_favorite_article_button(): void {
         'button_action' => $button_action,
     ));
 }
+
+function get_training_posts_query(): \WP_Query {
+    $args = [
+        'post_type'      => 'training',
+        'posts_per_page' => -1,
+        'tax_query'      => [ 'relation' => 'AND' ],
+        'meta_key'       => 'training_start_datetime', // Define the meta key for ordering
+        'orderby'        => 'meta_value', // Order by meta value
+        'order'          => 'ASC', // Order in ascending order
+        'meta_query'     => [
+            [
+                'key'     => 'training_end_datetime', // Target the correct meta field
+                'value'   => current_time( 'Y-m-d\TH:i:s' ), // Get the current date and time in WordPress timezone
+                'compare' => '>=', // Only include posts where the date is in the future
+                'type'    => 'DATETIME', // Ensure proper comparison as a date-time value
+            ],
+        ],
+    ];
+
+    if ( ! empty( $_GET['cornerlabels'] ) ) {
+        $args['tax_query'][] = [
+            'taxonomy' => 'cornerlabels',
+            'field'    => 'id',
+            'terms'    => sanitize_text_field( $_GET['cornerlabels'] ),
+        ];
+    }
+
+    if ( ! empty( $_GET['training_theme'] ) ) {
+        $args['tax_query'][] = [
+            'taxonomy' => 'training_theme',
+            'field'    => 'id',
+            'terms'    => sanitize_text_field( $_GET['training_theme'] ),
+        ];
+    }
+
+    return new \WP_Query( $args );
+}
