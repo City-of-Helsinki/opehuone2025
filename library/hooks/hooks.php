@@ -178,3 +178,9 @@ function increment_monthly_post_views() {
     update_post_meta( $post_id, 'monthly_views_count', $count );
 }
 add_action( 'wp', __NAMESPACE__ . '\increment_monthly_post_views' );
+
+// Remove post tags from posts
+function remove_tags_from_posts() {
+    unregister_taxonomy_for_object_type( 'post_tag', 'post' );
+}
+add_action( 'init', __NAMESPACE__ . '\remove_tags_from_posts' );

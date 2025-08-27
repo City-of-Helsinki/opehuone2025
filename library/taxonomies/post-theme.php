@@ -16,8 +16,8 @@ function init_taxonomy() {
 		'singular_name'              => _x( 'Aihe', 'taxonomy singular name', 'helsinki-universal' ),
 		'search_items'               => __( 'Etsi aiheita', 'helsinki-universal' ),
 		'all_items'                  => __( 'Kaikki aiheet', 'helsinki-universal' ),
-		'parent_item'                => __( 'Aiheen yläsivu', 'helsinki-universal' ),
-		'parent_item_colon'          => __( 'Aiheen yläsivu:', 'helsinki-universal' ),
+		'parent_item'                => __( 'Aiheen ylätaso', 'helsinki-universal' ),
+		'parent_item_colon'          => __( 'Aiheen ylätaso:', 'helsinki-universal' ),
 		'edit_item'                  => __( 'Muokkaa aihetta', 'helsinki-universal' ),
 		'update_item'                => __( 'Päivitä aihetta', 'helsinki-universal' ),
 		'add_new_item'               => __( 'Lisää uusi aihe', 'helsinki-universal' ),
@@ -44,6 +44,12 @@ function init_taxonomy() {
 		'show_in_nav_menus'  => false,
 		'show_tagcloud'      => false,
 		'show_admin_column'  => true,
+		'capabilities' => array(
+            'manage_terms' => 'manage_options',
+            'edit_terms'   => 'manage_options',
+            'delete_terms' => 'manage_options',
+            'assign_terms' => 'edit_posts',
+        ),
 
 	);
 	register_taxonomy( 'post_theme', [ 'post' ], $args );
