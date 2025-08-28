@@ -1,82 +1,67 @@
 <?php
 
-/**
- * Helper class to check time until selected holiday
- *
- * Class Days_until
- */
 class Time_until {
 
     /**
-     * Main method to be called to get string example "x päivää y tuntia kesälomaan"
+     * Get string like "56 päivää ja 10 tuntia"
      *
-     * @param $season
-     *
-     * @return string
+     * @param string $season ACF field suffix, e.g., 'autumn', 'summer'
+     * @return string|null
      */
-    public static function get_days_until_string( $season, $is_sv = false ) {
-        $array = self::get_data_array( $season, $is_sv );
+    public static function get_days_until_string( $season ): string | null {
+        $array = self::get_data_array( $season );
 
-        $format = '%d %s ja %d %s.';
-
-        if ( $is_sv ) {
-            $format = '%d %s och %d %s.';
+        if ( empty( $array ) ) {
+            return null;
         }
 
-        return sprintf( $format, $array['days_until'], $array['days_text'], $array['hours_until'], $array['hours_text'] );
+        $format = '%d %s ja %d %s';
+
+        return sprintf(
+            $format,
+            $array['days_until'],
+            $array['days_text'],
+            $array['hours_until'],
+            $array['hours_text']
+        );
     }
 
-    private static function get_data_array( $season, $is_sv ) {
-        $now  = date_i18n( 'Y-m-d H:i' );
-        $when = self::get_date_by_season( $season, false, $is_sv );
+    private static function get_data_array( $season ): array {
+        $now  = new DateTime( date_i18n( 'Y-m-d H:i' ) );
+        $when = self::get_date_by_season( $season );
 
-        $dateStart = new DateTime( $now );
-        $dateEnd   = new DateTime( $when );
+        $dateEnd = new DateTime( $when );
 
-        $interval = $dateStart->diff( $dateEnd );
+        $interval = $now->diff( $dateEnd );
 
-        $days_until   = str_replace( '+', '', $interval->format( '%R%a' ) );
-        $hours_until  = str_replace( '+', '', $interval->format( '%H' ) );
-        $days_string  = $is_sv === true ? 'dagar' : __( 'päivää', 'helsinki-universal' );
-        $hours_string = $is_sv === true ? 'timmar' : __( 'tuntia', 'helsinki-universal' );
+        $days_until   = (int) str_replace( '+', '', $interval->format( '%R%a' ) );
 
-        if ( $days_until === 1 ) {
-            $days_string = $is_sv === true ? 'dag' : __( 'päivä', 'helsinki-universal' );
+        if ($days_until < 0) {
+            return [];
         }
 
-        if ( $hours_until === 1 ) {
-            $hours_string = $is_sv === true ? 'timme' : __( 'tunti', 'helsinki-universal' );
-        }
+        $hours_until  = (int) str_replace( '+', '', $interval->format( '%H' ) );
+
+        $days_text  = $days_until === 1 ? 'päivä' : 'päivää';
+        $hours_text = $hours_until === 1 ? 'tunti' : 'tuntia';
 
         return [
             'days_until'  => $days_until,
-            'days_text'   => $days_string,
+            'days_text'   => $days_text,
             'hours_until' => $hours_until,
-            'hours_text'  => $hours_string,
+            'hours_text'  => $hours_text,
         ];
     }
 
-    public static function get_date_by_season( $season, $only_date = false, $is_sv = false ) {
-
-        $field_name = $is_sv === true ? 'holiday_starts_' . $season . '_sv' : 'holiday_starts_' . $season;
-
-        $date = get_field( $field_name, 'option' );
-
-        if ( $only_date ) {
-            return $date;
-        } else {
-            return $date . ' 00:00';
-        }
+    private static function get_date_by_season( $season ): string {
+        $field_name = 'holiday_starts_' . $season;
+        $date       = get_field( $field_name, 'option' ); // e.g. '2025-10-24'
+        return $date . ' 00:00'; // set midnight to have a proper DateTime
     }
 
-    public static function date_in_past( $date ) {
+    public static function date_in_past( $date ): bool {
         $date_now = new DateTime();
-        $date     = new DateTime( $date );
-
-        if ( $date_now >= $date ) {
-            return true;
-        } else {
-            return false;
-        }
+        $date_obj = new DateTime( $date );
+        return $date_now >= $date_obj;
     }
 }

@@ -157,3 +157,28 @@ function get_training_posts_query(): \WP_Query {
 
     return new \WP_Query( $args );
 }
+
+function display_time_until_holidays(): void {
+    $holidays = [
+        'autumn'   => 'Aikaa syyslomaan',
+        'christmas'=> 'Aikaa joululomaan',
+        'winter'   => 'Aikaa talvilomaan',
+        'summer'   => 'Aikaa kesälomaan',
+    ];
+
+    echo '<div class="profile-opener-dropdown__holiday">';
+    foreach ( $holidays as $season => $label ) {
+        $show = get_field( 'show_until_' . $season, 'option' );
+        if ( ! $show ) {
+            continue;
+        }
+
+        $countdown = \Time_until::get_days_until_string( $season );
+
+        if ( ! $countdown ) {
+            continue;
+        }
+        echo '<span class="profile-opener-dropdown__holiday-countdown">' . esc_html( $label ) . ': ' . esc_html( $countdown ) . '</span>';
+    }
+    echo '</div>';
+}
