@@ -55,6 +55,13 @@
                 "operator": "==",
                 "value": "training_theme"
             }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "post_theme"
+            }
         ]
     ],
     "menu_order": 0,
@@ -66,5 +73,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1755002477
+    "modified": 1756379791
 }
