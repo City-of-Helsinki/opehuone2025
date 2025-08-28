@@ -1,6 +1,7 @@
 <?php
 
 use Opehuone\Helpers;
+use function \Opehuone\TemplateFunctions\display_time_until_holidays;
 
 if ( ! is_user_logged_in() ) {
 	return;
@@ -38,6 +39,9 @@ $profile_name = strtoupper( $first_initial . $last_initial );
 				</p>
 			</div>
 		</div>
+
+        <?php display_time_until_holidays(); ?>
+
 		<nav aria-label="<?php esc_attr_e( 'Profiiliasetusten navigointi', 'helsinki-universal' ); ?>">
 			<ul class="profile-opener-dropdown__links">
 				<li class="profile-opener-dropdown__link-item">
