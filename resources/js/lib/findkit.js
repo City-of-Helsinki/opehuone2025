@@ -8,7 +8,7 @@ const findkitUI = new FindkitUI({
     header: false,
     groups: [
         {
-            title: "Sivut",
+            title: "Sisältösivut",
             previewSize: 3,
             params: {
                 tagQuery: [["wp_post_type/page"]],
@@ -113,10 +113,12 @@ const findkitUI = new FindkitUI({
 
         .findkit--hit h2 {
             margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 1rem;
-            font-weight: 700;
+            margin-bottom: 0.65rem;
             color: #1A1A1A;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%;
         }
 
         .findkit--hit h2 > a {
@@ -217,7 +219,7 @@ const findkitUI = new FindkitUI({
         .findkit-result-tag {
             color: black;
             display: inline-block;
-            background-color: #cce0ff;
+            background-color: #E6E6E6;
             font-size: 10px;
             line-height: 24px;
             border-radius: 24px;

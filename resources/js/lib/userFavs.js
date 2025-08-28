@@ -65,6 +65,7 @@ const addToFavs = () => {
 				} else {
 					pinnerButton.classList.toggle('pinned', addFavorite);
 					pinnerButton.setAttribute('aria-pressed', pinnerButton.classList.contains('pinned'));
+					pinnerButton.setAttribute('data-action', addFavorite ? 'favs_remove' : 'favs_add');
 				}
 			})
 			.catch((error) => console.error('AJAX Error:', error));
