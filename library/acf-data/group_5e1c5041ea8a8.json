@@ -729,7 +729,6 @@
             "key": "field_5ef9a87c15993",
             "label": "Näytä syysloman alkuun?",
             "name": "show_until_autumn",
-            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -749,7 +748,6 @@
             "key": "field_5ef58aba2f712",
             "label": "Syysloma alkaa",
             "name": "holiday_starts_autumn",
-            "aria-label": "",
             "type": "date_picker",
             "instructions": "",
             "required": 0,
@@ -769,14 +767,12 @@
             },
             "display_format": "d\/m\/Y",
             "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
+            "first_day": 1
         },
         {
             "key": "field_5ef9ba11f4679",
             "label": "Näytä joululoman alkuun?",
             "name": "show_until_christmas",
-            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -796,7 +792,6 @@
             "key": "field_5ef58af52f713",
             "label": "Joululoma alkaa",
             "name": "holiday_starts_christmas",
-            "aria-label": "",
             "type": "date_picker",
             "instructions": "",
             "required": 0,
@@ -816,14 +811,12 @@
             },
             "display_format": "d\/m\/Y",
             "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
+            "first_day": 1
         },
         {
             "key": "field_5ef9ba29f467a",
             "label": "Näytä talviloman alkuun?",
             "name": "show_until_winter",
-            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -843,7 +836,6 @@
             "key": "field_5ef58b092f714",
             "label": "Talviloma alkaa",
             "name": "holiday_starts_winter",
-            "aria-label": "",
             "type": "date_picker",
             "instructions": "",
             "required": 0,
@@ -863,14 +855,12 @@
             },
             "display_format": "d\/m\/Y",
             "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
+            "first_day": 1
         },
         {
             "key": "field_5ef9ba43f467b",
             "label": "Näytä kesäloman alkuun?",
             "name": "show_until_summer",
-            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -890,7 +880,6 @@
             "key": "field_5ef58a6e2f711",
             "label": "Kesäloma alkaa",
             "name": "holiday_starts_summer",
-            "aria-label": "",
             "type": "date_picker",
             "instructions": "",
             "required": 0,
@@ -910,8 +899,200 @@
             },
             "display_format": "d\/m\/Y",
             "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
+            "first_day": 1
+        },
+        {
+            "key": "field_5f3ccc84ad642",
+            "label": "Ruotsinkieliset koulut",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_5f3ccbcead63a",
+            "label": "Näytä syysloman alkuun? (ruotsinkielinen)",
+            "name": "show_until_autumn_sv",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5f3ccbd2ad63b",
+            "label": "Syysloma alkaa (ruotsinkielinen)",
+            "name": "holiday_starts_autumn_sv",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f3ccbcead63a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d\/m\/Y",
+            "return_format": "Y-m-d",
+            "first_day": 1
+        },
+        {
+            "key": "field_5f3ccbd6ad63c",
+            "label": "Näytä joululoman alkuun? (ruotsinkielinen)",
+            "name": "show_until_christmas_sv",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5f3ccbdaad63d",
+            "label": "Joululoma alkaa (ruotsinkielinen)",
+            "name": "holiday_starts_christmas_sv",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f3ccbd6ad63c",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d\/m\/Y",
+            "return_format": "Y-m-d",
+            "first_day": 1
+        },
+        {
+            "key": "field_5f3ccbe4ad63e",
+            "label": "Näytä talviloman alkuun? (ruotsinkielinen)",
+            "name": "show_until_winter_sv",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5f3ccbe8ad63f",
+            "label": "Talviloma alkaa (ruotsinkielinen)",
+            "name": "holiday_starts_winter_sv",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f3ccbe4ad63e",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d\/m\/Y",
+            "return_format": "Y-m-d",
+            "first_day": 1
+        },
+        {
+            "key": "field_5f3ccbecad640",
+            "label": "Näytä kesäloman alkuun? (ruotsinkielinen)",
+            "name": "show_until_summer_sv",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5f3ccbf0ad641",
+            "label": "Kesäloma alkaa (ruotsinkielinen)",
+            "name": "holiday_starts_summer_sv",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f3ccbecad640",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d\/m\/Y",
+            "return_format": "Y-m-d",
+            "first_day": 1
         },
         {
             "key": "field_5fc11224adc92",
