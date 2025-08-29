@@ -1,67 +1,82 @@
 <?php
 
+/**
+ * Helper class to check time until selected holiday
+ *
+ * Class Days_until
+ */
 class Time_until {
 
     /**
-     * Get string like "56 päivää ja 10 tuntia"
+     * Main method to be called to get string example "x päivää y tuntia kesälomaan"
      *
-     * @param string $season ACF field suffix, e.g., 'autumn', 'summer'
-     * @return string|null
+     * @param $season
+     *
+     * @return string
      */
-    public static function get_days_until_string( $season ): string | null {
-        $array = self::get_data_array( $season );
+    public static function get_days_until_string( $season, $is_sv = false ) {
+        $array = self::get_data_array( $season, $is_sv );
 
-        if ( empty( $array ) ) {
-            return null;
+        $format = '%d %s ja %d %s.';
+
+        if ( $is_sv ) {
+            $format = '%d %s och %d %s.';
         }
 
-        $format = '%d %s ja %d %s';
-
-        return sprintf(
-            $format,
-            $array['days_until'],
-            $array['days_text'],
-            $array['hours_until'],
-            $array['hours_text']
-        );
+        return sprintf( $format, $array['days_until'], $array['days_text'], $array['hours_until'], $array['hours_text'] );
     }
 
-    private static function get_data_array( $season ): array {
-        $now  = new DateTime( date_i18n( 'Y-m-d H:i' ) );
-        $when = self::get_date_by_season( $season );
+    private static function get_data_array( $season, $is_sv ) {
+        $now  = date_i18n( 'Y-m-d H:i' );
+        $when = self::get_date_by_season( $season, false, $is_sv );
 
-        $dateEnd = new DateTime( $when );
+        $dateStart = new DateTime( $now );
+        $dateEnd   = new DateTime( $when );
 
-        $interval = $now->diff( $dateEnd );
+        $interval = $dateStart->diff( $dateEnd );
 
-        $days_until   = (int) str_replace( '+', '', $interval->format( '%R%a' ) );
+        $days_until   = str_replace( '+', '', $interval->format( '%R%a' ) );
+        $hours_until  = str_replace( '+', '', $interval->format( '%H' ) );
+        $days_string  = $is_sv === true ? 'dagar' : __( 'päivää', TEXT_DOMAIN );
+        $hours_string = $is_sv === true ? 'timmar' : __( 'tuntia', TEXT_DOMAIN );
 
-        if ($days_until < 0) {
-            return [];
+        if ( $days_until === 1 ) {
+            $days_string = $is_sv === true ? 'dag' : __( 'päivä', TEXT_DOMAIN );
         }
 
-        $hours_until  = (int) str_replace( '+', '', $interval->format( '%H' ) );
-
-        $days_text  = $days_until === 1 ? 'päivä' : 'päivää';
-        $hours_text = $hours_until === 1 ? 'tunti' : 'tuntia';
+        if ( $hours_until === 1 ) {
+            $hours_string = $is_sv === true ? 'timme' : __( 'tunti', TEXT_DOMAIN );
+        }
 
         return [
             'days_until'  => $days_until,
-            'days_text'   => $days_text,
+            'days_text'   => $days_string,
             'hours_until' => $hours_until,
-            'hours_text'  => $hours_text,
+            'hours_text'  => $hours_string,
         ];
     }
 
-    private static function get_date_by_season( $season ): string {
-        $field_name = 'holiday_starts_' . $season;
-        $date       = get_field( $field_name, 'option' ); // e.g. '2025-10-24'
-        return $date . ' 00:00'; // set midnight to have a proper DateTime
+    public static function get_date_by_season( $season, $only_date = false, $is_sv = false ) {
+
+        $field_name = $is_sv === true ? 'holiday_starts_' . $season . '_sv' : 'holiday_starts_' . $season;
+
+        $date = get_field( $field_name, 'option' );
+
+        if ( $only_date ) {
+            return $date;
+        } else {
+            return $date . ' 00:00';
+        }
     }
 
-    public static function date_in_past( $date ): bool {
+    public static function date_in_past( $date ) {
         $date_now = new DateTime();
-        $date_obj = new DateTime( $date );
-        return $date_now >= $date_obj;
+        $date     = new DateTime( $date );
+
+        if ( $date_now >= $date ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
