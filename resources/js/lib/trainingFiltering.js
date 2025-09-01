@@ -94,3 +94,17 @@ export const trainingFiltering = () => {
 	// If a query parameter is found (from a redirect), filter the results and scroll into view
 	triggerFormUpdateOnPageLoad(form);
 };
+
+document.addEventListener('DOMContentLoaded', (e) => {
+	const form = document.querySelector('.training-archive-filtering');
+
+	if (!form) {
+		return;
+	}
+
+	if (!window.location.search.includes('training_theme')) {
+		return;
+	}
+
+	form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
