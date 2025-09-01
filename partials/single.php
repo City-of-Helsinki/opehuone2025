@@ -37,6 +37,8 @@ use function \Opehuone\TemplateFunctions\get_favorite_article_button;
                     helsinki_comment_form();
                 }
                 ?>
+
+                <?php do_action('helsinki_content_body_after'); ?>
 			</section>
 			<aside>
 				<div class="single-post__sidebar-post">
