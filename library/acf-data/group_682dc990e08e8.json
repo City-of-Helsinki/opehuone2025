@@ -22,7 +22,8 @@
                 "engel": "Engel",
                 "copper": "Kupari",
                 "fog": "Sumu",
-                "bus": "Bussi"
+                "bus": "Bussi",
+                "summer": "Kesä"
             },
             "default_value": "vihrea",
             "return_format": "value",
@@ -99,5 +100,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1748953285
+    "modified": 1756715903
 }
