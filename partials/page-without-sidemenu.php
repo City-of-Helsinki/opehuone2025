@@ -22,6 +22,8 @@ use function \Opehuone\TemplateFunctions\get_top_parent_page_title;
                     echo '<span data-fdk-tags style="display: none;">opehuone-search-label/' . esc_html( $top_parent_title ) .'</span>';
                 }
                 ?>
+
+                <?php do_action('helsinki_content_body_after'); ?>
 			</div>
 		</div>
 	</div>
