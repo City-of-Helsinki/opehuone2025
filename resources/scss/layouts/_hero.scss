@@ -1,4 +1,5 @@
-.home {
+.home,
+.blog {
 
     .sidebar-boxes {
         margin-top: 0 !important;
@@ -35,5 +36,20 @@
                 }
             }
         }
+        &__coat-of-arms {
+            &.hero {
+                background-color: var(--color-coat-of-arms);
+
+                .hds-koros {
+                    path {
+                        fill: var(--color-coat-of-arms);
+                    }
+                }
+                h1, h2, .hero__title {
+                    color: white !important;
+                }
+            }
+        }
     }
+
 }
