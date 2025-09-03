@@ -30,7 +30,7 @@ use function Opehuone\Helpers\the_svg;
                         <input type="url" id="service-url-input" class="add-new-service-form__form-field"
                                aria-describedby="urlHelp">
                         <small id="urlHelp" class="form-text text-muted">
-                            <?php esc_html_e( 'Aloitathan osoitteen https:// tai http://...' ); ?>
+                            <?php esc_html_e( 'Aloitathan osoitteen https://...' ); ?>
                         </small>
                     </div>
                     <button type="submit" class="add-new-service-form__btn add-new-service-form__btn--submit">
