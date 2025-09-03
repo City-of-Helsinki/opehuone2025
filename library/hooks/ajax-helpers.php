@@ -2,6 +2,9 @@
 
 namespace Opehuone\AjaxHelpers;
 
+use function Opehuone\Utils\the_own_services_row;
+use function Opehuone\Utils\the_services_row;
+
 /**
  * AJAX related stuff
  */
@@ -371,35 +374,91 @@ add_action( 'wp_ajax_nopriv_copy_training_to_articles', __NAMESPACE__ . '\\ajax_
  * Ajax function to add new service
  */
 function ajax_add_new_own_service() {
-	$nonce = $_POST['nonce'];
+    $nonce = $_POST['nonce'];
 
-	if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
-		die( esc_html__( 'Käyttäjää ei pystytty tunnistamaan.', TEXT_DOMAIN ) );
-	}
+    if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
+        die( esc_html__( 'Käyttäjää ei pystytty tunnistamaan.' ) );
+    }
 
-	$service_details = $_POST['service_details'];
-	$user_id         = isset( $_POST['user_id'] ) ? wp_unslash( $_POST['user_id'] ) : null;
+    $service_details = $_POST['service_details'];
+    $user_id         = isset( $_POST['user_id'] ) ? wp_unslash( $_POST['user_id'] ) : null;
 
-	$service_name = isset( $service_details['serviceName'] ) ? sanitize_text_field( $service_details['serviceName'] ) : null;
-	$service_url  = isset( $service_details['serviceUrl'] ) ? esc_url_raw( $service_details['serviceUrl'] ) : null;
-	$identifier   = md5( $service_name . $service_url );
+    $service_name        = isset( $service_details['serviceName'] ) ? sanitize_text_field( $service_details['serviceName'] ) : null;
+    $service_url         = isset( $service_details['serviceUrl'] ) ? esc_url_raw( $service_details['serviceUrl'] ) : null;
+    $identifier          = md5( $service_name . $service_url );
 
-	global $wpdb;
-	$table  = $wpdb->prefix . 'user_own_services';
-	$data   = array(
-		'identifier'   => $identifier,
-		'user_id'      => $user_id,
-		'service_name' => $service_name,
-		'service_url'  => $service_url,
-		'visible'      => 1,
-	);
-	$format = array( '%s', '%d', '%s', '%s', '%d' );
-	$wpdb->insert( $table, $data, $format );
+    global $wpdb;
+    $table  = $wpdb->prefix . 'user_own_services';
+    $data   = array(
+        'identifier'          => $identifier,
+        'user_id'             => $user_id,
+        'service_name'        => $service_name,
+        'service_url'         => $service_url,
+    );
+    $format = array( '%s', '%d', '%s', '%s' );
+    $insert = $wpdb->insert( $table, $data, $format );
 
-	die();
+    if ( false !== $insert ) {
+        $user_services = new \User_services();
+        the_services_row( false, $user_services );
+        the_own_services_row( false );
+    }
+
+    die();
 }
 
 add_action( 'wp_ajax_add_new_own_service', __NAMESPACE__ . '\\ajax_add_new_own_service' );
+add_action( 'wp_ajax_nopriv_add_new_own_service', __NAMESPACE__ . '\\ajax_add_new_own_service' );
+
+/**
+ * Add service to favs
+ */
+function ajax_add_service_to_favorites() {
+    $user_services  = new \User_services();
+    $users_services = $user_services->get_user_services();
+    $service_id     = isset( $_POST['service_id'] ) ? wp_unslash( $_POST['service_id'] ) : null;
+    $user_id        = isset( $_POST['user_id'] ) ? wp_unslash( $_POST['user_id'] ) : null;
+
+    if ( $service_id && $user_id ) {
+        $users_services[] = $service_id;
+        update_user_meta( $user_id, 'user_services', $users_services );
+
+        the_own_services_row( true );
+        the_services_row( true, $user_services );
+    }
+
+    die();
+}
+
+add_action( 'wp_ajax_add_service_to_favorites', __NAMESPACE__ . '\\ajax_add_service_to_favorites' );
+add_action( 'wp_ajax_nopriv_add_service_to_favorites', __NAMESPACE__ . '\\ajax_add_service_to_favorites' );
+
+
+/**
+ * Remove service from favs
+ */
+function ajax_remove_service_from_favorites() {
+    $user_services  = new \User_services();
+    $users_services = $user_services->get_user_services();
+    $service_id     = isset( $_POST['service_id'] ) ? wp_unslash( $_POST['service_id'] ) : null;
+    $user_id        = isset( $_POST['user_id'] ) ? wp_unslash( $_POST['user_id'] ) : null;
+
+    if ( $service_id && $user_id ) {
+        $key = array_search( $service_id, $users_services );
+        if ( false !== $key ) {
+            unset( $users_services[ $key ] );
+            update_user_meta( $user_id, 'user_services', $users_services );
+
+            the_own_services_row( false );
+            the_services_row( false, $user_services );
+        }
+    }
+
+    die();
+}
+
+add_action( 'wp_ajax_remove_service_from_favorites', __NAMESPACE__ . '\\ajax_remove_service_from_favorites' );
+add_action( 'wp_ajax_nopriv_remove_service_from_favorites', __NAMESPACE__ . '\\ajax_remove_service_from_favorites' );
 
 /**
  * Ajax function to delete own service
@@ -439,36 +498,49 @@ function ajax_delete_own_service() {
 
 add_action( 'wp_ajax_remove_own_service', __NAMESPACE__ . '\\ajax_delete_own_service' );
 
+
 function ajax_pin_own_service() {
-	$nonce = $_POST['nonce'];
+    $nonce = $_POST['nonce'];
 
-	if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
-		die( esc_html__( 'Käyttäjää ei pystytty tunnistamaan.', TEXT_DOMAIN ) );
-	}
+    if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
+        die( esc_html__( 'Käyttäjää ei pystytty tunnistamaan.' ) );
+    }
 
-	$user_id            = isset( $_POST['userId'] ) ? wp_unslash( $_POST['userId'] ) : null;
-	$set_visible        = isset( $_POST['setVisible'] ) ? (int) wp_unslash( $_POST['setVisible'] ) : null;
-	$service_id         = isset( $_POST['serviceId'] ) ? wp_unslash( $_POST['serviceId'] ) : null;
-	$service_identifier = isset( $_POST['serviceIdentifier'] ) ? wp_unslash( $_POST['serviceIdentifier'] ) : null;
+    $user_id            = isset( $_POST['userId'] ) ? wp_unslash( $_POST['userId'] ) : null;
+    $set_visible        = isset( $_POST['setVisible'] ) ? (int) wp_unslash( $_POST['setVisible'] ) : null;
+    $service_id         = isset( $_POST['serviceId'] ) ? wp_unslash( $_POST['serviceId'] ) : null;
+    $service_identifier = isset( $_POST['serviceIdentifier'] ) ? wp_unslash( $_POST['serviceIdentifier'] ) : null;
 
-	global $wpdb;
-	$table = $wpdb->prefix . 'user_own_services';
+    global $wpdb;
+    $table = $wpdb->prefix . 'user_own_services';
 
-	$update = $wpdb->update(
-		$table,
-		[
-			'visible' => $set_visible,
-		],
-		[
-			'id'         => $service_id,
-			'user_id'    => $user_id,
-			'identifier' => $service_identifier,
-		],
-		[ '%d' ],
-		[ '%d', '%d', '%s' ]
-	);
+    $update = $wpdb->update(
+        $table,
+        [
+            'visible' => $set_visible,
+        ],
+        [
+            'id'         => $service_id,
+            'user_id'    => $user_id,
+            'identifier' => $service_identifier,
+        ],
+        [ '%d' ],
+        [ '%d', '%d', '%s' ]
+    );
 
-	die();
+    $user_services = new \User_services();
+
+    if ( false !== $update ) {
+        if ( 1 === $set_visible ) {
+            the_own_services_row( true );
+            the_services_row( true, $user_services );
+        } else {
+            the_services_row( false, $user_services );
+            the_own_services_row( false );
+        }
+    }
+
+    die();
 }
 
 add_action( 'wp_ajax_pin_own_service', __NAMESPACE__ . '\\ajax_pin_own_service' );

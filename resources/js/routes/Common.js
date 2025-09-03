@@ -4,9 +4,16 @@ import { serviceFailure } from '../lib/serviceFailure';
 import { userFavs } from '../lib/userFavs';
 import { postsFiltering } from '../lib/postsFiltering';
 import { profileOpener } from '../lib/profileOpener';
-import { addNewOwnService, handleAddNewServiceClick } from '../lib/ownServices'
+import {
+	addToServices,
+	allServicesToggler,
+	removeFromServices,
+	servicesToggler,
+	updateButtonClicks,
+} from '../lib/services'
 import { concentrationFunctions } from "../lib/concentration";
-import { findkitUI } from "../lib/findkit";
+import { ownServices } from "../lib/ownServices";
+import { findkitUI } from "../lib/findkit"; // This is not used, but must be imported to work
 
 function toggleAria($element, attribute) {
 	const isHidden = $element.attr(attribute) === 'true';
@@ -44,9 +51,14 @@ export default {
 		postsFiltering();
 		// Profile opener
 		profileOpener();
-		// Own service functions
-		handleAddNewServiceClick();
-		addNewOwnService();
+		// General services functions
+		updateButtonClicks();
+		allServicesToggler();
+		addToServices();
+		removeFromServices();
+		servicesToggler();
+
+		ownServices();
 		// Concentration functions
 		concentrationFunctions();
 
