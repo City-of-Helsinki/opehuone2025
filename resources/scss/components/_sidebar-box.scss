@@ -41,6 +41,12 @@
 		}
 	}
 
+	&__placeholder-text {
+		font-weight: 500;
+		font-size: var(--opehuone--font-size--medium);
+		line-height: 28px;
+	}
+
 	&__description {
 		font-size: var(--opehuone--font-size--small);
 		font-weight: 500;
