@@ -152,7 +152,7 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     width: 290px;
     color: #FFF;
-    @include transition(all 3.2s ease);
+    transition: all 3.2s ease;
   }
 
   &__hover-content__headline {
