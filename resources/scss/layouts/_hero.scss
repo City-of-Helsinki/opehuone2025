@@ -37,6 +37,12 @@
             }
         }
         &__coat-of-arms {
+            #breadcrumbs {
+                * {
+                    color: white !important;
+                    fill: white !important;
+                }
+            }
             &.hero {
                 background-color: var(--color-coat-of-arms);
 
@@ -52,4 +58,11 @@
         }
     }
 
+}
+.blog {
+    .hero__container {
+        .hero__content {
+            min-height: 110px;
+        }
+    }
 }
