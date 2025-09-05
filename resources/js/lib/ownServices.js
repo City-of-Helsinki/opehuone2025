@@ -126,20 +126,22 @@ const pinOwnService = () => {
 
 const toggler = document.querySelector('.add-new-service-toggler');
 const modal = document.querySelector('#add-new-service-modal');
-const closeBtn = modal.querySelector('.close');
-const cancelBtn = modal.querySelector('.add-new-service-form__btn--cancel');
+const closeBtn = modal?.querySelector('.close');
+const cancelBtn = modal?.querySelector('.add-new-service-form__btn--cancel');
 
 toggler?.addEventListener('click', () => {
     modal.classList.add('is-visible');
 });
 
-[closeBtn, cancelBtn].forEach(btn =>
-    btn.addEventListener('click', () => {
-        modal.classList.remove('is-visible');
-    })
-);
+if (closeBtn && cancelBtn) {
+    [closeBtn, cancelBtn].forEach(btn =>
+        btn.addEventListener('click', () => {
+            modal.classList.remove('is-visible');
+        })
+    );
+}
 
-modal.addEventListener('click', (event) => {
+modal?.addEventListener('click', (event) => {
     // If the click is directly on the backdrop (not inside the dialog)
     if (event.target === modal) {
         modal.classList.remove('is-visible');
