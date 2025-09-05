@@ -80,9 +80,24 @@
 		}
 	}
 	&__sub-button {
-		svg.icon {
-			width: 11px !important;
+
+		.button {
+			background-color: #000;
+			border-color: #000;
+			
+			@include hover-focus {
+				background-color: transparent;
+				color: #000;
+				border-color: #000;
+
+				svg {
+					path {
+						-webkit-transition: .3s;
+						transition: .3s;
+						fill: #000;		
+					}
+				}
+			}	
 		}
 	}
-
 }

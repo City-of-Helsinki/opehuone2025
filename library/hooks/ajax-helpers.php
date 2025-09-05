@@ -242,26 +242,50 @@ function ajax_update_user_settings() {
 add_action( 'wp_ajax_update_user_settings', __NAMESPACE__ . '\\ajax_update_user_settings' );
 
 function ajax_add_new_own_link() {
-	// Call the verification function and pass the nonce from $_POST
-	verify_logged_in_request( $_POST['nonce'] );
+    // Check nonce
+    $nonce = $_POST['nonce'] ?? '';
+    if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
+        wp_send_json_error( 'Virheellinen nonce' );
+    }
 
-	$url_name = esc_html( $_POST['urlName'] );
-	$url      = esc_url( $_POST['url'] );
-	$user_id  = esc_attr( $_POST['userId'] );
+    $user_id  = intval( $_POST['userId'] ?? 0 );
+    $url      = esc_url_raw( $_POST['url'] ?? '' );
+    $url_name = sanitize_text_field( $_POST['urlName'] ?? '' );
 
-	$user_links = \User_settings::get_user_own_links( $user_id );
+    if ( ! $user_id || ! $url || ! $url_name ) {
+        wp_send_json_error( 'Puuttuvat tiedot' );
+    }
 
-	$user_links['added_custom_links'][] = [
-		'url_name' => $url_name,
-		'url'      => $url,
-	];
+    // Get existing user links
+    $own_links = get_user_meta( $user_id, 'user_opehuone_own_links', true );
 
-	update_user_meta( $user_id, 'user_opehuone_own_links', $user_links );
+    if ( ! is_array( $own_links ) ) {
+        $own_links = array(
+            'removed_default_urls' => array(),
+            'added_custom_links'   => array(),
+		);
+    }
 
-	// Send a success response with the added link
-	wp_send_json_success( [ 'message' => 'Linkki lisätty', 'urlName' => $url_name, 'url' => $url ] );
+    if ( ! isset( $own_links['added_custom_links'] ) || ! is_array( $own_links['added_custom_links'] ) ) {
+        $own_links['added_custom_links'] = array();
+    }
+
+    // Add new link
+    $own_links['added_custom_links'][] = array(
+        'url_name' => $url_name,
+        'url'      => $url,
+	);
+
+    update_user_meta( $user_id, 'user_opehuone_own_links', $own_links );
+
+    $added_link = array(
+        'title' => $url_name,
+        'url'   => $url,
+        'type'  => 'custom',
+	);
+
+    wp_send_json_success( $added_link );
 }
-
 add_action( 'wp_ajax_add_new_own_link', __NAMESPACE__ . '\\ajax_add_new_own_link' );
 
 function ajax_remove_default_link() {

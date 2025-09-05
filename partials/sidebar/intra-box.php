@@ -1,4 +1,7 @@
 <?php
+
+use Opehuone\Helpers;
+
 $intrabox_title = get_field('intrabox_title','options');
 $intrabox_content = get_field('intrabox_content','options');
 
@@ -39,7 +42,15 @@ if( $intrabox_title || $intrabox_content ):
 			$link_title = $link['title'];
 			$link_target = $link['target'] ? $link['target'] : '_self';
 			?>
-			<a class="button" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?><svg class="icon mask-icon icon--link-external hds-icon--link-external inline-icon" viewBox="0 0 24 24" aria-label="(Linkki johtaa ulkoiseen palveluun)" tabindex="-1" role="img"></svg></a>
+			<a class="button" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>">
+				<?php echo esc_html( $link_title );
+				if( $link_target === "_self" ) :
+					Helpers\the_svg( 'icons/arrow-right' );
+				else :
+					Helpers\the_svg( 'icons/arrow-top-right' );
+				endif;
+				?>
+			</a>
 		<?php endif; ?>
 	</div>
 </div>
