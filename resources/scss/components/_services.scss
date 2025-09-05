@@ -31,7 +31,7 @@
 .services-row, .services-row--inactive {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   list-style-type: none;
   margin: 1rem auto;
   padding: .3125rem 0;

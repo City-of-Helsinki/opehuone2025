@@ -52,12 +52,15 @@ const addNewOwnService = () => {
                 notifications.show();
                 form.removeClass('form-loading');
                 notifications.text(opehuone_js.new_service_added);
+                notifications.addClass('success');
                 inactiveRow.html(content);
                 clearInputs();
 
                 setTimeout(() => {
                     notifications.fadeOut();
+                    notifications.removeClass('success');
                 },5000);
+
             }
         });
     });
@@ -83,7 +86,9 @@ const removeOwnService = () => {
             }),
             success: function (content) {
                 alert(content);
-                closestColumn.fadeOut();
+                closestColumn.fadeOut('fast', function() {
+                    updateInactiveTogglersVisibility();
+                });
             }
         });
     });
