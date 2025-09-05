@@ -45,7 +45,7 @@ function init_taxonomy() {
 		'show_tagcloud'      => false,
 		'show_in_rest'       => true,
 	);
-	register_taxonomy( 'cornerlabels', [ 'post', 'training', 'page', 'links' ], $args );
+	register_taxonomy( 'cornerlabels', [ 'post', 'training', 'page', 'links', 'services' ], $args );
 
 }
 
