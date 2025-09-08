@@ -58,12 +58,3 @@ add_action('helsinki_footer', function() {
 add_action('helsinki_footer_bottom', function() {
     get_template_part('partials/footer/logo' );
 }, 10);
-
-
-add_action('wp', function() {
-    // Helsinki-theme enables feedback only for pages, not posts, so we have to apply filters here
-    if ( is_singular('post') && apply_filters('helsinki_feedback_enabled', true) ) {
-        add_filter('body_class', 'helsinki_feedback_buttons_body_class', 10);
-        add_action('helsinki_content_body_after', 'helsinki_feedback_buttons', 21);
-    }
-});
