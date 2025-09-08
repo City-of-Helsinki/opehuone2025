@@ -10,44 +10,30 @@ if ( $post->post_parent ) {
     }
 } 
 
-$terms = get_terms(
-	array(
-    'taxonomy' => 'cornerlabels',
-    'hide_empty' => false,
-));
+$cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
 
-if (!empty($terms) && !is_wp_error($terms)) {
-
-    echo '<p>Suodata sisältöä oppiasteen mukaan</p>';
+    echo '<p>Suodata sisältöä koulutusasteen mukaan</p>';
     echo '<form id="front-page-filter-pages" class="front-page-posts-filter" data-target="pages">';
     echo '<div class="front-page-posts-filter__checkboxes-row">';
 
-    foreach ($terms as $term) {
-        $term_id = $term->term_id;
-        $term_name = $term->name;
+    $terms = get_terms( [
+        'taxonomy'   => 'cornerlabels',
+        'hide_empty' => true,
+    ] );
 
-        // Check if the term has any published pages
-        $pages = get_posts(
-			array(
-            'post_type' => 'page',
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'cornerlabels',
-                    'field' => 'term_id',
-                    'terms' => $term_id,
-				),
-			)
-		));
-
-        $disabled = empty($pages) ? 'disabled' : '';
-
-        echo '<label class="front-page-posts-filter__checkbox-label">';
-        echo '<input type="checkbox" class="front-page-posts-filter__checkbox-input" value="' . esc_attr($term_id) . '" ' . $disabled . '>';
-        echo esc_html($term_name);
-        echo '</label>';
+    if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+        foreach ( $terms as $term ) {
+            ?>
+            <label class="front-page-posts-filter__checkbox-label">
+                <input type="checkbox" class="front-page-posts-filter__checkbox-input" name="cornerlabels[]"
+                        value="<?php echo esc_attr( $term->term_id ); ?>" <?php echo in_array( $term->term_id, $cornerlabels ) ? ' checked' : ''; ?>>
+                <?php echo esc_html( $term->name ); ?>
+            </label>
+            <?php
+        }
     }
 
     echo '</div>';
     echo '</form>';
-}
+
 ?>
