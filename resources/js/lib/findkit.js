@@ -8,7 +8,7 @@ const findkitUI = new FindkitUI({
     header: false,
     groups: [
         {
-            title: "Sivut",
+            title: "Sisältösivut",
             previewSize: 3,
             params: {
                 tagQuery: [["wp_post_type/page"]],
@@ -50,12 +50,17 @@ const findkitUI = new FindkitUI({
             `;
         },
         Hit(props) {
+            const tags = props.hit.tags
+                .filter(tag => tag.startsWith('opehuone-search-label/'))
+                .map(tag => tag.replace('opehuone-search-label/', ''));
+
             return html`
                 <div>
+                    ${tags.length > 0 && tags.map(tag => html`<div className="findkit-result-tag"><span>${tag}</span></div>`)}
                     <h2 class="findkit-result-header">
                         <a class="findkit-result-link" href=${props.hit.url}>${props.hit.title}</a>
                     </h2>
-                    <${props.parts.Highlight} />
+                    <${props.parts.Highlight}/>
                 </div>
             `;
         },
@@ -108,10 +113,12 @@ const findkitUI = new FindkitUI({
 
         .findkit--hit h2 {
             margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 1rem;
-            font-weight: 700;
+            margin-bottom: 0.65rem;
             color: #1A1A1A;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%;
         }
 
         .findkit--hit h2 > a {
@@ -207,6 +214,19 @@ const findkitUI = new FindkitUI({
             color: #000;
             background-color: transparent;
             text-decoration: none;
+        }
+        
+        .findkit-result-tag {
+            color: black;
+            display: inline-block;
+            background-color: #E6E6E6;
+            font-size: 10px;
+            line-height: 24px;
+            border-radius: 24px;
+            padding: 0px 12px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            margin-right: 12px;
         }
     `,
 })

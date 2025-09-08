@@ -1,124 +1,49 @@
 <?php
-
 use Opehuone\Helpers;
-use Opehuone\Utils;
+use Opehuone\User_settings;
 
 $current_user = wp_get_current_user();
 $user_id      = $current_user->ID;
 
-$own_links = User_settings::get_user_own_links( $user_id );
-
-// Fallback to empty set if no data
-if ( ! is_array( $own_links ) ) {
-	$own_links = [
-		'removed_default_urls' => [],
-		'added_custom_links'   => [],
-	];
-}
+$all_links = \User_settings::get_sorted_links_for_user( $user_id );
 ?>
+
 <div class="sidebar-box sidebar-box--engel-light side-links-list-box">
 	<h3 class="sidebar-box__sub-title">Omat pikalinkit</h3>
 
 	<ul class="side-links-list">
-		<?php
-		$link_lists = [
-			[
-				'terms' => Oppiaste_checker::get_oppiaste_options_term_value(),
-			],
-			[
-				'terms' => get_field( 'oppiaste_term_default', 'option' ),
-			]
-		];
-
-		foreach (
-			$link_lists
-
-			as $link_list
-		) {
-
-			/**
-			 * Dont show default "yhteiset" set for non logged
-			 */
-			if ( ! Utils\user_data_meta_exists() && empty( $link_list['name'] ) ) {
-				continue;
-			}
-
-			$args = [
-				'post_type'      => 'links',
-				'posts_per_page' => - 1,
-				'order'          => 'ASC',
-				'orderby'        => 'menu_order',
-				'tax_query'      => [
-					[
-						'taxonomy' => 'cornerlabels',
-						'field'    => 'term_id',
-						'terms'    => $link_list['terms'],
-					]
-				],
-			];
-
-			$query = new WP_Query( $args );
-
-			if ( $query->have_posts() ) {
-
-				while ( $query->have_posts() ) {
-					$query->the_post();
-
-					$link_array = get_field( 'link' );
-
-					// Check is this link is removed by user
-					if ( in_array( $link_array['url'], $own_links['removed_default_urls'] ) ) {
-						continue;
-					}
-
-					?>
-					<li class="side-links-list__item">
-						<a href="<?php echo esc_url( $link_array['url'] ); ?>"
-						   class="side-links-list__link"
-						   target="_blank">
-							<?php echo esc_html( $link_array['title'] ); ?>
-						</a>
-						<button class="side-links-list__remove-btn side-links-list__remove-btn--default"
-								aria-label="<?php esc_html_e( 'Poista tämä linkki', 'helsinki-universal' ); ?>"
-								data-link-url="<?php echo esc_url( $link_array['url'] ); ?>">
-							<?php Helpers\the_svg( 'icons/cross-circle-fill' ); ?>
-						</button>
-					</li>
-					<?php
-				}
-			}
-		}
-		wp_reset_postdata();
-
-		foreach ( $own_links['added_custom_links'] as $row ) {
-			?>
+		<?php foreach ( $all_links as $link ) : ?>
 			<li class="side-links-list__item">
-				<a href="<?php echo esc_url( $row['url'] ); ?>"
+				<a href="<?php echo esc_url( $link['url'] ); ?>"
 				   class="side-links-list__link"
 				   target="_blank">
-					<?php echo esc_html( $row['url_name'] ); ?>
+					<?php echo esc_html( $link['title'] ); ?>
 				</a>
-				<button class="side-links-list__remove-btn side-links-list__remove-btn--custom"
-						aria-label="<?php esc_html_e( 'Poista tämä linkki', 'helsinki-universal' ); ?>"
-						data-custom-link-name="<?php echo esc_attr( $row['url_name'] ); ?>"
-						data-custom-link-url="<?php echo esc_url( $row['url'] ); ?>">
-					<?php Helpers\the_svg( 'icons/cross-circle-fill' ); ?>
-				</button>
+				<?php if ( $link['type'] === 'default' ) : ?>
+					<button class="side-links-list__remove-btn side-links-list__remove-btn--default"
+							aria-label="<?php esc_html_e( 'Poista tämä linkki', 'helsinki-universal' ); ?>"
+							data-link-url="<?php echo esc_url( $link['url'] ); ?>">
+						<?php Helpers\the_svg( 'icons/cross-circle-fill' ); ?>
+					</button>
+				<?php else : ?>
+					<button class="side-links-list__remove-btn side-links-list__remove-btn--custom"
+							aria-label="<?php esc_html_e( 'Poista tämä linkki', 'helsinki-universal' ); ?>"
+							data-custom-link-name="<?php echo esc_attr( $link['title'] ); ?>"
+							data-custom-link-url="<?php echo esc_url( $link['url'] ); ?>">
+						<?php Helpers\the_svg( 'icons/cross-circle-fill' ); ?>
+					</button>
+				<?php endif; ?>
 			</li>
-			<?php
-		}
-		?>
+		<?php endforeach; ?>
 	</ul>
+
 	<?php if ( is_user_logged_in() ) : ?>
 		<div class="side-links-list__own-links-functions">
-			
-
-
 			<div class="side-links-list__form-wrapper">
 				<form class="side-links-list__form" id="own-links__add-new-form">
 					<fieldset class="own-links__add-new-form__fieldset">
 						<legend class="own-links__add-new-form__legend">
-							<?php esc_html_e( 'Voit lisätä listan alkuun omia linkkejä.', 'helsinki-universal' ); ?>
+							<?php esc_html_e( 'Voit lisätä listaan omia linkkejä.', 'helsinki-universal' ); ?>
 						</legend>
 						<div class="opehuone-form-field-group">
 							<label for="own-link-name" class="opehuone-form-label">
@@ -141,25 +66,20 @@ if ( ! is_array( $own_links ) ) {
 						<button type="submit" class="own-links__submit-btn">
 							<?php esc_html_e( 'Lisää uusi linkki', 'helsinki-universal' ); ?>
 						</button>
-						<div class="own-links__add-new-form-notifications">
-
-						</div>
+						<div class="own-links__add-new-form-notifications"></div>
 					</fieldset>
 				</form>
 				<div class="side-links-list__reset-buttons">
-
 					<button
-						class="side-links-list__reset-btn side-links-list__reset-btn--final side-links-list__reset-btn--final--hidden">
-						<?php esc_html_e( 'VAROITUS!! Painamalla tästä kaikki luomasi linkit poistetaan ja kaikki alkuperäiset linkit palautetaan. Sivu latautuu automaattisesti uudelleen.', 'helsinki-universal' ); ?>
+						class="side-links-list__reset-btn side-links-list__reset-btn--final button hds-button--white">
+						<?php esc_html_e( 'Palauta alkuperäiset linkit', 'helsinki-universal' ); ?>
 					</button>
 				</div>
-				
 			</div>
 
 			<button class="side-links-list__edit-link" id="own-links-modify">
 				<span><?php esc_html_e( 'Muokkaa ja lisää', 'helsinki-universal' ); ?></span>
 			</button>
-
 		</div>
 	<?php endif; ?>
 </div>

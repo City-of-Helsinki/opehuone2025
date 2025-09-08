@@ -95,7 +95,7 @@ function add_js_variables() {
 		'ajaxUrl'         => admin_url( 'admin-ajax.php' ),
 		'userId'           => is_user_logged_in() ? get_current_user_id() : 0,
 		'addNewFormErrors' => esc_html__( 'Uuden palvelun lisäämisessä on ongelmia. Syötitkö tarvittavat tiedot?', 'helsinki-universal' ),
-		'newServiceSdded'  => esc_html__( 'Uusi palvelu lisätty onnistuneesti. Palvelu tulee näkyviin, kun sivu ladataan uudelleen.', 'helsinki-universal' ),
+		'newServiceAdded'  => esc_html__( 'Uusi palvelu lisätty onnistuneesti.', 'helsinki-universal' ),
 		'opehuoneNonce'   => wp_create_nonce( 'opehuone_nonce' ),
 	];
 

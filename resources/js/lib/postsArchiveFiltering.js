@@ -3,26 +3,17 @@ import { setLoadmoreButtonAttributes, loadMorePosts } from './loadMoreHelpers';
 
 const T = getTranslations('opehuone-variables');
 
-const numberOfPostsSpan = document.querySelector(
-	'#posts-archive-number-of-posts'
-);
+const numberOfPostsSpan = document.querySelector('#posts-archive-number-of-posts');
 const postsContainer = document.querySelector('#posts-archive-results');
 
-const getCheckedValues = (form, name) => {
-	// need to escape the square brackets with double backslashes (\\) in the selector string
-	const escapedName = name.replace(/([\[\]])/g, '\\$1');
-	const checkboxes = form.querySelectorAll(
-		`input[type="checkbox"][name="${escapedName}"]:checked`
-	);
-	return Array.from(checkboxes).map((input) => input.value);
-};
+const doFiltering = (event) => {
+	if (event) {
+		event.preventDefault();
+	}
 
-const doFiltering = (event, form) => {
-	event.preventDefault(); // Prevent the default form submission
-
-	const cornerlabels = getCheckedValues(form, 'cornerlabels[]');
-	const categories = getCheckedValues(form, 'category[]');
-	const postTags = getCheckedValues(form, 'post_tag[]');
+	const cornerLabel = document.querySelector('#posts-archive-cornerlabels')?.value ?? '';
+	const category = document.querySelector('#posts-archive-category')?.value ?? '';
+	const postTheme = document.querySelector('#posts-archive-post_theme')?.value ?? '';
 
 	fetch(T.ajaxUrl, {
 		method: 'POST',
@@ -30,10 +21,10 @@ const doFiltering = (event, form) => {
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		body: new URLSearchParams({
-			action: `update_posts_archive_results`,
-			cornerLabels: cornerlabels,
-			categories: categories,
-			postTags: postTags,
+			action: 'update_post_archive_results',
+			cornerLabel: cornerLabel,
+			category: category,
+			postTheme: postTheme,
 			userId: T.userId,
 		}),
 	})
@@ -42,111 +33,68 @@ const doFiltering = (event, form) => {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
 			return response.json();
-		}) // Assuming the response is JSON
+		})
 		.then((response) => {
 			if (postsContainer) {
 				postsContainer.innerHTML = response.data.output;
 			}
-			numberOfPostsSpan.innerHTML = response.data.totalPosts;
+			if (numberOfPostsSpan) {
+				numberOfPostsSpan.innerHTML = response.data.totalPosts;
+			}
 
-			// Set load more button properties
-			setLoadmoreButtonAttributes(
-				response.data.totalPosts,
-				cornerlabels,
-				categories,
-				postTags
-			);
+            // Update URL parameters
+			const url = new URL(window.location);
+			url.searchParams.set('filter_cornerlabels', cornerLabel);
+			url.searchParams.set('filter_category', category);
+			url.searchParams.set('filter_post_theme', postTheme);
+			window.history.replaceState({}, document.title, url);
+
+            // Update load more button attributes
+			setLoadmoreButtonAttributes(response.data.totalPosts, cornerLabel, category, postTheme);
 		})
 		.catch((error) => console.error('AJAX Error:', error));
 };
 
-const toggleDropdown = () => {
-	const filterButtons = document.querySelectorAll(
-		'.checkbox-filter__filter-btn'
-	);
-
-	filterButtons.forEach((button) => {
-		const originalLabel =
-			button.getAttribute('aria-label') || 'Näytä valinnat'; // Fallback label
-
-		button.addEventListener('click', (event) => {
-			event.preventDefault();
-			const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
-			// Toggle aria-expanded
-			button.setAttribute('aria-expanded', (!isExpanded).toString());
-
-			// Toggle aria-label
-			button.setAttribute(
-				'aria-label',
-				isExpanded ? originalLabel : 'Piilota valinnat'
-			);
-		});
-
-		// Ensure that pressing "Enter" also toggles the dropdown
-		button.addEventListener('keydown', (event) => {
-			if (event.key === 'Enter' || event.key === ' ') {
-				event.preventDefault(); // Prevent scrolling or default button behavior
-				button.click(); // Simulate the click to toggle dropdown
-			}
-		});
-	});
-
-	// Enable checkboxes to toggle with Enter and Space keys
-	const checkboxes = document.querySelectorAll(
-		'.checkbox-filter__checkbox-input'
-	);
-
-	checkboxes.forEach((checkbox) => {
-		checkbox.addEventListener('keydown', (event) => {
-			if (event.key === 'Enter' || event.key === ' ') {
-				event.preventDefault(); // Prevent triggering other elements like buttons
-				checkbox.checked = !checkbox.checked; // Toggle checkbox state manually
-				checkbox.dispatchEvent(new Event('change')); // Trigger change event if needed
-			}
-		});
+const applyUrlParamsToForm = (form) => {
+	const urlParams = new URLSearchParams(window.location.search);
+	const map = {
+		filter_cornerlabels: '#posts-archive-cornerlabels',
+		filter_category: '#posts-archive-category',
+		filter_post_theme: '#posts-archive-post_theme',
+	};
+	Object.entries(map).forEach(([param, selector]) => {
+		const el = form.querySelector(selector);
+		const val = urlParams.get(param);
+		
+        if (el && val !== null) {
+			el.value = val;
+		}
 	});
 };
 
-const initializeResetButtons = () => {
-	const resetButtons = document.querySelectorAll(
-		'.checkbox-filter__checkboxes-reset-btn'
-	);
+const triggerFormUpdateOnPageLoad = (form) => {
+	const urlParams = new URLSearchParams(window.location.search);
+	const filterKeys = ['filter_cornerlabels', 'filter_category', 'filter_post_theme'];
+	const shouldTrigger = filterKeys.some((key) => urlParams.has(key) && urlParams.get(key) !== '');
 
-	resetButtons.forEach((button) => {
-		button.addEventListener('click', (event) => {
-			event.preventDefault();
-			// Find the closest filter wrapper to scope the reset action
-			const filterWrapper = button.closest(
-				'.posts-archive__select-filter-wrapper'
-			);
+	if (!shouldTrigger) {
+		return;
+	}
 
-			if (filterWrapper) {
-				// Select all checked checkboxes within this filter group
-				const checkboxes = filterWrapper.querySelectorAll(
-					'.checkbox-filter__checkbox-input:checked'
-				);
-
-				checkboxes.forEach((checkbox) => {
-					checkbox.checked = false;
-					checkbox.dispatchEvent(new Event('change')); // Dispatch change event if needed
-				});
-			}
-		});
-	});
+	applyUrlParamsToForm(form);
+	doFiltering();
+    form.scrollIntoView({ behavior: 'smooth' });
 };
 
 export const postsArchiveFiltering = () => {
 	const form = document.querySelector('.posts-archive-filtering');
-	if (form) {
-		form.addEventListener('submit', (event) => doFiltering(event, form));
+	
+    if (!form) {
+		return;
 	}
 
-	// toggle dropdowns with button
-	toggleDropdown();
-
-	// reset buttons
-	initializeResetButtons();
+	form.addEventListener('submit', doFiltering);
+	triggerFormUpdateOnPageLoad(form);
 
 	// Load more
 	loadMorePosts('load_more_posts_archive_results', postsContainer);

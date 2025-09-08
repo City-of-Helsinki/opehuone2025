@@ -85,10 +85,12 @@
 	}
 
 	&__reset-btn {
-		@include create-button(true, #fff, red);
+		border: solid 2px #000;
 
-		&.side-links-list__reset-btn--final--hidden {
-			display: none;
+		@include hover-focus {
+			background-color: transparent;
+			color: #000;
+			border-color: #000;
 		}
 	}
 
@@ -96,6 +98,7 @@
 		display: grid;
 		grid-template-columns: auto;
 		gap: var(--opehuone--spacing--x-small);
+		margin-bottom: var(--opehuone--spacing--normal);
 	}
 
 	&__form {

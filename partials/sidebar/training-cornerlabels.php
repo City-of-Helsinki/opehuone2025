@@ -19,6 +19,11 @@ foreach ( $terms as $term ) {
 	<?php the_svg( 'icons/oppiaste' ); ?>
 	<div class="icon-detail__text-content">
 		<span class="icon-detail__title"><?php esc_html_e( 'Oppiaste', 'helsinki-universal' ); ?></span>
-		<span data-fdk-tags class="icon-detail__subtitle"><?php echo esc_html( implode( ', ', $terms_array ) ); ?></span>
+		<span class="icon-detail__subtitle"><?php echo esc_html( implode( ', ', $terms_array ) ); ?></span>
+        <?php
+        foreach( $terms_array as $term ) {
+            echo '<span data-fdk-tags style="display: none;">opehuone-search-label/' . esc_html( $term ) .'</span>';
+        }
+        ?>
 	</div>
 </div>

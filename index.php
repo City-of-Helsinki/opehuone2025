@@ -17,7 +17,11 @@ do_action( 'helsinki_loop_before' );
 	 * Hook: helsinki_loop_top
 	 *
 	 */
-	do_action( 'helsinki_loop_top' );
+	if ( get_queried_object_id() === (int) get_option('page_for_posts') ) {
+		get_template_part('partials/header/news-header');
+	} else {
+		do_action( 'helsinki_loop_top' );
+	}
 
 	?>
 

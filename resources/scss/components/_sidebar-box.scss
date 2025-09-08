@@ -11,7 +11,7 @@
 	background-size: 50%;
 
 	&.sidebar-box--suomenlinna-light {
-		background-color: var(--color-suomenlinna-light);
+		background-color: var(--color-suomenlinna-medium-light);
 	}
 
 	&.sidebar-box--coat-of-arms-light {
@@ -39,6 +39,12 @@
 		&.sidebar-box__sub-title--margin-top {
 			margin-top: var(--opehuone--spacing--small);
 		}
+	}
+
+	&__placeholder-text {
+		font-weight: 500;
+		font-size: var(--opehuone--font-size--medium);
+		line-height: 28px;
 	}
 
 	&__description {
@@ -74,9 +80,24 @@
 		}
 	}
 	&__sub-button {
-		svg.icon {
-			width: 11px !important;
+
+		.button {
+			background-color: #000;
+			border-color: #000;
+			
+			@include hover-focus {
+				background-color: transparent;
+				color: #000;
+				border-color: #000;
+
+				svg {
+					path {
+						-webkit-transition: .3s;
+						transition: .3s;
+						fill: #000;		
+					}
+				}
+			}	
 		}
 	}
-
 }

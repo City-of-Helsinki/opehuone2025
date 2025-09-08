@@ -37,15 +37,15 @@ class Time_until {
 
         $days_until   = str_replace( '+', '', $interval->format( '%R%a' ) );
         $hours_until  = str_replace( '+', '', $interval->format( '%H' ) );
-        $days_string  = $is_sv === true ? 'dagar' : __( 'päivää', 'helsinki-universal' );
-        $hours_string = $is_sv === true ? 'timmar' : __( 'tuntia', 'helsinki-universal' );
+        $days_string  = $is_sv === true ? 'dagar' : __( 'päivää', TEXT_DOMAIN );
+        $hours_string = $is_sv === true ? 'timmar' : __( 'tuntia', TEXT_DOMAIN );
 
         if ( $days_until === 1 ) {
-            $days_string = $is_sv === true ? 'dag' : __( 'päivä', 'helsinki-universal' );
+            $days_string = $is_sv === true ? 'dag' : __( 'päivä', TEXT_DOMAIN );
         }
 
         if ( $hours_until === 1 ) {
-            $hours_string = $is_sv === true ? 'timme' : __( 'tunti', 'helsinki-universal' );
+            $hours_string = $is_sv === true ? 'timme' : __( 'tunti', TEXT_DOMAIN );
         }
 
         return [

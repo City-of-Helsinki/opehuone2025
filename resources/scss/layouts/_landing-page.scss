@@ -1,6 +1,18 @@
-.page-template-landing-page, .post-type-archive {
+
+.page-template-landing-page, .post-type-archive, .home, .blog {
+
+    .sidebar-boxes {
+        margin-top: var(--opehuone--spacing--medium);
+    }
+
+    .hero {
+            margin-bottom: var(--opehuone--spacing--x-small);
+    }
+
     .hero__container {
         padding-top: var(--spacing-s);
+        min-height: 150px;
+        position: relative;
 
         .breadcrumbs {
             margin-bottom: var(--opehuone--spacing--2-x-small);
@@ -29,17 +41,12 @@
                 max-width: 100%;
                 max-height: 190px;
                 position: absolute;
-                left: 50%;
+                right: calc(130px + 1rem);
                 top: 0;
                 z-index: 999;
-
-                @include media-breakpoint-down(sm) {
-                    display: none;
-                }
                 
                 @include media-breakpoint-down(md) {
-                    max-height: 175px;
-                    top: initial;
+                    display: none;
                 }      
             }
         }
@@ -54,6 +61,21 @@
         }
         .single-post__featured-image  {
             aspect-ratio: 1000 / 335;
+        }
+    }
+
+    .link-element-box {
+        background-color: #F7F7F7;
+        border-left: 12px solid;
+        padding: 24px 46px;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            li {
+                font-size: var(--opehuone--font-size--2-x-medium);
+                margin-bottom: 18px;
+            }
         }
     }
 
@@ -79,11 +101,11 @@
 
         &__suomenlinna {
             &.hero {
-                background-color: var(--color-suomenlinna-medium-light);
+                background-color: var(--color-suomenlinna);
 
                 .hds-koros {
                     path {
-                        fill: var(--color-suomenlinna-medium-light);
+                        fill: var(--color-suomenlinna);
                     }
                 }
             }
@@ -91,18 +113,22 @@
             &.quick-links-container {
                 .quick-links-box {
                     background-color: var(--color-suomenlinna-light);
-                    border-left: 6px solid var(--color-suomenlinna-dark);
+                    border-left: 6px solid var(--color-suomenlinna);
                 }
+            }
+
+            &.link-element-box {
+                border-color: var(--color-suomenlinna);
             }
         }
 
         &__engel {
             &.hero {
-                background-color: var(--color-engel-medium-light);
+                background-color: var(--color-engel);
 
                 .hds-koros {
                     path {
-                        fill: var(--color-engel-medium-light);
+                        fill: var(--color-engel);
                     }
                 }
             }
@@ -110,8 +136,12 @@
             &.quick-links-container {
                 .quick-links-box {
                     background-color: var(--color-engel-light);
-                    border-left: 6px solid var(--color-engel-dark);
+                    border-left: 6px solid var(--color-engel);
                 }
+            }
+
+            &.link-element-box {
+                border-color: var(--color-engel);
             }
         }
 
@@ -129,18 +159,22 @@
             &.quick-links-container {
                 .quick-links-box {
                     background-color: var(--color-copper-light);
-                    border-left: 6px solid var(--color-copper-dark);
+                    border-left: 6px solid var(--color-copper);
                 }
+            }
+
+            &.link-element-box {
+                border-color: var(--color-copper);
             }
         }
 
         &__fog {
             &.hero {
-                background-color: var(--color-fog-medium-light);
+                background-color: var(--color-fog);
 
                 .hds-koros {
                     path {
-                        fill: var(--color-fog-medium-light);
+                        fill: var(--color-fog);
                     }
                 }
             }
@@ -148,8 +182,12 @@
             &.quick-links-container {
                 .quick-links-box {
                     background-color: var(--color-fog-light);
-                    border-left: 6px solid var(--color-fog-dark);
+                    border-left: 6px solid var(--color-fog);
                 }
+            }
+
+            &.link-element-box {
+                border-color: var(--color-fog);
             }
         }
 
@@ -167,8 +205,65 @@
             &.quick-links-container {
                 .quick-links-box {
                     background-color: var(--color-bus-light);
-                    border-left: 6px solid var(--color-bus-dark);
+                    border-left: 6px solid var(--color-bus-medium-light);
                 }
+            }
+
+            &.link-element-box {
+                border-color: var(--color-bus);
+            }
+        }
+
+        &__summer {
+            &.hero {
+                background-color: var(--color-summer);
+
+                .hds-koros {
+                    path {
+                        fill: var(--color-summer);
+                    }
+                }
+            }
+            
+            &.quick-links-container {
+                .quick-links-box {
+                    background-color: var(--color-summer-light);
+                    border-left: 6px solid var(--color-summer);
+                }
+            }
+
+            &.link-element-box {
+                border-color: var(--color-summer);
+            }
+        }
+
+        &__metro {
+            &.link-element-box {
+                border-color: var(--color-metro);
+            }
+        }
+
+        &__coat-of-arms {
+            &.link-element-box {
+                border-color: var(--color-coat-of-arms);
+            }
+        }
+
+        &__silver {
+            &.link-element-box {
+                border-color: var(--color-silver);
+            }
+        }
+
+        &__gold {
+            &.link-element-box {
+                border-color: var(--color-gold);
+            }
+        }
+
+        &__tram {
+            &.link-element-box {
+                border-color: var(--color-tram);
             }
         }
     }

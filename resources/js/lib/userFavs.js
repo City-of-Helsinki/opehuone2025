@@ -17,7 +17,16 @@ const buttonAriaPin = 'Lisää sivu kirjanmerkkeihin';
 
 const addToFavs = () => {
 	document.addEventListener('click', (event) => {
-		const pinnerButton = event.target.closest('.b-post__pinner');
+		let isSmallPinButton = true;
+
+		// This is pin button for front page post listing (small bookmark icon)
+		let pinnerButton = event.target.closest('.b-post__pinner');
+
+		if (!pinnerButton) {
+			// Large pin-button element located for individual pages/posts
+			pinnerButton = event.target.closest('.pin-btn');
+			isSmallPinButton = false;
+		}
 
 		if (!pinnerButton) return; // Ignore clicks outside .b-post__pinner buttons
 
@@ -46,15 +55,17 @@ const addToFavs = () => {
 				return response.json();
 			})
 			.then(() => {
+				const addFavorite = action === 'favs_add';
+
 				// Toggle button content and data-action attribute
-				if (action === 'favs_add') {
-					pinnerButton.innerHTML = pinnedSvg;
-					pinnerButton.setAttribute('data-action', 'favs_remove');
-					pinnerButton.setAttribute('aria-label', buttonAriaPinned);
+				if (isSmallPinButton) {
+					pinnerButton.innerHTML = addFavorite ? pinnedSvg : pinSvg;
+					pinnerButton.setAttribute('data-action', addFavorite ? 'favs_remove' : 'favs_add');
+					pinnerButton.setAttribute('aria-label', addFavorite ? buttonAriaPinned : buttonAriaPin);
 				} else {
-					pinnerButton.innerHTML = pinSvg;
-					pinnerButton.setAttribute('data-action', 'favs_add');
-					pinnerButton.setAttribute('aria-label', buttonAriaPin);
+					pinnerButton.classList.toggle('pinned', addFavorite);
+					pinnerButton.setAttribute('aria-pressed', pinnerButton.classList.contains('pinned'));
+					pinnerButton.setAttribute('data-action', addFavorite ? 'favs_remove' : 'favs_add');
 				}
 			})
 			.catch((error) => console.error('AJAX Error:', error));

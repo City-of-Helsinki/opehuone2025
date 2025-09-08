@@ -2,6 +2,8 @@
 
 namespace Opehuone\TemplateFunctions;
 
+use function \Opehuone\Utils\get_user_favs;
+
 /**
  * @return void
  */
@@ -94,4 +96,89 @@ function get_top_monthly_posts($limit = 5): \WP_Query {
     ];
 
     return new \WP_Query( $args );
+}
+
+function get_top_parent_page_title( $post_id = null ): ?string {
+    $post_id = $post_id ?: get_the_ID();
+    $ancestors = get_post_ancestors( $post_id );
+    $top_parent = $ancestors ? end( $ancestors ) : $post_id;
+
+    return $top_parent ? get_the_title( $top_parent ) : null;
+}
+
+// Function which displays the bookmark icon
+function get_favorite_article_button(): void {
+    $user_favs = get_user_favs();
+    $block_is_pinned = in_array( get_the_ID(), $user_favs );
+
+    $pinner_aria = $block_is_pinned ? 'Poista sivu kirjanmerkeistä' : 'Lisää sivu kirjanmerkiksi';
+    $button_action = $block_is_pinned ? 'favs_remove' : 'favs_add';
+
+    get_template_part('partials/components/pin-favorite-button', null, array(
+        'block_is_pinned' => $block_is_pinned,
+        'pinner_aria' => $pinner_aria,
+        'button_action' => $button_action,
+    ));
+}
+
+function get_training_posts_query(): \WP_Query {
+    $args = [
+        'post_type'      => 'training',
+        'posts_per_page' => -1,
+        'tax_query'      => [ 'relation' => 'AND' ],
+        'meta_key'       => 'training_start_datetime', // Define the meta key for ordering
+        'orderby'        => 'meta_value', // Order by meta value
+        'order'          => 'ASC', // Order in ascending order
+        'meta_query'     => [
+            [
+                'key'     => 'training_end_datetime', // Target the correct meta field
+                'value'   => current_time( 'Y-m-d\TH:i:s' ), // Get the current date and time in WordPress timezone
+                'compare' => '>=', // Only include posts where the date is in the future
+                'type'    => 'DATETIME', // Ensure proper comparison as a date-time value
+            ],
+        ],
+    ];
+
+    if ( ! empty( $_GET['cornerlabels'] ) ) {
+        $args['tax_query'][] = [
+            'taxonomy' => 'cornerlabels',
+            'field'    => 'id',
+            'terms'    => sanitize_text_field( $_GET['cornerlabels'] ),
+        ];
+    }
+
+    if ( ! empty( $_GET['training_theme'] ) ) {
+        $args['tax_query'][] = [
+            'taxonomy' => 'training_theme',
+            'field'    => 'id',
+            'terms'    => sanitize_text_field( $_GET['training_theme'] ),
+        ];
+    }
+
+    return new \WP_Query( $args );
+}
+
+function display_time_until_holidays(): void {
+    $holidays = [
+        'autumn'   => 'Aikaa syyslomaan',
+        'christmas'=> 'Aikaa joululomaan',
+        'winter'   => 'Aikaa talvilomaan',
+        'summer'   => 'Aikaa kesälomaan',
+    ];
+
+    echo '<div class="profile-opener-dropdown__holiday">';
+    foreach ( $holidays as $season => $label ) {
+        $show = get_field( 'show_until_' . $season, 'option' );
+        if ( ! $show ) {
+            continue;
+        }
+
+        $countdown = \Time_until::get_days_until_string( $season );
+
+        if ( ! $countdown ) {
+            continue;
+        }
+        echo '<span class="profile-opener-dropdown__holiday-countdown">' . esc_html( $label ) . ': ' . esc_html( $countdown ) . '</span>';
+    }
+    echo '</div>';
 }

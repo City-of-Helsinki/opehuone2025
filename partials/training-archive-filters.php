@@ -6,7 +6,7 @@
 		<?php
 		$filters = [
 			[
-				'name'     => esc_html__( 'Opetusaste', 'helsinki-universal' ),
+				'name'     => esc_html__( 'Koulutusaste', 'helsinki-universal' ),
 				'taxonomy' => 'cornerlabels',
 			],
 			[
@@ -17,8 +17,7 @@
 
 		foreach ( $filters as $filter ) {
             // Check if query parameter exists and select the correct option in the dropdowns
-            $query_param = 'filter_' . $filter['taxonomy'];
-            $selected_filter = isset( $_GET[ $query_param ] ) ? intval( $_GET[ $query_param ] ) : null;
+            $selected_filter = isset( $_GET[ $filter['taxonomy'] ] ) ? intval( $_GET[ $filter['taxonomy'] ] ) : null;
 			?>
 			<div class="training-archive__single-filter">
 				<label for="training-archive-<?php echo esc_attr( $filter['taxonomy'] ); ?>"

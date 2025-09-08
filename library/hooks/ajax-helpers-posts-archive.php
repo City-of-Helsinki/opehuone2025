@@ -58,10 +58,10 @@ function get_user_favs( $user_id ) {
  *
  * @param $cornerlabels
  * @param $categories
- * @param $post_tags
+ * @param $post_themes
  *
  */
-function set_tax_query( $cornerlabels = [], $categories = [], $post_tags = [] ) {
+function set_tax_query( $cornerlabels = [], $categories = [], $post_themes = [] ) {
 	$tax_query = [];
 
 	if ( ! empty( $cornerlabels ) ) {
@@ -84,12 +84,12 @@ function set_tax_query( $cornerlabels = [], $categories = [], $post_tags = [] ) 
 		}
 	}
 
-	if ( ! empty( $post_tags ) ) {
-		if ( $post_tags[0] !== '' ) { // This here because exploded done for empty string return ['']
+	if ( ! empty( $post_themes ) ) {
+		if ( $post_themes[0] !== '' ) { // This here because exploded done for empty string return ['']
 			$tax_query[] = [
-				'taxonomy' => 'post_tag',
+				'taxonomy' => 'post_theme',
 				'field'    => 'term_id',
-				'terms'    => $post_tags,
+				'terms'    => $post_themes,
 			];
 		}
 	}
@@ -102,93 +102,95 @@ function set_tax_query( $cornerlabels = [], $categories = [], $post_tags = [] ) 
 	return $tax_query;
 }
 
+// function ajax_update_posts_archive_results() {
+// 	// Get filter values from POST request
+// 	$user_id      = intval( $_POST['userId'] );
+// 	$current_favs = get_user_favs( $user_id );
 
-function ajax_update_posts_archive_results() {
-	// Get filter values from POST request
-	$user_id      = intval( $_POST['userId'] );
-	$current_favs = get_user_favs( $user_id );
+// 	$cornerlabels = isset( $_POST['cornerLabels'] ) ? $_POST['cornerLabels'] : '';
+// 	$cornerlabels = convert_string_to_array( $cornerlabels );
 
-	$cornerlabels = isset( $_POST['cornerLabels'] ) ? $_POST['cornerLabels'] : '';
-	$cornerlabels = convert_string_to_array( $cornerlabels );
+// 	$categories = isset( $_POST['categories'] ) ? $_POST['categories'] : '';
+// 	$categories = convert_string_to_array( $categories );
 
-	$categories = isset( $_POST['categories'] ) ? $_POST['categories'] : '';
-	$categories = convert_string_to_array( $categories );
+// 	$post_themes = isset( $_POST['postThemes'] ) ? $_POST['postThemes'] : '';
+// 	$post_themes = convert_string_to_array( $post_themes );
 
-	$post_tags = isset( $_POST['postTags'] ) ? $_POST['postTags'] : '';
-	$post_tags = convert_string_to_array( $post_tags );
+// 	$tax_query = set_tax_query( $cornerlabels, $categories, $post_themes );
 
-	$tax_query = set_tax_query( $cornerlabels, $categories, $post_tags );
+// 	$query_args = [
+// 		'post_type'      => 'post',
+// 		'post_status'    => 'publish',
+// 		'posts_per_page' => 15,
+// 	];
 
-	$query_args = [
-		'post_type'      => 'post',
-		'post_status'    => 'publish',
-		'posts_per_page' => 15,
-	];
+// 	// possibly add tax query
+// 	if ( count( $tax_query ) > 0 ) {
+// 		$query_args['tax_query'] = $tax_query;
+// 	}
 
-	// possibly add tax query
-	if ( count( $tax_query ) > 0 ) {
-		$query_args['tax_query'] = $tax_query;
-	}
+// 	ob_start();
 
-	ob_start();
+// 	$query = new \WP_Query( $query_args );
 
-	$query = new \WP_Query( $query_args );
+// 	// Output regular posts after sticky ones
+// 	if ( $query->have_posts() ) {
+// 		while ( $query->have_posts() ) {
+// 			$query->the_post();
 
-	// Output regular posts after sticky ones
-	if ( $query->have_posts() ) {
-		while ( $query->have_posts() ) {
-			$query->the_post();
+// 			$block_args = [
+// 				'post_id'    => get_the_ID(),
+// 				'title'      => get_the_title(),
+// 				'url'        => get_the_permalink(),
+// 				'media_id'   => get_post_thumbnail_id(),
+// 				'excerpt'    => get_the_excerpt(),
+// 				'is_sticky'  => is_sticky(),
+// 				'categories' => get_the_category(),
+// 				'date'       => get_the_date(),
+// 				'is_pinned'  => in_array( get_the_ID(), $current_favs ),
+// 			];
 
-			$block_args = [
-				'post_id'    => get_the_ID(),
-				'title'      => get_the_title(),
-				'url'        => get_the_permalink(),
-				'media_id'   => get_post_thumbnail_id(),
-				'excerpt'    => get_the_excerpt(),
-				'is_sticky'  => is_sticky(),
-				'categories' => get_the_category(),
-				'date'       => get_the_date(),
-				'is_pinned'  => in_array( get_the_ID(), $current_favs ),
-			];
+// 			get_template_part( 'partials/template-blocks/b-post', null, $block_args );
+// 		}
+// 	} else {
+// 		echo '<p>Ei uutisia.</p>';
+// 	}
 
-			get_template_part( 'partials/template-blocks/b-post', null, $block_args );
-		}
-	} else {
-		echo '<p>Ei uutisia.</p>';
-	}
+// 	$output      = ob_get_clean();
+// 	$total_posts = $query->found_posts; // Get the total number of posts found
 
-	$output      = ob_get_clean();
-	$total_posts = $query->found_posts; // Get the total number of posts found
+// 	wp_reset_postdata();
 
-	wp_reset_postdata();
+// 	wp_send_json_success( [
+// 		'message'    => 'Uutiset päivitetty',
+// 		'output'     => $output,
+// 		'totalPosts' => $total_posts, // Include total number of posts
+// 	] );
+// }
 
-	wp_send_json_success( [
-		'message'    => 'Uutiset päivitetty',
-		'output'     => $output,
-		'totalPosts' => $total_posts, // Include total number of posts
-	] );
+// add_action( 'wp_ajax_update_posts_archive_results', __NAMESPACE__ . '\\ajax_update_posts_archive_results' );
+// add_action( 'wp_ajax_nopriv_update_posts_archive_results', __NAMESPACE__ . '\\ajax_update_posts_archive_results' );
+
+function get_post_array( $key ) {
+    if ( ! isset( $_POST[$key] ) || $_POST[$key] === 'null' || $_POST[$key] === '' ) {
+        return [];
+    }
+
+    return array_filter(
+        explode( ',', sanitize_text_field( $_POST[$key] ) )
+    );
 }
 
-add_action( 'wp_ajax_update_posts_archive_results', __NAMESPACE__ . '\\ajax_update_posts_archive_results' );
-add_action( 'wp_ajax_nopriv_update_posts_archive_results', __NAMESPACE__ . '\\ajax_update_posts_archive_results' );
-
 function ajax_load_more_posts_archive_results() {
-	// Get filter values from POST request
-	$user_id      = intval( $_POST['userId'] );
-	$current_favs = get_user_favs( $user_id );
+	$current_favs = \Opehuone\Utils\get_user_favs();
 
-	$offset = intval( $_POST['offset'] );
+	$offset = isset( $_POST['offset'] ) ? intval( $_POST['offset'] ) : 0;
 
-	$cornerlabels = isset( $_POST['cornerLabels'] ) ? $_POST['cornerLabels'] : '';
-	$cornerlabels = explode( ',', $cornerlabels );
+    $cornerlabels = get_post_array('cornerLabel');
+    $categories   = get_post_array('category');
+    $post_themes  = get_post_array('postTheme');
 
-	$categories = isset( $_POST['categories'] ) ? $_POST['categories'] : '';
-	$categories = explode( ',', $categories );
-
-	$post_tags = isset( $_POST['postTags'] ) ? $_POST['postTags'] : '';
-	$post_tags = explode( ',', $post_tags );
-
-	$tax_query = set_tax_query( $cornerlabels, $categories, $post_tags );
+	$tax_query = set_tax_query( $cornerlabels, $categories, $post_themes );
 
 	$query_args = [
 		'post_type'      => 'post',
@@ -197,16 +199,14 @@ function ajax_load_more_posts_archive_results() {
 		'offset'         => $offset,
 	];
 
-	// possibly add tax query
-	if ( count( $tax_query ) > 0 ) {
+	if ( ! empty( $tax_query ) ) {
 		$query_args['tax_query'] = $tax_query;
 	}
 
-	ob_start();
-
 	$query = new \WP_Query( $query_args );
 
-	// Output regular posts after sticky ones
+	ob_start();
+
 	if ( $query->have_posts() ) {
 		while ( $query->have_posts() ) {
 			$query->the_post();
@@ -230,12 +230,12 @@ function ajax_load_more_posts_archive_results() {
 	}
 
 	$output = ob_get_clean();
-
 	wp_reset_postdata();
 
 	wp_send_json_success( [
-		'message' => 'Uutiset päivitetty',
-		'output'  => $output,
+		'message'    => 'Uutiset päivitetty',
+		'output'     => $output,
+		'totalPosts' => $query->found_posts,
 	] );
 }
 

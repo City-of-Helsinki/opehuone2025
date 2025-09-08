@@ -62,7 +62,7 @@ class User_settings {
 	public static function update_user_settings( $data, $user_id ) {
 		update_user_meta( $user_id, 'user_opehuone_settings', $data );
 	}
-
+	
 	public function get_user_settings() {
 		$user_settings = get_user_meta( self::$user_id, 'user_opehuone_settings', true ) ? get_user_meta( self::$user_id, 'user_opehuone_settings', true ) : false;
 
@@ -130,5 +130,93 @@ class User_settings {
 		}
 
 		return $items;
+	}
+
+	// Get all links for user (default and custom added), sorted alphabetically. Used by the links-box template partial.
+    public static function get_sorted_links_for_user( $user_id ) {
+		$own_links = self::get_user_own_links( $user_id );
+
+		// Fallback to empty set if no data
+		if ( ! is_array( $own_links ) ) {
+			$own_links = array(
+				'removed_default_urls' => array(),
+				'added_custom_links'   => array(),
+			);
+		}
+
+		// Get pre-selected default term based on oppiaste-checker value or fallback to ACF options
+		$user_term_ids = (array) ( Oppiaste_checker::get_oppiaste_options_term_value() ?: array() );
+		$user_term_ids = array_values( array_filter( array_map( 'intval', $user_term_ids ) ) );
+
+		// ACF options ONLY if user has no terms
+		$default_term_ids = array();
+		if ( empty( $user_term_ids ) ) {
+			$raw = get_field( 'oppiaste_term_default', 'option' );
+			$raw = is_array( $raw ) ? $raw : ( $raw ? array( $raw ) : array() );
+			foreach ( $raw as $t ) {
+				$default_term_ids[] = ( $t instanceof \WP_Term ) ? (int) $t->term_id : (int) $t;
+			}
+			$default_term_ids = array_values( array_filter( $default_term_ids ) );
+		}
+
+		$link_terms = ! empty( $user_term_ids ) ? $user_term_ids : $default_term_ids;
+
+		$all_links = array();
+
+		// Default query
+		if ( ! empty( $link_terms ) ) {
+			$args = array(
+				'post_type'      => 'links',
+				'posts_per_page' => -1,
+				'tax_query'      => array(
+					array(
+						'taxonomy'         => 'cornerlabels',
+						'field'            => 'term_id',
+						'terms'            => $link_terms,
+						'operator'         => 'IN',
+						'include_children' => false,
+					),
+				),
+			);
+
+			$query = new \WP_Query( $args );
+
+			if ( $query->have_posts() ) {
+				while ( $query->have_posts() ) {
+					$query->the_post();
+					$link_array = get_field( 'link' );
+					$url        = $link_array['url']   ?? '';
+					$title      = $link_array['title'] ?? '';
+
+					// Skip if user has removed this default link
+					if ( in_array( $url, $own_links['removed_default_urls'], true ) ) {
+						continue;
+					}
+
+					$all_links[] = array(
+						'title' => $title,
+						'url'   => $url,
+						'type'  => 'default',
+					);
+				}
+			}
+			wp_reset_postdata();
+		}
+
+		// User-added custom links
+		foreach ( $own_links['added_custom_links'] as $row ) {
+			$all_links[] = array(
+				'title' => $row['url_name'],
+				'url'   => $row['url'],
+				'type'  => 'custom',
+			);
+		}
+
+		// Order alphabetically
+		usort( $all_links, function( $a, $b ) {
+			return strcasecmp( $a['title'], $b['title'] );
+		});
+
+		return $all_links;
 	}
 }
