@@ -50,8 +50,9 @@
 
             .quick-links-box__title {
                 margin-bottom: var(--opehuone--spacing--small);
-                font-size: var(--opehuone--font-size--small);
-                font-weight: 600;
+                font-size: var(--opehuone--font-size--medium);
+                font-weight: 700;
+                line-height: 155.556%;
                 width: 100%;
                 margin-bottom: 0;
 
@@ -67,14 +68,15 @@
             }
     
             .quick-links-box__description {
-                font-size: var(--opehuone--font-size--x-small);
+                font-size: var(--opehuone--font-size--small);
                 font-weight: 400;
+                line-height: 142.857%;
                 width: 100%;
             }
         }
     }
 }
 
-
+ 
 
 
