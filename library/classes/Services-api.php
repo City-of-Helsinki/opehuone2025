@@ -103,8 +103,8 @@ class Services_api extends WP_REST_Controller {
             'title'       => $item['title'],
             'url'         => $item['url'],
             'description' => $item['description'],
-            'icon_url'    => $item['icon']['url'],
-            'icon_alt'    => $item['icon']['alt'],
+            'icon_url'    => $item['icon'],
+            'icon_alt'    => '',
             'is_default'  => $item['is_default'],
         ];
     }
