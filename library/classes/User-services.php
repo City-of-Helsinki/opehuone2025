@@ -41,10 +41,11 @@ class User_services {
 
         $api_response_body = wp_remote_retrieve_body( $api_response );
 
-        if ( ! is_wp_error( $api_response_body ) ) {
-            return json_decode( $api_response_body );
-        } else {
-            return false;
-        }
+        return json_decode( $api_response_body );
+//        if ( ! is_wp_error( $api_response_body ) ) {
+//            return json_decode( $api_response_body );
+//        } else {
+//            return false;
+//        }
     }
 }
