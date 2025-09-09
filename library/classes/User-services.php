@@ -44,6 +44,8 @@ class User_services {
         error_log( 'get_services_api_response' );
         error_log( json_encode( $api_response_body ) );
 
+        var_dump( $api_response_body );
+
         return json_decode( $api_response_body );
 //        if ( ! is_wp_error( $api_response_body ) ) {
 //            return json_decode( $api_response_body );
