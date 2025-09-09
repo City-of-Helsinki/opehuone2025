@@ -41,6 +41,9 @@ class User_services {
 
         $api_response_body = wp_remote_retrieve_body( $api_response );
 
+        error_log( 'get_services_api_response' );
+        error_log( json_encode( $api_response_body ) );
+
         return json_decode( $api_response_body );
 //        if ( ! is_wp_error( $api_response_body ) ) {
 //            return json_decode( $api_response_body );
