@@ -145,6 +145,7 @@ function the_services_row( bool $is_active, \User_services $user_services ) {
 
     error_log('the_services_row');
     error_log( json_encode( $all_services ) );
+    var_dump( $all_services );
 
     // Check that JSON response has been valid
     if ( $all_services !== false ) {
