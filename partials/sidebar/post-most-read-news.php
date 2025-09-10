@@ -5,7 +5,7 @@ use function \Opehuone\TemplateFunctions\get_top_monthly_posts;
 ?>
 <div class="b-sidebar-news-lifts">
 	<h3 class="b-sidebar-news-lifts__title">
-		<?php esc_html_e( 'Kuukauden luetimmat uutiset', 'helsinki-universal' ); ?>
+		<?php esc_html_e( 'Kuukauden luetuimmat uutiset', 'helsinki-universal' ); ?>
 	</h3>
 	<ul class="b-sidebar-news-lift__list">
 		<?php
