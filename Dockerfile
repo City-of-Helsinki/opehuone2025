@@ -15,6 +15,7 @@ ARG WP_PLUGIN_VERSION_WPO365_LOGIN=""
 ARG WP_PLUGIN_VERSION_WPO365_SAMESITE=""
 ARG WP_PLUGIN_VERSION_TABLEPRESS=""
 ARG WP_PLUGIN_VERSION_TAXONOMY_TERMS_ORDER=""
+ARG WP_PLUGIN_VERSION_WP_SENTRY_INTEGRATION=""
 
 RUN mkdir -m 777 /tmp/wflogs
 
@@ -47,4 +48,5 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require wpackagist-plugin/wpo365-samesite:$WP_PLUGIN_VERSION_WPO365_SAMESITE && \
     composer require wpackagist-plugin/tablepress:$WP_PLUGIN_VERSION_TABLEPRESS && \
     composer require wpackagist-plugin/taxonomy-terms-order:$WP_PLUGIN_VERSION_TAXONOMY_TERMS_ORDER && \
+    composer require wpackagist-plugin/wp-sentry-integration:$WP_PLUGIN_VERSION_WP_SENTRY_INTEGRATION && \
     rm -f /opt/app-root/src/.config/composer/auth.json
