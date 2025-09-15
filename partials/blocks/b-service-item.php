@@ -25,10 +25,12 @@ $hover_args = [
                 <span class="services-column__first-letter">
 					<?php echo esc_html( substr( $args['title'], 0, 1 ) ); ?>
 				</span>
+                <span class="services-column__tooltip"><?php echo esc_html( $args['title'] ); ?></span>
             <?php else : ?>
                 <img src="<?php echo esc_url( $args['icon_url'] ); ?>"
                      alt="<?php echo esc_attr( $args['icon_alt'] ); ?>"
                      class="services-column__image"/>
+                <span class="services-column__tooltip"><?php echo esc_html( $args['title'] ); ?></span>
             <?php endif; ?>
         </a>
         <?php if ( is_user_logged_in() ) : ?>

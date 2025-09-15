@@ -55,6 +55,7 @@ const addNewOwnService = () => {
                 notifications.addClass('success');
                 inactiveRow.html(content);
                 clearInputs();
+                updateInactiveTogglersVisibility();
 
                 setTimeout(() => {
                     notifications.fadeOut();
@@ -117,8 +118,9 @@ const pinOwnService = () => {
             }),
             success: function (content) {
                 setServicesRow(parseInt(setVisible), content);
-                closestColumn.fadeOut();
-                updateInactiveTogglersVisibility();
+                closestColumn.fadeOut('fast', function() {
+                    updateInactiveTogglersVisibility();
+                });
             }
         });
     });

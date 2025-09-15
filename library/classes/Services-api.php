@@ -96,15 +96,14 @@ class Services_api extends WP_REST_Controller {
      */
     public function prepare_item_for_response( $item, $request ) {
 
-
         return [
             'post_id'     => $item['post_id'],
             'id'          => $item['id'],
             'title'       => $item['title'],
             'url'         => $item['url'],
             'description' => $item['description'],
-            'icon_url'    => $item['icon'],
-            'icon_alt'    => '',
+            'icon_url'    => $item['icon']['url'],
+            'icon_alt'    => $item['icon']['alt'] ?: $item['title'], // Default to title if alt text not set
             'is_default'  => $item['is_default'],
         ];
     }

@@ -152,7 +152,7 @@ function the_services_row( bool $is_active, \User_services $user_services ) {
                 $service_post_id     = $row->post_id;
                 $service_url         = $row->url;
                 $service_icon_url    = $row->icon_url;
-                $service_icon_alt    = '';
+                $service_icon_alt    = $row->icon_alt;
                 $service_description = $row->description;
 
                 $args = [
