@@ -238,6 +238,22 @@
         }
 
         &__metro {
+            &.hero {
+                background-color: var(--color-metro);
+
+                .hds-koros {
+                    path {
+                        fill: var(--color-metro);
+                    }
+                }
+            }
+            
+            &.quick-links-container {
+                .quick-links-box {
+                    background-color: var(--color-metro-light);
+                    border-left: 6px solid var(--color-metro);
+                }
+            }
             &.link-element-box {
                 border-color: var(--color-metro);
             }
