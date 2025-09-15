@@ -158,16 +158,39 @@ export function updateInactiveTogglersVisibility() {
 	const $inactiveTogglers = jQuery('.services-row--inactive .services-column__toggler');
 
 	if (activeCount >= 10) {
-		// hide/disable add buttons in inactive section
-		$inactiveTogglers
-			.prop('disabled', true)
-			.attr('aria-hidden', 'true')
-			.css('display', 'none');
+		$inactiveTogglers.each(function () {
+			const $toggler = jQuery(this);
+			const $ul = $toggler.next('ul'); // <-- get sibling UL
+			const $listItems = $ul.find('li');
+
+			if ($listItems.length === 1) {
+				// hide/disable the whole toggler
+				$toggler
+					.prop('disabled', true)
+					.attr('aria-hidden', 'true')
+					.css('display', 'none');
+			} else {
+				// hide only the "pin-own" item
+				$ul.find('.services-item-dropdown__link--pin-own')
+					.closest('li')
+					.hide();
+			}
+		});
 	} else {
-		// show/enable them again
-		$inactiveTogglers
-			.prop('disabled', false)
-			.removeAttr('aria-hidden')
-			.css('display', '');
+		// re-enable everything
+		$inactiveTogglers.each(function () {
+			const $toggler = jQuery(this);
+			const $ul = $toggler.next('ul'); // <-- get sibling UL
+			const $listItems = $ul.find('li');
+
+			// show/enable the toggler again
+			$toggler
+				.prop('disabled', false)
+				.removeAttr('aria-hidden')
+				.css('display', '');
+
+			// make sure all list items are visible again
+			$listItems.show();
+		});
 	}
 }

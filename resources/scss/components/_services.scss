@@ -107,11 +107,28 @@
   }
 
   &__image {
-    width: 50%;
-    height: 50%;
+    width: 85%;
+    height: 85%;
     object-fit: contain;
     display: block;
     transition: transform 0.2s ease-in-out;
+  }
+
+  &__tooltip {
+    position: absolute;
+    top: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4D4D4D;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 10;
   }
 
   &__toggler {
@@ -190,6 +207,9 @@
     &:hover {
       .services-column__hover-content {
         display: none; // dont want to show this at the moment
+      }
+      .services-column__tooltip {
+        opacity: 1;
       }
     }
   }
