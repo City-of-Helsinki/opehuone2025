@@ -52,7 +52,7 @@ if ( ! $user_favs ) {
 						<?php echo esc_html( $current_user->user_email ); ?>
 					</p>
 					<p>
-						<?php echo esc_html( sprintf( 'Olet kirjatunut sisään koulutiedolla: %s', $school_name ) ); ?>
+						<?php echo esc_html( sprintf( 'Olet kirjatunut sisään koulutusasteella: %s', $school_name ) ); ?>
 					</p>
 				</div>
 				<div>
@@ -88,6 +88,8 @@ if ( ! $user_favs ) {
 				<h2 class="user-settings-page__secondary-title">
 					<?php esc_html_e( 'Tallennetut sisällöt', 'helsinki-universal' ); ?>
 				</h2>
+				<p><?php esc_html_e( 'Alla näet tallentamasi Opehuoneen suosikkisisällöt. 
+Voit tallentaa suosikeiksi uutisia ja Opehuoneen sisältösivuja. Löydät tallenna-napin jokaisen sisältösivun oikeasta yläkulmasta.', 'helsinki-universal' ); ?></p><hr role="separator" aria-label="End of instructions">
 				<ul class="user-favs-list user-favs-list--grid">
 					<?php
 					// Loop through favs
