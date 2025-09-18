@@ -27,11 +27,15 @@ const ownLinkItem = (link) => {
 const mainModifyButton = document.querySelector('.side-links-list__edit-link');
 const sideLinksBox = document.querySelector('.side-links-list-box');
 const modifyButtonText = mainModifyButton?.querySelector('span');
-const resetButtonFinal = document.querySelector('.side-links-list__reset-btn--final');
+const resetButtonFinal = document.querySelector(
+	'.side-links-list__reset-btn--final'
+);
 const submitBtn = document.querySelector('.own-links__submit-btn');
 const urlNameInput = document.querySelector('#own-link-name');
 const urlInput = document.querySelector('#own-link-url');
-const notificationsWrapper = document.querySelector('.own-links__add-new-form-notifications');
+const notificationsWrapper = document.querySelector(
+	'.own-links__add-new-form-notifications'
+);
 const addNewForm = document.querySelector('#own-links__add-new-form');
 const customList = document.querySelector('.side-links-list');
 
@@ -70,7 +74,9 @@ const addNewCustomLink = () => {
 
 			fetch(T.ajaxUrl, {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
 				body: new URLSearchParams({
 					action: 'add_new_own_link',
 					userId: T.userId,
@@ -80,7 +86,10 @@ const addNewCustomLink = () => {
 				}),
 			})
 				.then((response) => {
-					if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+					if (!response.ok)
+						throw new Error(
+							`HTTP error! Status: ${response.status}`
+						);
 					return response.json();
 				})
 				.then((data) => {
@@ -89,16 +98,27 @@ const addNewCustomLink = () => {
 					urlInput.value = '';
 
 					const newLink = data.data;
-					if (!newLink || !newLink.title) throw new Error('Invalid Ajax response: missing link data');
+					if (!newLink || !newLink.title)
+						throw new Error(
+							'Invalid Ajax response: missing link data'
+						);
 
 					// Insert the new link in alphabetical order
-					const items = Array.from(customList.querySelectorAll('.side-links-list__item'));
+					const items = Array.from(
+						customList.querySelectorAll('.side-links-list__item')
+					);
 					let inserted = false;
 
 					items.forEach((item) => {
 						if (inserted) return;
-						const itemTitle = item.querySelector('.side-links-list__link').textContent.trim();
-						if (newLink.title.localeCompare(itemTitle, 'fi', { sensitivity: 'base' }) < 0) {
+						const itemTitle = item
+							.querySelector('.side-links-list__link')
+							.textContent.trim();
+						if (
+							newLink.title.localeCompare(itemTitle, 'fi', {
+								sensitivity: 'base',
+							}) < 0
+						) {
 							customList.insertBefore(ownLinkItem(newLink), item);
 							inserted = true;
 						}
@@ -108,7 +128,8 @@ const addNewCustomLink = () => {
 
 					// Show success notification
 					setTimeout(() => {
-						notificationsWrapper.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M21 7L10 18L4.5 12.5L6 11L10 15L19.5 5.5L21 7Z" fill="black"/></svg> Linkki lisätty.';
+						notificationsWrapper.innerHTML =
+							'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M21 7L10 18L4.5 12.5L6 11L10 15L19.5 5.5L21 7Z" fill="black"/></svg> Linkki lisätty.';
 						setTimeout(() => {
 							notificationsWrapper.style.display = 'none';
 						}, 3000);
@@ -116,7 +137,8 @@ const addNewCustomLink = () => {
 				})
 				.catch((error) => {
 					console.error('AJAX Error:', error);
-					notificationsWrapper.innerHTML = 'Tapahtui virhe linkkiä lisättäessä.';
+					notificationsWrapper.innerHTML =
+						'Tapahtui virhe linkkiä lisättäessä.';
 				});
 		} else {
 			notificationsWrapper.innerHTML =
@@ -132,8 +154,13 @@ const toggleModifyVisibility = () => {
 	const toggleText = 'Poistu muokkaustilasta';
 
 	mainModifyButton.addEventListener('click', () => {
-		sideLinksBox.classList.toggle('side-links-list-box--modification-ongoing');
-		modifyButtonText.textContent = modifyButtonText.textContent === originalText ? toggleText : originalText;
+		sideLinksBox.classList.toggle(
+			'side-links-list-box--modification-ongoing'
+		);
+		modifyButtonText.textContent =
+			modifyButtonText.textContent === originalText
+				? toggleText
+				: originalText;
 	});
 };
 
@@ -166,7 +193,8 @@ const setupLinkRemoval = ({ btnClass, urlAttr, nameAttr = null, action }) => {
 			body: new URLSearchParams(bodyParams),
 		})
 			.then((response) => {
-				if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+				if (!response.ok)
+					throw new Error(`HTTP error! Status: ${response.status}`);
 				return response.json();
 			})
 			.catch((error) => console.error('AJAX Error:', error));
@@ -197,7 +225,6 @@ const resetAllLinks = () => {
 	if (!resetButtonFinal) return;
 
 	resetButtonFinal.addEventListener('click', (e) => {
-		
 		e.preventDefault();
 		const confirmed = confirm('Haluatko varmasti palauttaa kaikki linkit?');
 		if (!confirmed) return;

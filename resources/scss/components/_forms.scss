@@ -158,7 +158,6 @@
 	color: var(--wp--preset--color--accent-2);
 }
 
-
 // New service form
 .add-new-service-form {
 	&__wrapper {
@@ -190,7 +189,7 @@
 		font-weight: bold;
 
 		.has-theme-dark & {
-			color: #FFF;
+			color: #fff;
 		}
 	}
 
@@ -203,8 +202,8 @@
 		padding: rem(10px 15px);
 
 		.has-theme-dark & {
-			border: rem(2px) solid #FFF;
-			color: #FFF;
+			border: rem(2px) solid #fff;
+			color: #fff;
 		}
 
 		&:focus {
@@ -227,12 +226,12 @@
 		font-weight: bold;
 
 		&.add-new-service-form__btn--submit {
-			color: #FFF;
+			color: #fff;
 			background-color: #000;
 
 			.has-theme-dark & {
 				color: #000;
-				background-color: #FFF;
+				background-color: #fff;
 			}
 		}
 	}
@@ -247,8 +246,8 @@
 		line-height: (22/16);
 
 		.has-theme-dark & {
-			border: rem(2px) solid #FFF;
-			color: #FFF;
+			border: rem(2px) solid #fff;
+			color: #fff;
 		}
 	}
 }
@@ -259,10 +258,10 @@
 	margin-top: rem(30px);
 	margin-bottom: rem(20px);
 	display: none;
-  
+
 	//@each $name, $value in $highlight-theme-colors {
 	//  .has-highlight-color-#{$name} & {
 	//	border: 2px solid $value;
 	//  }
 	//}
-} 
+}
