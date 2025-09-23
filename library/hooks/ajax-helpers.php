@@ -763,7 +763,7 @@ add_action( 'wp_ajax_nopriv_update_front_page_training', __NAMESPACE__ . '\\ajax
 
 // Side-menu Ajax update for pages only
 function ajax_update_front_page_pages() {
-    $cornerlabel_ids = isset($_POST['cornerLabels']) ? $_POST['cornerLabels'] : [];
+    $cornerlabel_ids = $_POST['cornerLabels'] ?? [];
     if (!is_array($cornerlabel_ids)) {
         $cornerlabel_ids = explode(',', $cornerlabel_ids);
     }
@@ -825,7 +825,7 @@ function ajax_update_front_page_pages() {
         }
 
         // Use the Filtered walker
-        $walker = new \Filtered_BEM_Page_Walker($filtered_ids);
+        $walker = new \Filtered_BEM_Page_Walker($filtered_ids, $cornerlabel_ids);
         $walker->current_page = $current_id;
     }
 

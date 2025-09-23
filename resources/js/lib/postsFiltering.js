@@ -95,8 +95,6 @@ const handleCheckboxChange = (form, target) => {
 			return response.json();
 		})
 		.then((response) => {
-			console.log('AJAX response:', response);
-
 			const targetSelector =
 				toTarget === 'posts'
 					? '.b-posts-row'
@@ -118,7 +116,7 @@ const handleCheckboxChange = (form, target) => {
 export const postsFiltering = () => {
 	detectCheckboxChange(
 		document.querySelector('#front-page-filter-posts'),
-		false
+		true
 	);
 	detectCheckboxChange(
 		document.querySelector('#front-page-filter-training'),

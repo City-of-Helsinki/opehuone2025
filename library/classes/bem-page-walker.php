@@ -52,6 +52,7 @@ class BEM_Page_Walker extends Walker_Page {
 	
 		$args['link_before'] = isset($args['link_before']) ? $args['link_before'] : '';
 		$args['link_after'] = isset($args['link_after']) ? $args['link_after'] : '';
+        $args['$user_selected_filter_values'] = $args['$user_selected_filter_values'] ?? [];
 
 		$this->curpage = $page;
 
@@ -100,7 +101,13 @@ class BEM_Page_Walker extends Walker_Page {
 
 		$output .= $indent . '<li data-has-cornerlabels="' . esc_attr( $cornerlabels ) . '" class="' . $class_names . '">';
 
-		$output .= '<a class="' . $menu_class . '-lvl-' . $lvl . '__link sidemenu-page-link" href="' . get_permalink( $page->ID ) . '" ' . $aria_current . ' aria-label="' . $aria_label . '">' . $args['link_before'] . apply_filters( 'the_title',
+        // Add cornerlabels as the query parameter
+        $href = add_query_arg(
+            ['cornerlabels' => $args['user_selected_filter_values']],
+            get_permalink($page->ID)
+        );
+
+        $output .= '<a class="' . $menu_class . '-lvl-' . $lvl . '__link sidemenu-page-link" href="' . $href . '" ' . $aria_current . ' aria-label="' . $aria_label . '">' . $args['link_before'] . apply_filters( 'the_title',
 				$page->post_title, $page->ID ) . $args['link_after'] . '</a>';
 	}
 
@@ -108,13 +115,16 @@ class BEM_Page_Walker extends Walker_Page {
 
 
 class Filtered_BEM_Page_Walker extends BEM_Page_Walker {
-    private $allowed_ids;
+    private array $allowed_ids;
+
+    private array $user_selected_filter_values;
 
     // Add this property
-    public $current_page = 0;
+    public int $current_page = 0;
 
-    public function __construct($allowed_ids = []) {
+    public function __construct($allowed_ids = [], $user_selected_filter_values = []) {
         $this->allowed_ids = $allowed_ids;
+        $this->user_selected_filter_values = $user_selected_filter_values;
     }
 
     public function start_el(&$output, $page, $depth = 0, $args = [], $current_page = 0) {
@@ -122,6 +132,9 @@ class Filtered_BEM_Page_Walker extends BEM_Page_Walker {
         if (!empty($this->allowed_ids) && !in_array($page->ID, $this->allowed_ids)) {
             return;
         }
+
+        // Send user selected cornerlabel filters to the parent Walker and create href based on these values
+        $args['user_selected_filter_values'] = $this->user_selected_filter_values;
 
         // Use current_page property if not passed
         if (empty($current_page)) {
