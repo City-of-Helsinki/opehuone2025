@@ -768,7 +768,7 @@ function ajax_update_front_page_pages() {
         $cornerlabel_ids = explode(',', $cornerlabel_ids);
     }
 
-    $no_filter = empty($cornerlabel_ids) || (count($cornerlabel_ids) === 1 && $cornerlabel_ids[0] === '');
+    $filter_not_found = empty($cornerlabel_ids) || (count($cornerlabel_ids) === 1 && $cornerlabel_ids[0] === '');
 
     $current_id = isset($_POST['currentPageId']) ? intval($_POST['currentPageId']) : 0;
     if (!$current_id || !get_post($current_id)) {
@@ -786,16 +786,11 @@ function ajax_update_front_page_pages() {
         wp_send_json_success(['output' => '<p class="error">Valikon muodostaminen epäonnistui – sivua ei löytynyt.</p>']);
     }
 
-    $args = [
-        'title_li' => '',
-        'sort_column' => 'menu_order',
-        'order' => 'asc',
-        'child_of' => $second_level_parent_id,
-        'depth' => 3,
-        'walker' => new \BEM_Page_Walker(),
-    ];
+    $walker = new \BEM_Page_Walker(); // Default walker
 
-    if (!$no_filter) {
+    // If we have filter values, we want to get only relevant posts
+    if (! $filter_not_found ) {
+        // Get all descendants of the second-level parent
         $all_pages = get_pages([
             'child_of' => $second_level_parent_id,
             'sort_column' => 'menu_order',
@@ -808,46 +803,40 @@ function ajax_update_front_page_pages() {
 
         foreach ($all_pages as $page) {
             $page_terms = wp_get_post_terms($page->ID, 'cornerlabels', ['fields' => 'ids']);
-            $has_match = array_intersect($cornerlabel_ids, $page_terms);
-
-            if ($has_match) {
+            if (array_intersect($cornerlabel_ids, $page_terms)) {
                 $filtered_ids[] = $page->ID;
-
-                foreach (get_post_ancestors($page->ID) as $ancestor_id) {
-                    $ancestor = get_post($ancestor_id);
-                    if ($ancestor && $ancestor->post_parent == $second_level_parent_id) {
-                        if (!in_array($ancestor_id, $filtered_ids)) {
-                            $filtered_ids[] = $ancestor_id;
-                        }
-                    }
-                }
             }
+        }
 
-            $children = get_pages(['child_of' => $page->ID]);
-            foreach ($children as $child) {
-                $child_terms = wp_get_post_terms($child->ID, 'cornerlabels', ['fields' => 'ids']);
-                if (array_intersect($cornerlabel_ids, $child_terms)) {
-                    if (!in_array($page->ID, $filtered_ids)) {
-                        $filtered_ids[] = $page->ID;
-                    }
-                    foreach (get_post_ancestors($page->ID) as $ancestor_id) {
-                        $ancestor = get_post($ancestor_id);
-                        if ($ancestor && $ancestor->post_parent == $second_level_parent_id) {
-                            if (!in_array($ancestor_id, $filtered_ids)) {
-                                $filtered_ids[] = $ancestor_id;
-                            }
-                        }
-                    }
+        // Add all ancestors of filtered pages to preserve hierarchy
+        foreach ($filtered_ids as $page_id) {
+            $ancestors_of_page = get_post_ancestors($page_id);
+            foreach ($ancestors_of_page as $ancestor_id) {
+                if ($ancestor_id >= $second_level_parent_id && !in_array($ancestor_id, $filtered_ids)) {
+                    $filtered_ids[] = $ancestor_id;
                 }
             }
         }
+
+        $filtered_ids = array_unique($filtered_ids);
 
         if (empty($filtered_ids)) {
             wp_send_json_success(['output' => '<p>Ei sivuja valituilla suodattimilla.</p>']);
         }
 
-        $args['include'] = $filtered_ids;
+        // Use the Filtered walker
+        $walker = new \Filtered_BEM_Page_Walker($filtered_ids);
+        $walker->current_page = $current_id;
     }
+
+    $args = [
+        'title_li'    => '',
+        'sort_column' => 'menu_order',
+        'order'       => 'asc',
+        'child_of'    => $second_level_parent_id,
+        'depth'       => 3,
+        'walker'      => $walker,
+    ];
 
     ob_start();
 

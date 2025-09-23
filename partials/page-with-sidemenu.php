@@ -6,6 +6,8 @@ use function \Opehuone\TemplateFunctions\get_top_parent_page_title;
 	<div class="hds-container opehuone-page opehuone-content-container">
 		<?php get_template_part( 'partials/breadcrumbs' ); ?>
 
+        <?php get_template_part( 'partials/page-filters' ); ?>
+
 		<div class="opehuone-grid opehuone-grid--reversed">
 			<aside>
 				<?php get_template_part( 'partials/sidemenu' ); ?>

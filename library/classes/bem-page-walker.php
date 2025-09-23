@@ -105,3 +105,30 @@ class BEM_Page_Walker extends Walker_Page {
 	}
 
 }
+
+
+class Filtered_BEM_Page_Walker extends BEM_Page_Walker {
+    private $allowed_ids;
+
+    // Add this property
+    public $current_page = 0;
+
+    public function __construct($allowed_ids = []) {
+        $this->allowed_ids = $allowed_ids;
+    }
+
+    public function start_el(&$output, $page, $depth = 0, $args = [], $current_page = 0) {
+        // If filtering and this page is not in the allowed list, skip it
+        if (!empty($this->allowed_ids) && !in_array($page->ID, $this->allowed_ids)) {
+            return;
+        }
+
+        // Use current_page property if not passed
+        if (empty($current_page)) {
+            $current_page = $this->current_page;
+        }
+
+        // Call parent to render normally
+        parent::start_el($output, $page, $depth, $args, $current_page);
+    }
+}
