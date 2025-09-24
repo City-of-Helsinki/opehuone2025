@@ -2,253 +2,255 @@ $hel-metro: red;
 $body-color: white;
 
 #dock-settings {
-  max-width: rem(1378px);
-  margin: 0 auto 4rem;
-  #settings-submit {
-    background-color: #000;
-    box-shadow: none;
-    color: #FFF;
-    border-radius: 0;
-    border: 2px solid #000;
-    text-decoration: none;
-    padding: 10px 15px;
-    display: inline-block;
-    line-height: 1;
-    margin: 0;
-    &:hover {
-      background-color: #FFF;
-      color: #000;
-      border: 2px solid #000;
-    }
-  }
-  .form-actions-row {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
-    max-width: rem(800px);
-  }
+	max-width: rem(1378px);
+	margin: 0 auto 4rem;
+	#settings-submit {
+		background-color: #000;
+		box-shadow: none;
+		color: #fff;
+		border-radius: 0;
+		border: 2px solid #000;
+		text-decoration: none;
+		padding: 10px 15px;
+		display: inline-block;
+		line-height: 1;
+		margin: 0;
+		&:hover {
+			background-color: #fff;
+			color: #000;
+			border: 2px solid #000;
+		}
+	}
+	.form-actions-row {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: row-reverse;
+		max-width: rem(800px);
+	}
 }
 
 .dock-settings-column {
-  //@include make-col-ready();
-  margin-bottom: rem(20px);
-  max-width: rem(800px);
-  //margin: 0 auto;
+	//@include make-col-ready();
+	margin-bottom: rem(20px);
+	max-width: rem(800px);
+	//margin: 0 auto;
 
-  &.dock-settings-column--title {
-    @include media-breakpoint-up(lg) {
-      //@include make-col(2);
-    }
-  }
+	&.dock-settings-column--title {
+		@include media-breakpoint-up(lg) {
+			//@include make-col(2);
+		}
+	}
 
-  &.dock-settings-column--list {
-    @include media-breakpoint-up(lg) {
-      //@include make-col(6);
-    }
-  }
+	&.dock-settings-column--list {
+		@include media-breakpoint-up(lg) {
+			//@include make-col(6);
+		}
+	}
 
-  &.dock-settings-column--helper {
-    @include media-breakpoint-up(lg) {
-      //@include make-col(4);
-      padding-left: rem(80px);
-      font-size: rem(14px);
-      color: #6A6A6A;
-      line-height: rem(18px);
+	&.dock-settings-column--helper {
+		@include media-breakpoint-up(lg) {
+			//@include make-col(4);
+			padding-left: rem(80px);
+			font-size: rem(14px);
+			color: #6a6a6a;
+			line-height: rem(18px);
 
-      .has-theme-dark & {
-        color: #FFF;
-      }
+			.has-theme-dark & {
+				color: #fff;
+			}
 
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: rem(20px);
-        width: rem(40px);
-        height: rem(40px);
-        // This is having error in yarn prod
-        //background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' role='img' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h24v24H0z'%3E%3C/path%3E%3Cpath d='M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm1 12v2h-2v-2h2zm-.956-10.25c1.99 0 3.673 1.545 3.673 3.674 0 1.357-.47 2.065-1.556 2.882l-.242.178c-.744.545-.963.852-.98 1.658l-.002.108h-2c0-1.575.522-2.412 1.677-3.288l.248-.182c.706-.517.855-.726.855-1.356 0-.985-.75-1.674-1.673-1.674-.853 0-1.565.59-1.662 1.458l-.009.098-1.996-.114c.115-2.019 1.757-3.442 3.667-3.442z' fill='%239FC9EB'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
-      }
-    }
-  }
+			&:before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: rem(20px);
+				width: rem(40px);
+				height: rem(40px);
+				// This is having error in yarn prod
+				//background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' role='img' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h24v24H0z'%3E%3C/path%3E%3Cpath d='M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm1 12v2h-2v-2h2zm-.956-10.25c1.99 0 3.673 1.545 3.673 3.674 0 1.357-.47 2.065-1.556 2.882l-.242.178c-.744.545-.963.852-.98 1.658l-.002.108h-2c0-1.575.522-2.412 1.677-3.288l.248-.182c.706-.517.855-.726.855-1.356 0-.985-.75-1.674-1.673-1.674-.853 0-1.565.59-1.662 1.458l-.009.098-1.996-.114c.115-2.019 1.757-3.442 3.667-3.442z' fill='%239FC9EB'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+			}
+		}
+	}
 }
 
 .dock-settings__subtitle {
-  font-size: rem(22px);
-  font-weight: 500;
-  line-height: rem(28px);
+	font-size: rem(22px);
+	font-weight: 500;
+	line-height: rem(28px);
 }
 
 .dock-settings-list {
-  list-style-type: none;
-  margin: rem(0 0 30px 0);
-  padding: 0;
+	list-style-type: none;
+	margin: rem(0 0 30px 0);
+	padding: 0;
 
-  button {
-    background-color: #000;
-    box-shadow: none;
-    color: #FFF;
-    border-radius: 0;
-    border: 2px solid #000;
-    &:hover {
-      background-color: #FFF;
-      color: #000;
-      border: 2px solid #000;
-    }
-  }
+	button {
+		background-color: #000;
+		box-shadow: none;
+		color: #fff;
+		border-radius: 0;
+		border: 2px solid #000;
+		&:hover {
+			background-color: #fff;
+			color: #000;
+			border: 2px solid #000;
+		}
+	}
 
-  &__item {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    position: relative;
-    padding: rem(12px 0);
-    font-size: rem(18px);
-    line-height: rem(23px);
+	&__item {
+		display: flex;
+		align-items: center;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		position: relative;
+		padding: rem(12px 0);
+		font-size: rem(18px);
+		line-height: rem(23px);
 
-    &.dock-settings-list__item--drag-item {
-      background-color: #FFF;
+		&.dock-settings-list__item--drag-item {
+			background-color: #fff;
 
-      .has-theme-dark & {
-        background-color: #000;
-        color: #FFF
-      }
+			.has-theme-dark & {
+				background-color: #000;
+				color: #fff;
+			}
 
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background-color: #C5C5C5;
-      }
-    }
+			&:before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 1px;
+				background-color: #c5c5c5;
+			}
+		}
 
-    &:first-child {
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background-color: #C5C5C5;
+		&:first-child {
+			&:before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 1px;
+				background-color: #c5c5c5;
 
-        .has-theme-dark & {
-          background-color: transparentize(#F5F5F5, 0.5);
-        }
-      }
+				.has-theme-dark & {
+					background-color: transparentize(#f5f5f5, 0.5);
+				}
+			}
 
-      .dock-settings-list__move-up {
-        display: none;
-      }
-    }
+			.dock-settings-list__move-up {
+				display: none;
+			}
+		}
 
-    &:nth-child(8) {
-      &:after {
-        height: 2px;
+		&:nth-child(8) {
+			&:after {
+				height: 2px;
 
-        //@each $name, $value in $highlight-theme-colors {
-        //  .has-highlight-color-#{$name} & {
-        //    background-color: $value;
-        //  }
-        //}
+				//@each $name, $value in $highlight-theme-colors {
+				//  .has-highlight-color-#{$name} & {
+				//    background-color: $value;
+				//  }
+				//}
+			}
+		}
 
-      }
-    }
+		&:after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			background-color: #c5c5c5;
 
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background-color: #C5C5C5;
+			.has-theme-dark & {
+				background-color: transparentize(#f5f5f5, 0.5);
+			}
+		}
 
-      .has-theme-dark & {
-        background-color: transparentize(#F5F5F5, 0.5);
-      }
-    }
+		&:last-child {
+			.dock-settings-list__move-down {
+				display: none;
+			}
+		}
+	}
 
-    &:last-child {
-      .dock-settings-list__move-down {
-        display: none;
-      }
-    }
-  }
+	&__link {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		color: $body-color;
 
-  &__link {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    color: $body-color;
+		.has-theme-dark & {
+			color: #fff;
+		}
 
-    .has-theme-dark & {
-      color: #FFF;
-    }
+		&:hover,
+		&:focus,
+		&:active {
+			color: $body-color;
+			text-decoration: none;
 
-    &:hover, &:focus, &:active {
-      color: $body-color;
-      text-decoration: none;
+			.has-theme-dark & {
+				color: #fff;
+			}
+		}
+	}
 
-      .has-theme-dark & {
-        color: #FFF;
-      }
-    }
-  }
+	&__dock-icon {
+		width: rem(40px);
+		height: rem(40px);
+	}
 
-  &__dock-icon {
-    width: rem(40px);
-    height: rem(40px);
-  }
+	&__title {
+		padding-left: rem(18px);
+	}
 
-  &__title {
-    padding-left: rem(18px);
-  }
+	&__dock-icon-char {
+		width: rem(40px);
+		height: rem(40px);
+		background-color: $hel-metro;
+		color: #fff;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 
-  &__dock-icon-char {
-    width: rem(40px);
-    height: rem(40px);
-    background-color: $hel-metro;
-    color: #FFF;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+	&__drag {
+		cursor: grab !important;
+		padding: rem(5px);
+		border-radius: 4px;
+		box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
 
-  &__drag {
-    cursor: grab !important;
-    padding: rem(5px);
-    border-radius: 4px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+		svg {
+			width: rem(25px);
+			height: rem(25px);
+		}
+	}
 
-    svg {
-      width: rem(25px);
-      height: rem(25px);
-    }
-  }
+	&__move,
+	&__star,
+	&__remove {
+		padding: rem(5px);
+		border-radius: 4px;
+		box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
 
-  &__move, &__star, &__remove {
-    padding: rem(5px);
-    border-radius: 4px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+		svg {
+			width: rem(25px);
+			height: rem(25px);
+		}
+	}
 
-    svg {
-      width: rem(25px);
-      height: rem(25px);
-    }
-  }
-
-  &__star {
-
-    .dock-settings-list__item--active &  {
-      .fill-star-path {
-        fill: $hel-metro;
-      }
-    }
-  }
+	&__star {
+		.dock-settings-list__item--active & {
+			.fill-star-path {
+				fill: $hel-metro;
+			}
+		}
+	}
 }

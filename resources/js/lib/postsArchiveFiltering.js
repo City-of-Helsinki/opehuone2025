@@ -3,7 +3,9 @@ import { setLoadmoreButtonAttributes, loadMorePosts } from './loadMoreHelpers';
 
 const T = getTranslations('opehuone-variables');
 
-const numberOfPostsSpan = document.querySelector('#posts-archive-number-of-posts');
+const numberOfPostsSpan = document.querySelector(
+	'#posts-archive-number-of-posts'
+);
 const postsContainer = document.querySelector('#posts-archive-results');
 
 const doFiltering = (event) => {
@@ -11,9 +13,12 @@ const doFiltering = (event) => {
 		event.preventDefault();
 	}
 
-	const cornerLabel = document.querySelector('#posts-archive-cornerlabels')?.value ?? '';
-	const category = document.querySelector('#posts-archive-category')?.value ?? '';
-	const postTheme = document.querySelector('#posts-archive-post_theme')?.value ?? '';
+	const cornerLabel =
+		document.querySelector('#posts-archive-cornerlabels')?.value ?? '';
+	const category =
+		document.querySelector('#posts-archive-category')?.value ?? '';
+	const postTheme =
+		document.querySelector('#posts-archive-post_theme')?.value ?? '';
 
 	fetch(T.ajaxUrl, {
 		method: 'POST',
@@ -42,15 +47,20 @@ const doFiltering = (event) => {
 				numberOfPostsSpan.innerHTML = response.data.totalPosts;
 			}
 
-            // Update URL parameters
+			// Update URL parameters
 			const url = new URL(window.location);
 			url.searchParams.set('filter_cornerlabels', cornerLabel);
 			url.searchParams.set('filter_category', category);
 			url.searchParams.set('filter_post_theme', postTheme);
 			window.history.replaceState({}, document.title, url);
 
-            // Update load more button attributes
-			setLoadmoreButtonAttributes(response.data.totalPosts, cornerLabel, category, postTheme);
+			// Update load more button attributes
+			setLoadmoreButtonAttributes(
+				response.data.totalPosts,
+				cornerLabel,
+				category,
+				postTheme
+			);
 		})
 		.catch((error) => console.error('AJAX Error:', error));
 };
@@ -65,8 +75,8 @@ const applyUrlParamsToForm = (form) => {
 	Object.entries(map).forEach(([param, selector]) => {
 		const el = form.querySelector(selector);
 		const val = urlParams.get(param);
-		
-        if (el && val !== null) {
+
+		if (el && val !== null) {
 			el.value = val;
 		}
 	});
@@ -74,8 +84,14 @@ const applyUrlParamsToForm = (form) => {
 
 const triggerFormUpdateOnPageLoad = (form) => {
 	const urlParams = new URLSearchParams(window.location.search);
-	const filterKeys = ['filter_cornerlabels', 'filter_category', 'filter_post_theme'];
-	const shouldTrigger = filterKeys.some((key) => urlParams.has(key) && urlParams.get(key) !== '');
+	const filterKeys = [
+		'filter_cornerlabels',
+		'filter_category',
+		'filter_post_theme',
+	];
+	const shouldTrigger = filterKeys.some(
+		(key) => urlParams.has(key) && urlParams.get(key) !== ''
+	);
 
 	if (!shouldTrigger) {
 		return;
@@ -83,13 +99,13 @@ const triggerFormUpdateOnPageLoad = (form) => {
 
 	applyUrlParamsToForm(form);
 	doFiltering();
-    form.scrollIntoView({ behavior: 'smooth' });
+	form.scrollIntoView({ behavior: 'smooth' });
 };
 
 export const postsArchiveFiltering = () => {
 	const form = document.querySelector('.posts-archive-filtering');
-	
-    if (!form) {
+
+	if (!form) {
 		return;
 	}
 

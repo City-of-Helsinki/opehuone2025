@@ -7,21 +7,19 @@ export const updateButtonClicks = () => {
 		const element = jQuery(e.currentTarget);
 		const PostId = element.attr('data-post-id');
 
-		if(!PostId) {
+		if (!PostId) {
 			return;
 		}
 
 		jQuery.ajax({
 			url: opehuone_js.ajax_url,
 			type: 'POST',
-			data: ({
+			data: {
 				action: 'update_service_open_count',
 				postId: PostId,
 				metaKey: '_service_clicks',
-			}),
-			success: function () {
-
-			}
+			},
+			success: function () {},
 		});
 	});
 };
@@ -33,7 +31,7 @@ export const allServicesToggler = () => {
 		const inactiveServices = jQuery('.services-row--inactive');
 		target.toggleClass('all-services-toggler--open');
 		target.attr('aria-expanded', (i, attr) => {
-			return attr === 'true' ? 'false' : 'true'
+			return attr === 'true' ? 'false' : 'true';
 		});
 		inactiveServices.slideToggle(800);
 	});
@@ -51,62 +49,67 @@ export const addToServices = () => {
 		jQuery.ajax({
 			url: opehuone_js.ajax_url,
 			type: 'POST',
-			data: ({
+			data: {
 				action: 'add_service_to_favorites',
 				service_id: serviceId,
-				user_id: opehuone_js.user_id
-			}),
+				user_id: opehuone_js.user_id,
+			},
 			success: function (content) {
 				closestColumn.fadeOut();
 				activeServices.html(content);
 				updateInactiveTogglersVisibility();
-			}
+			},
 		});
 	});
-}
+};
 
 export const removeFromServices = () => {
 	const inactiveServices = jQuery('.services-row--inactive');
 	inactiveServices.hide();
 
-	jQuery(document).on('click', '.services-item-dropdown__link--remove', (e) => {
-		e.preventDefault();
-		const target = jQuery(e.currentTarget);
-		target.addClass('disabled');
-		const serviceId = target.attr('data-item-id');
-		const closestColumn = target.closest('.services-column');
+	jQuery(document).on(
+		'click',
+		'.services-item-dropdown__link--remove',
+		(e) => {
+			e.preventDefault();
+			const target = jQuery(e.currentTarget);
+			target.addClass('disabled');
+			const serviceId = target.attr('data-item-id');
+			const closestColumn = target.closest('.services-column');
 
-		jQuery.ajax({
-			url: opehuone_js.ajax_url,
-			type: 'POST',
-			data: ({
-				action: 'remove_service_from_favorites',
-				service_id: serviceId,
-				user_id: opehuone_js.user_id
-			}),
-			success: function (content) {
-				closestColumn.fadeOut();
-				inactiveServices.html(content);
-			}
-		});
-		updateInactiveTogglersVisibility();
-
-	});
-}
+			jQuery.ajax({
+				url: opehuone_js.ajax_url,
+				type: 'POST',
+				data: {
+					action: 'remove_service_from_favorites',
+					service_id: serviceId,
+					user_id: opehuone_js.user_id,
+				},
+				success: function (content) {
+					closestColumn.fadeOut();
+					inactiveServices.html(content);
+				},
+			});
+			updateInactiveTogglersVisibility();
+		}
+	);
+};
 
 export const servicesToggler = () => {
-// Toggle the pin dropdown, hide any others if there are any already opened
+	// Toggle the pin dropdown, hide any others if there are any already opened
 	jQuery(document).on('click', '.services-column__toggler', (e) => {
 		e.preventDefault();
 		const $clickedToggler = jQuery(e.currentTarget);
 
-		jQuery('.services-column__toggler').each(function() {
+		jQuery('.services-column__toggler').each(function () {
 			const $toggler = jQuery(this);
 			const $dropdown = $toggler.next('.services-item-dropdown');
 
 			if ($toggler.is($clickedToggler)) {
 				// Toggle the clicked one
-				const isOpen = $dropdown.hasClass('services-item-dropdown--open');
+				const isOpen = $dropdown.hasClass(
+					'services-item-dropdown--open'
+				);
 				$dropdown.toggleClass('services-item-dropdown--open', !isOpen);
 				$toggler.attr('aria-expanded', String(!isOpen));
 
@@ -137,25 +140,31 @@ export const servicesToggler = () => {
 	});
 
 	// Click outside to close the dropdown
-	jQuery(document).on('click', function(e) {
+	jQuery(document).on('click', function (e) {
 		if (
 			!jQuery(e.target).closest('.services-column__toggler').length &&
 			!jQuery(e.target).closest('.services-item-dropdown').length
 		) {
-			jQuery('.services-item-dropdown').removeClass('services-item-dropdown--open');
+			jQuery('.services-item-dropdown').removeClass(
+				'services-item-dropdown--open'
+			);
 			jQuery('.services-column__toggler').attr('aria-expanded', 'false');
 			jQuery('.services-item-dropdown').css({ left: '', right: '' });
 		}
 	});
 
 	updateInactiveTogglersVisibility();
-}
+};
 
 export function updateInactiveTogglersVisibility() {
 	// how many services are currently active
-	const activeCount = jQuery('.services-row--active .services-column:visible').length;
+	const activeCount = jQuery(
+		'.services-row--active .services-column:visible'
+	).length;
 	// all togglers inside the inactive row
-	const $inactiveTogglers = jQuery('.services-row--inactive .services-column__toggler');
+	const $inactiveTogglers = jQuery(
+		'.services-row--inactive .services-column__toggler'
+	);
 
 	if (activeCount >= 10) {
 		$inactiveTogglers.each(function () {

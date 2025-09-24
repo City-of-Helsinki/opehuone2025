@@ -103,9 +103,7 @@ const editorSettings = () => {
 				</PanelBody>
 				<PanelBody title="Ajankohta" initialOpen={false}>
 					<TextControl
-						label={
-							'Ajankohta (päivä(t) ja aika)'
-						}
+						label={'Ajankohta (päivä(t) ja aika)'}
 						value={getPostMeta(trainingSchedule)}
 						placeholder={'Pe klo 12-16'}
 						onChange={(value) =>

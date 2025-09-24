@@ -97,8 +97,12 @@
 }
 
 /* Hover state */
-.pin-btn:hover .icon-default { display: none; }
-.pin-btn:hover .icon-hover { display: inline-block; }
+.pin-btn:hover .icon-default {
+	display: none;
+}
+.pin-btn:hover .icon-hover {
+	display: inline-block;
+}
 
 /* Pinned state */
 .pin-btn.pinned .icon-default,
@@ -111,7 +115,8 @@
 
 #comments {
 	margin-top: 3.5rem;
-	.comment, .children {
+	.comment,
+	.children {
 		border: none;
 	}
 }
