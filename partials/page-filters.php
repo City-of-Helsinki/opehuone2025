@@ -39,28 +39,34 @@ $terms = array_filter($terms, function($term) {
 
 if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
     foreach ( $terms as $term ) {
+        $cache_key = 'has_pages_with_label_' . $term->term_id . '_' . $post->post_parent;
 
-        // Query the posts with term value. Here we handle checkbox state (enabled / disabled) based on posts length
-        $args = [
-            'post_type'              => 'page',
-            'post_status'            => 'publish',
-            'posts_per_page'         => 1, // ei tarvi enempää
-            'post_parent'            => $post->post_parent,
-            'tax_query'              => [
-                [
-                    'taxonomy' => 'cornerlabels',
-                    'field'    => 'term_id',
-                    'terms'    => $term->term_id,
+        $disabled = wp_cache_get( $cache_key );
+
+        if ( false === $disabled ) {
+            $args = [
+                'post_type'              => 'page',
+                'post_status'            => 'publish',
+                'posts_per_page'         => 1,
+                'post_parent'            => $post->post_parent,
+                'tax_query'              => [
+                    [
+                        'taxonomy' => 'cornerlabels',
+                        'field'    => 'term_id',
+                        'terms'    => $term->term_id,
+                    ],
                 ],
-            ],
-            'fields'                 => 'ids',
-            'no_found_rows'          => true,
-            'update_post_term_cache' => false,
-            'update_post_meta_cache' => false,
-        ];
+                'fields'                 => 'ids',
+                'no_found_rows'          => true,
+                'update_post_term_cache' => false,
+                'update_post_meta_cache' => false,
+            ];
 
-        // Check if there are any posts found for the cornerlabel and set the correct string to handle checkbox state
-        $disabled = get_posts( $args ) ? '' : 'disabled';
+            $disabled = get_posts( $args ) ? '' : 'disabled';
+
+            wp_cache_set( $cache_key, $disabled );
+        }
+
         $checked = in_array( $term->term_id, $cornerlabels ) ? ' checked' : '';
 
         // If there are no posts and the checkbox is disabled, but we have cornerlabels coming from URL parameter, we want to uncheck it
