@@ -102,10 +102,13 @@ class BEM_Page_Walker extends Walker_Page {
 		$output .= $indent . '<li data-has-cornerlabels="' . esc_attr( $cornerlabels ) . '" class="' . $class_names . '">';
 
         // Add cornerlabels as the query parameter
-        $href = add_query_arg(
-            ['cornerlabels' => $args['user_selected_filter_values']],
-            get_permalink($page->ID)
-        );
+        $query_args = [];
+        if (!empty($args['user_selected_filter_values'])) {
+            $query_args['cornerlabels'] = $args['user_selected_filter_values'];
+        }
+
+        $href = add_query_arg($query_args, get_permalink($page->ID));
+
 
         $output .= '<a class="' . $menu_class . '-lvl-' . $lvl . '__link sidemenu-page-link" href="' . $href . '" ' . $aria_current . ' aria-label="' . $aria_label . '">' . $args['link_before'] . apply_filters( 'the_title',
 				$page->post_title, $page->ID ) . $args['link_after'] . '</a>';
