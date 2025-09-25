@@ -6,7 +6,7 @@
 		<?php
 		$filters = [
 			[
-				'name'     => esc_html__( 'Opetusaste', 'helsinki-universal' ),
+				'name'     => esc_html__( 'Koulutusaste', 'helsinki-universal' ),
 				'taxonomy' => 'cornerlabels',
 			],
 			[
