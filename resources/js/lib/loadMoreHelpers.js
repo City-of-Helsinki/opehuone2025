@@ -10,12 +10,13 @@ const loadMoreButton = document.querySelector('.posts-archive__load-more-btn');
  * @returns {string} - Comma-separated string or an empty string if input is not an array.
  */
 const convertArrayToString = (value) => {
-	return Array.isArray(value) ? value.join(',') : value?.toString() ?? '';
+	return Array.isArray(value) ? value.join(',') : (value?.toString() ?? '');
 };
 
 const setLoadMoreButtonOffSet = (currentOffSet) => {
 	const totalPosts = parseInt(
-		loadMoreButton.getAttribute('data-total-posts'));
+		loadMoreButton.getAttribute('data-total-posts')
+	);
 	const newOffset = 15 + currentOffSet;
 
 	loadMoreButton.setAttribute('data-posts-offset', newOffset);
@@ -34,9 +35,18 @@ export const setLoadmoreButtonAttributes = (
 	loadMoreButton.classList.remove('is-disabled');
 	loadMoreButton.setAttribute('data-total-posts', totalPosts);
 	loadMoreButton.setAttribute('data-posts-offset', 15);
-	loadMoreButton.setAttribute('data-cornerlabel', convertArrayToString(cornerLabel));
-	loadMoreButton.setAttribute('data-category', convertArrayToString(category));
-	loadMoreButton.setAttribute('data-posttheme', convertArrayToString(postTheme));
+	loadMoreButton.setAttribute(
+		'data-cornerlabel',
+		convertArrayToString(cornerLabel)
+	);
+	loadMoreButton.setAttribute(
+		'data-category',
+		convertArrayToString(category)
+	);
+	loadMoreButton.setAttribute(
+		'data-posttheme',
+		convertArrayToString(postTheme)
+	);
 
 	if (totalPosts <= 15) {
 		loadMoreButton.classList.add('is-disabled');
@@ -78,7 +88,7 @@ export const loadMorePosts = (ajaxAction, container) => {
 			.then((response) => {
 				if (container) {
 					container.insertAdjacentHTML(
-						'beforeend', 
+						'beforeend',
 						response.data.output
 					);
 				}

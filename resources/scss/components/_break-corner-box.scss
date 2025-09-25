@@ -1,85 +1,86 @@
 .break-corner-box {
-  &__button {
-    @include create-button(true, '#00000', '#FFFFFF');
-    background-color: #FFFFFF;
-    padding-left: rem(18px);
-  }
+	&__button {
+		@include create-button(true, "#00000", "#FFFFFF");
+		background-color: #ffffff;
+		padding-left: rem(18px);
+	}
 
-  .break-corner-box__button span {
-    flex-grow: 1; /* make text take available space */
-  }
+	.break-corner-box__button span {
+		flex-grow: 1; /* make text take available space */
+	}
 
-  .break-corner-box__button-chevron-down-svg,
-  .break-corner-box__button-chevron-up-svg,
-  .break-corner-box__button-face-svg {
-    display: flex;
-    align-items: center;
-  }
+	.break-corner-box__button-chevron-down-svg,
+	.break-corner-box__button-chevron-up-svg,
+	.break-corner-box__button-face-svg {
+		display: flex;
+		align-items: center;
+	}
 
-  .break-corner-box__button-chevron-down-svg,
-  .break-corner-box__button-chevron-up-svg {
-    width: 24px;
-    height: 24px;
-  }
+	.break-corner-box__button-chevron-down-svg,
+	.break-corner-box__button-chevron-up-svg {
+		width: 24px;
+		height: 24px;
+	}
 
-  .break-corner-box__button-face-svg {
-    width: 28px;
-    height: 28px;
-    svg {
-      width: 28px;
-      height: 28px;
-    }
-  }
+	.break-corner-box__button-face-svg {
+		width: 28px;
+		height: 28px;
+		svg {
+			width: 28px;
+			height: 28px;
+		}
+	}
 
-  /* Hide the up chevron by default */
-  .break-corner-box__button-chevron-up-svg {
-    display: none;
-  }
+	/* Hide the up chevron by default */
+	.break-corner-box__button-chevron-up-svg {
+		display: none;
+	}
 
-  /* When button has 'open', hide down chevron and show up chevron */
-  .break-corner-box__button.open .break-corner-box__button-chevron-down-svg {
-    display: none;
-  }
+	/* When button has 'open', hide down chevron and show up chevron */
+	.break-corner-box__button.open .break-corner-box__button-chevron-down-svg {
+		display: none;
+	}
 
-  .break-corner-box__button.open .break-corner-box__button-chevron-up-svg {
-    display: block;
-  }
+	.break-corner-box__button.open .break-corner-box__button-chevron-up-svg {
+		display: block;
+	}
 
-  &__wikipedia {
-    background-color: #fff;
-    padding: 1.75rem 1rem;
-    border: 2px solid #000;
-    margin-top: 3rem;
+	&__wikipedia {
+		background-color: #fff;
+		padding: 1.75rem 1rem;
+		border: 2px solid #000;
+		margin-top: 3rem;
 
-    &-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+		&-header {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			margin-bottom: 1.5rem;
 
-      svg {
-        display: block;
-        flex-shrink: 0;
-      }
-    }
+			svg {
+				display: block;
+				flex-shrink: 0;
+			}
+		}
 
-    &-title {
-      font-weight: 500;
-      font-size: 0.875rem;
-      line-height: 1.5rem;
-    }
-    &-list {
-      margin: 0;
+		&-title {
+			font-weight: 500;
+			font-size: 0.875rem;
+			line-height: 1.5rem;
+		}
+		&-list {
+			margin: 0;
 
-      li {
-        list-style: none;
-      }
-    }
+			li {
+				list-style: none;
+			}
+		}
 
-    &-extract, a, i {
-      font-size: 14px;
-      line-height: 1.5rem;
-    }
-
-  }
+		&-extract,
+		a,
+		i {
+			font-size: 14px;
+			line-height: 1.5rem;
+		}
+	}
 }

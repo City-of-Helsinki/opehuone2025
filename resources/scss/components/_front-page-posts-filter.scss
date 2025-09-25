@@ -21,6 +21,13 @@
 	gap: 8px;
 	font-size: var(--opehuone--font-size--small);
 	font-weight: 400;
+
+	&:has(input:disabled) {
+		color: #B3B3B3;
+		input {
+			border-color: #B3B3B3;
+		}
+	}
 }
 
 .front-page-posts-filter__checkbox-input {

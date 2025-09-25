@@ -42,7 +42,7 @@ const doFiltering = (event) => {
 				postsContainer.innerHTML = response.data.output;
 			}
 			if (numberOfPostsSpan) {
-			numberOfPostsSpan.innerHTML = response.data.totalPosts;
+				numberOfPostsSpan.innerHTML = response.data.totalPosts;
 			}
 		})
 		.catch((error) => console.error('AJAX Error:', error));

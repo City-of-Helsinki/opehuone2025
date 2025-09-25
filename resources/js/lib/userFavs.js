@@ -60,12 +60,24 @@ const addToFavs = () => {
 				// Toggle button content and data-action attribute
 				if (isSmallPinButton) {
 					pinnerButton.innerHTML = addFavorite ? pinnedSvg : pinSvg;
-					pinnerButton.setAttribute('data-action', addFavorite ? 'favs_remove' : 'favs_add');
-					pinnerButton.setAttribute('aria-label', addFavorite ? buttonAriaPinned : buttonAriaPin);
+					pinnerButton.setAttribute(
+						'data-action',
+						addFavorite ? 'favs_remove' : 'favs_add'
+					);
+					pinnerButton.setAttribute(
+						'aria-label',
+						addFavorite ? buttonAriaPinned : buttonAriaPin
+					);
 				} else {
 					pinnerButton.classList.toggle('pinned', addFavorite);
-					pinnerButton.setAttribute('aria-pressed', pinnerButton.classList.contains('pinned'));
-					pinnerButton.setAttribute('data-action', addFavorite ? 'favs_remove' : 'favs_add');
+					pinnerButton.setAttribute(
+						'aria-pressed',
+						pinnerButton.classList.contains('pinned')
+					);
+					pinnerButton.setAttribute(
+						'data-action',
+						addFavorite ? 'favs_remove' : 'favs_add'
+					);
 				}
 			})
 			.catch((error) => console.error('AJAX Error:', error));
