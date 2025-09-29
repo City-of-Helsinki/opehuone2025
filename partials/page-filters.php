@@ -3,7 +3,9 @@
 // Get the root page slug and return if it's not 'pedagogiikka'
 if ( $post->post_parent ) {
 
-    $root_page_id = end( get_post_ancestors( $post->ID ) );
+    $ancestors = get_post_ancestors( $post->ID );
+    $root_page_id = end( $ancestors );
+
 
     if ( get_post_field( 'post_name', $root_page_id ) !== 'pedagogiikka' ) {
         return;
