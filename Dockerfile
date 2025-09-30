@@ -49,6 +49,8 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require wpackagist-plugin/tablepress:$WP_PLUGIN_VERSION_TABLEPRESS && \
     composer require wpackagist-plugin/taxonomy-terms-order:$WP_PLUGIN_VERSION_TAXONOMY_TERMS_ORDER && \
     composer require wpackagist-plugin/wp-sentry-integration:$WP_PLUGIN_VERSION_WP_SENTRY_INTEGRATION && \
+    sed -i '/^pm\.max_children\s*=.*/d' /etc/php-fpm.d/www.conf && \
+    echo 'pm.max_children = 150' >> /etc/php-fpm.d/www.conf && \
     sed -i '/^pm\.max_spare_servers\s*=.*/d' /etc/php-fpm.d/www.conf && \
-    echo 'pm.max_spare_servers = 150' >> /etc/php-fpm.d/www.conf && \
+    echo 'pm.max_spare_servers = 140' >> /etc/php-fpm.d/www.conf && \
     rm -f /opt/app-root/src/.config/composer/auth.json
