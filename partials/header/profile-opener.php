@@ -8,7 +8,7 @@ use function \Opehuone\TemplateFunctions\display_time_until_holidays;
 if ( ! is_user_logged_in() ) { ?>
 
     <div class="login-wrapper">
-        <a href="javascript:void(0)" onclick="window.wpo365.pintraRedirect.toMsOnline()" class="login-button"
+        <a href="javascript:void(0)" onclick="window.wpo365.pintraRedirect.toMsOnline('', location.href, '', '', false, document.getElementById('selectedTenant') ? document.getElementById('selectedTenant').value : null)" class="login-button"
            title="<?php echo esc_html__('Kirjaudu edu.hel.fi' ); ?>">
 
             <?php helsinki_svg_icon('user'); ?>
