@@ -7,7 +7,7 @@ use function \Opehuone\TemplateFunctions\display_time_until_holidays;
 // Display the login button if the user is not logged in
 if ( ! is_user_logged_in() ) { ?>
 
-    <div class="login-wrapper">
+    <div id="wpo365OpenIdRedirect" class="login-wrapper">
         <a href="javascript:void(0)" onclick="window.wpo365.pintraRedirect.toMsOnline()" class="login-button"
            title="<?php echo esc_html__('Kirjaudu edu.hel.fi' ); ?>">
 
