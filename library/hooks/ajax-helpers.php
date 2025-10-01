@@ -768,6 +768,13 @@ function ajax_update_front_page_pages() {
         $cornerlabel_ids = explode(',', $cornerlabel_ids);
     }
 
+    // Get the default option (Kaikille yhteinen) and set it as one of the selected options
+    $default_cornerlabel = get_field( 'oppiaste_term_default', 'option' );
+
+    if ( $default_cornerlabel !== false ) {
+        $cornerlabel_ids[] = (string) $default_cornerlabel;
+    }
+
     $filter_not_found = empty($cornerlabel_ids) || (count($cornerlabel_ids) === 1 && $cornerlabel_ids[0] === '');
 
     $current_id = isset($_POST['currentPageId']) ? intval($_POST['currentPageId']) : 0;

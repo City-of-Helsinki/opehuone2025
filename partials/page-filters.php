@@ -33,9 +33,12 @@ $terms = get_terms( [
     'hide_empty' => false, // We want to check manually
 ] );
 
+// Get "Kaikille yhteinen" term id from Opehuone settings ACF field
+$default_term_id = get_field( 'oppiaste_term_default', 'option' );
+
 // Remove the term "Kaikille yhteinen"
-$terms = array_filter($terms, function($term) {
-    return $term->slug !== 'yhteiset';
+$terms = array_filter($terms, function($term) use ($default_term_id) {
+    return $term->term_id !== $default_term_id;
 });
 
 
