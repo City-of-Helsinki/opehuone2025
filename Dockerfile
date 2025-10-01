@@ -16,6 +16,8 @@ ARG WP_PLUGIN_VERSION_WPO365_SAMESITE=""
 ARG WP_PLUGIN_VERSION_TABLEPRESS=""
 ARG WP_PLUGIN_VERSION_TAXONOMY_TERMS_ORDER=""
 ARG WP_PLUGIN_VERSION_WP_SENTRY_INTEGRATION=""
+ARG WP_PLUGIN_VERSION_WP_SECURITY_AUDIT_LOG=""
+ARG WP_PLUGIN_VERSION_WP_CONNECT_MATOMO=""
 
 RUN mkdir -m 777 /tmp/wflogs
 
@@ -49,6 +51,8 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require wpackagist-plugin/tablepress:$WP_PLUGIN_VERSION_TABLEPRESS && \
     composer require wpackagist-plugin/taxonomy-terms-order:$WP_PLUGIN_VERSION_TAXONOMY_TERMS_ORDER && \
     composer require wpackagist-plugin/wp-sentry-integration:$WP_PLUGIN_VERSION_WP_SENTRY_INTEGRATION && \
+    composer require wpackagist-plugin/wp-security-audit-log:$WP_PLUGIN_VERSION_WP_SECURITY_AUDIT_LOG && \
+    composer require wpackagist-plugin/wp-piwik:$WP_PLUGIN_VERSION_CONNECT_MATOMO && \
     sed -i '/^pm\.max_children\s*=.*/d' /etc/php-fpm.d/www.conf && \
     echo 'pm.max_children = 150' >> /etc/php-fpm.d/www.conf && \
     sed -i '/^pm\.max_spare_servers\s*=.*/d' /etc/php-fpm.d/www.conf && \
