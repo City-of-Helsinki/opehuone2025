@@ -54,7 +54,13 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require wpackagist-plugin/wp-security-audit-log:$WP_PLUGIN_VERSION_WP_SECURITY_AUDIT_LOG && \
     composer require wpackagist-plugin/wp-piwik:$WP_PLUGIN_VERSION_CONNECT_MATOMO && \
     sed -i '/^pm\.max_children\s*=.*/d' /etc/php-fpm.d/www.conf && \
-    echo 'pm.max_children = 150' >> /etc/php-fpm.d/www.conf && \
+    echo 'pm.max_children = 60' >> /etc/php-fpm.d/www.conf && \
     sed -i '/^pm\.max_spare_servers\s*=.*/d' /etc/php-fpm.d/www.conf && \
-    echo 'pm.max_spare_servers = 140' >> /etc/php-fpm.d/www.conf && \
+    echo 'pm.max_spare_servers = 15' >> /etc/php-fpm.d/www.conf && \
+    sed -i '/^pm\.start_servers\s*=.*/d' /etc/php-fpm.d/www.conf && \
+    echo 'pm.start_servers = 10' >> /etc/php-fpm.d/www.conf && \
+    sed -i '/^pm\.max_requests\s*=.*/d' /etc/php-fpm.d/www.conf && \
+    echo 'pm.max_requests = 500' >> /etc/php-fpm.d/www.conf && \
+    sed -i '/^listen\.backlog\s*=.*/d' /etc/php-fpm.d/www.conf && \
+    echo 'listen.backlog = 1024' >> /etc/php-fpm.d/www.conf && \
     rm -f /opt/app-root/src/.config/composer/auth.json
