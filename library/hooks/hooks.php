@@ -195,3 +195,15 @@ function remove_tags_from_posts() {
     unregister_taxonomy_for_object_type( 'post_tag', 'post' );
 }
 add_action( 'init', __NAMESPACE__ . '\remove_tags_from_posts' );
+
+add_filter( 'comment_form_defaults', function( $defaults ) {
+    $defaults['must_log_in'] = 'Sinun täytyy <a href="javascript:void(0)" onclick="window.wpo365.pintraRedirect.toMsOnline()">kirjautua sisään</a> kommentoidaksesi.';
+    return $defaults;
+});
+
+add_filter( 'comment_reply_link', function( $link ) {
+    if ( ! is_user_logged_in() ) {
+        $link = '<a href="javascript:void(0)" onclick="window.wpo365.pintraRedirect.toMsOnline()">Kirjaudu sisään vastataksesi</a>';
+    }
+    return $link;
+}, 10, 4 );
