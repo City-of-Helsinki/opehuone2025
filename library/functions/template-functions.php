@@ -182,3 +182,44 @@ function display_time_until_holidays(): void {
     }
     echo '</div>';
 }
+
+// Force auto-generated excerpt when the manual one is blank/whitespace or filtered to empty.
+add_filter('get_the_excerpt', function ($excerpt, $post) {
+    // Normalize whitespace and HTML entities (e.g., &nbsp;)
+    $normalized = html_entity_decode( (string) $excerpt, ENT_QUOTES, get_bloginfo('charset') );
+    $normalized = preg_replace('/\x{00A0}|\x{2007}|\x{202F}/u', ' ', $normalized); // non-breaking spaces
+    $normalized = trim( wp_strip_all_tags( $normalized ) );
+
+    if ($normalized !== '') {
+        return $excerpt; // we have a real excerpt
+    }
+
+    // Build from post content (very close to core behavior, but resilient)
+    $post = get_post( $post );
+    if (! $post) {
+        return $excerpt;
+    }
+
+    $content = $post->post_content;
+
+    // Remove shortcodes and blocks safely
+    $content = strip_shortcodes( $content );
+    if ( function_exists('excerpt_remove_blocks') ) {
+        $content = excerpt_remove_blocks( $content ); // WP block-aware strip
+    }
+
+    // Strip tags, normalize whitespace
+    $text = wp_strip_all_tags( $content );
+    $text = trim( preg_replace('/\s+/u', ' ', $text) );
+
+    if ($text === '') {
+        return $excerpt; // nothing to build from
+    }
+
+    // Respect excerpt_length and excerpt_more filters
+    $length = (int) apply_filters('excerpt_length', 55);
+    $more   = apply_filters('excerpt_more', ' […]');
+
+    return wp_trim_words( $text, 20, apply_filters('excerpt_more', ' […]') );
+
+}, 9999, 2);
