@@ -2,6 +2,7 @@
 
 namespace Opehuone\TemplateFunctions;
 
+use WP_Query;
 use function \Opehuone\Utils\get_user_favs;
 
 /**
@@ -75,7 +76,7 @@ function fetch_wikipedia_featured_articles(): void {
     }
 }
 
-function get_top_monthly_posts($limit = 5): \WP_Query {
+function get_top_monthly_posts($limit = 5): WP_Query {
     $current_month = date('Y-m');
 
     $args = [
@@ -95,7 +96,7 @@ function get_top_monthly_posts($limit = 5): \WP_Query {
         ]
     ];
 
-    return new \WP_Query( $args );
+    return new WP_Query( $args );
 }
 
 function get_top_parent_page_title( $post_id = null ): ?string {
@@ -121,7 +122,7 @@ function get_favorite_article_button(): void {
     ));
 }
 
-function get_training_posts_query(): \WP_Query {
+function get_training_posts_query(): WP_Query {
     $args = [
         'post_type'      => 'training',
         'posts_per_page' => -1,
@@ -155,7 +156,7 @@ function get_training_posts_query(): \WP_Query {
         ];
     }
 
-    return new \WP_Query( $args );
+    return new WP_Query( $args );
 }
 
 function display_time_until_holidays(): void {
@@ -181,4 +182,76 @@ function display_time_until_holidays(): void {
         echo '<span class="profile-opener-dropdown__holiday-countdown">' . esc_html( $label ) . ': ' . esc_html( $countdown ) . '</span>';
     }
     echo '</div>';
+}
+
+/**
+ * @return array|mixed
+ */
+function get_user_cornerlabels_with_added_default_value(): mixed {
+    $cornerlabels = \Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
+
+    // Add "Kaikille yhteinen" even if it's not saved under user settings
+    $default_term_id = (string) get_field('oppiaste_term_default', 'option' );
+
+    if ( $default_term_id ) {
+        $cornerlabels[] = $default_term_id;
+        $cornerlabels = array_unique( $cornerlabels );
+    }
+
+    return $cornerlabels;
+}
+
+
+/**
+ * Function that loops through sticky and regular posts and displays the posts
+ * This function is used on the front page, both for the template and for the AJAX functionality that updates the results
+ *
+ * @param int $sticky_count
+ * @param WP_Query $sticky_query
+ * @param mixed $user_favs
+ * @param mixed $remaining
+ * @param WP_Query $regular_query
+ * @return void
+ */
+function display_sticky_and_regular_posts( int $sticky_count, WP_Query $sticky_query, mixed $user_favs, mixed $remaining, WP_Query $regular_query ): void {
+    if ( $sticky_count > 0 ) {
+        while ( $sticky_query->have_posts() ) {
+            $sticky_query->the_post();
+
+            $block_args = [
+                'post_id' => get_the_ID(),
+                'title' => get_the_title(),
+                'url' => get_the_permalink(),
+                'media_id' => get_post_thumbnail_id(),
+                'excerpt' => get_the_excerpt(),
+                'is_sticky' => true,
+                'categories' => get_the_category(),
+                'date' => get_the_date(),
+                'is_pinned' => in_array( get_the_ID(), $user_favs, true ),
+            ];
+
+            get_template_part('partials/template-blocks/b-post', null, $block_args );
+        }
+    }
+
+    // Then regular posts
+    if ( $remaining > 0 && $regular_query->have_posts() ) {
+        while ( $regular_query->have_posts() ) {
+            $regular_query->the_post();
+
+            $block_args = [
+                'post_id' => get_the_ID(),
+                'title' => get_the_title(),
+                'url' => get_the_permalink(),
+                'media_id' => get_post_thumbnail_id(),
+                'excerpt' => get_the_excerpt(),
+                'is_sticky' => false,
+                'categories' => get_the_category(),
+                'date' => get_the_date(),
+                'is_pinned' => in_array( get_the_ID(), $user_favs, true ),
+            ];
+
+            get_template_part('partials/template-blocks/b-post', null, $block_args );
+        }
+    }
 }
