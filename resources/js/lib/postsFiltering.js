@@ -128,7 +128,16 @@ export const postsFiltering = () => {
 	);
 };
 
+// Handle cornerlabels in the URL for the Pedagogiikka page
 document.addEventListener('DOMContentLoaded', () => {
+	const isPedagogiikkaPage = document.querySelector(
+		'#front-page-filter-pages'
+	);
+
+	if (!isPedagogiikkaPage) {
+		return;
+	}
+
 	const checkboxes = document.querySelectorAll(
 		'input[name="cornerlabels[]"]'
 	);
