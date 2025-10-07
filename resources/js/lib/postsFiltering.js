@@ -114,14 +114,17 @@ const handleCheckboxChange = (form, target) => {
 };
 
 export const postsFiltering = () => {
+	// Front page
 	detectCheckboxChange(
 		document.querySelector('#front-page-filter-posts'),
-		true
+		false
 	);
+	// Koulutukset page
 	detectCheckboxChange(
 		document.querySelector('#front-page-filter-training'),
 		false
 	);
+	// Pedagogiikka page
 	detectCheckboxChange(
 		document.querySelector('#front-page-filter-pages'),
 		true
