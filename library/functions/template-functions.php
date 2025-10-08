@@ -184,22 +184,27 @@ function display_time_until_holidays(): void {
     echo '</div>';
 }
 
+
 /**
- * @return array|mixed
+ * @return array
  */
-function get_user_cornerlabels_with_added_default_value(): mixed {
-    $cornerlabels = \Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
+function get_user_cornerlabels_with_added_default_value(): array {
+    $cornerlabels = \Opehuone_user_settings_reader::get_user_settings_key('cornerlabels');
 
-    // Add "Kaikille yhteinen" even if it's not saved under user settings
-    $default_term_id = (string) get_field('oppiaste_term_default', 'option' );
+    if ( ! is_array( $cornerlabels ) ) {
+        $cornerlabels = $cornerlabels ? [(string) $cornerlabels] : [];
+    }
 
-    if ( $default_term_id ) {
+    $default_term_id = (string) get_field('oppiaste_term_default', 'option');
+
+    if ($default_term_id !== '') {
         $cornerlabels[] = $default_term_id;
-        $cornerlabels = array_unique( $cornerlabels );
+        $cornerlabels = array_unique($cornerlabels);
     }
 
     return $cornerlabels;
 }
+
 
 
 /**
@@ -227,10 +232,11 @@ function display_sticky_and_regular_posts( int $sticky_count, WP_Query $sticky_q
                 'is_sticky' => true,
                 'categories' => get_the_category(),
                 'date' => get_the_date(),
-                'is_pinned' => in_array( get_the_ID(), $user_favs, true ),
+                'is_pinned' => in_array( get_the_ID(), $user_favs, false ),
             ];
 
             get_template_part('partials/template-blocks/b-post', null, $block_args );
+            wp_reset_postdata();
         }
     }
 
@@ -248,10 +254,11 @@ function display_sticky_and_regular_posts( int $sticky_count, WP_Query $sticky_q
                 'is_sticky' => false,
                 'categories' => get_the_category(),
                 'date' => get_the_date(),
-                'is_pinned' => in_array( get_the_ID(), $user_favs, true ),
+                'is_pinned' => in_array( get_the_ID(), $user_favs, false ),
             ];
 
             get_template_part('partials/template-blocks/b-post', null, $block_args );
+            wp_reset_postdata();
         }
     }
 }
