@@ -255,3 +255,31 @@ function display_sticky_and_regular_posts( int $sticky_count, WP_Query $sticky_q
         }
     }
 }
+
+/**
+ * Fetch all cornerlabels, but filter out the default value (Kaikille yhteinen)
+ *
+ * @return array
+ */
+function get_cornerlabels_without_default_value(): array {
+    $terms = get_terms( [
+        'taxonomy'   => 'cornerlabels',
+        'hide_empty' => false,
+    ] );
+
+    if ( is_wp_error( $terms ) ) {
+        return [];
+    }
+
+    // Get "Kaikille yhteinen" term id from Opehuone settings ACF field
+    $default_term_id = get_field( 'oppiaste_term_default', 'option' );
+
+    if ( empty( $default_term_id) ) {
+        return $terms;
+    }
+
+    // Remove the term "Kaikille yhteinen" and return the cornerlabels
+    return array_filter($terms, function($term) use ($default_term_id) {
+        return $term->term_id !== $default_term_id;
+    });
+}

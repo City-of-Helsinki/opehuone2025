@@ -4,6 +4,8 @@ if ( ! is_user_logged_in() ) {
 	return;
 }
 
+use function \Opehuone\TemplateFunctions\get_cornerlabels_without_default_value;
+
 $current_user = wp_get_current_user();
 $cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
 $user_data    = get_user_meta( $current_user->ID, 'user_data', true );
@@ -60,12 +62,9 @@ if ( ! $user_favs ) {
 						<p><?php esc_html_e( 'Muuta koulutusastetta', 'helsinki-universal' ); ?></p>
 						<div class="front-page-posts-filter__checkboxes-row">
 							<?php
-							$terms = get_terms( [
-								'taxonomy'   => 'cornerlabels',
-								'hide_empty' => true,
-							] );
+							$terms = get_cornerlabels_without_default_value();
 
-							if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+                            if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 								foreach ( $terms as $term ) {
 									?>
 									<label class="front-page-posts-filter__checkbox-label">
