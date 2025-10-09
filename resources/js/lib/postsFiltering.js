@@ -114,21 +114,33 @@ const handleCheckboxChange = (form, target) => {
 };
 
 export const postsFiltering = () => {
+	// Front page
 	detectCheckboxChange(
 		document.querySelector('#front-page-filter-posts'),
-		true
+		false
 	);
+	// Koulutukset page
 	detectCheckboxChange(
 		document.querySelector('#front-page-filter-training'),
 		false
 	);
+	// Pedagogiikka page
 	detectCheckboxChange(
 		document.querySelector('#front-page-filter-pages'),
 		true
 	);
 };
 
+// Handle cornerlabels in the URL for the Pedagogiikka page
 document.addEventListener('DOMContentLoaded', () => {
+	const isPedagogiikkaPage = document.querySelector(
+		'#front-page-filter-pages'
+	);
+
+	if (!isPedagogiikkaPage) {
+		return;
+	}
+
 	const checkboxes = document.querySelectorAll(
 		'input[name="cornerlabels[]"]'
 	);

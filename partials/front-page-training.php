@@ -1,5 +1,7 @@
 <?php
-$cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
+use function \Opehuone\TemplateFunctions\get_user_cornerlabels_with_added_default_value;
+
+$cornerlabels   = get_user_cornerlabels_with_added_default_value();
 
 $query_args = [
 	'post_type'      => 'training',

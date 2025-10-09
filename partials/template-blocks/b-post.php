@@ -27,11 +27,13 @@ if ( $block_is_pinned ) {
 			<?php if ( $block_is_sticky ) : ?>
 				<span class="b-post__sticky">Uutisnosto</span>
 			<?php endif; ?>
+            <?php if ( is_user_logged_in() ) : ?>
 			<button class="b-post__pinner" data-action="<?php echo esc_attr( $button_action ); ?>"
 					data-post-id="<?php echo esc_attr( $block_post_id ); ?>"
 					aria-label="<?php echo esc_attr( $pinner_aria ); ?>">
 				<?php \Opehuone\Helpers\the_svg( 'icons/' . $pin_svg ); ?>
 			</button>
+            <?php endif; ?>
 		</figure>
 	<?php endif; ?>
 	<?php if ( ! empty( $block_date ) ) : ?>

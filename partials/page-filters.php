@@ -1,4 +1,5 @@
 <?php
+use function \Opehuone\TemplateFunctions\get_cornerlabels_without_default_value;
 
 // Get the root page slug and return if it's not 'pedagogiikka'
 if ( $post->post_parent ) {
@@ -28,19 +29,7 @@ echo '<p>Suodata sisältöä koulutusasteen mukaan</p>';
 echo '<form id="front-page-filter-pages" class="front-page-posts-filter" data-target="pages">';
 echo '<div class="front-page-posts-filter__checkboxes-row">';
 
-$terms = get_terms( [
-    'taxonomy'   => 'cornerlabels',
-    'hide_empty' => false, // We want to check manually
-] );
-
-// Get "Kaikille yhteinen" term id from Opehuone settings ACF field
-$default_term_id = get_field( 'oppiaste_term_default', 'option' );
-
-// Remove the term "Kaikille yhteinen"
-$terms = array_filter($terms, function($term) use ($default_term_id) {
-    return $term->term_id !== $default_term_id;
-});
-
+$terms = get_cornerlabels_without_default_value();
 
 if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
     foreach ( $terms as $term ) {
