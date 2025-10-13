@@ -85,7 +85,7 @@ if ( ! $user_favs ) {
 			</div>
 			<div class="user-settings-page__favorites-wrapper">
 				<h2 class="user-settings-page__secondary-title">
-					<?php esc_html_e( 'Tallennetut sisällöt', 'helsinki-universal' ); ?>
+					<?php esc_html_e( 'Omat tallennetut sisällöt', 'helsinki-universal' ); ?>
 				</h2>
 				<p><?php esc_html_e( 'Alla näet tallentamasi Opehuoneen suosikkisisällöt. 
 Voit tallentaa suosikeiksi uutisia ja Opehuoneen sisältösivuja. Löydät tallenna-napin jokaisen sisältösivun oikeasta yläkulmasta.', 'helsinki-universal' ); ?></p><hr role="separator" aria-label="End of instructions">
