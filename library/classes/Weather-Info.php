@@ -7,7 +7,15 @@
  */
 class HelsinkiWeather {
 
-	private $feed_url = 'https://api.openweathermap.org/data/2.5/weather?id=658225&units=metric&appid=d8d1cbf5d638c700896cce8af6a5a40d';
+	private $feed_url = 'https://api.openweathermap.org/data/2.5/weather?id=658225&units=metric&appid=';
+    private $appid_key;
+
+    /**
+     * Constructor
+     */
+    public function __construct( $appid_key = null ) {
+        $this->appid_key = $appid_key ?: ( defined( 'OWM_APPID' ) ? OWM_APPID : null );
+    }
 
 	/**
 	 * Returns weather icon and current temperature of location
@@ -30,37 +38,32 @@ class HelsinkiWeather {
 	 *
 	 */
 	private function get_output_json() {
+        $transient = get_transient( 'opehuone_weather_json' );
 
-		// Do we have this information in our transients already?
-		$transient = get_transient( 'opehuone_weather_json' );
+        if ( ! empty( $transient ) ) {
+            return $transient;
+        }
 
-		// Yep!  Just return it and we're done.
-		if ( ! empty( $transient ) ) {
+        if ( empty( $this->api_key ) ) {
+            error_log( 'HelsinkiWeather: Missing OpenWeather API key.' );
+            return false;
+        }
 
-			// The function will return here every time after the first time it is run, until the transient expires.
-			return $transient;
+        $url = $this->feed_url . $this->api_key;
 
-			// Nope!  We gotta make a call.
-		} else {
+        $arr_context_options = [
+            "ssl" => [
+                "verify_peer"      => false,
+                "verify_peer_name" => false,
+            ],
+        ];
 
-			// Call the API.
+        $out = @file_get_contents( $url, false, stream_context_create( $arr_context_options ) );
 
-			//Lets debug SSL problem
-			$arr_context_options=array(
-				"ssl"=>array(
-					"verify_peer"=>false,
-					"verify_peer_name"=>false,
-				),
-			);
+        if ( $out ) {
+            set_transient( 'opehuone_weather_json', $out, MINUTE_IN_SECONDS * 15 );
+        }
 
-			$out = file_get_contents( $this->feed_url, false, stream_context_create($arr_context_options) );
-
-			// Save the API response so we don't have to call again until next 15 minutes
-			set_transient( 'opehuone_weather_json', $out, MINUTE_IN_SECONDS * 15 );
-
-			return $out;
-
-		}
-
-	}
+        return $out;
+    }
 }

@@ -5,7 +5,7 @@ if ( ! is_user_logged_in() ) {
 }
 ?>
 <div class="sidebar-box sidebar-box--engel-light">
-	<h3 class="sidebar-box__sub-title"><?php esc_html_e( 'Tallennetut sisällöt', 'helsinki-universal' ); ?></h3>
+	<h3 class="sidebar-box__sub-title"><?php esc_html_e( 'Omat tallennetut sisällöt', 'helsinki-universal' ); ?></h3>
 	<?php
 	$user_favs = get_user_meta( get_current_user_id(), 'opehuone_favs', true );
 
