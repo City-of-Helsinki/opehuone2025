@@ -1,8 +1,6 @@
 .date-box-row {
 	display: grid;
-	align-items: center;
 	grid-template-columns: auto 90px;
-	gap: rem(12px);
 }
 
 .date-box-row-weather {
@@ -23,8 +21,16 @@
 }
 
 .date-box-info {
-	margin-top: var(--opehuone--spacing--small);
+    padding-left: 1.5rem;
 	display: block;
 	font-weight: 500;
 	font-size: var(--opehuone--font-size--small);
+
+  span {
+    display: block;
+  }
+
+  &__name-day-sv {
+    font-style: italic;
+  }
 }
