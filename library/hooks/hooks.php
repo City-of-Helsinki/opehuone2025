@@ -207,3 +207,16 @@ add_filter( 'comment_reply_link', function( $link ) {
     }
     return $link;
 }, 10, 4 );
+
+/**
+ * Get first 35 words of the content if no excerpt found
+ *
+ */
+add_filter( 'get_the_excerpt', function ( $excerpt, $post ) {
+    if ( ! $excerpt ) {
+        // Get post content and limit to 35 words
+        $content = wp_strip_all_tags( $post->post_content );
+        return wp_trim_words( $content, 35, '...' );
+    }
+    return $excerpt;
+}, 10, 2);
