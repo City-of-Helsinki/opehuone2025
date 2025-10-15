@@ -217,7 +217,9 @@ add_filter( 'comment_reply_link', function( $link ) {
  */
 add_filter( 'get_the_excerpt', function ( $excerpt, $post ) {
     $post = get_post( $post );
-    if ( ! $post ) return $excerpt;
+    if ( ! $post ) {
+        return $excerpt;
+    }
 
     global $wp_query;
 
