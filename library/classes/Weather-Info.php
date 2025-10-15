@@ -8,13 +8,13 @@
 class HelsinkiWeather {
 
 	private $feed_url = 'https://api.openweathermap.org/data/2.5/weather?id=658225&units=metric&appid=';
-    private $appid_key;
+    private $appid;
 
     /**
      * Constructor
      */
-    public function __construct( $appid_key = null ) {
-        $this->appid_key = $appid_key ?: ( defined( 'OWM_APPID' ) ? OWM_APPID : null );
+    public function __construct() {
+        $this->appid = defined( 'OWM_APPID' ) ? OWM_APPID : null;
     }
 
 	/**
@@ -24,6 +24,10 @@ class HelsinkiWeather {
 	 */
 	public function get_weather_details() {
 		$obj = json_decode( $this->get_output_json() );
+
+        if ( ! $obj ) {
+            return null;
+        }
 
 		return [
 			'weather_code' => $obj->weather[0]->icon,
@@ -44,12 +48,12 @@ class HelsinkiWeather {
             return $transient;
         }
 
-        if ( empty( $this->api_key ) ) {
+        if ( empty( $this->appid ) ) {
             error_log( 'HelsinkiWeather: Missing OpenWeather API key.' );
             return false;
         }
 
-        $url = $this->feed_url . $this->api_key;
+        $url = $this->feed_url . $this->appid;
 
         $arr_context_options = [
             "ssl" => [
