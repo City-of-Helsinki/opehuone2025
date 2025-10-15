@@ -221,10 +221,8 @@ add_filter( 'get_the_excerpt', function ( $excerpt, $post ) {
         return $excerpt;
     }
 
-    global $wp_query;
-
     // Detect if this is the main query on a single post page
-    $is_main_single = $wp_query->is_main_query() && is_single( $post );
+    $is_main_single = is_single( $post ) && is_main_query();
 
     // On the actual single post page
     if ( $is_main_single ) {
