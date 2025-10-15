@@ -227,10 +227,10 @@ add_filter( 'get_the_excerpt', function ( $excerpt, $post ) {
     // On the actual single post page
     if ( $is_main_single ) {
         // Only show manual excerpt
-        return has_excerpt( $post->ID ) ? $excerpt : '';
+        return $excerpt;
     }
 
-    // For cards or custom loops (not the main single post)
+    // For cards or custom loops (not the main single post), create excerpt from content if no manual excerpt found
     if ( ! $excerpt ) {
         $excerpt = wp_strip_all_tags( $post->post_content );
     }
