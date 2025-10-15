@@ -210,13 +210,30 @@ add_filter( 'comment_reply_link', function( $link ) {
 
 /**
  * Get first 35 words of the content if no excerpt found
+ * Do this trimming only on front page, training and news archive pages
+ *
+ * On singular pages, show only the full excerpt if user has added one
  *
  */
 add_filter( 'get_the_excerpt', function ( $excerpt, $post ) {
-    if ( ! $excerpt ) {
-        // Get post content and limit to 35 words
-        $content = wp_strip_all_tags( $post->post_content );
-        return wp_trim_words( $content, 35, '...' );
+    $post = get_post( $post );
+    if ( ! $post ) return $excerpt;
+
+    global $wp_query;
+
+    // Detect if this is the main query on a single post page
+    $is_main_single = $wp_query->is_main_query() && is_single( $post );
+
+    // On the actual single post page
+    if ( $is_main_single ) {
+        // Only show manual excerpt
+        return has_excerpt( $post->ID ) ? $excerpt : '';
     }
-    return $excerpt;
+
+    // For cards or custom loops (not the main single post)
+    if ( ! $excerpt ) {
+        $excerpt = wp_strip_all_tags( $post->post_content );
+    }
+
+    return wp_trim_words( $excerpt, 35, '...' );
 }, 10, 2);
