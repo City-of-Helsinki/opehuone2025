@@ -58,7 +58,6 @@ class HelsinkiWeather {
         $response = wp_remote_get( $url, array( 'timeout' => 5 ) );
 
         if ( is_wp_error( $response ) ) {
-            var_dump( 'error');
             error_log( 'HelsinkiWeather: HTTP request failed: ' . $response->get_error_message() );
             return false;
         }
