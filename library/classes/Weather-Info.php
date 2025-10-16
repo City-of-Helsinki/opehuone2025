@@ -55,14 +55,21 @@ class HelsinkiWeather {
 
         $url = $this->feed_url . $this->appid;
 
-        $arr_context_options = [
-            "ssl" => [
-                "verify_peer"      => false,
-                "verify_peer_name" => false,
-            ],
-        ];
+        $response = wp_remote_get( $url, array( 'timeout' => 5 ) );
 
-        $out = @file_get_contents( $url, false, stream_context_create( $arr_context_options ) );
+        if ( is_wp_error( $response ) ) {
+            var_dump( 'error');
+            error_log( 'HelsinkiWeather: HTTP request failed: ' . $response->get_error_message() );
+            return false;
+        }
+
+        $out = wp_remote_retrieve_body( $response );
+        $status_Code = wp_remote_retrieve_response_code( $response );
+
+        if ( $status_Code < 200 || $status_Code >= 300 ) {
+            error_log( 'HelsinkiWeather: Received HTTP error code: ' . $status_Code . ' with error message: ' . $out );
+            return false;
+        }
 
         if ( $out ) {
             set_transient( 'opehuone_weather_json', $out, MINUTE_IN_SECONDS * 15 );
