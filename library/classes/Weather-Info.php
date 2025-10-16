@@ -49,7 +49,6 @@ class HelsinkiWeather {
         }
 
         if ( empty( $this->appid ) ) {
-            error_log( 'HelsinkiWeather: Missing OpenWeather API key.' );
             return false;
         }
 
@@ -58,7 +57,6 @@ class HelsinkiWeather {
         $response = wp_remote_get( $url, array( 'timeout' => 5 ) );
 
         if ( is_wp_error( $response ) ) {
-            error_log( 'HelsinkiWeather: HTTP request failed: ' . $response->get_error_message() );
             return false;
         }
 
@@ -66,7 +64,6 @@ class HelsinkiWeather {
         $status_Code = wp_remote_retrieve_response_code( $response );
 
         if ( $status_Code < 200 || $status_Code >= 300 ) {
-            error_log( 'HelsinkiWeather: Received HTTP error code: ' . $status_Code . ' with error message: ' . $out );
             return false;
         }
 
