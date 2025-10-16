@@ -290,3 +290,28 @@ function get_cornerlabels_without_default_value(): array {
         return $term->term_id !== $default_term_id;
     });
 }
+
+/**
+ * Generate a random colored thumbnail for post cards that have no thumbnail
+ *
+ * @return string
+ */
+function get_custom_card_thumbnail(): string {
+    $color_variations = [
+        'tram',
+        'coat-of-arms',
+        'suomenlinna',
+        'copper',
+        'summer',
+        'engel',
+        'metro'
+    ];
+
+    $random_color = $color_variations[ array_rand( $color_variations ) ];
+
+    return sprintf(
+        '<div class="b-post__custom-thumbnail b-post__custom-thumbnail-%s">%s</div>',
+        esc_attr( $random_color ),
+        helsinki_get_svg_logo()
+    );
+}
