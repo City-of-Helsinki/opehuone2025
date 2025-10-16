@@ -326,25 +326,7 @@ class Utils {
         $day->setTimezone( new \DateTimeZone( 'Europe/Helsinki' ) );
         $week_number = $day->format( 'W' );
 
-        $weather         = new \HelsinkiWeather();
-        $weather_details = $weather->get_weather_details();
-
         $string = '<span class="week">' . __( 'viikko', TEXT_DOMAIN ) . ' ' . $week_number . '</span> ' . '<span class="date">' . date_i18n( 'D' ) . ' ' . $day->format( 'j.n.' ) . '</span>' . ' ' . '<span class="header-the-time">klo ' . ' <span id="current-time"></span></span><br>';
-
-        return $string;
-    }
-
-    function get_current_weather_minified() {
-        $day = new \DateTime();
-        $day->setTimezone( new \DateTimeZone( 'Europe/Helsinki' ) );
-        $week_number = ' (' . $day->format( 'W' ) . ') ';
-
-        $weather         = new \HelsinkiWeather();
-        $weather_details = $weather->get_weather_details();
-
-        $weather_details['temperature'] = round( (float) $weather_details['temperature'] );
-
-        $string = '<img class="front-side__weather__weather-symbol" alt="' . __( 'Säätiedot', TEXT_DOMAIN ) . '" src="https://openweathermap.org/img/wn/' . $weather_details['weather_code'] . '@2x.png"><span class="front-side__weather__location">' . $weather_details['temperature'] . '&#176; Helsinki</span>';
 
         return $string;
     }

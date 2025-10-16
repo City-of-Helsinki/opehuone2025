@@ -8,13 +8,13 @@
 class HelsinkiWeather {
 
 	private $feed_url = 'https://api.openweathermap.org/data/2.5/weather?id=658225&units=metric&appid=';
-    private $appid_key;
+    private $appid;
 
     /**
      * Constructor
      */
-    public function __construct( $appid_key = null ) {
-        $this->appid_key = $appid_key ?: ( defined( 'OWM_APPID' ) ? OWM_APPID : null );
+    public function __construct() {
+        $this->appid = defined( 'OWM_APPID' ) ? OWM_APPID : null;
     }
 
 	/**
@@ -24,6 +24,10 @@ class HelsinkiWeather {
 	 */
 	public function get_weather_details() {
 		$obj = json_decode( $this->get_output_json() );
+
+        if ( ! $obj ) {
+            return null;
+        }
 
 		return [
 			'weather_code' => $obj->weather[0]->icon,
@@ -44,21 +48,24 @@ class HelsinkiWeather {
             return $transient;
         }
 
-        if ( empty( $this->api_key ) ) {
-            error_log( 'HelsinkiWeather: Missing OpenWeather API key.' );
+        if ( empty( $this->appid ) ) {
             return false;
         }
 
-        $url = $this->feed_url . $this->api_key;
+        $url = $this->feed_url . $this->appid;
 
-        $arr_context_options = [
-            "ssl" => [
-                "verify_peer"      => false,
-                "verify_peer_name" => false,
-            ],
-        ];
+        $response = wp_remote_get( $url, array( 'timeout' => 5 ) );
 
-        $out = @file_get_contents( $url, false, stream_context_create( $arr_context_options ) );
+        if ( is_wp_error( $response ) ) {
+            return false;
+        }
+
+        $out = wp_remote_retrieve_body( $response );
+        $status_Code = wp_remote_retrieve_response_code( $response );
+
+        if ( $status_Code < 200 || $status_Code >= 300 ) {
+            return false;
+        }
 
         if ( $out ) {
             set_transient( 'opehuone_weather_json', $out, MINUTE_IN_SECONDS * 15 );

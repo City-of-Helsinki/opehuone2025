@@ -22,7 +22,15 @@ function get_current_weather_minified() {
 	$weather         = new \HelsinkiWeather();
 	$weather_details = $weather->get_weather_details();
 
-	$weather_details['temperature'] = round( (float) $weather_details['temperature'] );
+    if ( ! $weather_details ) {
+        return '';
+    }
+
+    $weather_details['temperature'] = round((float) $weather_details['temperature']);
+
+    // Negatives already have a '-' sign, so we need to check for positives
+    $weather_details['temperature'] = ($weather_details['temperature'] > 0) ? '+' . $weather_details['temperature'] : $weather_details['temperature'];
+
 
 	$string = '<img class="front-side__weather__weather-symbol" alt="Säätiedot" src="https://openweathermap.org/img/wn/' . $weather_details['weather_code'] . '@2x.png"><span class="front-side__weather__location">' . $weather_details['temperature'] . '&#176; Helsinki</span>';
 
