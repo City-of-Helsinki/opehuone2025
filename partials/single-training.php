@@ -4,9 +4,9 @@
         <div class="opehuone-grid">
             <section>
                 <h1 class="single-post__title"><?php the_title(); ?></h1>
-
-                <p><?php the_excerpt(); ?></p>
-
+                <?php if ( has_excerpt() ) : ?>
+                    <p><?php echo get_the_excerpt(); ?></p>
+                <?php endif; ?>
                 <div class="single-post__details-box">
                     <?php
                     get_template_part( 'partials/sidebar/training-cornerlabels' );
