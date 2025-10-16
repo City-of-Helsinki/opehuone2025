@@ -40,6 +40,53 @@
 		vertical-align: bottom;
 	}
 
+    &__custom-thumbnail {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        width: 60%;
+        height: auto;
+      }
+
+      &-tram, &-coat-of-arms, &-metro {
+        svg {
+          fill: white;
+        }
+      }
+
+      &-tram {
+        background-color: var(--color-tram);
+      }
+
+      &-coat-of-arms {
+        background-color: var(--color-coat-of-arms);
+      }
+
+      &-suomenlinna {
+        background-color: var(--color-suomenlinna-dark);
+      }
+
+      &-copper {
+        background-color: var(--color-copper);
+      }
+
+      &-summer {
+        background-color: var(--color-summer);
+      }
+
+      &-engel {
+        background-color: var(--color-engel);
+      }
+
+      &-metro {
+        background-color: var(--color-metro);
+      }
+    }
+
 	&__date {
 		display: block;
 		font-size: var(--opehuone--font-size--x-small);
