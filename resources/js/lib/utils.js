@@ -46,14 +46,6 @@ export const getUrlParameterAsArray = (param) => {
 	return value ? value.split(',') : [];
 };
 
-/**
- * Get single URL parameter
- */
-export const getUrlParameter = (param) => {
-	const params = new URLSearchParams(window.location.search);
-	return params.get(param) || '';
-};
-
 export const createAjaxParameters = (action, pageFilters) => {
 	const params = new URLSearchParams();
 
