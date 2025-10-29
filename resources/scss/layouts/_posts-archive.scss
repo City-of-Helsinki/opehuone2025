@@ -18,6 +18,7 @@
 		display: grid;
 		grid-template-columns: auto;
 		gap: var(--opehuone--spacing--small);
+        margin-bottom: 3rem;
 
 		@include media-breakpoint-up(sm) {
 			grid-template-columns: repeat(2, 1fr);
@@ -30,11 +31,6 @@
 		@include media-breakpoint-up(xl) {
 			column-gap: var(--opehuone--spacing--2-x-large);
 			row-gap: var(--opehuone--spacing--small);
-		}
-
-		// Viimeinen elementti omalle riville
-		& > *:last-child {
-			grid-column-start: 1;
 		}
 	}
 
@@ -68,7 +64,8 @@
 	}
 
 	&__filters-submit {
-		@include create-button(true);
+		@include create-button();
+        width: 25%;
 	}
 
 	&__number-of-posts {
@@ -80,9 +77,11 @@
 
 	&__load-more-wrapper {
 		margin-top: var(--opehuone--spacing--small);
+        text-align: center;
 	}
 
 	&__load-more-btn {
 		@include create-button();
+        width: 14rem;
 	}
 }
