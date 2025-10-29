@@ -175,8 +175,6 @@ function get_training_posts_query( $isAjax = false ): WP_Query {
         }
     }
 
-    error_log( print_r( $args, true ) );
-
     return new WP_Query( $args );
 }
 
