@@ -217,8 +217,7 @@ const updateDropdownButtonText = (wrapper) => {
 	const checkboxes = wrapper.querySelectorAll(
 		'.checkbox-filter__checkbox-input:checked'
 	);
-	const originalLabel =
-		button.getAttribute('data-original-label') || button.textContent;
+	const originalLabel = button.dataset.originalLabel || button.textContent;
 
 	if (checkboxes.length === 0) {
 		button.textContent = originalLabel; // no selection
