@@ -114,9 +114,7 @@ const toggleDropdown = () => {
 			const wrapper = button.closest(
 				'.posts-archive__select-filter-wrapper'
 			);
-			const dropdown = wrapper.querySelector(
-				'.checkbox-filter__filter-dropdown'
-			);
+
 			const originalLabel =
 				button.getAttribute('aria-label') || 'Näytä valinnat';
 
