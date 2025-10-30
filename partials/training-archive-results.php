@@ -6,7 +6,7 @@ $trainings_query = get_training_posts_query();
 ?>
 
 <span class="training-archive__number-of-posts" aria-live="polite">
-	<span id="training-archive-number-of-posts"><?php echo esc_html($trainings_query->found_posts); ?></span> <?php esc_html_e('hakutulosta', 'helsinki-universal'); ?>
+	<span id="archive-number-of-posts"><?php echo esc_html($trainings_query->found_posts); ?></span> <?php esc_html_e('hakutulosta', 'helsinki-universal'); ?>
 </span>
 
 <div class="b-training-row" id="training-archive-results">
@@ -28,4 +28,11 @@ $trainings_query = get_training_posts_query();
         <?php endwhile; ?>
         <?php wp_reset_postdata(); ?>
     <?php endif; ?>
+</div>
+<div class="posts-archive__load-more-wrapper">
+    <button class="posts-archive__load-more-btn"
+            data-total-posts="<?php echo esc_attr( $trainings_query->found_posts ); ?>"
+            data-posts-offset="15">
+        <?php esc_html_e( 'Katso lisää', 'helsinki-universal' ); ?>
+    </button>
 </div>

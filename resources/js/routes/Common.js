@@ -13,7 +13,8 @@ import {
 } from '../lib/services';
 import { concentrationFunctions } from '../lib/concentration';
 import { ownServices } from '../lib/ownServices';
-import { findkitUI } from '../lib/findkit'; // This is not used, but must be imported to work
+import { findkitUI } from '../lib/findkit';
+import { archiveFiltering } from '../lib/archiveFiltering'; // This is not used, but must be imported to work
 
 function toggleAria($element, attribute) {
 	const isHidden = $element.attr(attribute) === 'true';
@@ -48,6 +49,8 @@ export default {
 			userFavs();
 			// Posts filtering
 			postsFiltering();
+			// Archive pages filtering (posts and training archive)
+			archiveFiltering();
 			// Profile opener
 			profileOpener();
 			// General services functions

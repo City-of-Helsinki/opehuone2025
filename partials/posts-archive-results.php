@@ -1,25 +1,21 @@
 <?php
 
-if ( ! have_posts() ) {
-	return;
-}
+use function \Opehuone\TemplateFunctions\get_post_archive_query;
+use function \Opehuone\Utils\get_user_favs;
 
-global $wp_query;
+$posts_query = get_post_archive_query();
 
-$user_favs = \Opehuone\Utils\get_user_favs();
-$per_page  = 15;
 ?>
 
 <span class="posts-archive__number-of-posts" aria-live="polite">
 	<span
-		id="posts-archive-number-of-posts"><?php echo esc_html( $wp_query->found_posts ); ?></span> <?php esc_html_e( 'hakutulosta', 'helsinki-universal' ); ?>
+		id="archive-number-of-posts"><?php echo esc_html( $posts_query->found_posts ); ?></span> <?php esc_html_e( 'hakutulosta', 'helsinki-universal' ); ?>
 </span>
 
 <div class="b-posts-row" id="posts-archive-results">
-	<?php
-	while ( have_posts() ) {
-		the_post();
-
+	<?php if ( $posts_query->have_posts() ) : ?>
+	    <?php while ( $posts_query->have_posts() ) : $posts_query->the_post(); ?>
+        <?php
 		$block_args = [
 			'post_id'    => get_the_ID(),
 			'title'      => get_the_title(),
@@ -29,23 +25,19 @@ $per_page  = 15;
 			'is_sticky'  => is_sticky(),
 			'categories' => get_the_category(),
 			'date'       => get_the_date(),
-			'is_pinned'  => in_array( get_the_ID(), $user_favs ),
+			'is_pinned'  => in_array( get_the_ID(), get_user_favs() ),
 		];
-
 		get_template_part( 'partials/template-blocks/b-post', '', $block_args );
-	}
-
+        endwhile;
 	wp_reset_postdata();
+    endif;
 	?>
 </div>
 <div class="posts-archive__load-more-wrapper">
 	<button class="posts-archive__load-more-btn"
-			data-total-posts="<?php echo esc_attr( $wp_query->found_posts ); ?>"
-			data-posts-offset="15"
-			data-cornerlabels=""
-			data-categories=""
-			data-post-themes="">
-		<?php esc_html_e( 'Lataa lisää', 'helsinki-universal' ); ?>
+			data-total-posts="<?php echo esc_attr( $posts_query->found_posts ); ?>"
+			data-posts-offset="15">
+		<?php esc_html_e( 'Katso lisää', 'helsinki-universal' ); ?>
 	</button>
 </div>
 
