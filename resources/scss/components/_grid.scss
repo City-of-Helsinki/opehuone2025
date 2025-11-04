@@ -4,6 +4,10 @@
 	gap: var(--opehuone--spacing--normal);
 	width: 100%;
 
+    > * {
+      min-width: 0;
+    }
+
 	&.opehuone-grid--reversed {
 		@include media-breakpoint-up(lg) {
 			grid-template-columns: 360px 1fr;
