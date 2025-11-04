@@ -5,12 +5,12 @@
 	width: 100%;
 
 	&.opehuone-grid--reversed {
-		@include media-breakpoint-up(md) {
+		@include media-breakpoint-up(lg) {
 			grid-template-columns: 360px 1fr;
 		}
 	}
 
-	@include media-breakpoint-up(md) {
+	@include media-breakpoint-up(lg) {
 		grid-template-columns: 1fr 360px;
 	}
 }
