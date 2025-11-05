@@ -1,6 +1,7 @@
 <?php
 
 use function \Opehuone\TemplateFunctions\get_training_posts_query;
+use function Opehuone\TemplateFunctions\display_load_more_button;
 
 $trainings_query = get_training_posts_query();
 ?>
@@ -29,10 +30,4 @@ $trainings_query = get_training_posts_query();
         <?php wp_reset_postdata(); ?>
     <?php endif; ?>
 </div>
-<div class="posts-archive__load-more-wrapper">
-    <button class="posts-archive__load-more-btn"
-            data-total-posts="<?php echo esc_attr( $trainings_query->found_posts ); ?>"
-            data-posts-offset="15">
-        <?php esc_html_e( 'Katso lisää', 'helsinki-universal' ); ?>
-    </button>
-</div>
+<?php display_load_more_button( $trainings_query->found_posts, 15 ); ?>

@@ -2,6 +2,7 @@
 
 use function \Opehuone\TemplateFunctions\get_post_archive_query;
 use function \Opehuone\Utils\get_user_favs;
+use function Opehuone\TemplateFunctions\display_load_more_button;
 
 $posts_query = get_post_archive_query();
 
@@ -33,12 +34,6 @@ $posts_query = get_post_archive_query();
     endif;
 	?>
 </div>
-<div class="posts-archive__load-more-wrapper">
-	<button class="posts-archive__load-more-btn"
-			data-total-posts="<?php echo esc_attr( $posts_query->found_posts ); ?>"
-			data-posts-offset="15">
-		<?php esc_html_e( 'Katso lisää', 'helsinki-universal' ); ?>
-	</button>
-</div>
+<?php display_load_more_button( $posts_query->found_posts, 15 ); ?>
 
 

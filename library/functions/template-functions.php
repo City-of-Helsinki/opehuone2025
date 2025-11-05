@@ -452,3 +452,15 @@ function display_archive_multi_select_filters( $filters ): void {
         <?php
     }
 }
+
+function display_load_more_button( $found_posts, $offset ): void {
+    ?>
+    <div class="posts-archive__load-more-wrapper">
+	<button class="posts-archive__load-more-btn <?php echo $offset > $found_posts ? 'is-disabled' : ''; ?>"
+			data-total-posts="<?php echo esc_attr( $found_posts ); ?>"
+			data-posts-offset="<?php echo $offset; ?>">
+		<?php esc_html_e( 'Katso lisää', 'helsinki-universal' ); ?>
+	</button>
+</div>
+<?php
+}
