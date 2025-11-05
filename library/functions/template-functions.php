@@ -122,11 +122,13 @@ function get_favorite_article_button(): void {
     ));
 }
 
-function get_training_posts_query(): WP_Query {
+function get_training_posts_query( $isAjax = false ): WP_Query {
+    $filters = ['cornerlabels', 'training_theme'];
+
     $args = [
         'post_type'      => 'training',
-        'posts_per_page' => -1,
-        'tax_query'      => [ 'relation' => 'AND' ],
+        'posts_per_page' => 15,
+        'post_status'    => 'publish',
         'meta_key'       => 'training_start_datetime', // Define the meta key for ordering
         'orderby'        => 'meta_value', // Order by meta value
         'order'          => 'ASC', // Order in ascending order
@@ -140,23 +142,62 @@ function get_training_posts_query(): WP_Query {
         ],
     ];
 
-    if ( ! empty( $_GET['cornerlabels'] ) ) {
-        $args['tax_query'][] = [
-            'taxonomy' => 'cornerlabels',
-            'field'    => 'id',
-            'terms'    => sanitize_text_field( $_GET['cornerlabels'] ),
-        ];
+    $tax_query = [];
+
+    foreach( $filters as $filter ) {
+        $values = get_URL_parameter_values($filter, $isAjax);
+
+        if ( ! empty( $values ) ) {
+            $tax_query[] = [
+                'taxonomy' => $filter,
+                'field'    => 'term_id',
+                'terms'    => $values,
+            ];
+        }
     }
 
-    if ( ! empty( $_GET['training_theme'] ) ) {
-        $args['tax_query'][] = [
-            'taxonomy' => 'training_theme',
-            'field'    => 'id',
-            'terms'    => sanitize_text_field( $_GET['training_theme'] ),
-        ];
+    $args['tax_query'] = $tax_query;
+
+    $offset = isset( $_POST['offset'] ) ? intval( $_POST['offset'] ) : false;
+
+    // If we have offset (clicking the load more button), set it to the query args
+    if ( ! empty( $offset) ) {
+        $args['offset'] = $offset;
+    }
+
+    // Apply tax_query if any filters are set
+    if ( ! empty( $tax_query ) ) {
+        // If both filters are set, use 'AND' to require both terms
+        if ( count( $tax_query ) > 1 ) {
+            $args['tax_query'] = array_merge( [ 'relation' => 'AND' ], $tax_query );
+        } else {
+            $args['tax_query'] = $tax_query;
+        }
     }
 
     return new WP_Query( $args );
+}
+
+/**
+ * @param string $filter
+ * @param mixed $isAjax
+ * @return array|mixed
+ */
+function get_URL_parameter_values(string $filter, mixed $isAjax): mixed {
+    $values = $_GET[ $filter ] ?? [];
+
+    if ( $isAjax ) {
+        $values = $_POST[ $filter ] ?? [];
+    }
+
+    if ( ! empty( $values ) ) {
+        $flat_values = [];
+        foreach ( ( array ) $values as $value ) {
+            $flat_values = array_merge( $flat_values, explode(',', $value ) );
+        }
+        $values = array_map( 'intval', $flat_values );
+    }
+    return $values;
 }
 
 function display_time_until_holidays(): void {
@@ -314,4 +355,112 @@ function get_custom_card_thumbnail(): string {
         esc_attr( $random_color ),
         helsinki_get_svg_logo()
     );
+}
+
+function get_post_archive_query( $isAjax = false ): WP_Query {
+    $filters = [
+        'cornerlabels',
+        'category',
+        'post_theme'
+    ];
+
+    $tax_query = [];
+
+    foreach ( $filters as $filter ) {
+        $values = get_URL_parameter_values($filter, $isAjax);
+        // Sanitize term IDs (convert to integers)
+        if ( ! empty( $values ) ) {
+            $tax_query[] = [
+                'taxonomy' => $filter,
+                'field'    => 'term_id',
+                'terms'    => $values,
+            ];
+        }
+    }
+
+    $query_args = [
+        'post_type'      => 'post',
+        'posts_per_page' => 15,
+        'post_status'    => 'publish',
+        'ignore_sticky_posts' => true
+    ];
+
+    $offset = isset( $_POST['offset'] ) ? intval( $_POST['offset'] ) : false;
+
+    // If we have offset (clicking the load more button), set it to the query args
+    if ( ! empty( $offset) ) {
+        $query_args['offset'] = $offset;
+    }
+
+    // Apply tax_query if any filters are set
+    if ( ! empty( $tax_query ) ) {
+        // If both filters are set, use 'AND' to require both terms
+        if ( count( $tax_query ) > 1 ) {
+            $query_args['tax_query'] = array_merge( [ 'relation' => 'AND' ], $tax_query );
+        } else {
+            $query_args['tax_query'] = $tax_query;
+        }
+    }
+
+    return new \WP_Query( $query_args );
+}
+
+function display_archive_multi_select_filters( $filters ): void {
+    foreach ( $filters as $filter ) {
+        $default_label = esc_html('Valitse ' . strtolower($filter['name']), 'helsinki-universal');
+        ?>
+        <div class="posts-archive__single-filter">
+            <label for="posts-archive-<?php echo esc_attr( $filter['taxonomy'] ); ?>"
+                   class="posts-archive__filter-label">
+                <?php echo esc_html( $filter['name'] ); ?>
+            </label>
+            <div class="posts-archive__select-filter-wrapper">
+                <button type="button" class="checkbox-filter__filter-btn" aria-expanded="false"
+                        aria-label="<?php esc_attr_e( 'Näytä valinnat', 'helsinki-universal' ); ?>"
+                        data-original-label="<?php echo $default_label; ?>"
+                >
+                    <?php echo $default_label; ?>
+                </button>
+                <div class="checkbox-filter__filter-dropdown">
+                    <div class="checkbox-filter__checkboxes-wrapper">
+                        <?php
+                        $terms = get_terms( [
+                            'taxonomy'   => $filter['taxonomy'],
+                            'hide_empty' => true,
+                        ] );
+
+                        if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+                            foreach ( $terms as $term ) {
+                                ?>
+                                <label class="checkbox-filter__checkbox-label">
+                                    <input type="checkbox" class="checkbox-filter__checkbox-input"
+                                           name="<?php echo esc_attr( $filter['taxonomy'] ); ?>[]"
+                                           value="<?php echo esc_attr( $term->term_id ); ?>">
+                                    <?php echo esc_html( $term->name ); ?>
+                                </label>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </div>
+                    <button type="button" class="checkbox-filter__checkboxes-reset-btn">
+                        <?php esc_html_e( 'Tyhjennä valinnat', 'helsinki-universal' ); ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+}
+
+function display_load_more_button( $found_posts, $offset ): void {
+    ?>
+    <div class="posts-archive__load-more-wrapper">
+	<button class="posts-archive__load-more-btn <?php echo $offset > $found_posts ? 'is-disabled' : ''; ?>"
+			data-total-posts="<?php echo esc_attr( $found_posts ); ?>"
+			data-posts-offset="<?php echo $offset; ?>">
+		<?php esc_html_e( 'Katso lisää', 'helsinki-universal' ); ?>
+	</button>
+</div>
+<?php
 }

@@ -1,12 +1,13 @@
 <?php
 
 use function \Opehuone\TemplateFunctions\get_training_posts_query;
+use function Opehuone\TemplateFunctions\display_load_more_button;
 
 $trainings_query = get_training_posts_query();
 ?>
 
 <span class="training-archive__number-of-posts" aria-live="polite">
-	<span id="training-archive-number-of-posts"><?php echo esc_html($trainings_query->found_posts); ?></span> <?php esc_html_e('hakutulosta', 'helsinki-universal'); ?>
+	<span id="archive-number-of-posts"><?php echo esc_html($trainings_query->found_posts); ?></span> <?php esc_html_e('hakutulosta', 'helsinki-universal'); ?>
 </span>
 
 <div class="b-training-row" id="training-archive-results">
@@ -29,3 +30,4 @@ $trainings_query = get_training_posts_query();
         <?php wp_reset_postdata(); ?>
     <?php endif; ?>
 </div>
+<?php display_load_more_button( $trainings_query->found_posts, 15 ); ?>

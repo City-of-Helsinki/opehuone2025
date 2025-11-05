@@ -29,8 +29,7 @@
 
 			+ .checkbox-filter__filter-dropdown {
 				display: block;
-				position: relative;
-				top: -1px;
+				position: absolute;
 			}
 
 			&:after {
@@ -43,6 +42,9 @@
 		display: none;
 		border: 2px solid;
 		border-color: transparent #1a1a1a #1a1a1a #1a1a1a;
+        background-color: #fff;
+        z-index: 10;
+        width: 100%;
 	}
 
 	&__checkboxes-wrapper {

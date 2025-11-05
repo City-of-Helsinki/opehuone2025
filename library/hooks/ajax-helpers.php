@@ -3,8 +3,11 @@
 namespace Opehuone\AjaxHelpers;
 
 use function Opehuone\TemplateFunctions\display_sticky_and_regular_posts;
+use function Opehuone\TemplateFunctions\get_post_archive_query;
+use function Opehuone\TemplateFunctions\get_training_posts_query;
 use function Opehuone\Utils\the_own_services_row;
 use function Opehuone\Utils\the_services_row;
+use function \Opehuone\Utils\get_user_favs;
 
 /**
  * AJAX related stuff
@@ -832,60 +835,9 @@ add_action( 'wp_ajax_update_front_page_pages', __NAMESPACE__ . '\\ajax_update_fr
 add_action( 'wp_ajax_nopriv_update_front_page_pages', __NAMESPACE__ . '\\ajax_update_front_page_pages' );
 
 function ajax_update_training_archive_results() {
-	// Get filter values from POST request
-	$cornerlabel    = isset( $_POST['cornerLabel'] ) ? intval( $_POST['cornerLabel'] ) : '';
-	$training_theme = isset( $_POST['trainingTheme'] ) ? intval( $_POST['trainingTheme'] ) : '';
-
-	$query_args = [
-		'post_type'      => 'training',
-		'posts_per_page' => 8,
-		'meta_query'     => [
-			[
-				'key'     => 'training_end_datetime', // Target the correct meta field
-				'value'   => current_time( 'Y-m-d\TH:i:s' ), // Get the current date and time in WordPress timezone
-				'compare' => '>=', // Only include posts where the date is in the future
-				'type'    => 'DATETIME', // Ensure proper comparison as a date-time value
-			],
-		],
-	];
-
-	// Initialize tax_query array
-	$tax_query = [];
-
-	// Add cornerlabel filter if available
-	if ( ! empty( $cornerlabel ) ) {
-		$tax_query[] = [
-			'taxonomy' => 'cornerlabels',
-			'field'    => 'term_id',
-			'terms'    => $cornerlabel,
-		];
-	}
-
-	// Add training_theme filter if available
-	if ( ! empty( $training_theme ) ) {
-		$tax_query[] = [
-			'taxonomy' => 'training_theme',
-			'field'    => 'term_id',
-			'terms'    => $training_theme,
-		];
-	}
-
-	// Apply tax_query if any filters are set
-	if ( ! empty( $tax_query ) ) {
-		// If both filters are set, use 'AND' to require both terms
-		if ( count( $tax_query ) > 1 ) {
-			$query_args['tax_query'] = [
-				'relation' => 'AND',
-				...$tax_query, // Spread operator for merging arrays
-			];
-		} else {
-			$query_args['tax_query'] = $tax_query;
-		}
-	}
+    $query = get_training_posts_query( true );
 
 	ob_start();
-
-	$query = new \WP_Query( $query_args );
 
 	// Output regular posts after sticky ones
 	if ( $query->have_posts() ) {
@@ -927,62 +879,9 @@ add_action( 'wp_ajax_nopriv_update_training_archive_results', __NAMESPACE__ . '\
 // Post-archive filters
 
 function ajax_update_post_archive_results() {
-
-	// Get filter values from POST request
-	$cornerlabel    = isset( $_POST['cornerLabel'] ) ? intval( $_POST['cornerLabel'] ) : '';
-	$category = isset( $_POST['category'] ) ? intval( $_POST['category'] ) : '';
-	$post_theme = isset( $_POST['postTheme'] ) ? intval( $_POST['postTheme'] ) : '';
-
-	// Get filter values from POST request
-	$current_favs = \Opehuone\Utils\get_user_favs();
-
-	$query_args = [
-		'post_type'      => 'post',
-		'posts_per_page' => 15,
-	];
-
-	// Initialize tax_query array
-	$tax_query = [];
-
-	// Add cornerlabel filter if available
-	if ( ! empty( $cornerlabel ) ) {
-		$tax_query[] = [
-			'taxonomy' => 'cornerlabels',
-			'field'    => 'term_id',
-			'terms'    => $cornerlabel,
-		];
-	}
-
-	if ( ! empty( $category ) ) {
-		$tax_query[] = [
-			'taxonomy' => 'category',
-			'field'    => 'term_id',
-			'terms'    => $category,
-		];
-	}
-
-	// Add training_theme filter if available
-	if ( ! empty( $post_theme ) ) {
-		$tax_query[] = [
-			'taxonomy' => 'post_theme',
-			'field'    => 'term_id',
-			'terms'    => $post_theme,
-		];
-	}
-
-	// Apply tax_query if any filters are set
-	if ( ! empty( $tax_query ) ) {
-		// If both filters are set, use 'AND' to require both terms
-		if ( count( $tax_query ) > 1 ) {	
-			$query_args['tax_query'] = array_merge( [ 'relation' => 'AND' ], $tax_query );
-		} else {
-			$query_args['tax_query'] = $tax_query;
-		}
-	}
+    $query = get_post_archive_query(true );
 
 	ob_start();
-
-	$query = new \WP_Query( $query_args );
 
 	// Output regular posts after sticky ones
 	if ( $query->have_posts() ) {
@@ -998,7 +897,7 @@ function ajax_update_post_archive_results() {
 				'is_sticky'  => is_sticky(),
 				'categories' => get_the_category(),
 				'date'       => get_the_date(),
-				'is_pinned'  => in_array( get_the_ID(), $current_favs ),
+				'is_pinned'  => in_array( get_the_ID(), get_user_favs() ),
 			];
 
 			get_template_part( 'partials/template-blocks/b-post', null, $block_args );
