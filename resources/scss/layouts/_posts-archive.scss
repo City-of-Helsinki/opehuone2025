@@ -65,7 +65,9 @@
 
 	&__filters-submit {
 		@include create-button();
-        width: 25%;
+        grid-column: 1;
+        grid-row: auto;
+        width: 100%;
 	}
 
 	&__number-of-posts {

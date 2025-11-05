@@ -382,6 +382,7 @@ function get_post_archive_query( $isAjax = false ): WP_Query {
         'post_type'      => 'post',
         'posts_per_page' => 15,
         'post_status'    => 'publish',
+        'ignore_sticky_posts' => true
     ];
 
     $offset = isset( $_POST['offset'] ) ? intval( $_POST['offset'] ) : false;
@@ -404,7 +405,7 @@ function get_post_archive_query( $isAjax = false ): WP_Query {
     return new \WP_Query( $query_args );
 }
 
-function display_archive_multi_select_filters( $filters ) {
+function display_archive_multi_select_filters( $filters ): void {
     foreach ( $filters as $filter ) {
         $default_label = esc_html('Valitse ' . strtolower($filter['name']), 'helsinki-universal');
         ?>

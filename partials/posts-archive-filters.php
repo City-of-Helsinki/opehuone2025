@@ -25,8 +25,8 @@ use function Opehuone\TemplateFunctions\display_archive_multi_select_filters;
 
         display_archive_multi_select_filters( $filters );
         ?>
-	</div>
     <button id="archive-submit-button" type="button" class="posts-archive__filters-submit">
         <?php esc_html_e( 'Hae', 'helsinki-universal' ); ?>
     </button>
+	</div>
 </form>
