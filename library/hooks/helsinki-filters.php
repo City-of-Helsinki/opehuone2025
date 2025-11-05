@@ -24,6 +24,10 @@ function remove_helsinki_theme_actions() {
     if ( has_action ('helsinki_footer_bottom', 'helsinki_footer_logo' ) ) {
         remove_action('helsinki_footer_bottom', 'helsinki_footer_logo', 10);
     }
+
+    if ( has_action('helsinki_not_found', 'helsinki_not_found_notice' ) ) {
+        remove_action('helsinki_not_found', 'helsinki_not_found_notice', 30);
+    }
 }
 
 add_action( 'wp_head', __NAMESPACE__ . '\\remove_helsinki_theme_actions' );
@@ -57,4 +61,18 @@ add_action('helsinki_footer', function() {
 
 add_action('helsinki_footer_bottom', function() {
     get_template_part('partials/footer/logo' );
+}, 10);
+
+/**
+ * Display 404 page content based on Opehuone asetukset ACF WYSIWYG field
+ *
+ */
+add_action('helsinki_not_found', function () {
+    $page_not_found_acf = get_field('404_page_content', 'option');
+
+    if ( empty( $page_not_found_acf ) ) {
+        return;
+    }
+
+    echo $page_not_found_acf;
 }, 10);
