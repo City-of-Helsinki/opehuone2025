@@ -210,7 +210,9 @@ function display_time_until_holidays(): void {
 
     echo '<div class="profile-opener-dropdown__holiday">';
     foreach ( $holidays as $season => $label ) {
-        $show = get_field( 'show_until_' . $season, 'option' );
+        $field_name = 'show_until_' . $season;
+        $show = get_field( $field_name, 'option' );
+
         if ( ! $show ) {
             continue;
         }
@@ -220,6 +222,12 @@ function display_time_until_holidays(): void {
         if ( ! $countdown ) {
             continue;
         }
+
+        if ( intval( $countdown ) < 0 ) {
+            update_field( $field_name, false, 'option' );
+            continue;
+        }
+
         echo '<span class="profile-opener-dropdown__holiday-countdown">' . esc_html( $label ) . ': ' . esc_html( $countdown ) . '</span>';
     }
     echo '</div>';
