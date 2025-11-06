@@ -8,11 +8,11 @@
 	}
 
 	@include media-breakpoint-up(md) {
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 	}
 
 	@include media-breakpoint-up(xl) {
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 	}
 
 	&__button-wrapper {
@@ -22,6 +22,16 @@
 	&__more-btn {
 		@include create-button();
 	}
+}
+
+#posts-archive-results.b-posts-row {
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 .b-post {
