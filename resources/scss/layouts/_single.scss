@@ -21,8 +21,9 @@
 	&__date-row {
 		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
 		align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
 		font-size: var(--opehuone--font-size--normal);
 		line-height: calc(24 / 16);
 		margin-bottom: var(--opehuone--spacing--x-small);
