@@ -5,9 +5,9 @@ use function \Opehuone\TemplateFunctions\get_top_parent_page_title;
 <article class="content" data-current-page-id="<?php echo get_the_ID(); ?>">
 	<div class="hds-container opehuone-page opehuone-content-container">
 		<?php get_template_part( 'partials/breadcrumbs' ); ?>
-		<div class="filters-container">
-			<?php get_template_part( 'partials/page-filters' ); ?>
-		</div>
+
+        <?php get_template_part( 'partials/page-filters' ); ?>
+
 		<div class="opehuone-grid opehuone-grid--reversed">
 			<aside>
 				<?php get_template_part( 'partials/sidemenu' ); ?>

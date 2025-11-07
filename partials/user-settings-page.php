@@ -4,6 +4,8 @@ if ( ! is_user_logged_in() ) {
 	return;
 }
 
+use function \Opehuone\TemplateFunctions\get_cornerlabels_without_default_value;
+
 $current_user = wp_get_current_user();
 $cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
 $user_data    = get_user_meta( $current_user->ID, 'user_data', true );
@@ -42,52 +44,62 @@ if ( ! $user_favs ) {
 	<div class="content__container hds-container">
 		<div class="user-settings-page">
 			<h2 class="user-settings-page__main-title">
-				<?php esc_html_e( 'Omat tiedot', 'helsinki-universal' ); ?>
+				<?php esc_html_e( 'Oma profiili', 'helsinki-universal' ); ?>
 			</h2>
-			<div class="user-settings-page__settings-row">
-				<div>
-					<p>
-						<?php echo esc_html( $current_user->user_firstname . ' ' . $current_user->user_lastname ); ?>
-						<br>
-						<?php echo esc_html( $current_user->user_email ); ?>
-					</p>
-					<p>
-						<?php echo esc_html( sprintf( 'Olet kirjatunut sisään koulutiedolla: %s', $school_name ) ); ?>
-					</p>
-				</div>
-				<div>
-					<form class="user-settings-form" id="user-settings">
-						<p><?php esc_html_e( 'Muuta koulutusastetta', 'helsinki-universal' ); ?></p>
-						<div class="front-page-posts-filter__checkboxes-row">
-							<?php
-							$terms = get_terms( [
-								'taxonomy'   => 'cornerlabels',
-								'hide_empty' => true,
-							] );
+            <p><?php esc_html_e('Oma profiili -sivulla voit vaihtaa koulutusastettasi, jonka mukaan Opehuoneen sisällöt sinulle ensisijaisesti suodatetaan. Täältä voit myös hallinnoida etusivulla näkyvää Omat tallennetut sisällöt -osiota.'); ?></p>
+            <div class="user-settings-page__settings">
+                <h3 class="user-settings-page__settings-title"><?php esc_html_e('Omat tiedot'); ?></h3>
+                <div class="user-settings-page__settings-row">
+                    <div>
+                        <p>
+                            <?php echo esc_html( $current_user->user_firstname . ' ' . $current_user->user_lastname ); ?>
+                            <br>
+                            <?php echo esc_html( $current_user->user_email ); ?>
+                        </p>
+                        <p class="user-settings-page__settings-row-school-name">
+                            <?php echo esc_html( 'Koulutusasteesi:'); ?> <span><?php echo $school_name; ?></span>
+                        </p>
+                    </div>
+                    <div>
+                        <form class="user-settings-form" id="user-settings">
+                            <p><?php esc_html_e( 'Muokkaa koulutusastettasi', 'helsinki-universal' ); ?></p>
+                            <span><?php esc_html_e('Valitse koulutusaste tai -asteet, joiden sisällöt haluat nähdä ensisijaisesti. Voit muokata koulutusastetta aina halutessasi.', 'helsinki-universal'); ?></span>
+                            <div class="front-page-posts-filter__checkboxes-row">
+                                <?php
+                                $terms = get_cornerlabels_without_default_value();
 
-							if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-								foreach ( $terms as $term ) {
-									?>
-									<label class="front-page-posts-filter__checkbox-label">
-										<input type="checkbox" class="front-page-posts-filter__checkbox-input"
-											   name="cornerlabels[]"
-											   value="<?php echo esc_attr( $term->term_id ); ?>" <?php echo in_array( $term->term_id, $cornerlabels ) ? ' checked' : ''; ?>>
-										<?php echo esc_html( $term->name ); ?>
-									</label>
-									<?php
-								}
-							}
-							?>
-						</div>
-						<button type="submit"
-								class="user-settings-form__submit-button"><?php esc_html_e( 'Tallenna muutos' ); ?></button>
-					</form>
-				</div>
-			</div>
+                                if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+                                    foreach ( $terms as $term ) {
+                                        ?>
+                                        <label class="front-page-posts-filter__checkbox-label">
+                                            <input type="checkbox" class="front-page-posts-filter__checkbox-input"
+                                                   name="cornerlabels[]"
+                                                   value="<?php echo esc_attr( $term->term_id ); ?>" <?php echo in_array( $term->term_id, $cornerlabels ) ? ' checked' : ''; ?>>
+                                            <?php echo esc_html( $term->name ); ?>
+                                        </label>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </div>
+                            <button type="submit"
+                                    class="user-settings-form__submit-button"><?php esc_html_e( 'Tallenna muutos' ); ?></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 			<div class="user-settings-page__favorites-wrapper">
-				<h2 class="user-settings-page__secondary-title">
-					<?php esc_html_e( 'Tallennetut sisällöt', 'helsinki-universal' ); ?>
-				</h2>
+                <div class="user-settings-page__favorites-wrapper-info">
+                    <h2 class="user-settings-page__secondary-title">
+                        <?php esc_html_e( 'Omat tallennetut sisällöt', 'helsinki-universal' ); ?>
+                    </h2>
+                    <p>
+                        <?php esc_html_e( 'Alla näet tallentamasi Opehuoneen suosikkisisällöt.', 'helsinki-universal' ); ?>
+                    <br/>
+                        <?php esc_html_e( 'Voit tallentaa suosikeiksi uutisia ja Opehuoneen sisältösivuja. Löydät tallenna-napin jokaisen sisältösivun otsikon alta.', 'helsinki-universal' ); ?>
+                    </p>
+                </div>
+                <hr role="separator" aria-label="End of instructions">
 				<ul class="user-favs-list user-favs-list--grid">
 					<?php
 					// Loop through favs

@@ -2,6 +2,13 @@
 
 namespace Opehuone\AjaxHelpers;
 
+use function Opehuone\TemplateFunctions\display_sticky_and_regular_posts;
+use function Opehuone\TemplateFunctions\get_post_archive_query;
+use function Opehuone\TemplateFunctions\get_training_posts_query;
+use function Opehuone\Utils\the_own_services_row;
+use function Opehuone\Utils\the_services_row;
+use function \Opehuone\Utils\get_user_favs;
+
 /**
  * AJAX related stuff
  */
@@ -239,26 +246,50 @@ function ajax_update_user_settings() {
 add_action( 'wp_ajax_update_user_settings', __NAMESPACE__ . '\\ajax_update_user_settings' );
 
 function ajax_add_new_own_link() {
-	// Call the verification function and pass the nonce from $_POST
-	verify_logged_in_request( $_POST['nonce'] );
+    // Check nonce
+    $nonce = $_POST['nonce'] ?? '';
+    if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
+        wp_send_json_error( 'Virheellinen nonce' );
+    }
 
-	$url_name = esc_html( $_POST['urlName'] );
-	$url      = esc_url( $_POST['url'] );
-	$user_id  = esc_attr( $_POST['userId'] );
+    $user_id  = intval( $_POST['userId'] ?? 0 );
+    $url      = esc_url_raw( $_POST['url'] ?? '' );
+    $url_name = sanitize_text_field( $_POST['urlName'] ?? '' );
 
-	$user_links = \User_settings::get_user_own_links( $user_id );
+    if ( ! $user_id || ! $url || ! $url_name ) {
+        wp_send_json_error( 'Puuttuvat tiedot' );
+    }
 
-	$user_links['added_custom_links'][] = [
-		'url_name' => $url_name,
-		'url'      => $url,
-	];
+    // Get existing user links
+    $own_links = get_user_meta( $user_id, 'user_opehuone_own_links', true );
 
-	update_user_meta( $user_id, 'user_opehuone_own_links', $user_links );
+    if ( ! is_array( $own_links ) ) {
+        $own_links = array(
+            'removed_default_urls' => array(),
+            'added_custom_links'   => array(),
+		);
+    }
 
-	// Send a success response with the added link
-	wp_send_json_success( [ 'message' => 'Linkki lisätty', 'urlName' => $url_name, 'url' => $url ] );
+    if ( ! isset( $own_links['added_custom_links'] ) || ! is_array( $own_links['added_custom_links'] ) ) {
+        $own_links['added_custom_links'] = array();
+    }
+
+    // Add new link
+    $own_links['added_custom_links'][] = array(
+        'url_name' => $url_name,
+        'url'      => $url,
+	);
+
+    update_user_meta( $user_id, 'user_opehuone_own_links', $own_links );
+
+    $added_link = array(
+        'title' => $url_name,
+        'url'   => $url,
+        'type'  => 'custom',
+	);
+
+    wp_send_json_success( $added_link );
 }
-
 add_action( 'wp_ajax_add_new_own_link', __NAMESPACE__ . '\\ajax_add_new_own_link' );
 
 function ajax_remove_default_link() {
@@ -371,35 +402,91 @@ add_action( 'wp_ajax_nopriv_copy_training_to_articles', __NAMESPACE__ . '\\ajax_
  * Ajax function to add new service
  */
 function ajax_add_new_own_service() {
-	$nonce = $_POST['nonce'];
+    $nonce = $_POST['nonce'];
 
-	if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
-		die( esc_html__( 'Käyttäjää ei pystytty tunnistamaan.', TEXT_DOMAIN ) );
-	}
+    if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
+        die( esc_html__( 'Käyttäjää ei pystytty tunnistamaan.' ) );
+    }
 
-	$service_details = $_POST['service_details'];
-	$user_id         = isset( $_POST['user_id'] ) ? wp_unslash( $_POST['user_id'] ) : null;
+    $service_details = $_POST['service_details'];
+    $user_id         = isset( $_POST['user_id'] ) ? wp_unslash( $_POST['user_id'] ) : null;
 
-	$service_name = isset( $service_details['serviceName'] ) ? sanitize_text_field( $service_details['serviceName'] ) : null;
-	$service_url  = isset( $service_details['serviceUrl'] ) ? esc_url_raw( $service_details['serviceUrl'] ) : null;
-	$identifier   = md5( $service_name . $service_url );
+    $service_name        = isset( $service_details['serviceName'] ) ? sanitize_text_field( $service_details['serviceName'] ) : null;
+    $service_url         = isset( $service_details['serviceUrl'] ) ? esc_url_raw( $service_details['serviceUrl'] ) : null;
+    $identifier          = md5( $service_name . $service_url );
 
-	global $wpdb;
-	$table  = $wpdb->prefix . 'user_own_services';
-	$data   = array(
-		'identifier'   => $identifier,
-		'user_id'      => $user_id,
-		'service_name' => $service_name,
-		'service_url'  => $service_url,
-		'visible'      => 1,
-	);
-	$format = array( '%s', '%d', '%s', '%s', '%d' );
-	$wpdb->insert( $table, $data, $format );
+    global $wpdb;
+    $table  = $wpdb->prefix . 'user_own_services';
+    $data   = array(
+        'identifier'          => $identifier,
+        'user_id'             => $user_id,
+        'service_name'        => $service_name,
+        'service_url'         => $service_url,
+    );
+    $format = array( '%s', '%d', '%s', '%s' );
+    $insert = $wpdb->insert( $table, $data, $format );
 
-	die();
+    if ( false !== $insert ) {
+        $user_services = new \User_services();
+        the_services_row( false, $user_services );
+        the_own_services_row( false );
+    }
+
+    die();
 }
 
 add_action( 'wp_ajax_add_new_own_service', __NAMESPACE__ . '\\ajax_add_new_own_service' );
+add_action( 'wp_ajax_nopriv_add_new_own_service', __NAMESPACE__ . '\\ajax_add_new_own_service' );
+
+/**
+ * Add service to favs
+ */
+function ajax_add_service_to_favorites() {
+    $user_services  = new \User_services();
+    $users_services = $user_services->get_user_services();
+    $service_id     = isset( $_POST['service_id'] ) ? wp_unslash( $_POST['service_id'] ) : null;
+    $user_id        = isset( $_POST['user_id'] ) ? wp_unslash( $_POST['user_id'] ) : null;
+
+    if ( $service_id && $user_id ) {
+        $users_services[] = $service_id;
+        update_user_meta( $user_id, 'user_services', $users_services );
+
+        the_own_services_row( true );
+        the_services_row( true, $user_services );
+    }
+
+    die();
+}
+
+add_action( 'wp_ajax_add_service_to_favorites', __NAMESPACE__ . '\\ajax_add_service_to_favorites' );
+add_action( 'wp_ajax_nopriv_add_service_to_favorites', __NAMESPACE__ . '\\ajax_add_service_to_favorites' );
+
+
+/**
+ * Remove service from favs
+ */
+function ajax_remove_service_from_favorites() {
+    $user_services  = new \User_services();
+    $users_services = $user_services->get_user_services();
+    $service_id     = isset( $_POST['service_id'] ) ? wp_unslash( $_POST['service_id'] ) : null;
+    $user_id        = isset( $_POST['user_id'] ) ? wp_unslash( $_POST['user_id'] ) : null;
+
+    if ( $service_id && $user_id ) {
+        $key = array_search( $service_id, $users_services );
+        if ( false !== $key ) {
+            unset( $users_services[ $key ] );
+            update_user_meta( $user_id, 'user_services', $users_services );
+
+            the_own_services_row( false );
+            the_services_row( false, $user_services );
+        }
+    }
+
+    die();
+}
+
+add_action( 'wp_ajax_remove_service_from_favorites', __NAMESPACE__ . '\\ajax_remove_service_from_favorites' );
+add_action( 'wp_ajax_nopriv_remove_service_from_favorites', __NAMESPACE__ . '\\ajax_remove_service_from_favorites' );
 
 /**
  * Ajax function to delete own service
@@ -439,149 +526,127 @@ function ajax_delete_own_service() {
 
 add_action( 'wp_ajax_remove_own_service', __NAMESPACE__ . '\\ajax_delete_own_service' );
 
+
 function ajax_pin_own_service() {
-	$nonce = $_POST['nonce'];
+    $nonce = $_POST['nonce'];
 
-	if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
-		die( esc_html__( 'Käyttäjää ei pystytty tunnistamaan.', TEXT_DOMAIN ) );
-	}
+    if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
+        die( esc_html__( 'Käyttäjää ei pystytty tunnistamaan.' ) );
+    }
 
-	$user_id            = isset( $_POST['userId'] ) ? wp_unslash( $_POST['userId'] ) : null;
-	$set_visible        = isset( $_POST['setVisible'] ) ? (int) wp_unslash( $_POST['setVisible'] ) : null;
-	$service_id         = isset( $_POST['serviceId'] ) ? wp_unslash( $_POST['serviceId'] ) : null;
-	$service_identifier = isset( $_POST['serviceIdentifier'] ) ? wp_unslash( $_POST['serviceIdentifier'] ) : null;
+    $user_id            = isset( $_POST['userId'] ) ? wp_unslash( $_POST['userId'] ) : null;
+    $set_visible        = isset( $_POST['setVisible'] ) ? (int) wp_unslash( $_POST['setVisible'] ) : null;
+    $service_id         = isset( $_POST['serviceId'] ) ? wp_unslash( $_POST['serviceId'] ) : null;
+    $service_identifier = isset( $_POST['serviceIdentifier'] ) ? wp_unslash( $_POST['serviceIdentifier'] ) : null;
 
-	global $wpdb;
-	$table = $wpdb->prefix . 'user_own_services';
+    global $wpdb;
+    $table = $wpdb->prefix . 'user_own_services';
 
-	$update = $wpdb->update(
-		$table,
-		[
-			'visible' => $set_visible,
-		],
-		[
-			'id'         => $service_id,
-			'user_id'    => $user_id,
-			'identifier' => $service_identifier,
-		],
-		[ '%d' ],
-		[ '%d', '%d', '%s' ]
-	);
+    $update = $wpdb->update(
+        $table,
+        [
+            'visible' => $set_visible,
+        ],
+        [
+            'id'         => $service_id,
+            'user_id'    => $user_id,
+            'identifier' => $service_identifier,
+        ],
+        [ '%d' ],
+        [ '%d', '%d', '%s' ]
+    );
 
-	die();
+    $user_services = new \User_services();
+
+    if ( false !== $update ) {
+        if ( 1 === $set_visible ) {
+            the_own_services_row( true );
+            the_services_row( true, $user_services );
+        } else {
+            the_services_row( false, $user_services );
+            the_own_services_row( false );
+        }
+    }
+
+    die();
 }
 
 add_action( 'wp_ajax_pin_own_service', __NAMESPACE__ . '\\ajax_pin_own_service' );
 
 function ajax_update_front_page_posts() {
-	// Get cornerLabels from POST request
-	$cornerlabel_ids = isset( $_POST['cornerLabels'] ) ? $_POST['cornerLabels'] : '';
+    $cornerlabel_ids = $_POST['cornerLabels'] ?? [];
 
-	if ( $cornerlabel_ids === '' ) {
-		$cornerlabel_ids = [];
-	}
+    if ( ! is_array( $cornerlabel_ids ) ) {
+        $cornerlabel_ids = explode( ',', $cornerlabel_ids );
+    }
 
-	$user_id = intval( $_POST['userId'] );
+    $user_id = intval( $_POST['userId'] );
 
-	$current_favs = get_user_meta( $user_id, 'opehuone_favs', true );
-	if ( ! $current_favs ) {
-		$current_favs = [];
-	}
+    $current_favs = get_user_meta( $user_id, 'opehuone_favs', true );
+    if ( ! $current_favs ) {
+        $current_favs = [];
+    }
 
-	if ( ! is_array( $cornerlabel_ids ) ) {
-		$cornerlabel_ids = explode( ',', $cornerlabel_ids );
-	}
+    $max_posts = 8;
 
-	// Fetch sticky posts first
-	$sticky_posts = get_option( 'sticky_posts' );
-	$sticky_posts = ! empty( $sticky_posts ) ? array_map( 'intval', $sticky_posts ) : [];
+    // Base query arguments
+    $query_args = [
+        'post_type' => 'post',
+    ];
 
-	$query_args = [
-		'post_type'           => 'post',
-		'posts_per_page'      => 8,
-		'ignore_sticky_posts' => true, // Prevent default WP behavior
-	];
+    // Tax filter
+    if ( ! empty( $cornerlabel_ids ) ) {
+        $query_args['tax_query'] = [
+            [
+                'taxonomy' => 'cornerlabels',
+                'field'    => 'term_id',
+                'terms'    => $cornerlabel_ids,
+            ],
+        ];
+    }
 
-	// If there are selected filters, add them to query
-	if ( ! empty( $cornerlabel_ids ) ) {
-		$query_args['tax_query'] = [
-			[
-				'taxonomy' => 'cornerlabels',
-				'field'    => 'term_id',
-				'terms'    => $cornerlabel_ids,
-			],
-		];
-	}
+    // --- Sticky posts ---
+    $sticky_posts = get_option( 'sticky_posts' );
+    $sticky_posts = ! empty( $sticky_posts ) ? array_map( 'intval', $sticky_posts ) : [];
 
-	// Fetch sticky posts first if they match the filters
-	$sticky_query_args = wp_parse_args( [
-		'post__in' => $sticky_posts,
-		'orderby'  => 'post__in', // Keep sticky posts first
-	], $query_args );
+    $sticky_query_args = wp_parse_args( [
+        'post__in'       => $sticky_posts,
+        'posts_per_page' => $max_posts, // important: cap stickies to max_posts
+        'orderby'        => 'post__in',
+    ], $query_args );
 
-	$sticky_query = new \WP_Query( $sticky_query_args );
+    $sticky_query = new \WP_Query( $sticky_query_args );
+    $sticky_count = count( $sticky_query->posts );
 
-	// Fetch regular posts, excluding sticky ones
-	$regular_query_args = wp_parse_args( [
-		'post__not_in' => $sticky_posts, // Prevent duplicates
-	], $query_args );
+    // --- Regular posts ---
+    $remaining = max( 0, $max_posts - $sticky_count );
 
-	$regular_query = new \WP_Query( $regular_query_args );
+    $regular_query_args = wp_parse_args( [
+        'post__not_in'   => $sticky_posts,
+        'posts_per_page' => $remaining, // only fetch remaining
+    ], $query_args );
 
-	ob_start();
+    $regular_query = new \WP_Query( $regular_query_args );
 
-	// Output sticky posts first
-	if ( $sticky_query->have_posts() ) {
-		while ( $sticky_query->have_posts() ) {
-			$sticky_query->the_post();
+    // --- Output ---
+    ob_start();
 
-			$block_args = [
-				'post_id'    => get_the_ID(),
-				'title'      => get_the_title(),
-				'url'        => get_the_permalink(),
-				'media_id'   => get_post_thumbnail_id(),
-				'excerpt'    => get_the_excerpt(),
-				'is_sticky'  => true, // Force as sticky
-				'categories' => get_the_category(),
-				'date'       => get_the_date(),
-				'is_pinned'  => in_array( get_the_ID(), $current_favs ),
-			];
+    display_sticky_and_regular_posts( $sticky_count, $sticky_query, $current_favs, $remaining, $regular_query );
 
-			get_template_part( 'partials/template-blocks/b-post', null, $block_args );
-		}
-	}
+    if ( $sticky_count + count( $regular_query->posts ) === 0 ) {
+        return;
+    }
 
-	// Output regular posts after sticky ones
-	if ( $regular_query->have_posts() ) {
-		while ( $regular_query->have_posts() ) {
-			$regular_query->the_post();
+    $output = ob_get_clean();
 
-			$block_args = [
-				'post_id'    => get_the_ID(),
-				'title'      => get_the_title(),
-				'url'        => get_the_permalink(),
-				'media_id'   => get_post_thumbnail_id(),
-				'excerpt'    => get_the_excerpt(),
-				'is_sticky'  => false, // Regular post
-				'categories' => get_the_category(),
-				'date'       => get_the_date(),
-				'is_pinned'  => in_array( get_the_ID(), $current_favs ),
-			];
+    wp_reset_postdata();
 
-			get_template_part( 'partials/template-blocks/b-post', null, $block_args );
-		}
-	} else {
-		echo '<p>Ei uutisia.</p>';
-	}
-
-	$output = ob_get_clean();
-	wp_reset_postdata();
-
-	wp_send_json_success( [
-		'message' => 'Uutiset päivitetty',
-		'output'  => $output
-	] );
+    wp_send_json_success( [
+        'message'        => 'Uutiset päivitetty',
+        'output'         => $output,
+    ] );
 }
+
 
 add_action( 'wp_ajax_update_front_page_posts', __NAMESPACE__ . '\\ajax_update_front_page_posts' );
 add_action( 'wp_ajax_nopriv_update_front_page_posts', __NAMESPACE__ . '\\ajax_update_front_page_posts' );
@@ -667,12 +732,19 @@ add_action( 'wp_ajax_nopriv_update_front_page_training', __NAMESPACE__ . '\\ajax
 
 // Side-menu Ajax update for pages only
 function ajax_update_front_page_pages() {
-    $cornerlabel_ids = isset($_POST['cornerLabels']) ? $_POST['cornerLabels'] : [];
+    $cornerlabel_ids = $_POST['cornerLabels'] ?? [];
     if (!is_array($cornerlabel_ids)) {
         $cornerlabel_ids = explode(',', $cornerlabel_ids);
     }
 
-    $no_filter = empty($cornerlabel_ids) || (count($cornerlabel_ids) === 1 && $cornerlabel_ids[0] === '');
+    // Get the default option (Kaikille yhteinen) and set it as one of the selected options
+    $default_cornerlabel = get_field( 'oppiaste_term_default', 'option' );
+
+    if ( $default_cornerlabel !== false ) {
+        $cornerlabel_ids[] = (string) $default_cornerlabel;
+    }
+
+    $filter_not_found = empty($cornerlabel_ids) || (count($cornerlabel_ids) === 1 && $cornerlabel_ids[0] === '');
 
     $current_id = isset($_POST['currentPageId']) ? intval($_POST['currentPageId']) : 0;
     if (!$current_id || !get_post($current_id)) {
@@ -690,16 +762,11 @@ function ajax_update_front_page_pages() {
         wp_send_json_success(['output' => '<p class="error">Valikon muodostaminen epäonnistui – sivua ei löytynyt.</p>']);
     }
 
-    $args = [
-        'title_li' => '',
-        'sort_column' => 'menu_order',
-        'order' => 'asc',
-        'child_of' => $second_level_parent_id,
-        'depth' => 3,
-        'walker' => new \BEM_Page_Walker(),
-    ];
+    $walker = new \BEM_Page_Walker(); // Default walker
 
-    if (!$no_filter) {
+    // If we have filter values, we want to get only relevant posts
+    if (! $filter_not_found ) {
+        // Get all descendants of the second-level parent
         $all_pages = get_pages([
             'child_of' => $second_level_parent_id,
             'sort_column' => 'menu_order',
@@ -712,46 +779,40 @@ function ajax_update_front_page_pages() {
 
         foreach ($all_pages as $page) {
             $page_terms = wp_get_post_terms($page->ID, 'cornerlabels', ['fields' => 'ids']);
-            $has_match = array_intersect($cornerlabel_ids, $page_terms);
-
-            if ($has_match) {
+            if (array_intersect($cornerlabel_ids, $page_terms)) {
                 $filtered_ids[] = $page->ID;
-
-                foreach (get_post_ancestors($page->ID) as $ancestor_id) {
-                    $ancestor = get_post($ancestor_id);
-                    if ($ancestor && $ancestor->post_parent == $second_level_parent_id) {
-                        if (!in_array($ancestor_id, $filtered_ids)) {
-                            $filtered_ids[] = $ancestor_id;
-                        }
-                    }
-                }
             }
+        }
 
-            $children = get_pages(['child_of' => $page->ID]);
-            foreach ($children as $child) {
-                $child_terms = wp_get_post_terms($child->ID, 'cornerlabels', ['fields' => 'ids']);
-                if (array_intersect($cornerlabel_ids, $child_terms)) {
-                    if (!in_array($page->ID, $filtered_ids)) {
-                        $filtered_ids[] = $page->ID;
-                    }
-                    foreach (get_post_ancestors($page->ID) as $ancestor_id) {
-                        $ancestor = get_post($ancestor_id);
-                        if ($ancestor && $ancestor->post_parent == $second_level_parent_id) {
-                            if (!in_array($ancestor_id, $filtered_ids)) {
-                                $filtered_ids[] = $ancestor_id;
-                            }
-                        }
-                    }
+        // Add all ancestors of filtered pages to preserve hierarchy
+        foreach ($filtered_ids as $page_id) {
+            $ancestors_of_page = get_post_ancestors($page_id);
+            foreach ($ancestors_of_page as $ancestor_id) {
+                if ($ancestor_id >= $second_level_parent_id && !in_array($ancestor_id, $filtered_ids)) {
+                    $filtered_ids[] = $ancestor_id;
                 }
             }
         }
+
+        $filtered_ids = array_unique($filtered_ids);
 
         if (empty($filtered_ids)) {
             wp_send_json_success(['output' => '<p>Ei sivuja valituilla suodattimilla.</p>']);
         }
 
-        $args['include'] = $filtered_ids;
+        // Use the Filtered walker
+        $walker = new \Filtered_BEM_Page_Walker($filtered_ids, $cornerlabel_ids);
+        $walker->current_page = $current_id;
     }
+
+    $args = [
+        'title_li'    => '',
+        'sort_column' => 'menu_order',
+        'order'       => 'asc',
+        'child_of'    => $second_level_parent_id,
+        'depth'       => 3,
+        'walker'      => $walker,
+    ];
 
     ob_start();
 
@@ -774,60 +835,9 @@ add_action( 'wp_ajax_update_front_page_pages', __NAMESPACE__ . '\\ajax_update_fr
 add_action( 'wp_ajax_nopriv_update_front_page_pages', __NAMESPACE__ . '\\ajax_update_front_page_pages' );
 
 function ajax_update_training_archive_results() {
-	// Get filter values from POST request
-	$cornerlabel    = isset( $_POST['cornerLabel'] ) ? intval( $_POST['cornerLabel'] ) : '';
-	$training_theme = isset( $_POST['trainingTheme'] ) ? intval( $_POST['trainingTheme'] ) : '';
-
-	$query_args = [
-		'post_type'      => 'training',
-		'posts_per_page' => 8,
-		'meta_query'     => [
-			[
-				'key'     => 'training_end_datetime', // Target the correct meta field
-				'value'   => current_time( 'Y-m-d\TH:i:s' ), // Get the current date and time in WordPress timezone
-				'compare' => '>=', // Only include posts where the date is in the future
-				'type'    => 'DATETIME', // Ensure proper comparison as a date-time value
-			],
-		],
-	];
-
-	// Initialize tax_query array
-	$tax_query = [];
-
-	// Add cornerlabel filter if available
-	if ( ! empty( $cornerlabel ) ) {
-		$tax_query[] = [
-			'taxonomy' => 'cornerlabels',
-			'field'    => 'term_id',
-			'terms'    => $cornerlabel,
-		];
-	}
-
-	// Add training_theme filter if available
-	if ( ! empty( $training_theme ) ) {
-		$tax_query[] = [
-			'taxonomy' => 'training_theme',
-			'field'    => 'term_id',
-			'terms'    => $training_theme,
-		];
-	}
-
-	// Apply tax_query if any filters are set
-	if ( ! empty( $tax_query ) ) {
-		// If both filters are set, use 'AND' to require both terms
-		if ( count( $tax_query ) > 1 ) {
-			$query_args['tax_query'] = [
-				'relation' => 'AND',
-				...$tax_query, // Spread operator for merging arrays
-			];
-		} else {
-			$query_args['tax_query'] = $tax_query;
-		}
-	}
+    $query = get_training_posts_query( true );
 
 	ob_start();
-
-	$query = new \WP_Query( $query_args );
 
 	// Output regular posts after sticky ones
 	if ( $query->have_posts() ) {
@@ -869,62 +879,9 @@ add_action( 'wp_ajax_nopriv_update_training_archive_results', __NAMESPACE__ . '\
 // Post-archive filters
 
 function ajax_update_post_archive_results() {
-
-	// Get filter values from POST request
-	$cornerlabel    = isset( $_POST['cornerLabel'] ) ? intval( $_POST['cornerLabel'] ) : '';
-	$category = isset( $_POST['category'] ) ? intval( $_POST['category'] ) : '';
-	$post_theme = isset( $_POST['postTheme'] ) ? intval( $_POST['postTheme'] ) : '';
-
-	// Get filter values from POST request
-	$current_favs = \Opehuone\Utils\get_user_favs();
-
-	$query_args = [
-		'post_type'      => 'post',
-		'posts_per_page' => 15,
-	];
-
-	// Initialize tax_query array
-	$tax_query = [];
-
-	// Add cornerlabel filter if available
-	if ( ! empty( $cornerlabel ) ) {
-		$tax_query[] = [
-			'taxonomy' => 'cornerlabels',
-			'field'    => 'term_id',
-			'terms'    => $cornerlabel,
-		];
-	}
-
-	if ( ! empty( $category ) ) {
-		$tax_query[] = [
-			'taxonomy' => 'category',
-			'field'    => 'term_id',
-			'terms'    => $category,
-		];
-	}
-
-	// Add training_theme filter if available
-	if ( ! empty( $post_theme ) ) {
-		$tax_query[] = [
-			'taxonomy' => 'post_theme',
-			'field'    => 'term_id',
-			'terms'    => $post_theme,
-		];
-	}
-
-	// Apply tax_query if any filters are set
-	if ( ! empty( $tax_query ) ) {
-		// If both filters are set, use 'AND' to require both terms
-		if ( count( $tax_query ) > 1 ) {	
-			$query_args['tax_query'] = array_merge( [ 'relation' => 'AND' ], $tax_query );
-		} else {
-			$query_args['tax_query'] = $tax_query;
-		}
-	}
+    $query = get_post_archive_query(true );
 
 	ob_start();
-
-	$query = new \WP_Query( $query_args );
 
 	// Output regular posts after sticky ones
 	if ( $query->have_posts() ) {
@@ -940,7 +897,7 @@ function ajax_update_post_archive_results() {
 				'is_sticky'  => is_sticky(),
 				'categories' => get_the_category(),
 				'date'       => get_the_date(),
-				'is_pinned'  => in_array( get_the_ID(), $current_favs ),
+				'is_pinned'  => in_array( get_the_ID(), get_user_favs() ),
 			];
 
 			get_template_part( 'partials/template-blocks/b-post', null, $block_args );

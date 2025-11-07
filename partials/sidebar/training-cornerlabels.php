@@ -18,7 +18,7 @@ foreach ( $terms as $term ) {
 <div class="icon-detail">
 	<?php the_svg( 'icons/oppiaste' ); ?>
 	<div class="icon-detail__text-content">
-		<span class="icon-detail__title"><?php esc_html_e( 'Oppiaste', 'helsinki-universal' ); ?></span>
+		<span class="icon-detail__title"><?php esc_html_e( 'Koulutusaste', 'helsinki-universal' ); ?></span>
 		<span class="icon-detail__subtitle"><?php echo esc_html( implode( ', ', $terms_array ) ); ?></span>
         <?php
         foreach( $terms_array as $term ) {

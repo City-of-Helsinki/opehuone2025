@@ -11,26 +11,70 @@
 		font-size: var(--opehuone--font-size--x-large);
 	}
 
-	&__settings-row {
-		display: grid;
-		grid-template-columns: auto;
-		gap: rem(32px);
-		font-size: var(--opehuone--font-size--2-x-medium);
-		font-weight: 500;
+    &__settings {
+      background-color: var(--color-fog-light);
+      padding: 1.75rem 2.5rem 2.5rem 2.5rem;
 
-		@include media-breakpoint-up(md) {
-			grid-template-columns: 1fr 1fr;
-		}
-	}
+      &-title {
+        margin: 0 0 1.75rem;
+      }
+
+
+      &-row {
+        display: grid;
+        grid-template-columns: auto;
+        gap: rem(32px);
+        font-size: var(--opehuone--font-size--2-x-medium);
+        font-weight: 700;
+
+        &-school-name {
+          font-weight: 500;
+          span {
+            font-weight: 700;
+          }
+        }
+
+        @include media-breakpoint-up(md) {
+          grid-template-columns: 35% 65%;
+        }
+      }
+    }
 
 	&__favorites-wrapper {
 		margin-top: var(--opehuone--spacing--large);
+		margin-bottom: var(--opehuone--spacing--large);
 		padding: var(--opehuone--spacing--normal)
 			var(--opehuone--spacing--small);
-		background-color: var(--color-engel-light);
+		background-color: var(--color-tram-light);
+
+      &-info {
+        padding: 0;
+        @include media-breakpoint-up(md) {
+          padding: 0 2.75rem;
+        }
+
+        p {
+          font-size: 1rem;
+          line-height: 24px;
+          margin: 0;
+        }
+      }
 	}
 }
 
-.user-settings-form__submit-button {
+.user-settings-form {
+  padding-right: 2.5rem;
+  p {
+    margin-bottom: 0;
+  }
+  span {
+    display: block;
+    font-size: 1rem;
+    line-height: 24px;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  &__submit-button {
 	@include create-button();
+  }
 }

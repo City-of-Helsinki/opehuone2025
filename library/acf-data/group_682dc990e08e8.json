@@ -23,7 +23,8 @@
                 "copper": "Kupari",
                 "fog": "Sumu",
                 "bus": "Bussi",
-                "summer": "Kesä"
+                "summer": "Kesä",
+                "metro": "Metro"
             },
             "default_value": "vihrea",
             "return_format": "value",
@@ -32,7 +33,9 @@
             "allow_in_bindings": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_682f1ac1a8cb6",
@@ -100,5 +103,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1756715903
+    "modified": 1757937174
 }

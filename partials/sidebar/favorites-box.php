@@ -5,7 +5,7 @@ if ( ! is_user_logged_in() ) {
 }
 ?>
 <div class="sidebar-box sidebar-box--engel-light">
-	<h3 class="sidebar-box__sub-title"><?php esc_html_e( 'Tallennetut sisällöt', 'helsinki-universal' ); ?></h3>
+	<h3 class="sidebar-box__sub-title"><?php esc_html_e( 'Omat tallennetut sisällöt', 'helsinki-universal' ); ?></h3>
 	<?php
 	$user_favs = get_user_meta( get_current_user_id(), 'opehuone_favs', true );
 
@@ -15,9 +15,21 @@ if ( ! is_user_logged_in() ) {
 
 	if ( count( $user_favs ) === 0 ) {
 		?>
-		<p>
-			<?php esc_html_e( 'Et ole vielä tallentanut yhtään sisältöä.', 'helsinki-universal' ); ?>
+		<p class="sidebar-box__placeholder-text">
+			<?php esc_html_e( 'Voit tallentaa Omiksi suosikeiksi uutisia ja Opehuoneen sisältösivuja.', 'helsinki-universal' ); ?>
 		</p>
+        <p class="sidebar-box__placeholder-text">
+            <?php esc_html_e( 'Löydät tallenna-napin jokaisen sisältösivun ja uutiskortin oikeasta yläkulmasta.', 'helsinki-universal' ); ?>
+        </p>
+        <p class="sidebar-box__placeholder-text">
+            <?php esc_html_e( 'Voit hallinnoida Omat tallennetut sisällöt -sisältöjä Oma profiili -sivulta.', 'helsinki-universal' ); ?>
+        </p>
+        <div class="sidebar-box__sub-button">
+            <a href="<?php echo get_permalink( get_field( 'favorites_page', 'option' ) ); ?>"
+               class="button">
+                <?php esc_html_e( 'Katso kaikki tallennetut sisällöt', 'helsinki-universal' ); ?>
+            </a>
+        </div>
 		<?php
 	} else {
 		?>
@@ -43,11 +55,12 @@ if ( ! is_user_logged_in() ) {
 			}
 			?>
 		</ul>
-		<a href="<?php echo get_permalink( get_field( 'favorites_page', 'option' ) ); ?>"
-		   class="user-favs-list__edit-link">
-			<?php esc_html_e( 'Muokkaa ja lisää', 'helsinki-universal' ); ?>
-			<?php Opehuone\Helpers\the_svg( 'icons/arrow-right-lg' ); ?>
-		</a>
+        <div class="sidebar-box__sub-button">
+            <a href="<?php echo get_permalink( get_field( 'favorites_page', 'option' ) ); ?>"
+               class="button">
+                <?php esc_html_e( 'Katso kaikki tallennetut sisällöt', 'helsinki-universal' ); ?>
+            </a>
+        </div>
 		<?php
 	}
 	?>

@@ -1,21 +1,13 @@
 import { getTranslations } from './translations';
+import { createAjaxParameters } from './utils';
 
 const T = getTranslations('opehuone-variables');
 const loadMoreButton = document.querySelector('.posts-archive__load-more-btn');
 
-/**
- * Convert array to comma separated string
- *
- * @param {Array} array - The array to be converted.
- * @returns {string} - Comma-separated string or an empty string if input is not an array.
- */
-const convertArrayToString = (value) => {
-	return Array.isArray(value) ? value.join(',') : value?.toString() ?? '';
-};
-
 const setLoadMoreButtonOffSet = (currentOffSet) => {
 	const totalPosts = parseInt(
-		loadMoreButton.getAttribute('data-total-posts'));
+		loadMoreButton.getAttribute('data-total-posts')
+	);
 	const newOffset = 15 + currentOffSet;
 
 	loadMoreButton.setAttribute('data-posts-offset', newOffset);
@@ -25,25 +17,16 @@ const setLoadMoreButtonOffSet = (currentOffSet) => {
 	}
 };
 
-export const setLoadmoreButtonAttributes = (
-	totalPosts,
-	cornerLabel,
-	category,
-	postTheme
-) => {
+export const setLoadmoreButtonAttributes = (totalPosts) => {
 	loadMoreButton.classList.remove('is-disabled');
 	loadMoreButton.setAttribute('data-total-posts', totalPosts);
 	loadMoreButton.setAttribute('data-posts-offset', 15);
-	loadMoreButton.setAttribute('data-cornerlabel', convertArrayToString(cornerLabel));
-	loadMoreButton.setAttribute('data-category', convertArrayToString(category));
-	loadMoreButton.setAttribute('data-posttheme', convertArrayToString(postTheme));
-
 	if (totalPosts <= 15) {
 		loadMoreButton.classList.add('is-disabled');
 	}
 };
 
-export const loadMorePosts = (ajaxAction, container) => {
+export const loadMorePosts = (action, pageFilters, container) => {
 	loadMoreButton.addEventListener('click', (event) => {
 		event.preventDefault();
 		loadMoreButton.classList.add('is-disabled');
@@ -51,23 +34,17 @@ export const loadMorePosts = (ajaxAction, container) => {
 		const currentOffSet = parseInt(
 			loadMoreButton.getAttribute('data-posts-offset')
 		);
-		const cornerLabel = loadMoreButton.getAttribute('data-cornerlabel');
-		const category = loadMoreButton.getAttribute('data-category');
-		const postTheme = loadMoreButton.getAttribute('data-posttheme');
+
+		const params = createAjaxParameters(action, pageFilters);
+		params.append('userId', T.userId);
+		params.append('offset', currentOffSet);
 
 		fetch(T.ajaxUrl, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
-			body: new URLSearchParams({
-				action: ajaxAction,
-				cornerLabel: cornerLabel,
-				category: category,
-				postTheme: postTheme,
-				userId: T.userId,
-				offset: currentOffSet,
-			}),
+			body: params,
 		})
 			.then((response) => {
 				if (!response.ok) {
@@ -78,7 +55,7 @@ export const loadMorePosts = (ajaxAction, container) => {
 			.then((response) => {
 				if (container) {
 					container.insertAdjacentHTML(
-						'beforeend', 
+						'beforeend',
 						response.data.output
 					);
 				}

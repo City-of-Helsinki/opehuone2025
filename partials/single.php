@@ -34,7 +34,7 @@ use function \Opehuone\TemplateFunctions\get_favorite_article_button;
                 <?php
                 // Load the comment template if comments are open
                 if ( comments_open() ) {
-                    helsinki_comment_form();
+                    comments_template();
                 }
                 ?>
 

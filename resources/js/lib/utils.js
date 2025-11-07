@@ -34,3 +34,27 @@ export const fadeOut = (element, duration = 400) => {
 
 	requestAnimationFrame(animate);
 };
+
+/**
+ * Helper function, return url parameters as an array
+ * @param param
+ * @returns {string[]|*[]}
+ */
+export const getUrlParameterAsArray = (param) => {
+	const params = new URLSearchParams(window.location.search);
+	const value = params.get(param);
+	return value ? value.split(',') : [];
+};
+
+export const createAjaxParameters = (action, pageFilters) => {
+	const params = new URLSearchParams();
+
+	params.append('action', action);
+
+	pageFilters.forEach((filter) => {
+		const urlValues = getUrlParameterAsArray(filter);
+		urlValues.forEach((value) => params.append(filter, value));
+	});
+
+	return params;
+};

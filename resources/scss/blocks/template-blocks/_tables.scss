@@ -1,0 +1,20 @@
+figure {
+	&.wp-block-table {
+		max-width: 860px;
+	}
+	&.wp-block-table {
+		table {
+			td {
+				word-break: break-word !important;
+			}
+		}
+	}
+}
+
+table {
+	&.tablepress {
+		td {
+			word-break: break-word !important;
+		}
+	}
+}

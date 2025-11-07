@@ -1,6 +1,9 @@
 <?php
+use function \Opehuone\TemplateFunctions\get_user_cornerlabels_with_added_default_value;
+
 $what_to_target = isset( $args['to_target'] ) ? $args['to_target'] : 'posts';
-$cornerlabels   = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
+$cornerlabels   = get_user_cornerlabels_with_added_default_value();
+
 ?>
 <div class="front-page-posts-filter">
 	<form class="front-page-posts-filter__posts-form" data-target="<?php echo esc_attr( $what_to_target ); ?>"

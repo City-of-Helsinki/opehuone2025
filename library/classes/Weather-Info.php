@@ -7,7 +7,15 @@
  */
 class HelsinkiWeather {
 
-	private $feed_url = 'https://api.openweathermap.org/data/2.5/weather?id=658225&units=metric&appid=d8d1cbf5d638c700896cce8af6a5a40d';
+	private $feed_url = 'https://api.openweathermap.org/data/2.5/weather?id=658225&units=metric&appid=';
+    private $appid;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->appid = defined( 'OWM_APPID' ) ? OWM_APPID : null;
+    }
 
 	/**
 	 * Returns weather icon and current temperature of location
@@ -16,6 +24,10 @@ class HelsinkiWeather {
 	 */
 	public function get_weather_details() {
 		$obj = json_decode( $this->get_output_json() );
+
+        if ( ! $obj ) {
+            return null;
+        }
 
 		return [
 			'weather_code' => $obj->weather[0]->icon,
@@ -30,37 +42,35 @@ class HelsinkiWeather {
 	 *
 	 */
 	private function get_output_json() {
+        $transient = get_transient( 'opehuone_weather_json' );
 
-		// Do we have this information in our transients already?
-		$transient = get_transient( 'opehuone_weather_json' );
+        if ( ! empty( $transient ) ) {
+            return $transient;
+        }
 
-		// Yep!  Just return it and we're done.
-		if ( ! empty( $transient ) ) {
+        if ( empty( $this->appid ) ) {
+            return false;
+        }
 
-			// The function will return here every time after the first time it is run, until the transient expires.
-			return $transient;
+        $url = $this->feed_url . $this->appid;
 
-			// Nope!  We gotta make a call.
-		} else {
+        $response = wp_remote_get( $url, array( 'timeout' => 5 ) );
 
-			// Call the API.
+        if ( is_wp_error( $response ) ) {
+            return false;
+        }
 
-			//Lets debug SSL problem
-			$arr_context_options=array(
-				"ssl"=>array(
-					"verify_peer"=>false,
-					"verify_peer_name"=>false,
-				),
-			);
+        $out = wp_remote_retrieve_body( $response );
+        $status_Code = wp_remote_retrieve_response_code( $response );
 
-			$out = file_get_contents( $this->feed_url, false, stream_context_create($arr_context_options) );
+        if ( $status_Code < 200 || $status_Code >= 300 ) {
+            return false;
+        }
 
-			// Save the API response so we don't have to call again until next 15 minutes
-			set_transient( 'opehuone_weather_json', $out, MINUTE_IN_SECONDS * 15 );
+        if ( $out ) {
+            set_transient( 'opehuone_weather_json', $out, MINUTE_IN_SECONDS * 15 );
+        }
 
-			return $out;
-
-		}
-
-	}
+        return $out;
+    }
 }

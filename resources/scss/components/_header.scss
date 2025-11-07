@@ -91,8 +91,12 @@
 
 .js-toggle {
   // Hide close toggle by default
+  &__open, &__close {
+    font-size: 0.75rem;
+  }
+
   .js-toggle__close {
-    display: none !important;
+    display: none;
   }
 
   // Window is opened, hide open toggle and show hide toggle
@@ -105,7 +109,10 @@
     }
 
     .js-toggle__close {
-      display: inline !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
       svg, .text, .screen-reader-text {
         display: block !important;
       }
@@ -122,7 +129,10 @@
     }
 
     .js-toggle__open {
-      display: inline !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
       svg, .text, .screen-reader-text {
         display: block !important;
       }
@@ -130,3 +140,10 @@
   }
 }
 
+@include media-breakpoint-up($main-menu-breakpoint) {
+  .js-toggle {
+    &__open, &__close {
+      font-size: 1.125rem;
+    }
+  }
+}

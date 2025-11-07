@@ -1,268 +1,268 @@
 $concentration-bg-color: #dedfe1;
 $concentration-selection-color: #dedfe1;
-$concentration-breakpoint: 'lg';
+$concentration-breakpoint: "lg";
 
 .concentration {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 20;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  background-color: transparentize(#000, 0.2);
-  background-size: cover;
-  background-position: center;
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 20;
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+	background-color: transparentize(#000, 0.2);
+	background-size: cover;
+	background-position: center;
 
-  &.concentration--open {
-    display: block;
-    opacity: 1;
-  }
+	&.concentration--open {
+		display: block;
+		opacity: 1;
+	}
 
-  &__content {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    width: 100%;
-    height: 100%;
-  }
+	&__content {
+		position: relative;
+		display: flex;
+		align-items: flex-end;
+		justify-content: flex-end;
+		width: 100%;
+		height: 100%;
+	}
 
-  &__loading {
-    display: none;
+	&__loading {
+		display: none;
 
-    > svg {
-      width: rem(40px);
-      height: auto;
-      animation: rotating 2s linear infinite;
-    }
-  }
+		> svg {
+			width: rem(40px);
+			height: auto;
+			animation: rotating 2s linear infinite;
+		}
+	}
 
-  &__text {
-    display: none;
-    position: relative;
-    padding: rem(10px 20px);
-    background-color: #000;
-    color: $concentration-selection-color;
-    margin-bottom: 0;
-    border-top: 3px solid $concentration-selection-color;
-    min-width: 100%;
+	&__text {
+		display: none;
+		position: relative;
+		padding: rem(10px 20px);
+		background-color: #000;
+		color: $concentration-selection-color;
+		margin-bottom: 0;
+		border-top: 3px solid $concentration-selection-color;
+		min-width: 100%;
 
-    @include media-breakpoint-up($concentration-breakpoint) {
-      padding: rem(20px 35px);
-      margin-bottom: rem(30px);
-      border-top: 5px solid $concentration-selection-color;
-      min-width: initial;
-    }
+		@include media-breakpoint-up($concentration-breakpoint) {
+			padding: rem(20px 35px);
+			margin-bottom: rem(30px);
+			border-top: 5px solid $concentration-selection-color;
+			min-width: initial;
+		}
 
-    &.concentration__text--open {
-      display: block;
-    }
-  }
+		&.concentration__text--open {
+			display: block;
+		}
+	}
 
-  &__text-close-wrapper {
-    position: absolute;
-    z-index: 22;
-    top: rem(20px);
-    right: rem(20px);
+	&__text-close-wrapper {
+		position: absolute;
+		z-index: 22;
+		top: rem(20px);
+		right: rem(20px);
 
-    @include media-breakpoint-up($concentration-breakpoint) {
-      top: rem(-15px);
-      left: rem(-10px);
-      right: initial;
-    }
-  }
+		@include media-breakpoint-up($concentration-breakpoint) {
+			top: rem(-15px);
+			left: rem(-10px);
+			right: initial;
+		}
+	}
 
-  &__text-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background-color: $concentration-selection-color;
-    border-radius: 100%;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    width: rem(25px);
-    height: rem(25px);
+	&__text-close {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: none;
+		background-color: $concentration-selection-color;
+		border-radius: 100%;
+		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+		width: rem(25px);
+		height: rem(25px);
 
-    @include media-breakpoint-up($concentration-breakpoint) {
-      width: rem(30px);
-      height: rem(30px);
-    }
+		@include media-breakpoint-up($concentration-breakpoint) {
+			width: rem(30px);
+			height: rem(30px);
+		}
 
-    > svg {
-      width: rem(12px);
-      height: auto;
+		> svg {
+			width: rem(12px);
+			height: auto;
 
-      @include media-breakpoint-up($concentration-breakpoint) {
-        width: rem(20px);
-      }
-    }
-  }
+			@include media-breakpoint-up($concentration-breakpoint) {
+				width: rem(20px);
+			}
+		}
+	}
 
-  &__text-wrapper {
-    max-width: 100%;
-    min-width: 100%;
-    max-height: rem(250px);
-    overflow-y: auto;
+	&__text-wrapper {
+		max-width: 100%;
+		min-width: 100%;
+		max-height: rem(250px);
+		overflow-y: auto;
 
-    @include media-breakpoint-up($concentration-breakpoint) {
-      max-width: rem(600px);
-      min-width: rem(600px);
-      max-height: rem(200px);
-    }
-  }
+		@include media-breakpoint-up($concentration-breakpoint) {
+			max-width: rem(600px);
+			min-width: rem(600px);
+			max-height: rem(200px);
+		}
+	}
 
-  &__action-button {
-    border: none;
-    background-color: $concentration-selection-color;
-    border-radius: 100%;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    width: rem(50px);
-    height: rem(50px);
-    margin-left: rem(10px);
+	&__action-button {
+		border: none;
+		background-color: $concentration-selection-color;
+		border-radius: 100%;
+		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+		width: rem(50px);
+		height: rem(50px);
+		margin-left: rem(10px);
 
-    &.concentration__action-button--active {
-      background-color: #fff;
-    }
+		&.concentration__action-button--active {
+			background-color: #fff;
+		}
 
-    > svg {
-      width: rem(35px);
-      height: auto;
-    }
-  }
+		> svg {
+			width: rem(35px);
+			height: auto;
+		}
+	}
 
-  &__actions {
-    position: absolute;
-    z-index: 22;
-    top: 80%;
-    right: auto;
-    left: auto;
-    margin: auto;
-    width: 100%;
+	&__actions {
+		position: absolute;
+		z-index: 22;
+		top: 80%;
+		right: auto;
+		left: auto;
+		margin: auto;
+		width: 100%;
 
-    .mindfullness-ongoing & {
-      top: rem(20px);
-      right: rem(20px);
-      left: initial;
-    }
+		.mindfullness-ongoing & {
+			top: rem(20px);
+			right: rem(20px);
+			left: initial;
+		}
 
-    @include media-breakpoint-up($concentration-breakpoint) {
-      top: rem(10px);
-      right: rem(10px);
-      left: initial;
-      width: auto;
+		@include media-breakpoint-up($concentration-breakpoint) {
+			top: rem(10px);
+			right: rem(10px);
+			left: initial;
+			width: auto;
 
-      .mindfullness-ongoing & {
-        top: rem(10px);
-        right: rem(10px);
-        left: initial;
-      }
-    }
-  }
+			.mindfullness-ongoing & {
+				top: rem(10px);
+				right: rem(10px);
+				left: initial;
+			}
+		}
+	}
 
-  &__actions-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	&__actions-row {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-    .mindfullness-ongoing & {
-      justify-content: flex-end;
-    }
+		.mindfullness-ongoing & {
+			justify-content: flex-end;
+		}
 
-    @include media-breakpoint-up($concentration-breakpoint) {
-      justify-content: flex-end;
-    }
-  }
+		@include media-breakpoint-up($concentration-breakpoint) {
+			justify-content: flex-end;
+		}
+	}
 }
 
 .mute-concentration {
-  display: none;
+	display: none;
 
-  .mindfullness-ongoing & {
-    display: inline-block;
-  }
+	.mindfullness-ongoing & {
+		display: inline-block;
+	}
 }
 
 .concentration-opener {
-  display: none;
+	display: none;
 
-  &__title {
-    font-size: 1.25rem;
-    font-weight: 500;
-    text-align: center;
-    margin-top: rem(32px);
-  }
+	&__title {
+		font-size: 1.25rem;
+		font-weight: 500;
+		text-align: center;
+		margin-top: rem(32px);
+	}
 
-  &__list {
-    margin: auto 0;
-    padding: 0;
-    list-style-type: none;
-  }
+	&__list {
+		margin: auto 0;
+		padding: 0;
+		list-style-type: none;
+	}
 
-  &__list-item {
-      margin-bottom: 1rem;
-    &:last-child {
-      margin-bottom: 2.5rem;
-    }
-  }
+	&__list-item {
+		margin-bottom: 1rem;
+		&:last-child {
+			margin-bottom: 2.5rem;
+		}
+	}
 
-  &__list-item-button {
-    display: grid;
-    grid-template-columns: rem(70px) 1fr;
-    align-items: center;
-    justify-content: flex-start;
-    border: 2px solid #000;
-    width: 100%;
-    padding: 0;
-    height: 56px;
+	&__list-item-button {
+		display: grid;
+		grid-template-columns: rem(70px) 1fr;
+		align-items: center;
+		justify-content: flex-start;
+		border: 2px solid #000;
+		width: 100%;
+		padding: 0;
+		height: 56px;
 
-    &.concentration-opener__list-item-button--selected {
-      .concentration-opener__list-item-button__name {
-        background-color: #E6F4FF;
-      }
+		&.concentration-opener__list-item-button--selected {
+			.concentration-opener__list-item-button__name {
+				background-color: #e6f4ff;
+			}
 
-      .concentration-opener__list-item-button__time {
-        background-color: #E6F4FF;
-      }
-    }
-  }
+			.concentration-opener__list-item-button__time {
+				background-color: #e6f4ff;
+			}
+		}
+	}
 
-  &__list-item-button__time {
-    grid-column: 1 / 2;
-    font-size: 1rem;
-    font-weight: 500;
-    background-color: #fff;
-    color: #000;
-    height: 100%;
-    border-right: 2px solid #000;
-  }
+	&__list-item-button__time {
+		grid-column: 1 / 2;
+		font-size: 1rem;
+		font-weight: 500;
+		background-color: #fff;
+		color: #000;
+		height: 100%;
+		border-right: 2px solid #000;
+	}
 
-  &__list-item-button__time__center {
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
+	&__list-item-button__time__center {
+		display: grid;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+	}
 
-  &__list-item-button__name {
-    grid-column: 2 / 3;
-    font-size: 1rem;
-    font-weight: 500;
-    background-color: #fff;
-    color: #000;
-    height: 100%;
-  }
+	&__list-item-button__name {
+		grid-column: 2 / 3;
+		font-size: 1rem;
+		font-weight: 500;
+		background-color: #fff;
+		color: #000;
+		height: 100%;
+	}
 
-  .start-concentration {
-    @include create-button('#FFFFFF');
-    &:hover {
-      background: #FFFFFF;
-    }
-  }
-  //
-  //&__button {
-  //  width: 100%;
-  //}
+	.start-concentration {
+		@include create-button("#FFFFFF");
+		&:hover {
+			background: #ffffff;
+		}
+	}
+	//
+	//&__button {
+	//  width: 100%;
+	//}
 }

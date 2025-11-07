@@ -1,5 +1,7 @@
 <?php
 
+use function \Opehuone\TemplateFunctions\get_custom_card_thumbnail;
+
 $block_post_id    = isset( $args['post_id'] ) ? $args['post_id'] : null;
 $block_title      = isset( $args['title'] ) ? $args['title'] : null;
 $block_url        = isset( $args['url'] ) ? $args['url'] : null;
@@ -19,21 +21,27 @@ if ( $block_is_pinned ) {
 	$pinner_aria   = 'Poista sivu kirjanmerkeistä';
 	$button_action = 'favs_remove';
 }
+
+$post_thumbnail = wp_get_attachment_image( $block_media_id, 'medium', false, [ 'class' => 'b-post__image' ] );
+
+if ( ! $post_thumbnail ) {
+    $post_thumbnail = get_custom_card_thumbnail();
+}
 ?>
 <div class="b-post">
-	<?php if ( ! empty( $block_media_id ) ) : ?>
-		<figure class="b-post__figure">
-			<?php echo wp_get_attachment_image( $block_media_id, 'medium', false, [ 'class' => 'b-post__image' ] ); ?>
-			<?php if ( $block_is_sticky ) : ?>
-				<span class="b-post__sticky">Uutisnosto</span>
-			<?php endif; ?>
-			<button class="b-post__pinner" data-action="<?php echo esc_attr( $button_action ); ?>"
-					data-post-id="<?php echo esc_attr( $block_post_id ); ?>"
-					aria-label="<?php echo esc_attr( $pinner_aria ); ?>">
-				<?php \Opehuone\Helpers\the_svg( 'icons/' . $pin_svg ); ?>
-			</button>
-		</figure>
-	<?php endif; ?>
+    <figure class="b-post__figure">
+        <?php echo $post_thumbnail ?>
+        <?php if ( $block_is_sticky ) : ?>
+            <span class="b-post__sticky">Uutisnosto</span>
+        <?php endif; ?>
+        <?php if ( is_user_logged_in() ) : ?>
+        <button class="b-post__pinner" data-action="<?php echo esc_attr( $button_action ); ?>"
+                data-post-id="<?php echo esc_attr( $block_post_id ); ?>"
+                aria-label="<?php echo esc_attr( $pinner_aria ); ?>">
+            <?php \Opehuone\Helpers\the_svg( 'icons/' . $pin_svg ); ?>
+        </button>
+        <?php endif; ?>
+    </figure>
 	<?php if ( ! empty( $block_date ) ) : ?>
 		<time class="b-post__date">
 			<?php echo esc_html( $block_date ); ?>

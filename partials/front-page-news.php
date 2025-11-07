@@ -1,61 +1,80 @@
 <?php
-$cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
+use function \Opehuone\TemplateFunctions\display_sticky_and_regular_posts;
+use function \Opehuone\TemplateFunctions\get_user_cornerlabels_with_added_default_value;
 
-$query_args = [
-	'post_type'      => 'post',
-	'posts_per_page' => 8,
+$cornerlabels = get_user_cornerlabels_with_added_default_value();
+
+$user_favs = \Opehuone\Utils\get_user_favs();
+$max_posts = 8;
+
+// Sticky posts
+$sticky_posts = get_option( 'sticky_posts' );
+$sticky_posts = ! empty( $sticky_posts ) ? array_map('intval', $sticky_posts ) : [];
+
+$sticky_query_args = [
+    'post_type'      => 'post',
+    'posts_per_page' => $max_posts,
+    'post__in'       => $sticky_posts,
+    'orderby'        => 'post__in',
 ];
 
-if ( is_array( $cornerlabels ) && count( $cornerlabels ) > 0 ) {
-	$tax_query  = [
-		'tax_query' => [
-			[
-				'taxonomy' => 'cornerlabels',
-				'field'    => 'id',
-				'terms'    => $cornerlabels,
-			],
-		]
-	];
-	$query_args = wp_parse_args( $tax_query, $query_args );
+if ( ! empty( $cornerlabels ) ) {
+    $sticky_query_args['tax_query'] = [
+        [
+            'taxonomy' => 'cornerlabels',
+            'field'    => 'term_id',
+            'terms'    => $cornerlabels,
+        ],
+    ];
 }
 
-$query = new WP_Query( $query_args );
+$sticky_query = new WP_Query( $sticky_query_args );
+$sticky_count = count( $sticky_query->posts );
 
-if ( ! $query->have_posts() ) {
-	return;
+// Regular (non-sticky) posts to fill remaining slots
+$remaining = max(0, $max_posts - $sticky_count);
+
+$regular_query_args = [
+    'post_type'      => 'post',
+    'posts_per_page' => $remaining,
+    'post__not_in'   => $sticky_posts,
+];
+
+if ( ! empty( $cornerlabels ) ) {
+    $regular_query_args['tax_query'] = [
+        [
+            'taxonomy' => 'cornerlabels',
+            'field'    => 'term_id',
+            'terms'    => $cornerlabels,
+        ],
+    ];
 }
-$user_favs = \Opehuone\Utils\get_user_favs();
+
+$regular_query = new WP_Query( $regular_query_args );
+
+// Return if nothing is found
+if ( $sticky_count + count( $regular_query->posts ) === 0 ) {
+    return;
+}
+
 ?>
+
 <h2 class="front-page-posts-filter__title">
-	<?php esc_html_e( 'Uutiset ja tiedotteet', 'helsini-universal' ); ?>
+    <?php esc_html_e('Uutiset', 'helsinki-universal'); ?>
 </h2>
-<?php get_template_part( 'partials/front-page-filters' ); ?>
+
+<?php get_template_part('partials/front-page-filters'); ?>
+
 <div class="b-posts-row">
-	<?php
-	while ( $query->have_posts() ) {
-		$query->the_post();
+    <?php
+    display_sticky_and_regular_posts($sticky_count, $sticky_query, $user_favs, $remaining, $regular_query);
 
-		$block_args = [
-			'post_id'    => get_the_ID(),
-			'title'      => get_the_title(),
-			'url'        => get_the_permalink(),
-			'media_id'   => get_post_thumbnail_id(),
-			'excerpt'    => get_the_excerpt(),
-			'is_sticky'  => is_sticky(),
-			'categories' => get_the_category(),
-			'date'       => get_the_date(),
-			'is_pinned'  => in_array( get_the_ID(), $user_favs ),
-		];
-
-		get_template_part( 'partials/template-blocks/b-post', '', $block_args );
-	}
-
-	wp_reset_postdata();
-	?>
+    wp_reset_postdata();
+    ?>
 </div>
+
 <div class="b-posts-row__button-wrapper">
-	<a href="<?php echo esc_url( get_post_type_archive_link( 'post' ) ); ?>" class="b-posts-row__more-btn">
-		<?php esc_html_e( 'Katso kaikki uutiset', 'helsinki-universal' ); ?>
-	</a>
+    <a href="<?php echo esc_url(get_post_type_archive_link('post')); ?>" class="b-posts-row__more-btn">
+        <?php esc_html_e('Katso kaikki uutiset', 'helsinki-universal'); ?>
+    </a>
 </div>
-

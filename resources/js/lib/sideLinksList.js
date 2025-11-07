@@ -1,18 +1,18 @@
 import { getTranslations } from './translations';
 
-const ownLinkItem = (url, urlName) => {
+// Create a list item element for a link object
+const ownLinkItem = (link) => {
 	const li = document.createElement('li');
 	li.classList.add('side-links-list__item');
 	li.innerHTML = `
-        <a href="${url}"
+        <a href="${link.url}"
            class="side-links-list__link"
            target="_blank">
-            ${urlName}
+            ${link.title}
         </a>
-        <button class="side-links-list__remove-btn side-links-list__remove-btn--custom"
+        <button class="side-links-list__remove-btn side-links-list__remove-btn--${link.type}"
                 aria-label="Poista tämä linkki"
-                data-custom-link-name="${urlName}"
-                data-custom-link-url="${url}">
+                ${link.type === 'custom' ? `data-custom-link-name="${link.title}" data-custom-link-url="${link.url}"` : `data-link-url="${link.url}"`}>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <g fill="none" fill-rule="evenodd">
                 <rect width="24" height="24"></rect>
@@ -21,14 +21,13 @@ const ownLinkItem = (url, urlName) => {
             </svg>
         </button>
     `;
-	return li; // Return a DOM element, not a string
+	return li;
 };
 
 const mainModifyButton = document.querySelector('.side-links-list__edit-link');
 const sideLinksBox = document.querySelector('.side-links-list-box');
 const modifyButtonText = mainModifyButton?.querySelector('span');
-const resetButtonStage1 = document.querySelector('.side-links-list__reset-btn');
-const resetButtonStage2 = document.querySelector(
+const resetButtonFinal = document.querySelector(
 	'.side-links-list__reset-btn--final'
 );
 const submitBtn = document.querySelector('.own-links__submit-btn');
@@ -44,36 +43,28 @@ const T = getTranslations('opehuone-variables');
 
 const isValidUrl = (string) => {
 	let url;
-
 	try {
 		url = new URL(string);
 	} catch (_) {
 		return false;
 	}
-
 	return url.protocol === 'http:' || url.protocol === 'https:';
 };
 
+// Add new custom link
 const addNewCustomLink = () => {
 	if (!addNewForm) return;
 
 	addNewForm.addEventListener('submit', (event) => {
-		event.preventDefault(); // Prevent the page from refreshing
+		event.preventDefault(); // Prevent page refresh
+
 		let isValidForm = true;
 		let urlName = urlNameInput.value.trim();
 		const url = urlInput.value.trim();
 
-		if (!urlName) {
-			isValidForm = false;
-		}
-
-		if (!isValidUrl(url)) {
-			isValidForm = false;
-		}
-
-		if (urlName.length > 50) {
-			urlName = urlName.slice(0, 50);
-		}
+		if (!urlName) isValidForm = false;
+		if (!isValidUrl(url)) isValidForm = false;
+		if (urlName.length > 50) urlName = urlName.slice(0, 50);
 
 		notificationsWrapper.style.display = 'block';
 
@@ -84,7 +75,7 @@ const addNewCustomLink = () => {
 			fetch(T.ajaxUrl, {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded', 
+					'Content-Type': 'application/x-www-form-urlencoded',
 				},
 				body: new URLSearchParams({
 					action: 'add_new_own_link',
@@ -95,28 +86,60 @@ const addNewCustomLink = () => {
 				}),
 			})
 				.then((response) => {
-					if (!response.ok) {
+					if (!response.ok)
 						throw new Error(
 							`HTTP error! Status: ${response.status}`
 						);
-					}
 					return response.json();
-				}) // Assuming the response is JSON
-				.then(() => {
+				})
+				.then((data) => {
 					submitBtn.classList.remove('is-disabled');
 					urlNameInput.value = '';
 					urlInput.value = '';
-					customList.appendChild(ownLinkItem(url, urlName));
 
+					const newLink = data.data;
+					if (!newLink || !newLink.title)
+						throw new Error(
+							'Invalid Ajax response: missing link data'
+						);
+
+					// Insert the new link in alphabetical order
+					const items = Array.from(
+						customList.querySelectorAll('.side-links-list__item')
+					);
+					let inserted = false;
+
+					items.forEach((item) => {
+						if (inserted) return;
+						const itemTitle = item
+							.querySelector('.side-links-list__link')
+							.textContent.trim();
+						if (
+							newLink.title.localeCompare(itemTitle, 'fi', {
+								sensitivity: 'base',
+							}) < 0
+						) {
+							customList.insertBefore(ownLinkItem(newLink), item);
+							inserted = true;
+						}
+					});
+
+					if (!inserted) customList.appendChild(ownLinkItem(newLink));
+
+					// Show success notification
 					setTimeout(() => {
-						notificationsWrapper.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M21 7L10 18L4.5 12.5L6 11L10 15L19.5 5.5L21 7Z" fill="black"/></svg> Linkki lisätty.';
-
+						notificationsWrapper.innerHTML =
+							'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M21 7L10 18L4.5 12.5L6 11L10 15L19.5 5.5L21 7Z" fill="black"/></svg> Linkki lisätty.';
 						setTimeout(() => {
 							notificationsWrapper.style.display = 'none';
 						}, 3000);
 					}, 1000);
 				})
-				.catch((error) => console.error('AJAX Error:', error));
+				.catch((error) => {
+					console.error('AJAX Error:', error);
+					notificationsWrapper.innerHTML =
+						'Tapahtui virhe linkkiä lisättäessä.';
+				});
 		} else {
 			notificationsWrapper.innerHTML =
 				'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 7.5L13.5 12L18 16.5L16.5 18L12 13.5L7.5 18L6 16.5L10.5 12L6 7.5L7.5 6L12 10.5L16.5 6L18 7.5Z" fill="black"/></svg> Linkin lisääminen ei onnistunut. Annoithan linkille nimen ja osoitteen. Huomaathan, että linkin pitää alkaa joko http:// tai https://.';
@@ -124,19 +147,9 @@ const addNewCustomLink = () => {
 	});
 };
 
-const toggleResetStage2 = () => {
-	if (!resetButtonStage1) return;
-
-	resetButtonStage1.addEventListener('click', () => {
-		resetButtonStage2.classList.remove(
-			'side-links-list__reset-btn--final--hidden'
-		);
-	});
-};
-
+// Toggle edit/add mode
 const toggleModifyVisibility = () => {
 	if (!mainModifyButton || !sideLinksBox || !modifyButtonText) return;
-
 	const originalText = modifyButtonText.textContent;
 	const toggleText = 'Poistu muokkaustilasta';
 
@@ -144,8 +157,6 @@ const toggleModifyVisibility = () => {
 		sideLinksBox.classList.toggle(
 			'side-links-list-box--modification-ongoing'
 		);
-
-		// Toggle the button text
 		modifyButtonText.textContent =
 			modifyButtonText.textContent === originalText
 				? toggleText
@@ -153,100 +164,70 @@ const toggleModifyVisibility = () => {
 	});
 };
 
-const customLinkRemoval = () => {
+// Shared removal logic for both link types
+const setupLinkRemoval = ({ btnClass, urlAttr, nameAttr = null, action }) => {
 	document.addEventListener('click', (e) => {
-		const target = e.target.closest(
-			'.side-links-list__remove-btn--custom'
-		);
+		const target = e.target.closest(btnClass);
 		if (!target) return;
-
 		e.preventDefault();
 
-		// Ask for confirmation
 		const confirmed = confirm('Haluatko varmasti poistaa tämän linkin?');
 		if (!confirmed) return;
 
-		const url = target.getAttribute('data-custom-link-url');
-		const urlName = target.getAttribute('data-custom-link-name');
-
-		// Remove the closest `.side-links-list__item`
+		const url = target.getAttribute(urlAttr);
+		const urlName = nameAttr ? target.getAttribute(nameAttr) : null;
 		const listItem = target.closest('.side-links-list__item');
-		if (listItem) {
-			listItem.remove();
-		}
+		if (listItem) listItem.remove();
 
-		// Send AJAX request using fetch()
+		const bodyParams = {
+			action,
+			userId: T.userId,
+			url,
+			nonce: T.opehuoneNonce,
+		};
+		if (urlName) bodyParams.urlName = urlName;
+
 		fetch(T.ajaxUrl, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: new URLSearchParams({
-				action: 'remove_custom_link',
-				userId: T.userId,
-				url,
-				urlName,
-				nonce: T.opehuoneNonce,
-			}),
+			body: new URLSearchParams(bodyParams),
 		})
 			.then((response) => {
-				if (!response.ok) {
+				if (!response.ok)
 					throw new Error(`HTTP error! Status: ${response.status}`);
-				}
 				return response.json();
-			})
-			.then(() => {
-				alert('Linkki poistettu.');
 			})
 			.catch((error) => console.error('AJAX Error:', error));
 	});
 };
-	
 
+// Remove custom link
+const customLinkRemoval = () => {
+	setupLinkRemoval({
+		btnClass: '.side-links-list__remove-btn--custom',
+		urlAttr: 'data-custom-link-url',
+		nameAttr: 'data-custom-link-name',
+		action: 'remove_custom_link',
+	});
+};
+
+// Remove default link
 const defaultLinkRemoval = () => {
-	document.addEventListener('click', (e) => {
-		const target = e.target.closest(
-			'.side-links-list__remove-btn--default'
-		);
-		if (!target) return;
-
-		e.preventDefault();
-		const url = target.getAttribute('data-link-url');
-
-		// Remove the closest `.front-side__links-list-item`
-		const listItem = target.closest('.side-links-list__item');
-		if (listItem) {
-			listItem.remove();
-		}
-
-		// Send AJAX request using fetch()
-		fetch(T.ajaxUrl, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: new URLSearchParams({
-				action: 'remove_default_link',
-				userId: T.userId,
-				url,
-				nonce: T.opehuoneNonce,
-			}),
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error(`HTTP error! Status: ${response.status}`);
-				}
-				return response.json();
-			}) // Assuming the response is JSON
-			.then(() => {
-				// eslint-disable-next-line no-alert
-				alert('Linkki poistettu.');
-			})
-			.catch((error) => console.error('AJAX Error:', error));
+	setupLinkRemoval({
+		btnClass: '.side-links-list__remove-btn--default',
+		urlAttr: 'data-link-url',
+		action: 'remove_default_link',
 	});
 };
 
+// Reset all links
 const resetAllLinks = () => {
-	if (!resetButtonStage2) return;
+	if (!resetButtonFinal) return;
 
-	resetButtonStage2.addEventListener('click', (e) => {
+	resetButtonFinal.addEventListener('click', (e) => {
 		e.preventDefault();
+		const confirmed = confirm('Haluatko varmasti palauttaa kaikki linkit?');
+		if (!confirmed) return;
 
 		fetch(T.ajaxUrl, {
 			method: 'POST',
@@ -262,9 +243,9 @@ const resetAllLinks = () => {
 					throw new Error(`HTTP error! Status: ${response.status}`);
 				}
 				return response.json();
-			}) // Assuming the response is JSON
+			})
 			.then(() => {
-				location.reload(); // Reload the page after success
+				location.reload();
 			})
 			.catch((error) => console.error('AJAX Error:', error));
 	});
@@ -272,7 +253,6 @@ const resetAllLinks = () => {
 
 export const sideLinksList = () => {
 	toggleModifyVisibility();
-	toggleResetStage2();
 	addNewCustomLink();
 	customLinkRemoval();
 	defaultLinkRemoval();

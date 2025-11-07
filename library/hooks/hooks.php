@@ -195,3 +195,45 @@ function remove_tags_from_posts() {
     unregister_taxonomy_for_object_type( 'post_tag', 'post' );
 }
 add_action( 'init', __NAMESPACE__ . '\remove_tags_from_posts' );
+
+add_filter( 'comment_form_defaults', function( $defaults ) {
+    $defaults['must_log_in'] = 'Sinun täytyy <a href="javascript:void(0)" onclick="window.wpo365.pintraRedirect.toMsOnline()">kirjautua sisään</a> kommentoidaksesi.';
+    return $defaults;
+});
+
+add_filter( 'comment_reply_link', function( $link ) {
+    if ( ! is_user_logged_in() ) {
+        $link = '<a href="javascript:void(0)" onclick="window.wpo365.pintraRedirect.toMsOnline()">Kirjaudu sisään vastataksesi</a>';
+    }
+    return $link;
+}, 10, 4 );
+
+/**
+ * Get first 35 words of the content if no excerpt found
+ * Do this trimming only on front page, training and news archive pages
+ *
+ * On singular pages, show only the full excerpt if user has added one
+ *
+ */
+add_filter( 'get_the_excerpt', function ( $excerpt, $post ) {
+    $post = get_post( $post );
+    if ( ! $post ) {
+        return $excerpt;
+    }
+
+    // Detect if this is the main query on a single post page
+    $is_main_single = is_single( $post ) && is_main_query();
+
+    // On the actual single post page
+    if ( $is_main_single ) {
+        // Only show manual excerpt
+        return $excerpt;
+    }
+
+    // For cards or custom loops (not the main single post), create excerpt from content if no manual excerpt found
+    if ( ! $excerpt ) {
+        $excerpt = wp_strip_all_tags( $post->post_content );
+    }
+
+    return wp_trim_words( $excerpt, 35, '...' );
+}, 10, 2);

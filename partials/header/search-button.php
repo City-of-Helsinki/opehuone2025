@@ -9,8 +9,8 @@
         data-no-scroll-limit="down">
 		<span class="js-toggle__open">
 			<?php helsinki_svg_icon( 'search' ); ?>
-			<span class="text" aria-hidden="true">
-				<?php echo esc_html_x( 'Search', 'verb', 'helsinki-universal' ); ?>
+			<span aria-hidden="true">
+				<?php echo esc_html_x( 'Haku', 'verb', 'helsinki-universal' ); ?>
 			</span>
 			<span class="screen-reader-text">
 				<?php echo esc_html_x( 'Search from site', 'Label - Toggle - Search', 'helsinki-universal' ); ?>
@@ -18,8 +18,8 @@
 		</span>
         <span class="js-toggle__close">
             <?php helsinki_svg_icon( 'search' ); ?>
-            <span class="text" aria-hidden="true">
-                <?php echo esc_html_x( 'Search', 'verb', 'helsinki-universal' ); ?>
+            <span aria-hidden="true">
+                <?php echo esc_html_x( 'Haku', 'verb', 'helsinki-universal' ); ?>
             </span>
             <span class="screen-reader-text">
                 <?php echo esc_html_x( 'Search from site', 'Label - Toggle - Search', 'helsinki-universal' ); ?>

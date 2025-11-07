@@ -1,29 +1,25 @@
 .wp-block-hds-wp-link-list-cards {
-    h2 {
-        font-size: clamp(rem(30px), 3vw, rem(38px));
-    }
-    h3 {
-        font-size: clamp(rem(24px), 3vw, rem(32px)) !important;
-    }
-    .hds-links-list-cards__cards {
-        border-left-width: 10px;
-        border-left-style: solid;
-        border-left-color: var(--color-engel);
-        .wp-block-hds-wp-link-list-card {
-            width: 100%;
-            .hds-links-list-card__links {
-                .wp-block-hds-wp-link-list-card-link {
-                    padding-left: 0;
-                    line-height: 140%;
-                    &::before {
-                        display: none;
-                    }
-                }
-            }
-        }
-    }
+	h2 {
+		font-size: clamp(rem(30px), 3vw, rem(38px));
+	}
+	h3 {
+		font-size: clamp(rem(24px), 3vw, rem(32px)) !important;
+	}
+	.hds-links-list-cards__cards {
+		border-left-width: 10px;
+		border-left-style: solid;
+		border-left-color: var(--color-engel);
+		.wp-block-hds-wp-link-list-card {
+			width: 100%;
+			.hds-links-list-card__links {
+				.wp-block-hds-wp-link-list-card-link {
+					padding-left: 0;
+					line-height: 140%;
+					&::before {
+						display: none;
+					}
+				}
+			}
+		}
+	}
 }
-
-
-
-        
