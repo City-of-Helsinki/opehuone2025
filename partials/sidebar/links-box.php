@@ -8,7 +8,7 @@ $user_id      = $current_user->ID;
 $all_links = \User_settings::get_sorted_links_for_user( $user_id );
 ?>
 
-<div class="sidebar-box sidebar-box--engel-light side-links-list-box">
+<div class="sidebar-box sidebar-box--tram-light side-links-list-box">
 	<h3 class="sidebar-box__sub-title">Omat pikalinkit</h3>
 
 	<ul class="side-links-list">

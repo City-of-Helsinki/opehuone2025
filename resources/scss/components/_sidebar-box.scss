@@ -14,7 +14,7 @@
 		background-color: var(--color-suomenlinna-medium-light);
 	}
 
-	&.sidebar-box--coat-of-arms-light {
+  &.sidebar-box--coat-of-arms-light {
 		background-color: var(--color-coat-of-arms-light);
 	}
 
@@ -29,6 +29,14 @@
 	&.sidebar-box--fog-light {
 		background-color: var(--color-fog-light);
 	}
+
+    &.sidebar-box--engel-medium {
+        background-color: var(--color-engel-medium-light);
+    }
+
+    &.sidebar-box--tram-light {
+      background-color: var(--color-tram-light);
+    }
 
 	&__sub-title {
 		margin-top: 0;

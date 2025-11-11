@@ -10,7 +10,7 @@ if( $intrabox_title || $intrabox_content ):
     $bgimage = get_field('intrabox_bgimage','options');
 ?>
 
-<div class="sidebar-box sidebar-box--suomenlinna-light" style="background-image: url(<?php echo esc_url($bgimage); ?>)">
+<div class="sidebar-box sidebar-box--engel-medium" style="background-image: url(<?php echo esc_url($bgimage); ?>)">
 	<h3 class="sidebar-box__sub-title">
 		<?php echo esc_html( $intrabox_title ); ?>
 	</h3>
