@@ -11,6 +11,10 @@
 		padding: var(--opehuone--spacing--small)
 			var(--opehuone--spacing--2-x-small);
 
+        &:first-child {
+          padding-top: 0;
+        }
+
 		&:after {
 			content: "";
 			position: absolute;
@@ -22,6 +26,7 @@
 			background-color: #cccccc;
 		}
 	}
+
 
 	&__title {
 		display: block;
