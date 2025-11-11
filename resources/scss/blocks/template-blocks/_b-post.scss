@@ -1,6 +1,6 @@
 .b-posts-row {
 	display: grid;
-	gap: var(--opehuone--spacing--small);
+    gap: var(--opehuone--spacing--large) var(--opehuone--spacing--small);
 	grid-template-columns: auto;
 
 	@include media-breakpoint-up(sm) {
