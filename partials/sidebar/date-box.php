@@ -14,7 +14,7 @@ $swedish_names_list = $day_info_service->get_names_by_type('ruotsi');
 
 
 ?>
-<div class="sidebar-box sidebar-box--coat-of-arms-light">
+<div class="sidebar-box sidebar-box--suomenlinna-light">
 	<div class="date-box-row">
 		<div class="date-box-row-texts">
 			<span class="date-box-week"><?php echo esc_html( $week_number ); ?>. viikko vecka</span>
