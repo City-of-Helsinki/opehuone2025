@@ -56,8 +56,8 @@ if ( ! $user_favs ) {
                             <br>
                             <?php echo esc_html( $current_user->user_email ); ?>
                         </p>
-                        <p class="user-settings-page__settings-row-school-name">
-                            <?php echo esc_html( 'Koulutusasteesi:'); ?> <span><?php echo $school_name; ?></span>
+                        <p>
+                            <?php echo $school_name; ?>
                         </p>
                     </div>
                     <div>
