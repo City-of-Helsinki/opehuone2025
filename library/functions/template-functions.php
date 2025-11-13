@@ -267,8 +267,8 @@ function get_user_cornerlabels_with_added_default_value(): array {
  * @param WP_Query $regular_query
  * @return void
  */
-function display_sticky_and_regular_posts( int $sticky_count, WP_Query $sticky_query, mixed $user_favs, mixed $remaining, WP_Query $regular_query ): void {
-    if ( $sticky_count > 0 ) {
+function display_sticky_and_regular_posts( int $sticky_count, WP_Query | null $sticky_query, mixed $user_favs, mixed $remaining, WP_Query $regular_query ): void {
+    if ( $sticky_count > 0 && $sticky_query ) {
         while ( $sticky_query->have_posts() ) {
             $sticky_query->the_post();
 
