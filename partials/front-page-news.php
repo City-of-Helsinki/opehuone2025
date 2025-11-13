@@ -11,25 +11,32 @@ $max_posts = 8;
 $sticky_posts = get_option( 'sticky_posts' );
 $sticky_posts = ! empty( $sticky_posts ) ? array_map('intval', $sticky_posts ) : [];
 
-$sticky_query_args = [
-    'post_type'      => 'post',
-    'posts_per_page' => $max_posts,
-    'post__in'       => $sticky_posts,
-    'orderby'        => 'post__in',
-];
+$sticky_query = null;
+$sticky_count = 0;
+
+$tax_query = [];
 
 if ( ! empty( $cornerlabels ) ) {
-    $sticky_query_args['tax_query'] = [
-        [
-            'taxonomy' => 'cornerlabels',
-            'field'    => 'term_id',
-            'terms'    => $cornerlabels,
-        ],
+    $tax_query = [
+        'taxonomy' => 'cornerlabels',
+        'field'    => 'term_id',
+        'terms'    => $cornerlabels,
     ];
 }
 
-$sticky_query = new WP_Query( $sticky_query_args );
-$sticky_count = count( $sticky_query->posts );
+if ( ! empty( $sticky_posts ) ) {
+    $sticky_query_args = [
+            'post_type'      => 'post',
+            'posts_per_page' => $max_posts,
+            'post__in'      => $sticky_posts,
+            'orderby' => 'post__in'
+    ];
+
+    $sticky_query_args['tax_query'] = $tax_query;
+
+    $sticky_query = new WP_Query( $sticky_query_args );
+    $sticky_count = count( $sticky_query->posts );
+}
 
 // Regular (non-sticky) posts to fill remaining slots
 $remaining = max(0, $max_posts - $sticky_count);
@@ -40,15 +47,7 @@ $regular_query_args = [
     'post__not_in'   => $sticky_posts,
 ];
 
-if ( ! empty( $cornerlabels ) ) {
-    $regular_query_args['tax_query'] = [
-        [
-            'taxonomy' => 'cornerlabels',
-            'field'    => 'term_id',
-            'terms'    => $cornerlabels,
-        ],
-    ];
-}
+$regular_query_args['tax_query'] = $tax_query;
 
 $regular_query = new WP_Query( $regular_query_args );
 

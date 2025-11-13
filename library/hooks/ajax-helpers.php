@@ -609,14 +609,19 @@ function ajax_update_front_page_posts() {
     $sticky_posts = get_option( 'sticky_posts' );
     $sticky_posts = ! empty( $sticky_posts ) ? array_map( 'intval', $sticky_posts ) : [];
 
-    $sticky_query_args = wp_parse_args( [
-        'post__in'       => $sticky_posts,
-        'posts_per_page' => $max_posts, // important: cap stickies to max_posts
-        'orderby'        => 'post__in',
-    ], $query_args );
+    $sticky_query = null;
+    $sticky_count = 0;
 
-    $sticky_query = new \WP_Query( $sticky_query_args );
-    $sticky_count = count( $sticky_query->posts );
+    if ( ! empty( $sticky_posts ) ) {
+        $sticky_query_args = wp_parse_args( [
+            'post__in'       => $sticky_posts,
+            'posts_per_page' => $max_posts, // important: cap stickies to max_posts
+            'orderby'        => 'post__in',
+        ], $query_args );
+
+        $sticky_query = new \WP_Query( $sticky_query_args );
+        $sticky_count = count( $sticky_query->posts );
+    }
 
     // --- Regular posts ---
     $remaining = max( 0, $max_posts - $sticky_count );
