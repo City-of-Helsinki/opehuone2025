@@ -1,0 +1,204 @@
+{
+	"flag_days": {
+		"2025": [
+			{
+				"date": "2025-02-05",
+				"fi": "J.L. Runebergin päivä",
+				"sv": "Runebergsdagen"
+			},
+			{
+				"date": "2025-02-28",
+				"fi": "Kalevalan päivä, suomalaisen kulttuurin päivä",
+				"sv": "Kalevaladagen, den finska kulturens dag"
+			},
+			{
+				"date": "2025-03-19",
+				"fi": "Minna Canthin päivä, tasa-arvon päivä",
+				"sv": "Minna Canth-dagen, jämställdhetsdagen"
+			},
+			{
+				"date": "2025-04-09",
+				"fi": "Mikael Agricolan päivä, suomen kielen päivä",
+				"sv": "Mikael Agricola-dagen, finska språkets dag"
+			},
+			{
+				"date": "2025-04-27",
+				"fi": "Kansallinen veteraanipäivä",
+				"sv": "Nationella veteraners dag"
+			},
+			{
+				"date": "2025-05-01",
+				"fi": "Vappu, suomalaisen työn päivä",
+				"sv": "Första maj, Finlands arbetardag"
+			},
+			{ "date": "2025-05-11", "fi": "Äitienpäivä", "sv": "Mors dag" },
+			{
+				"date": "2025-05-09",
+				"fi": "Eurooppa-päivä",
+				"sv": "Europadagen"
+			},
+			{
+				"date": "2025-05-12",
+				"fi": "J.V. Snellmanin päivä, suomalaisuuden päivä",
+				"sv": "J.V. Snellman-dagen, finskhetens dag"
+			},
+			{
+				"date": "2025-05-18",
+				"fi": "Kaatuneitten muistopäivä",
+				"sv": "De stupades minnesdag"
+			},
+			{
+				"date": "2025-06-04",
+				"fi": "Puolustusvoimain lippujuhlan päivä",
+				"sv": "Försvarsmaktens flaggdag"
+			},
+			{
+				"date": "2025-06-21",
+				"fi": "Juhannus, Suomen lipun päivä",
+				"sv": "Midsommardagen, Finlands flaggas dag"
+			},
+			{
+				"date": "2025-07-06",
+				"fi": "Eino Leinon päivä, runon ja suven päivä",
+				"sv": "Eino Leinon dag, diktens och sommarens dag"
+			},
+			{
+				"date": "2025-08-30",
+				"fi": "Suomen luonnon päivä",
+				"sv": "Finlands naturdag"
+			},
+			{
+				"date": "2025-10-01",
+				"fi": "Miina Sillanpään päivä, kansalaisvaikuttamisen päivä",
+				"sv": "Miina Sillanpää-dagen, medborgardagens dag"
+			},
+			{
+				"date": "2025-10-10",
+				"fi": "Aleksis Kiven päivä, suomalaisen kirjallisuuden päivä",
+				"sv": "Aleksis Kivi-dagen, finsk litteraturdag"
+			},
+			{ "date": "2025-10-24", "fi": "YK:n päivä", "sv": "FN-dagen" },
+			{
+				"date": "2025-11-06",
+				"fi": "Ruotsalaisuuden päivä, Kustaa Aadolfin päivä",
+				"sv": "Svenskhetens dag, Gustav Adolfs dag"
+			},
+			{ "date": "2025-11-09", "fi": "Isänpäivä", "sv": "Fars dag" },
+			{
+				"date": "2025-11-20",
+				"fi": "Lapsen oikeuksien päivä",
+				"sv": "Barnets rättighetsdag"
+			},
+			{
+				"date": "2025-12-06",
+				"fi": "Itsenäisyyspäivä",
+				"sv": "Självständighetsdagen"
+			},
+			{
+				"date": "2025-12-08",
+				"fi": "Jean Sibeliuksen päivä, suomalaisen musiikin päivä",
+				"sv": "Jean Sibelius-dagen, finsk musikdag"
+			}
+		],
+		"2026": [
+			{
+				"date": "2026-02-05",
+				"fi": "J.L. Runebergin päivä",
+				"sv": "Runebergsdagen"
+			},
+			{
+				"date": "2026-02-28",
+				"fi": "Kalevalan päivä, suomalaisen kulttuurin päivä",
+				"sv": "Kalevaladagen, den finska kulturens dag"
+			},
+			{
+				"date": "2026-03-19",
+				"fi": "Minna Canthin päivä, tasa-arvon päivä",
+				"sv": "Minna Canth-dagen, jämställdhetsdagen"
+			},
+			{
+				"date": "2026-04-09",
+				"fi": "Mikael Agricolan päivä, suomen kielen päivä",
+				"sv": "Mikael Agricola-dagen, finska språkets dag"
+			},
+			{
+				"date": "2026-04-27",
+				"fi": "Kansallinen veteraanipäivä",
+				"sv": "Nationella veteraners dag"
+			},
+			{
+				"date": "2026-05-01",
+				"fi": "Vappu, suomalaisen työn päivä",
+				"sv": "Första maj, Finlands arbetardag"
+			},
+			{ "date": "2026-05-10", "fi": "Äitienpäivä", "sv": "Mors dag" },
+			{
+				"date": "2026-05-09",
+				"fi": "Eurooppa-päivä",
+				"sv": "Europadagen"
+			},
+			{
+				"date": "2026-05-12",
+				"fi": "J.V. Snellmanin päivä, suomalaisuuden päivä",
+				"sv": "J.V. Snellman-dagen, finskhetens dag"
+			},
+			{
+				"date": "2026-05-17",
+				"fi": "Kaatuneitten muistopäivä",
+				"sv": "De stupades minnesdag"
+			},
+			{
+				"date": "2026-06-04",
+				"fi": "Puolustusvoimain lippujuhlan päivä",
+				"sv": "Försvarsmaktens flaggdag"
+			},
+			{
+				"date": "2026-06-20",
+				"fi": "Juhannus, Suomen lipun päivä",
+				"sv": "Midsommardagen, Finlands flaggas dag"
+			},
+			{
+				"date": "2026-07-06",
+				"fi": "Eino Leinon päivä, runon ja suven päivä",
+				"sv": "Eino Leinon dag, diktens och sommarens dag"
+			},
+			{
+				"date": "2026-08-29",
+				"fi": "Suomen luonnon päivä",
+				"sv": "Finlands naturdag"
+			},
+			{
+				"date": "2026-10-01",
+				"fi": "Miina Sillanpään päivä, kansalaisvaikuttamisen päivä",
+				"sv": "Miina Sillanpää-dagen, medborgardagens dag"
+			},
+			{
+				"date": "2026-10-10",
+				"fi": "Aleksis Kiven päivä, suomalaisen kirjallisuuden päivä",
+				"sv": "Aleksis Kivi-dagen, finsk litteraturdag"
+			},
+			{ "date": "2026-10-24", "fi": "YK:n päivä", "sv": "FN-dagen" },
+			{
+				"date": "2026-11-06",
+				"fi": "Ruotsalaisuuden päivä, Kustaa Aadolfin päivä",
+				"sv": "Svenskhetens dag, Gustav Adolfs dag"
+			},
+			{ "date": "2026-11-08", "fi": "Isänpäivä", "sv": "Fars dag" },
+			{
+				"date": "2026-11-20",
+				"fi": "Lapsen oikeuksien päivä",
+				"sv": "Barnets rättighetsdag"
+			},
+			{
+				"date": "2026-12-06",
+				"fi": "Itsenäisyyspäivä",
+				"sv": "Självständighetsdagen"
+			},
+			{
+				"date": "2026-12-08",
+				"fi": "Jean Sibeliuksen päivä, suomalaisen musiikin päivä",
+				"sv": "Jean Sibelius-dagen, finsk musikdag"
+			}
+		]
+	}
+}

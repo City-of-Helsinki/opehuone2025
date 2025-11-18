@@ -7,10 +7,11 @@ $day->setTimezone( new \DateTimeZone( 'Europe/Helsinki' ) );
 $week_number = (int) $day->format( 'W' );
 
 
-$day_info_service = new DayInfoService();
+$day_service = new DayInfoService();
+$day_info_service_data = $day_service->get_today_info();
 
-$finnish_names_list = $day_info_service->get_names_by_type('suomi');
-$swedish_names_list = $day_info_service->get_names_by_type('ruotsi');
+$finnish_names_list = $day_service->get_names_by_type( $day_info_service_data, 'suomi' );
+$swedish_names_list = $day_service->get_names_by_type( $day_info_service_data, 'ruotsi' );
 
 
 ?>
@@ -21,17 +22,24 @@ $swedish_names_list = $day_info_service->get_names_by_type('ruotsi');
 			<span class="date-box-month"><?php echo Utils\get_month_info() ?></span>
             <div class="date-box-info">
                 <?php if ( ! empty( $finnish_names_list ) ): ?>
-                    <span class="date-box-info__name-day-fi">
-            <?php echo esc_html( implode( ', ', $finnish_names_list ) ); ?>
-        </span>
+                    <span class="date-box-info__name-day-fi"><?php echo esc_html( implode( ', ', $finnish_names_list ) ); ?></span>
                 <?php endif; ?>
 
                 <?php if ( ! empty( $swedish_names_list ) ): ?>
-                    <span class="date-box-info__name-day-sv">
-            <?php echo esc_html( implode( ', ', $swedish_names_list ) ); ?>
-        </span>
+                    <span class="date-box-info__name-day-sv"><?php echo esc_html( implode( ', ', $swedish_names_list ) ); ?></span>
                 <?php endif; ?>
             </div>
+            <?php if ( ! empty( $day_info_service_data['flag_day'] ) ): ?>
+            <div class="date-box-info date-box-info__flag-days">
+                <div>
+                    <?php \Opehuone\Helpers\the_svg( 'icons/flag'); ?>
+                </div>
+                <div>
+                    <span class="date-box-info__name-day-fi"><?php echo $day_info_service_data['flag_day']['fi']; ?></span>
+                    <span class="date-box-info__name-day-sv"><?php echo $day_info_service_data['flag_day']['sv']; ?></span>
+                </div>
+            </div>
+            <?php endif; ?>
 
 		</div>
 		<div class="date-box-row-weather">
