@@ -19,10 +19,17 @@ ARG WP_PLUGIN_VERSION_WP_SENTRY_INTEGRATION=""
 ARG WP_PLUGIN_VERSION_WP_SECURITY_AUDIT_LOG=""
 ARG WP_PLUGIN_VERSION_CONNECT_MATOMO=""
 
-RUN mkdir -m 777 /tmp/wflogs
-
-# build volume auth
-RUN mkdir -p /opt/app-root/src/.config/composer && \
+# Create writable temp logs for Wordfence, configure Apache to use
+# forwarded client IPs, and initialize Composer auth if mounted
+RUN mkdir -m 777 /tmp/wflogs && \
+    printf "%s\n" \
+      'RequestHeader edit X-Forwarded-For "^([^,]+):[0-9]+.*$" "$1"' \
+      "RemoteIPHeader X-Forwarded-For" \
+      "RemoteIPTrustedProxy 10.0.0.0/8" \
+      "RemoteIPTrustedProxy 172.30.0.0/16" \
+      "RemoteIPTrustedProxy 127.0.0.1" \
+      > /etc/httpd/conf.d/remoteip.conf && \
+    mkdir -p /opt/app-root/src/.config/composer && \
     if [ -n "$MOUNT_SECRET" ] && [ "${MOUNT_SECRET,,}" = "true" ]; then \
         cp /mnt/secrets/* /opt/app-root/src/.config/composer; \
     fi
