@@ -9,7 +9,7 @@ class DayInfoService {
         $this->cache_key = 'flag_and_name_day';
 
         $this->name_day_API = 'https://nimipaivarajapinta.fi/api/namedays/today';
-        $this->flag_day_API = '';
+        $this->flag_day_API = get_stylesheet_directory() . '/resources/json/flag_days.json'; // Real API can be used in the future
     }
 
     private function fetch_name_day(): mixed {
@@ -35,7 +35,31 @@ class DayInfoService {
     }
 
     private function fetch_flag_day() {
-        return '';
+        if ( ! file_exists( $this->flag_day_API ) ) {
+            return null;
+        }
+
+        $data = json_decode( file_get_contents( $this->flag_day_API ), true );
+
+        if ( ! $data || ! isset( $data['flag_days'] ) ) {
+            return null;
+        }
+
+        $current_year = date( 'Y' );
+
+        if ( ! isset( $data['flag_days'][$current_year] ) ) {
+            return null;
+        }
+
+        $current_date = date( 'Y-m-d' );
+
+        foreach( $data['flag_days'][$current_year] as $flag_day ) {
+            if ( $flag_day['date'] === $current_date ) {
+                return $flag_day;
+            }
+        }
+
+        return null;
     }
 
     public function get_today_info(): array {
@@ -70,11 +94,9 @@ class DayInfoService {
      * @param string $type
      * @return array
      */
-    public function get_names_by_type(string $type): array {
-        $info = $this->get_today_info();
-
-        return ! empty( $info['name_day']['name_days_by_type'][$type] )
-            ? array_column( $info['name_day']['name_days_by_type'][$type], 'name' )
+    public function get_names_by_type( array $data, string $type ): array {
+        return ! empty( $data['name_day']['name_days_by_type'][$type] )
+            ? array_column( $data['name_day']['name_days_by_type'][$type], 'name' )
             : [];
     }
 

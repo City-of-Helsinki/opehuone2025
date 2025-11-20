@@ -33,4 +33,15 @@
   &__name-day-sv {
     font-style: italic;
   }
+
+  &__flag-days {
+    display: flex;
+    gap: 0.5rem;
+    padding-left: 0;
+    margin-top: var(--opehuone--font-size--medium);
+
+    svg {
+      margin-top: 3px;
+    }
+  }
 }
