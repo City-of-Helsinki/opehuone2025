@@ -17,14 +17,16 @@ $theme_class = $theme_color ? 'theme__' . esc_attr( $theme_color ) : '';
 
 <div class="hero has-default-style has-koros landing-page <?php echo $theme_class ?>">
 	<div class="hds-container hero__container">
-		<?php get_template_part( 'partials/breadcrumbs' ); ?>
-		<div class="hero__content">		
+		<div class="hero__content">
+            <div class="hero-text-content">
+		    <?php get_template_part( 'partials/breadcrumbs' ); ?>
 			<h1 class="hero__title"><?php echo get_the_title(); ?></h1>
 			<?php if( !empty( $header_sve ) ): ?>
 				<h2 class="hero__title__sve"><?php echo esc_attr($header_sve) ?></h2>
-			<?php endif;
-			if( !empty( $theme_image ) ): ?>
-				<img src="<?php echo esc_url($theme_image['sizes']['medium']); ?>" alt="<?php echo esc_attr($theme_image['alt'] ?: 'hero-image'); ?>" />
+			<?php endif;?>
+            </div>
+            <?php if( !empty( $theme_image ) ): ?>
+				<div class="hero-image-content"><img src="<?php echo esc_url($theme_image['sizes']['medium']); ?>" alt="<?php echo esc_attr($theme_image['alt'] ?: 'hero-image'); ?>" /></div>
 			<?php endif; ?>
 		</div>
 	</div>

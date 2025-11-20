@@ -12,17 +12,19 @@ $header_sub2 = get_field('news_hero_subtitle_2', 'options');
 
 <div class="hero has-default-style has-koros news-page <?php echo !empty($theme_color) ? 'theme__' . esc_attr($theme_color) : ''; ?>">
 	<div class="hds-container hero__container">
-		<?php get_template_part( 'partials/breadcrumbs' ); ?>
-		<div class="hero__content">		
+		<div class="hero__content">
+            <div class="hero-text-content">
+            <?php get_template_part( 'partials/breadcrumbs' ); ?>
 			<h1 class="hero__title"><?php echo esc_html( get_field('news_hero_title', 'options') ); ?></h1>
 			<?php if( !empty( $header_sub ) ): ?>
 				<h2 class="hero__title__sve hero__title__sub"><?php echo esc_html( get_field('news_hero_subtitle', 'options') ); ?></h2>
 			<?php endif;
             if( !empty( $header_sub2 ) ): ?>
 				<h2 class="hero__title__sve hero__title__sub"><?php echo esc_html( get_field('news_hero_subtitle_2', 'options') ); ?></h2>
-			<?php endif;
-			if( !empty( $theme_image ) ): ?>
-				<img src="<?php echo esc_url($theme_image['sizes']['large']); ?>" alt="<?php echo esc_attr($theme_image['alt'] ?: 'hero-image'); ?>" />
+			<?php endif; ?>
+            </div>
+			<?php if( !empty( $theme_image ) ): ?>
+				<div class="hero-image-content"><img src="<?php echo esc_url($theme_image['sizes']['large']); ?>" alt="<?php echo esc_attr($theme_image['alt'] ?: 'hero-image'); ?>" /></div>
 			<?php endif; ?>
 		</div>
 	</div>

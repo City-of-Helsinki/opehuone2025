@@ -9,7 +9,7 @@ use function \Opehuone\Utils\get_user_favs;
  * @return void
  */
 function displayBannerWaveLineSvg(): void {
-    echo '<div class="hds-koros hds-koros--basic hds-koros--flip-horizontal">
+    echo '<div class="hds-koros hds-koros--basic hds-koros--flip-horizontal hero__koros">
         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="100%" height="42">
             <defs>
                 <pattern id="koros_basic-page_hero" x="0" y="0" width="53" height="42"
