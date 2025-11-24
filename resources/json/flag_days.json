@@ -90,6 +90,16 @@
 				"sv": "Barnets rättighetsdag"
 			},
 			{
+				"date": "2025-11-24",
+				"fi": "1. debug-päivä",
+				"sv": "1. debug-dagen"
+			},
+			{
+				"date": "2025-11-25",
+				"fi": "2. debug-päivä",
+				"sv": "2. debug-dagen"
+			},
+			{
 				"date": "2025-12-06",
 				"fi": "Itsenäisyyspäivä",
 				"sv": "Självständighetsdagen"
