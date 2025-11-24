@@ -5,6 +5,7 @@ if ( ! is_user_logged_in() ) {
 }
 
 use function \Opehuone\TemplateFunctions\get_cornerlabels_without_default_value;
+use function \Opehuone\TemplateFunctions\displayBannerWaveLineSvg;
 
 $current_user = wp_get_current_user();
 $cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
@@ -16,29 +17,26 @@ $user_favs = get_user_meta( get_current_user_id(), 'opehuone_favs', true );
 if ( ! $user_favs ) {
 	$user_favs = [];
 }
+
+$theme_image = get_field('profile_hero_image', 'options');
 ?>
 <article class="content">
 	<div class="hero has-default-style has-koros">
 		<div class="hds-container hero__container">
 			<div class="hero__content">
-				<h1 class="hero__title"><?php echo esc_html( sprintf( 'Moi %s!', $current_user->user_firstname ) ); ?></h1>
-				<p class="hero__excerpt excerpt size-xl">
-					<?php get_template_part( 'partials/time-until' ); ?>
-				</p>
+                <div class="hero-text-content">
+                    <h1 class="hero__title"><?php echo esc_html( sprintf( 'Moi %s!', $current_user->user_firstname ) ); ?></h1>
+                    <p class="hero__excerpt excerpt size-xl">
+                        <?php get_template_part( 'partials/time-until' ); ?>
+                    </p>
+                </div>
+                <?php if( !empty( $theme_image ) ): ?>
+                    <div class="hero-image-content"><img src="<?php echo esc_url($theme_image['sizes']['large']); ?>" alt="<?php echo esc_attr($theme_image['alt'] ?: 'hero-image'); ?>" /></div>
+                <?php endif; ?>
 			</div>
 		</div>
 
-		<div class="hds-koros hds-koros--basic hds-koros--flip-horizontal">
-			<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="100%" height="42">
-				<defs>
-					<pattern id="koros_basic-page_hero" x="0" y="0" width="53" height="42"
-							 patternUnits="userSpaceOnUse">
-						<path transform="scale(2.65)" d="M0,800h20V0c-4.9,0-5,2.6-9.9,2.6S5,0,0,0V800z"></path>
-					</pattern>
-				</defs>
-				<rect fill="url(#koros_basic-page_hero)" width="100%" height="42"></rect>
-			</svg>
-		</div>
+		<?php displayBannerWaveLineSvg(); ?>
 
 	</div>
 	<div class="content__container hds-container">
