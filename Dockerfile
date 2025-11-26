@@ -40,13 +40,14 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require acf/advanced-custom-fields-pro && \
     composer config repositories.wpo365-integrate vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-wpo365-integrate && \
     composer require wpo365/wpo365-integrate && \
+    composer config repositories.wpo365-login-debugger vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-wpo365-login-debugger && \
+    composer require wpo365/wpo365-login-debugger && \
     composer config repositories.wpackagist composer https://wpackagist.org && \
     composer require wpackagist-plugin/wordfence:$WP_PLUGIN_VERSION_WORDFENCE && \
     composer require wpackagist-plugin/findkit:$WP_PLUGIN_VERSION_FINDKIT && \
     composer require wpackagist-plugin/simple-page-ordering:$WP_PLUGIN_VERSION_SIMPLE_PAGE_ORDERING && \
     composer require wpackagist-plugin/simple-comment-editing:$WP_PLUGIN_VERSION_SIMPLE_COMMENT_EDITING && \
     composer require wpackagist-plugin/safe-svg:$WP_PLUGIN_VERSION_SAFE_SVG && \
-    composer require wpackagist-plugin/wpo365-login:$WP_PLUGIN_VERSION_WPO365_LOGIN && \
     composer require wpackagist-plugin/wpo365-samesite:$WP_PLUGIN_VERSION_WPO365_SAMESITE && \
     composer require wpackagist-plugin/tablepress:$WP_PLUGIN_VERSION_TABLEPRESS && \
     composer require wpackagist-plugin/taxonomy-terms-order:$WP_PLUGIN_VERSION_TAXONOMY_TERMS_ORDER && \
