@@ -40,8 +40,8 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require acf/advanced-custom-fields-pro && \
     composer config repositories.wpo365-integrate vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-wpo365-integrate && \
     composer require wpo365/wpo365-integrate && \
-    composer config repositories.wpo365-login-debugger vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-wpo365-login-debugger && \
-    composer require wpo365/wpo365-login-debugger && \
+    composer config repositories.wpo365-login vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-wpo365-login-debugger && \
+    composer require wpo365/wpo365-login && \
     composer config repositories.wpackagist composer https://wpackagist.org && \
     composer require wpackagist-plugin/wordfence:$WP_PLUGIN_VERSION_WORDFENCE && \
     composer require wpackagist-plugin/findkit:$WP_PLUGIN_VERSION_FINDKIT && \
