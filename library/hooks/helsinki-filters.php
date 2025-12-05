@@ -76,3 +76,14 @@ add_action('helsinki_not_found', function () {
 
     echo $page_not_found_acf;
 }, 10);
+
+/**
+ * Remove this editor sidebar option (Helsinki theme) as it is not used
+ */
+add_action( 'add_meta_boxes', function() {
+    remove_meta_box(
+        'helsinki-sidebar-settings',
+        'page',
+        'normal'
+    );
+}, 20 );
