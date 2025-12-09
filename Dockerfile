@@ -40,6 +40,10 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require acf/advanced-custom-fields-pro && \
     composer config repositories.wpo365-integrate vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-wpo365-integrate && \
     composer require wpo365/wpo365-integrate && \
+    composer config repositories.tablepress vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-tablepress-premium && \
+    composer require tablepress/tablepress-premium:3.2.5 && \
+    composer config repositories.servicenow-tablepress-sync vcs https://github.com/City-of-Helsinki/servicenow-tablepress-sync && \
+    composer require city-of-helsinki/servicenow-tablepress-sync:1.0.0 && \
     composer config repositories.wpackagist composer https://wpackagist.org && \
     composer require wpackagist-plugin/wordfence:$WP_PLUGIN_VERSION_WORDFENCE && \
     composer require wpackagist-plugin/findkit:$WP_PLUGIN_VERSION_FINDKIT && \
@@ -48,7 +52,6 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require wpackagist-plugin/safe-svg:$WP_PLUGIN_VERSION_SAFE_SVG && \
     composer require wpackagist-plugin/wpo365-login:$WP_PLUGIN_VERSION_WPO365_LOGIN && \
     composer require wpackagist-plugin/wpo365-samesite:$WP_PLUGIN_VERSION_WPO365_SAMESITE && \
-    composer require wpackagist-plugin/tablepress:$WP_PLUGIN_VERSION_TABLEPRESS && \
     composer require wpackagist-plugin/taxonomy-terms-order:$WP_PLUGIN_VERSION_TAXONOMY_TERMS_ORDER && \
     composer require wpackagist-plugin/wp-sentry-integration:$WP_PLUGIN_VERSION_WP_SENTRY_INTEGRATION && \
     composer require wpackagist-plugin/wp-security-audit-log:$WP_PLUGIN_VERSION_WP_SECURITY_AUDIT_LOG && \
