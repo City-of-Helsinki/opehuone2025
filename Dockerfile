@@ -21,7 +21,7 @@ ARG WP_PLUGIN_VERSION_CONNECT_MATOMO=""
 ARG WP_PLUGIN_VERSION_OPPI_SCHOOL_PICKER=""
 ARG WP_PLUGIN_VERSION_TABLEPRESS_PREMIUM=""
 ARG WP_PLUGIN_VERSION_SERVICENOW_TABLEPRESS_SYNC=""
-ARG WP_THEME_OPEHUONE_VERSION=""
+ARG WP_THEME_VERSION_OPEHUONE=""
 
 RUN mkdir -m 777 /tmp/wflogs
 
@@ -33,7 +33,7 @@ RUN mkdir -p /opt/app-root/src/.config/composer && \
 
 # Install plugins via Composer
 RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsinki/opehuone2025 && \
-    composer require city-of-helsinki/opehuone:$WP_THEME_OPEHUONE_VERSION && \
+    composer require city-of-helsinki/opehuone:$WP_THEME_VERSION_OPEHUONE && \
     composer config repositories.wordpress-helfi-hds-wp vcs https://github.com/City-of-Helsinki/wordpress-helfi-hds-wp && \
     composer require city-of-helsinki/wordpress-helfi-hds-wp && \
     composer config repositories.wordpress-helfi-helsinkiteema vcs https://github.com/City-of-Helsinki/wordpress-helfi-helsinkiteema && \
