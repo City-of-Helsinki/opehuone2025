@@ -20,6 +20,7 @@ ARG WP_PLUGIN_VERSION_CONNECT_MATOMO=""
 ARG WP_PLUGIN_VERSION_OPPI_SCHOOL_PICKER=""
 ARG WP_PLUGIN_VERSION_TABLEPRESS_PREMIUM=""
 ARG WP_PLUGIN_VERSION_SERVICENOW_TABLEPRESS_SYNC=""
+ARG WP_THEME_VERSION_HELSINKITEEMA=""
 ARG WP_THEME_VERSION_OPEHUONE=""
 
 RUN mkdir -m 777 /tmp/wflogs
@@ -36,7 +37,7 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer config repositories.wordpress-helfi-hds-wp vcs https://github.com/City-of-Helsinki/wordpress-helfi-hds-wp && \
     composer require city-of-helsinki/wordpress-helfi-hds-wp && \
     composer config repositories.wordpress-helfi-helsinkiteema vcs https://github.com/City-of-Helsinki/wordpress-helfi-helsinkiteema && \
-    composer require city-of-helsinki/wordpress-helfi-helsinkiteema && \
+    composer require city-of-helsinki/wordpress-helfi-helsinkiteema:$WP_THEME_VERSION_HELSINKITEEMA && \
     composer config repositories.oppi-school-picker vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-oppi-school-picker && \
     composer require city-of-helsinki/oppi-school-picker:$WP_PLUGIN_VERSION_OPPI_SCHOOL_PICKER && \
     composer config repositories.advanced-custom-fields-pro vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-advanced-custom-fields-pro && \
