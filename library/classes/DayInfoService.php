@@ -1,18 +1,21 @@
 <?php
 
 class DayInfoService {
-    private string $cache_key;
     private string $name_day_API;
     private string $flag_day_API;
+    private int $cache_ttl = 3600; // 1 hour
 
     public function __construct() {
-        $this->cache_key = 'flag_and_name_day';
-
         $this->name_day_API = 'https://nimipaivarajapinta.fi/api/namedays/today';
         $this->flag_day_API = get_stylesheet_directory() . '/resources/json/flag_days.json'; // Real API can be used in the future
     }
 
-    private function fetch_name_day(): mixed {
+    /**
+     * Fetch name days through nimipaivarajapinta API
+     *
+     * @return mixed
+     */
+    private function fetch_name_day( ): mixed {
         $token = defined('NAME_DAYS_API') ? NAME_DAYS_API : null;
 
         if ( ! $token ) {
@@ -22,19 +25,30 @@ class DayInfoService {
         $response = wp_remote_get( $this->name_day_API, [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token,
-                'Accept'        => 'application/json'
+                'Accept'        => 'application/json',
             ],
-            'timeout' => 5
+            'timeout' => 5,
         ]);
 
         if ( is_wp_error( $response ) ) {
             return null;
         }
 
-        return json_decode( wp_remote_retrieve_body( $response ), true );
+        $data = json_decode( wp_remote_retrieve_body( $response ), true );
+
+        if ( ! $data ) {
+            return null;
+        }
+
+        return $data;
     }
 
-    private function fetch_flag_day() {
+    /**
+     * Fetch current flag day from the JSON file
+     *
+     * @return array|null
+     */
+    private function fetch_flag_day(): ?array {
         if ( ! file_exists( $this->flag_day_API ) ) {
             return null;
         }
@@ -62,30 +76,50 @@ class DayInfoService {
         return null;
     }
 
-    public function get_today_info(): array {
-        // Check cache first
-        $cached = get_transient( $this->cache_key );
-        $today = date( 'Y-m-d' );
+    /**
+     * @param string $cache_key
+     * @param callable $fetch_callback
+     * @return array|null
+     *
+     * Get cached value, use callback function to fetch new data if there is no cached data
+     */
+    private function get_cached_values( string $cache_key, callable $fetch_callback ): ?array {
+        $cached = get_transient( $cache_key );
 
-        // If we have the value cached and it has current days value, use it
-        if ( false !== $cached && $cached['date'] === $today ) {
+        if ( false !== $cached ) {
             return $cached;
         }
+        
+        $fresh_data = $fetch_callback();
 
-        // Fetch from both API's
-        $name_day = $this->fetch_name_day();
-        $flag_day = $this->fetch_flag_day();
+        if ( $fresh_data ) {
+            set_transient( $cache_key, $fresh_data, $this->cache_ttl );
+            return $fresh_data;
+        }
 
-        $data = [
-            'date'     => $today,
+        return null;
+    }
+
+
+    /**
+     * Fetch either cached or fresh data from name day and flag day API's
+     * Return an array with the data, that can be used in front-end
+     *
+     * @return array
+     */
+    public function get_today_info(): array {
+        $today = date( 'Y-m-d' );
+
+        $name_day_cache_key = "name_day_{$today}";
+        $flag_day_cache_key = "flag_day_{$today}";
+
+        $name_day = $this->get_cached_values( $name_day_cache_key, fn() => $this->fetch_name_day() );
+        $flag_day = $this->get_cached_values( $flag_day_cache_key, fn() => $this->fetch_flag_day() );
+
+        return [
             'name_day' => $name_day,
             'flag_day' => $flag_day
         ];
-
-        // Cache the results
-        set_transient( $this->cache_key, $data );
-
-        return $data;
     }
 
     /**
