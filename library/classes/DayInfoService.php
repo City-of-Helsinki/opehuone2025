@@ -10,6 +10,11 @@ class DayInfoService {
         $this->flag_day_API = get_stylesheet_directory() . '/resources/json/flag_days.json'; // Real API can be used in the future
     }
 
+    /**
+     * Fetch name days through nimipaivarajapinta API
+     *
+     * @return mixed
+     */
     private function fetch_name_day( ): mixed {
         $token = defined('NAME_DAYS_API') ? NAME_DAYS_API : null;
 
@@ -23,11 +28,7 @@ class DayInfoService {
                 'Accept'        => 'application/json',
             ],
             'timeout' => 5,
-            'sslverify' => false,
         ]);
-
-        error_log( print_r( 'Response to API:', true ) );
-        error_log( print_r( $response, true ) );
 
         if ( is_wp_error( $response ) ) {
             return null;
@@ -42,6 +43,11 @@ class DayInfoService {
         return $data;
     }
 
+    /**
+     * Fetch current flag day from the JSON file
+     *
+     * @return array|null
+     */
     private function fetch_flag_day(): ?array {
         if ( ! file_exists( $this->flag_day_API ) ) {
             return null;
@@ -81,12 +87,9 @@ class DayInfoService {
         $cached = get_transient( $cache_key );
 
         if ( false !== $cached ) {
-            error_log( print_r( 'Cached found for ' . $cache_key, true ) );
             return $cached;
         }
         
-        error_log( print_r( 'Fetching new data for ' . $cache_key, true ) );
-
         $fresh_data = $fetch_callback();
 
         if ( $fresh_data ) {
@@ -98,6 +101,12 @@ class DayInfoService {
     }
 
 
+    /**
+     * Fetch either cached or fresh data from name day and flag day API's
+     * Return an array with the data, that can be used in front-end
+     *
+     * @return array
+     */
     public function get_today_info(): array {
         $today = date( 'Y-m-d' );
 
@@ -107,15 +116,10 @@ class DayInfoService {
         $name_day = $this->get_cached_values( $name_day_cache_key, fn() => $this->fetch_name_day() );
         $flag_day = $this->get_cached_values( $flag_day_cache_key, fn() => $this->fetch_flag_day() );
 
-        $data = [
-            'date'     => $today,
+        return [
             'name_day' => $name_day,
             'flag_day' => $flag_day
         ];
-
-        error_log( print_r( $data, true ) );
-
-        return $data;
     }
 
     /**
