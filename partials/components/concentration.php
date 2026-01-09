@@ -44,9 +44,9 @@ if ( ! $query->have_posts() ) {
     <div class="concentration-opener">
         <div class="concentration-opener__wrapper">
             <div class="concentration-opener__items">
-                <h2 class="concentration-opener__title">
-                    <?php pll_esc_html_e( 'Valitse rauhoittumishetken pituus' ); ?>
-                </h2>
+                <h4 class="concentration-opener__title">
+                    <?php pll_esc_html_e( 'Valitse rauhoittumishetki' ); ?>
+                </h4>
                 <ul class="concentration-opener__list">
                     <?php
                     while ( $query->have_posts() ) {
