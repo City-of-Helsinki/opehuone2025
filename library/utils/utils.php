@@ -55,7 +55,7 @@ function get_month_info() {
 	$formatter_fi  = new \IntlDateFormatter( 'fi_FI', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE );
 	$month_finnish = $formatter_fi->format( $timestamp );
 	$month_finnish = explode( ' ', $month_finnish )[1]; // Extract only the month name
-	$month_finnish = str_replace( 'ta', '', $month_finnish ); // Remove helmikuuTA (ta-part)
+    $month_finnish = preg_replace('/ta$/u', '', $month_finnish);// Remove helmikuuTA (ta-part)
 
 	// Format month name in Swedish
 	$formatter_sv  = new \IntlDateFormatter( 'sv_SE', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE );
