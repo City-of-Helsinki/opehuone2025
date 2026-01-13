@@ -18,6 +18,7 @@ ARG WP_PLUGIN_VERSION_WP_SENTRY_INTEGRATION=""
 ARG WP_PLUGIN_VERSION_WP_SECURITY_AUDIT_LOG=""
 ARG WP_PLUGIN_VERSION_CONNECT_MATOMO=""
 ARG WP_PLUGIN_VERSION_OPPI_SCHOOL_PICKER=""
+ARG WP_PLUGIN_VERSION_ACTIVITY_LOG=""
 ARG WP_PLUGIN_VERSION_TABLEPRESS_PREMIUM=""
 ARG WP_PLUGIN_VERSION_SERVICENOW_TABLEPRESS_SYNC=""
 ARG WP_THEME_VERSION_HELSINKITEEMA=""
@@ -40,6 +41,8 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require city-of-helsinki/wordpress-helfi-helsinkiteema:$WP_THEME_VERSION_HELSINKITEEMA && \
     composer config repositories.oppi-school-picker vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-oppi-school-picker && \
     composer require city-of-helsinki/oppi-school-picker:$WP_PLUGIN_VERSION_OPPI_SCHOOL_PICKER && \
+    composer config repositories.activity-log vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-activity-log && \
+    composer require city-of-helsinki/wordpress-helfi-plugin-activity-log:5.5.4 && \
     composer config repositories.advanced-custom-fields-pro vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-advanced-custom-fields-pro && \
     composer require acf/advanced-custom-fields-pro && \
     composer config repositories.wpo365-integrate vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-wpo365-integrate && \
