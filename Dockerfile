@@ -1,6 +1,6 @@
 FROM helsinki.azurecr.io/openshift-wordpress-base:latest
 
-COPY .user.ini wordfence-waf.php /opt/app-root/src/
+#COPY .user.ini wordfence-waf.php /opt/app-root/src/
 
 ARG MOUNT_SECRET="false"
 ARG COMPOSER_AUTH="{}"
@@ -53,7 +53,7 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer config repositories.servicenow-tablepress-sync vcs https://github.com/City-of-Helsinki/servicenow-tablepress-sync && \
     composer require city-of-helsinki/servicenow-tablepress-sync:$WP_PLUGIN_VERSION_SERVICENOW_TABLEPRESS_SYNC && \
     composer config repositories.wpackagist composer https://wpackagist.org && \
-    composer require wpackagist-plugin/wordfence:$WP_PLUGIN_VERSION_WORDFENCE && \
+    #composer require wpackagist-plugin/wordfence:$WP_PLUGIN_VERSION_WORDFENCE && \
     composer require wpackagist-plugin/findkit:$WP_PLUGIN_VERSION_FINDKIT && \
     composer require wpackagist-plugin/simple-page-ordering:$WP_PLUGIN_VERSION_SIMPLE_PAGE_ORDERING && \
     composer require wpackagist-plugin/simple-comment-editing:$WP_PLUGIN_VERSION_SIMPLE_COMMENT_EDITING && \
