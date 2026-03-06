@@ -37,7 +37,7 @@ resources:
     # Azure DevOps repository
     - repository: opehuone-pipelines
       type: git
-      ref: review_build
+      ref: review_build 
       # Azure DevOps project/repository
       name: opehuone/opehuone-pipelines
 
