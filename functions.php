@@ -102,3 +102,13 @@ add_filter(
 
 // Site is hidden from search engines, but Findkit needs the sitemap ==> lets enable it
 add_filter( 'wp_sitemaps_enabled', '__return_true' );
+
+// Don't send TablePress warnings to Sentry
+add_filter( 'wp_sentry_before_send', function ( \Sentry\Event $event, ?\Sentry\EventHint $hint = null ) {
+    // Don't send error event with level `warning`
+    if ( $hint->exception !== null && $event->getLevel() === \Sentry\Severity::warning() && strpos( $hint->exception->getFile(), 'plugins/tablepress/' ) !== false ) {
+        return null;
+    }
+    
+    return $event;
+}, 2 );
