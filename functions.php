@@ -103,12 +103,10 @@ add_filter(
 // Site is hidden from search engines, but Findkit needs the sitemap ==> lets enable it
 add_filter( 'wp_sitemaps_enabled', '__return_true' );
 
-// Don't send TablePress warnings to Sentry
-add_filter( 'wp_sentry_before_send', function ( \Sentry\Event $event, ?\Sentry\EventHint $hint = null ) {
-    // Don't send error event with level `warning`
-    if ( $hint->exception !== null && $event->getLevel() === \Sentry\Severity::warning() && strpos( $hint->exception->getFile(), 'plugins/tablepress/' ) !== false ) {
-        return null;
-    }
-    
-    return $event;
-}, 2 );
+// Remove Askem feedback buttons from 'helsinki_content' and add a new one to 'helsinki_content_body_after'
+add_action( 'template_redirect', function () {
+    remove_action( 'helsinki_content', 'CityOfHelsinki\\WordPress\\Helsinki\\Theme\\Integrations\\Askem\\provide_feedback_buttons', 30 );
+	if ( \is_single() ) {
+		add_action( 'helsinki_content_body_after', 'CityOfHelsinki\\WordPress\\Helsinki\\Theme\\Integrations\\Askem\\provide_feedback_buttons', 30 );
+	}
+}, 99 );
