@@ -115,8 +115,7 @@ add_filter( 'wp_sentry_before_send', function ( \Sentry\Event $event, ?\Sentry\E
 
 // Remove Askem feedback buttons from 'helsinki_content' and add a new one to 'helsinki_content_body_after'
 add_action( 'template_redirect', function () {
-    remove_action( 'helsinki_content', 'CityOfHelsinki\\WordPress\\Helsinki\\Theme\\Integrations\\Askem\\provide_feedback_buttons', 30 );
-	if ( \is_single() ) {
+	if ( \is_singular( 'post' ) ) {
 		add_action( 'helsinki_content_body_after', 'CityOfHelsinki\\WordPress\\Helsinki\\Theme\\Integrations\\Askem\\provide_feedback_buttons', 30 );
 	}
 }, 99 );
