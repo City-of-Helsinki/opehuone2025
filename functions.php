@@ -105,17 +105,68 @@ add_filter( 'wp_sitemaps_enabled', '__return_true' );
 
 // Don't send TablePress warnings to Sentry
 add_filter( 'wp_sentry_before_send', function ( \Sentry\Event $event, ?\Sentry\EventHint $hint = null ) {
-    // Don't send error event with level `warning`
-    if ( $hint->exception !== null && $event->getLevel() === \Sentry\Severity::warning() && strpos( $hint->exception->getFile(), 'plugins/tablepress/' ) !== false ) {
-        return null;
+
+    // Make sure $hint exists AND contains an exception
+    if ( $hint instanceof \Sentry\EventHint && $hint->exception instanceof \Throwable ) {
+
+        // Only drop warnings
+        if ( $event->getLevel() === \Sentry\Severity::warning() ) {
+
+            // Check file path for TablePress
+            if ( strpos( $hint->exception->getFile(), 'wp-content/plugins/tablepress/' ) !== false ) {
+                return null; // DROP the event
+            }
+        }
     }
 
-    return $event;
-}, 2 );
+    return $event; // Keep everything else
+}, 2, 2 );
 
-// Add Askem feedback buttons to 'helsinki_content_body_after'
-add_action( 'template_redirect', function () {
-	if ( \is_single() ) {
-		add_action( 'helsinki_content_body_after', 'CityOfHelsinki\\WordPress\\Helsinki\\Theme\\Integrations\\Askem\\provide_feedback_buttons', 30 );
-	}
-}, 99 );
+// Remove the parent setup hook after the parent theme has been initialized.
+\add_action('after_setup_theme', function () {
+    $parent_namespace = 'CityOfHelsinki\\WordPress\\Helsinki\\Theme\\Integrations\\Askem';
+
+    // Only try to remove if the parent function exists and is hooked.
+    if (\function_exists($parent_namespace . '\\setup_feedback_buttons')) {
+        \remove_action('template_redirect', $parent_namespace . '\\setup_feedback_buttons');
+    }
+}, 20);
+
+// Add own setup that always attaches to `helsinki_content_body_after` on posts.
+\add_action('template_redirect', __NAMESPACE__ . '\\setup_feedback_buttons_child');
+
+function setup_feedback_buttons_child(): void
+{
+    $parent_ns = 'CityOfHelsinki\\WordPress\\Helsinki\\Theme\\Integrations\\Askem';
+
+    $enabled  = \function_exists($parent_ns . '\\is_feedback_enabled') 
+        ? \call_user_func($parent_ns . '\\is_feedback_enabled') 
+        : true; // fall back if needed
+
+    $context  = \function_exists($parent_ns . '\\is_feedback_context') 
+        ? \call_user_func($parent_ns . '\\is_feedback_context') 
+        : true; // fall back if needed
+
+    if ($enabled && $context && \is_singular('post')) {
+        // Optional: apply the same body class behavior as parent (if you want it)
+        if (\function_exists($parent_ns . '\\apply_body_class')) {
+            \add_filter('body_class', $parent_ns . '\\apply_body_class', 10);
+        }
+
+        // Target the desired hook and priority for single posts
+        \add_action('helsinki_content_body_after', __NAMESPACE__ . '\\render_feedback_buttons_child', 21);
+    }
+}
+
+/**
+ * This runs on `helsinki_content_body_after` for single posts.
+ */
+function render_feedback_buttons_child(): void
+{
+    $parent_fn = 'CityOfHelsinki\\WordPress\\Helsinki\\Theme\\Integrations\\Askem\\provide_feedback_buttons';
+    if (\function_exists($parent_fn)) {
+        \call_user_func($parent_fn);
+        return;
+    }
+
+}
