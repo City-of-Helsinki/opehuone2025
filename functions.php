@@ -103,27 +103,64 @@ add_filter(
 // Site is hidden from search engines, but Findkit needs the sitemap ==> lets enable it
 add_filter( 'wp_sitemaps_enabled', '__return_true' );
 
-// Don't send TablePress warnings to Sentry
-add_filter( 'wp_sentry_before_send', function ( \Sentry\Event $event, ?\Sentry\EventHint $hint = null ) {
+// Don't send TablePress Premium-originated warnings/errors to Sentry
+add_filter('wp_sentry_before_send', function (\Sentry\Event $event, ?\Sentry\EventHint $hint = null) {
+    $PLUGIN_PATH = 'wp-content/plugins/tablepress-premium/';
 
-    // Make sure $hint exists AND contains an exception
-    if ( $hint instanceof \Sentry\EventHint && $hint->exception instanceof \Throwable ) {
+    // Determine the level safely (avoid strict identity)
+    $level = $event->getLevel(); // \Sentry\Severity|null
 
-        // Only drop warnings
-        if ( $event->getLevel() === \Sentry\Severity::warning() ) {
+    // Helper to normalize a level into a lowercase string
+    $level_name = null;
+    if ($level instanceof \Sentry\Severity) {
+        // Prefer the comparison helper if available
+        $is_warning = method_exists($level, 'isEqualTo')
+            ? $level->isEqualTo(\Sentry\Severity::warning())
+            : (string)$level === (string)\Sentry\Severity::warning();
 
-            // Check file path for TablePress
-            if ( strpos( $hint->exception->getFile(), 'wp-content/plugins/tablepress-premium/' ) !== false ) {
-                return null; // DROP the event
+        $is_error = method_exists($level, 'isEqualTo')
+            ? $level->isEqualTo(\Sentry\Severity::error())
+            : (string)$level === (string)\Sentry\Severity::error();
+    } else {
+        $is_warning = false;
+        $is_error   = false;
+    }
+
+    // We want to drop TablePress “Warning: …” but sometimes these come in as error level
+    $is_warning_or_error = $is_warning || $is_error;
+
+    if ($is_warning_or_error) {
+        // First try $hint->exception file (fast path)
+        if ($hint instanceof \Sentry\EventHint && $hint->exception instanceof \Throwable) {
+            $file = $hint->exception->getFile();
+            if (is_string($file) && strpos($file, $PLUGIN_PATH) !== false) {
+                return null; // DROP
+            }
+        }
+
+        // Fallback: scan stack frames for the plugin path
+        $exceptions = $event->getExceptions();
+        if (is_array($exceptions)) {
+            foreach ($exceptions as $ex) {
+                $stack = $ex->getStacktrace();
+                if ($stack) {
+                    foreach ($stack->getFrames() as $frame) {
+                        $frameFile = $frame->getFile();
+                        if (is_string($frameFile) && strpos($frameFile, $PLUGIN_PATH) !== false) {
+                            return null; // DROP
+                        }
+                    }
+                }
             }
         }
     }
 
-    return $event; // Keep everything else
-}, 2, 2 );
+    return $event; // keep everything else
+}, 100, 2);
+
 
 // Remove the parent setup hook after the parent theme has been initialized.
-\add_action('wp', function () {
+\add_action('plugins_loaded', function () {
     $parent_namespace = 'CityOfHelsinki\\WordPress\\Helsinki\\Theme\\Integrations\\Askem';
 
     // Only try to remove if the parent function exists and is hooked.
