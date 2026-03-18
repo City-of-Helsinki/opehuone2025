@@ -39,17 +39,6 @@ use function \Opehuone\TemplateFunctions\get_favorite_article_button;
                 ?>
 
                 <?php do_action('helsinki_content_body_after'); ?>
-
-                <?php
-                $parent_fn = 'CityOfHelsinki\\WordPress\\Helsinki\\Theme\\Integrations\\Askem\\provide_feedback_buttons';
-			    if (\function_exists($parent_fn)) {
-			        \call_user_func($parent_fn);
-			        return;
-			    }
-			    else {
-			    	echo 'Function not found.';
-			    }
-                ?>
 			</section>
 			<aside>
 				<div class="single-post__sidebar-post">
