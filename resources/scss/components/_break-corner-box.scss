@@ -3,6 +3,21 @@
 		@include create-button(true, "#00000", "#FFFFFF");
 		background-color: #ffffff;
 		padding-left: rem(18px);
+
+		&.actions-wrapper__list-item--wikipedia {
+			margin-top: 1.5rem;
+
+			&.open {
+				border-bottom: none;
+			}
+			.break-corner-box__button-chevron-down-svg,
+			.break-corner-box__button-chevron-up-svg {
+				svg {
+					width: 24px;
+					height: 24px;
+				}
+			}
+		}
 	}
 
 	.break-corner-box__button span {
@@ -49,7 +64,7 @@
 		background-color: #fff;
 		padding: 1.75rem 1rem;
 		border: 2px solid #000;
-		margin-top: 3rem;
+		border-top: none;
 
 		&-header {
 			display: flex;
@@ -81,6 +96,32 @@
 		i {
 			font-size: 14px;
 			line-height: 1.5rem;
+		}
+	}
+
+	.wikipedia-opener {
+		display: none;
+	}
+
+	.break-corner-box__buttons {
+		margin-top: 1.5rem;
+		display: inline-flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		.button {
+			@include hover-focus {
+				background-color: transparent;
+				color: #000;
+				border-color: #000;
+
+				svg {
+					path {
+						-webkit-transition: 0.3s;
+						transition: 0.3s;
+						fill: #000;
+					}
+				}
+			}
 		}
 	}
 }
