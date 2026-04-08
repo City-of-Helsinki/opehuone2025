@@ -1,3 +1,20 @@
+.home {
+	#main-menu-nav {
+		background-color: var(--primary-color);
+		border-bottom: none;
+		#main-menu {
+			border-bottom: none;
+
+			.menu__item .link-wrap {
+				color: #fff;
+				a {
+					color: #fff;
+					font-weight: 500;
+				}
+			}
+		}
+	}
+}
 #main-menu-nav {
 	border-bottom: none;
 	#main-menu {
