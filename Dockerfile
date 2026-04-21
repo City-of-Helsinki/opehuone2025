@@ -24,6 +24,7 @@ ARG WP_PLUGIN_VERSION_SERVICENOW_TABLEPRESS_SYNC=""
 ARG WP_THEME_VERSION_HELSINKITEEMA=""
 ARG WP_THEME_VERSION_OPEHUONE=""
 ARG WP_PLUGIN_VERSION_WP_CRONTROL=""
+ARG WP_PLUGIN_VERSION_FOLDERS=""
 
 RUN mkdir -m 777 /tmp/wflogs
 
@@ -65,4 +66,5 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require wpackagist-plugin/wp-security-audit-log:$WP_PLUGIN_VERSION_WP_SECURITY_AUDIT_LOG && \
     composer require wpackagist-plugin/wp-piwik:$WP_PLUGIN_VERSION_CONNECT_MATOMO && \
     composer require wpackagist-plugin/wp-crontrol:$WP_PLUGIN_VERSION_WP_CRONTROL && \
+    composer require wpackagist-plugin/folders:$WP_PLUGIN_VERSION_FOLDERS && \
     rm -f /opt/app-root/src/.config/composer/auth.json
