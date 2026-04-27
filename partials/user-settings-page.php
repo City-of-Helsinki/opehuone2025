@@ -35,10 +35,8 @@ $theme_image = get_field('profile_hero_image', 'options');
                 <?php endif; ?>
 			</div>
 		</div>
-
-		<?php displayBannerWaveLineSvg(); ?>
-
 	</div>
+    
 	<div class="content__container hds-container">
 		<div class="user-settings-page">
 			<h2 class="user-settings-page__main-title">
