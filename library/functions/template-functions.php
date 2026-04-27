@@ -26,7 +26,7 @@ function displayBannerWaveLineSvg(): void {
  * @return void
  */
 function displayHeroAngledKorosSvg(): void {
-    echo '<div class="hero-angled-koros" style="--koros-height:85px; --hero-height:200px; --hero-width:100%; height: var(--hero-height); max-width: 100%; overflow: hidden; position: absolute; left: 40%; z-index: 9999; width: var(--hero-width);">
+    echo '<div class="hero-angled-koros" style="--koros-height:85px; --hero-height:300px; --hero-width:100%; height: var(--hero-height); max-width: 100%; overflow: hidden; position: absolute; left: 30%; z-index: 1; width: var(--hero-width);">
         <div class="hero-angled-koros-inner"style="clip-path: polygon(0 0, var(--hero-height) 0, 0 100%, 0% 100%); height: 100%;"></div>
             <div class="hds-koros hds-koros--135deg hds-custom-koros" style="left: calc(-1 * var(--koros-height)); position: absolute; top: var(--koros-height); transform-origin: center center; width: calc(2 * var(--hero-height)); transform: rotate(135deg) translateZ(0px);">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="100%" height="85">

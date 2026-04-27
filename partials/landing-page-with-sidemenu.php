@@ -27,19 +27,21 @@ $theme_class = $theme_color ? 'theme__' . esc_attr( $theme_color ) : '';
 				<?php endif;?>
 				<?php displayBannerWaveLineSvg(); ?>
             </div>
-			<?php displayHeroAngledKorosSvg(); ?>
             <?php if( !empty( $theme_image ) ): ?>
+				<?php displayHeroAngledKorosSvg(); ?>
 				<div class="hero-image-content"><img src="<?php echo esc_url($theme_image['sizes']['large']); ?>" alt="<?php echo esc_attr($theme_image['alt'] ?: 'hero-image'); ?>" /></div>
 			<?php endif; ?>
 		</div>
 	</div>
-	<div class="hds-hero__bottom-container" aria-hidden="true">
-      	<div class="hds-hero__bottom-content-aligner">
-			<div class="hds-hero__information-container">
-				<span class="caption"><?php echo wp_get_attachment_caption($theme_image['id']); ?></span>
+	<?php if( !empty( $theme_image ) ): ?>
+		<div class="hds-hero__bottom-container" aria-hidden="true">
+			<div class="hds-hero__bottom-content-aligner">
+				<div class="hds-hero__information-container">
+					<span class="caption"><?php echo wp_get_attachment_caption($theme_image['id']); ?></span>
+				</div>
 			</div>
-      	</div>
-    </div>
+		</div>
+	<?php endif; ?>
 </div>
 
 <div class="opehuone-content-container">
