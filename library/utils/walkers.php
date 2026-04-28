@@ -243,6 +243,7 @@ class Opehuone_Submenu_Walker extends Walker_Nav_Menu {
 	private $parent_id = 0;
 	private $allowed_ids = [];
 	public $parent_theme_color_class = '';
+	public $has_children = '';
 
 	public function __construct() {
 		$locations = get_nav_menu_locations();
@@ -303,6 +304,7 @@ class Opehuone_Submenu_Walker extends Walker_Nav_Menu {
 		foreach ($menu_items as $item) {
 			if ((int)$item->menu_item_parent === $this->parent_id) {
 				$this->allowed_ids[] = $item->ID;
+				$this->has_children = 'has-children';
 			}
 		}
 

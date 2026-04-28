@@ -114,6 +114,9 @@
 	margin: 0;
 	width: 100vw;
 	margin-left: calc(-50vw + 50%);
+	&.has-children {
+		border-bottom: 2px solid #fff;
+	}
 	.menu--sub-lvl2 {
 		list-style-type: none;
 		display: flex;
@@ -210,4 +213,8 @@
 .sidemenu-nav-lvl-4 {
 	background-color: #fff;
 	margin-left: 0.2rem;
+}
+
+#mobile-panel.active {
+	z-index: 99999;
 }

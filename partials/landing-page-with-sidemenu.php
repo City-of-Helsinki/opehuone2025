@@ -1,6 +1,7 @@
 <?php
 
 use function Opehuone\TemplateFunctions\displayBannerWavelineSvg;
+use function Opehuone\TemplateFunctions\displayHeroAngledKorosSvg;
 
 $page_id = get_the_ID();
 $training_page_id   = (int) get_field( 'trainings_page', 'option' );
@@ -19,20 +20,29 @@ $theme_class = $theme_color ? 'theme__' . esc_attr( $theme_color ) : '';
 	<div class="hds-container hero__container">
 		<div class="hero__content">
             <div class="hero-text-content">
-		    <?php get_template_part( 'partials/breadcrumbs' ); ?>
-			<h1 class="hero__title"><?php echo get_the_title(); ?></h1>
-			<?php if( !empty( $header_sve ) ): ?>
-				<h2 class="hero__title__sve"><?php echo esc_attr($header_sve) ?></h2>
-			<?php endif;?>
+				<?php get_template_part( 'partials/breadcrumbs' ); ?>
+				<h1 class="hero__title"><?php echo get_the_title(); ?></h1>
+				<?php if( !empty( $header_sve ) ): ?>
+					<h2 class="hero__title__sve"><?php echo esc_attr($header_sve) ?></h2>
+				<?php endif;?>
+				<?php displayBannerWaveLineSvg(); ?>
             </div>
             <?php if( !empty( $theme_image ) ): ?>
-				<div class="hero-image-content"><img src="<?php echo esc_url($theme_image['sizes']['medium']); ?>" alt="<?php echo esc_attr($theme_image['alt'] ?: 'hero-image'); ?>" /></div>
+				<?php displayHeroAngledKorosSvg(); ?>
+				<div class="hero-image-content"><img src="<?php echo esc_url($theme_image['sizes']['large']); ?>" alt="<?php echo esc_attr($theme_image['alt'] ?: 'hero-image'); ?>" /></div>
 			<?php endif; ?>
 		</div>
 	</div>
-	<?php displayBannerWavelineSvg(); ?>
+	<?php if( !empty( $theme_image ) ): ?>
+		<div class="hds-hero__bottom-container" aria-hidden="true">
+			<div class="hds-hero__bottom-content-aligner">
+				<div class="hds-hero__information-container">
+					<span class="caption"><?php echo wp_get_attachment_caption($theme_image['id']); ?></span>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
 </div>
-
 
 <div class="opehuone-content-container">
 	<div class="opehuone-grid">
