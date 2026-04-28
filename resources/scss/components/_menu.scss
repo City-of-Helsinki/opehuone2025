@@ -17,11 +17,39 @@
 }
 #main-menu-nav {
 	border-bottom: none;
+	&.theme-primary {
+		background-color: var(--primary-color-light);
+	}
+	&.theme-suomenlinna {
+		background-color: var(--color-suomenlinna-light);
+	}
+	&.theme-engel {
+		background-color: var(--color-engel-light);
+	}
+	&.theme-copper {
+		background-color: var(--color-copper-light);
+	}
+	&.theme-fog {
+		background-color: var(--color-fog-light);
+	}
+	&.theme-metro {
+		background-color: var(--color-metro-light);
+	}
+	&.theme-bus {
+		background-color: var(--color-bus-medium-light);
+	}
+	&.theme-vihrea {
+		background-color: var(--color-vihrea-medium-light);
+	}
+	&.theme-summer {
+		background-color: var(--color-summer-light);
+	}
+	&.coat-of-arms {
+		background-color: var(--color-coat-of-arms-light);
+	}
 	#main-menu {
-		border-bottom: 1px solid black;
 		width: 100%;
 		padding-right: 146px;
-
 		.vanha-opehuone {
 			margin-left: auto;
 			a {
