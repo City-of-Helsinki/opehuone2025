@@ -27,6 +27,9 @@ function opehuone_menu_config(string $location)
 	}
 	$subwalker = new Opehuone_Submenu_Walker();
 
+	// This is for color theme and border between submenu & hero
+	$submenu_class = $subwalker->parent_theme_color_class . ' ' . $subwalker->has_children;
+
 	switch ($location) {
 		case 'topbar_menu':
 			return array(
@@ -85,7 +88,7 @@ function opehuone_menu_config(string $location)
 				'menu_id'         => 'main-menu-lvl-2',
 				'echo'            => false,
 				//'menu_class'      => 'menu menu--subi',
-				'menu_class'     => 'sub-menu ' . $subwalker->parent_theme_color_class,
+				'menu_class'     => 'sub-menu ' . $submenu_class,
 				'walker'          => $subwalker
 			);
 			break;

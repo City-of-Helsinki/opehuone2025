@@ -68,7 +68,9 @@
 	margin: 0;
 	width: 100vw;
 	margin-left: calc(-50vw + 50%);
-	border-bottom: 2px solid #fff;
+	&.has-children {
+		border-bottom: 2px solid #fff;
+	}
 	.menu--sub-lvl2 {
 		list-style-type: none;
 		display: flex;
