@@ -35,6 +35,8 @@
 			display: flex;
 			align-items: flex-start;
 			flex-wrap: wrap;
+			max-width: var(--opehuone--container--width) !important;
+			margin: 0 auto;
 
 			@include media-breakpoint-down(md) {
 				flex-direction: column;
@@ -42,7 +44,7 @@
 
 			.hero-text-content {
 				position: relative;
-				width: 40%;
+				width: 45%;
 				padding-top: var(--spacing-s);
 				z-index: 2;
 				@include media-breakpoint-down(md) {
@@ -77,7 +79,7 @@
 				display: flex;
 				right: 0;
 				top: 0;
-				width: 70%;
+				width: 65%;
 				z-index: 0;
 				height: 100%;
 				@include media-breakpoint-down(md) {
