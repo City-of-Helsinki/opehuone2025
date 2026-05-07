@@ -12,7 +12,7 @@ $header_sub2 = get_field('news_hero_subtitle_2', 'options');
 ?>
 
 <div class="hero has-default-style has-koros news-page <?php echo !empty($theme_color) ? 'theme__' . esc_attr($theme_color) : ''; ?>">
-	<div class="hds-container hero__container">
+	<div class="hds-container hds-container--wide hero__container">
 		<div class="hero__content">
             <div class="hero-text-content">
             <?php get_template_part( 'partials/breadcrumbs' ); ?>

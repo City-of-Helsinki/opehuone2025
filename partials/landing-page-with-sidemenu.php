@@ -17,7 +17,7 @@ $theme_class = $theme_color ? 'theme__' . esc_attr( $theme_color ) : '';
 ?>
 
 <div class="hero has-default-style has-koros landing-page <?php echo $theme_class ?>">
-	<div class="hds-container hero__container">
+	<div class="hds-container hds-container--wide hero__container">
 		<div class="hero__content">
             <div class="hero-text-content">
 				<?php get_template_part( 'partials/breadcrumbs' ); ?>
