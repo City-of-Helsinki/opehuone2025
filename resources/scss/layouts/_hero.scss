@@ -71,11 +71,17 @@
 }
 
 .page-template-user-settings {
-	.hero__container {
-		.hero__content {
-			.hero-text-content {
-				.hero__title {
-					color: #ffffff !important;
+	.hero {
+		background-color: var(--primary-color);
+		.hero-angled-koros-inner {
+			background-color: var(--primary-color);
+		}
+		.hero__container {
+			.hero__content {
+				.hero-text-content {
+					.hero__title {
+						color: #ffffff !important;
+					}
 				}
 			}
 		}
