@@ -1,4 +1,5 @@
-.home {
+.home,
+.page-template-user-settings {
 	#main-menu-nav {
 		background-color: var(--primary-color);
 		border-bottom: none;
@@ -114,9 +115,7 @@
 	margin: 0;
 	width: 100vw;
 	margin-left: calc(-50vw + 50%);
-	&.has-children {
-		border-bottom: 2px solid #fff;
-	}
+
 	.menu--sub-lvl2 {
 		list-style-type: none;
 		display: flex;
