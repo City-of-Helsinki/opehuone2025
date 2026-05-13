@@ -9,11 +9,41 @@ use function \Opehuone\TemplateFunctions\fetch_wikipedia_featured_articles;
  */
 get_template_part( 'partials/components/concentration' ); ?>
 
-<div class="break-corner-box__wikipedia">
-    <div class="break-corner-box__wikipedia-header">
+<!-- Button to open the wikipedia articles accordion -->
+<button class="break-corner-box__button actions-wrapper__list-item--wikipedia">
+    <div class="break-corner-box__button-face-svg">
         <?php the_svg('icons/' . 'wiki'); ?>
-        <span class="break-corner-box__wikipedia-title"><?php esc_html_e('Wikipedia viikon suosituimmat artikkelit', 'helsinki-universal'); ?></span>
-
     </div>
-    <?php fetch_wikipedia_featured_articles(); ?>
+
+    <span>
+        <?php esc_html_e('Wikipedian viikon suosituimmat artikkelit', 'helsinki-universal'); ?>
+    </span>
+
+    <div class="break-corner-box__button-chevron-down-svg">
+        <?php the_svg('icons/angle-down') ?>
+    </div>
+    
+    <div class="break-corner-box__button-chevron-up-svg">
+        <?php the_svg('icons/angle-up') ?>
+    </div>
+</button>
+
+<div class="wikipedia-opener">
+    <div class="break-corner-box__wikipedia">
+        <?php fetch_wikipedia_featured_articles(); ?>
+    </div>
+</div>
+
+<!-- Other external buttons at the bottom of the break corner box -->
+<div class="break-corner-box__buttons">
+    <a href="https://natlibfi.github.io/NDL-VuFind2/api/memory-game.html" target="_blank" rel="noopener noreferrer"
+        class="button">
+        <?php esc_html_e( 'Muistipeli', 'helsinki-universal' ); ?>
+        <?php the_svg( 'icons/arrow-top-right' ); ?>
+    </a>
+    <a href="https://sanuli.fi/" target="_blank" rel="noopener noreferrer"
+        class="button">
+        <?php esc_html_e( 'Sanuli', 'helsinki-universal' ); ?>
+        <?php the_svg( 'icons/arrow-top-right' ); ?>
+    </a>
 </div>

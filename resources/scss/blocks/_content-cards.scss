@@ -1,0 +1,15 @@
+.content-cards__cards {
+  --grid-columns: 1 !important;
+}
+
+@include media-breakpoint-up(sm) {
+  .content-cards__cards {
+    --grid-columns: 2 !important;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .content-cards__cards {
+    --grid-columns: 4 !important;
+  }
+}

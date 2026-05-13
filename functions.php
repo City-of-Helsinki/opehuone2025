@@ -102,3 +102,66 @@ add_filter(
 
 // Site is hidden from search engines, but Findkit needs the sitemap ==> lets enable it
 add_filter( 'wp_sitemaps_enabled', '__return_true' );
+
+// Don't send TablePress Premium-originated warnings/errors to Sentry
+add_filter('wp_sentry_before_send', function (\Sentry\Event $event, ?\Sentry\EventHint $hint = null) {
+    $PLUGIN_PATH = 'wp-content/plugins/tablepress-premium/';
+
+    // Determine the level safely (avoid strict identity)
+    $level = $event->getLevel(); // \Sentry\Severity|null
+
+    // Helper to normalize a level into a lowercase string
+    $level_name = null;
+    if ($level instanceof \Sentry\Severity) {
+        // Prefer the comparison helper if available
+        $is_warning = method_exists($level, 'isEqualTo')
+            ? $level->isEqualTo(\Sentry\Severity::warning())
+            : (string)$level === (string)\Sentry\Severity::warning();
+
+        $is_error = method_exists($level, 'isEqualTo')
+            ? $level->isEqualTo(\Sentry\Severity::error())
+            : (string)$level === (string)\Sentry\Severity::error();
+    } else {
+        $is_warning = false;
+        $is_error   = false;
+    }
+
+    // We want to drop TablePress “Warning: …” but sometimes these come in as error level
+    $is_warning_or_error = $is_warning || $is_error;
+
+    if ($is_warning_or_error) {
+        // First try $hint->exception file (fast path)
+        if ($hint instanceof \Sentry\EventHint && $hint->exception instanceof \Throwable) {
+            $file = $hint->exception->getFile();
+            if (is_string($file) && strpos($file, $PLUGIN_PATH) !== false) {
+                return null; // DROP
+            }
+        }
+
+        // Fallback: scan stack frames for the plugin path
+        $exceptions = $event->getExceptions();
+        if (is_array($exceptions)) {
+            foreach ($exceptions as $ex) {
+                $stack = $ex->getStacktrace();
+                if ($stack) {
+                    foreach ($stack->getFrames() as $frame) {
+                        $frameFile = $frame->getFile();
+                        if (is_string($frameFile) && strpos($frameFile, $PLUGIN_PATH) !== false) {
+                            return null; // DROP
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return $event; // keep everything else
+}, 100, 2);
+
+// Add Askem to post content
+add_action( 'template_redirect', function() {
+    if ( is_singular( 'post' ) && apply_filters( 'helsinki_feedback_enabled', false ) ) {
+        add_filter( 'body_class', 'helsinki_feedback_buttons_body_class', 10 );
+        add_action( 'helsinki_content_body_after', 'helsinki_feedback_buttons', 21 );
+    }
+}, 20 );

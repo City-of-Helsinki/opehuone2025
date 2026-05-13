@@ -1,10 +1,56 @@
+.home,
+.page-template-user-settings {
+	#main-menu-nav {
+		background-color: var(--primary-color);
+		border-bottom: none;
+		#main-menu {
+			border-bottom: none;
+
+			.menu__item .link-wrap {
+				color: #fff;
+				a {
+					color: #fff;
+					font-weight: 500;
+				}
+			}
+		}
+	}
+}
 #main-menu-nav {
 	border-bottom: none;
+	&.theme-primary {
+		background-color: var(--primary-color-light);
+	}
+	&.theme-suomenlinna {
+		background-color: var(--color-suomenlinna-light);
+	}
+	&.theme-engel {
+		background-color: var(--color-engel-light);
+	}
+	&.theme-copper {
+		background-color: var(--color-copper-light);
+	}
+	&.theme-fog {
+		background-color: var(--color-fog-light);
+	}
+	&.theme-metro {
+		background-color: var(--color-metro-light);
+	}
+	&.theme-bus {
+		background-color: var(--color-bus-medium-light);
+	}
+	&.theme-vihrea {
+		background-color: var(--color-vihrea-medium-light);
+	}
+	&.theme-summer {
+		background-color: var(--color-summer-light);
+	}
+	&.coat-of-arms {
+		background-color: var(--color-coat-of-arms-light);
+	}
 	#main-menu {
-		border-bottom: 1px solid black;
 		width: 100%;
 		padding-right: 146px;
-
 		.vanha-opehuone {
 			margin-left: auto;
 			a {
@@ -23,6 +69,24 @@
 					width: 12px;
 					height: 12px;
 					margin-top: 0;
+				}
+			}
+		}
+		.menu__item {
+			.link-wrap {
+				&:hover {
+					text-decoration: underline;
+					text-decoration-thickness: 10%;
+				}
+			}
+			&.menu__item--active {
+				.link-wrap {
+					border-bottom: none;
+					text-decoration: underline;
+					text-decoration-thickness: 10%;
+					a {
+						font-weight: 700;
+					}
 				}
 			}
 		}
@@ -51,6 +115,7 @@
 	margin: 0;
 	width: 100vw;
 	margin-left: calc(-50vw + 50%);
+
 	.menu--sub-lvl2 {
 		list-style-type: none;
 		display: flex;
@@ -60,9 +125,13 @@
 		max-width: 1920px;
 	}
 	.menu__item {
-		border-bottom: 4px solid rgba(0, 0, 0, 0);
 		&.menu__item--active {
-			border-bottom: 4px solid rgba(0, 0, 0, 1);
+			a {
+				font-weight: 700;
+				border-bottom: none;
+				text-decoration: underline;
+				text-decoration-thickness: 10%;
+			}
 		}
 		.menu__link {
 			padding: 1rem var(--spacing-m);
@@ -72,6 +141,7 @@
 		text-decoration: none;
 		&:hover {
 			text-decoration: underline;
+			text-decoration-thickness: 10%;
 		}
 	}
 	&.theme-primary {
@@ -142,4 +212,8 @@
 .sidemenu-nav-lvl-4 {
 	background-color: #fff;
 	margin-left: 0.2rem;
+}
+
+#mobile-panel.active {
+	z-index: 99999;
 }

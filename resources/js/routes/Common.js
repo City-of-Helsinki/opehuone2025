@@ -15,6 +15,7 @@ import { concentrationFunctions } from '../lib/concentration';
 import { ownServices } from '../lib/ownServices';
 import { findkitUI } from '../lib/findkit';
 import { archiveFiltering } from '../lib/archiveFiltering'; // This is not used, but must be imported to work
+import { breakCornerBoxFunctions } from '../lib/breakCornerBox';
 
 function toggleAria($element, attribute) {
 	const isHidden = $element.attr(attribute) === 'true';
@@ -63,6 +64,8 @@ export default {
 			ownServices();
 			// Concentration functions
 			concentrationFunctions();
+			// Break corner box functions
+			breakCornerBoxFunctions();
 
 			jQuery('.dock-toggler').on('click', (e) => {
 				e.preventDefault();

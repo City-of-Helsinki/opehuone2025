@@ -15,6 +15,7 @@
 		.hero__content {
 			min-height: 150px;
 			align-content: center;
+
 			img {
 				top: 1rem;
 			}
@@ -70,13 +71,19 @@
 }
 
 .page-template-user-settings {
-  .hero__container {
-    .hero__content {
-      .hero-text-content {
-        .hero__title {
-          color: #FFFFFF !important;
-        }
-      }
-    }
-  }
+	.hero {
+		background-color: var(--primary-color);
+		.hero-angled-koros-inner {
+			background-color: var(--primary-color);
+		}
+		.hero__container {
+			.hero__content {
+				.hero-text-content {
+					.hero__title {
+						color: #ffffff !important;
+					}
+				}
+			}
+		}
+	}
 }

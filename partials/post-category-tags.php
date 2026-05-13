@@ -19,7 +19,7 @@ $archive_url = get_post_type_archive_link( $post_type );
         foreach ( $category_terms as $category ) {
             $color = get_term_meta( $category->term_id, 'color_theme', true ) ?: 'suomenlinna';
             $filtered_url = add_query_arg(
-                'filter_category', // This has to be prefixed, because sending taxonomy name as query string redirects to 404
+                'category[]',
                 $category->term_id,
                 $archive_url
             );
@@ -37,7 +37,7 @@ $archive_url = get_post_type_archive_link( $post_type );
         foreach ( $post_theme_terms as $theme ) {
             $color = get_term_meta( $theme->term_id, 'button_color_theme', true ) ?: 'suomenlinna';
             $filtered_url = add_query_arg(
-                'filter_post_theme', // This has to be prefixed, because sending taxonomy name as query string redirects to 404
+                'post_theme[]',
                 $theme->term_id,
                 $archive_url
             );
