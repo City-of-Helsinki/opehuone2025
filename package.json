@@ -14,7 +14,7 @@
     "@wordpress/eslint-plugin": "^17.9.0",
     "@wordpress/icons": "^10.18.0",
     "@wordpress/prettier-config": "^3.9.0",
-    "@wordpress/scripts": "^27.3.0",
+    "@wordpress/scripts": "^32.1.0",
     "copy-webpack-plugin": "^12.0.2",
     "path": "^0.12.7",
     "sass-rem": "^3.0.0",
