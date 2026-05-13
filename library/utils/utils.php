@@ -63,7 +63,11 @@ function get_month_info() {
 	$month_swedish = explode( ' ', $month_swedish )[1]; // Extract only the month name
 
 	// Output formatted date
-	return "{$day}. {$month_finnish} {$month_swedish}";
+    return array(
+        'day' => $day,
+        'month_finnish' => $month_finnish,
+        'month_swedish' => $month_swedish,
+    );
 }
 
 function user_data_meta_exists() {

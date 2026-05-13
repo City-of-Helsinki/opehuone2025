@@ -86,7 +86,7 @@ $i = 1;
 		<?php if ( get_field( 'show_until_' . $row['holiday'], 'option' ) ): ?>
 			<?php if ( $i === 1 ): ?>
 				<?php if ( ! empty( get_field( 'holiday_starts_' . $row['holiday'], 'option' ) ) ): ?>
-					<?php echo $row['starts_txt'] . ' ' . Time_until::get_days_until_string( $row['holiday'] ) ?>
+					<?php echo '<span class="holiday">' . $row['starts_txt'] . '</span> <span class="countdown">' . Time_until::get_days_until_string( $row['holiday'] ) . '</span>'; ?>
 				<?php endif; ?>
 				<?php $i ++; ?>
 			<?php endif; ?>
@@ -108,7 +108,7 @@ $i = 1;
 		<?php if ( get_field( 'show_until_' . $row['holiday'] . '_sv', 'option' ) ): ?>
 			<?php if ( $i === 1 ): ?>
 				<?php if ( ! empty( get_field( 'holiday_starts_' . $row['holiday'] . '_sv', 'option' ) ) ): ?>
-					<?php echo $row['starts_txt'] . ' ' . Time_until::get_days_until_string( $row['holiday'], true ) ?>
+					<?php echo '<span class="holiday">' . $row['starts_txt'] . '</span> <span class="countdown">' . Time_until::get_days_until_string( $row['holiday'], true ) . '</span>'; ?>
 				<?php endif; ?>
 				<?php $i ++; ?>
 			<?php endif; ?>
