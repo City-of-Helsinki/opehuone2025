@@ -449,15 +449,17 @@ function display_archive_multi_select_filters( $filters ): void {
                     <?php echo $default_label; ?>
                 </button>
                 <div class="checkbox-filter__filter-dropdown">
-                    <div class="checkbox-filter__checkboxes-wrapper">
+                    <div class="checkbox-filter__checkboxes-wrapper <?php echo esc_html( strtolower($filter['name']) ); ?>">
                         <?php
                         $terms = get_terms( [
                             'taxonomy'   => $filter['taxonomy'],
+                            'orderby' => 'term_order', 
                             'hide_empty' => true,
                         ] );
 
                         if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
                             foreach ( $terms as $term ) {
+                                if ( $term->parent == 0 ) {
                                 ?>
                                 <label class="checkbox-filter__checkbox-label">
                                     <input type="checkbox" class="checkbox-filter__checkbox-input"
@@ -465,7 +467,20 @@ function display_archive_multi_select_filters( $filters ): void {
                                            value="<?php echo esc_attr( $term->term_id ); ?>">
                                     <?php echo esc_html( $term->name ); ?>
                                 </label>
-                                <?php
+                                    <?php
+                                    foreach ( $terms as $child_term ) {
+                                        if ( $child_term->parent == $term->term_id ) {
+                                            ?>
+                                            <label class="checkbox-filter__checkbox-label checkbox-filter__checkbox-label--child">
+                                                <input type="checkbox" class="checkbox-filter__checkbox-input"
+                                                    name="<?php echo esc_attr( $filter['taxonomy'] ); ?>[]"
+                                                    value="<?php echo esc_attr( $child_term->term_id ); ?>">
+                                                <?php echo esc_html( $child_term->name ); ?>
+                                            </label>
+                                            <?php
+                                        }
+                                    }
+                                }
                             }
                         }
                         ?>
