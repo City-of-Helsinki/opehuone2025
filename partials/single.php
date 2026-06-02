@@ -22,12 +22,12 @@ use function \Opehuone\TemplateFunctions\get_favorite_article_button;
                     echo '</div>';
                 }
                 ?>
+				<?php get_template_part('partials/page-meta' ); ?>
 				<?php if ( has_excerpt() ) : ?>
 					<p class="single-post__excerpt">
 						<?php echo get_the_excerpt(); ?>
 					</p>
 				<?php endif; ?>
-				<?php get_template_part('partials/page-meta' ); ?>
 				<?php the_post_thumbnail( 'large', [ 'class' => 'single-post__featured-image' ] ); ?>
 				<?php the_content(); ?>
 				<?php get_template_part( 'partials/post-category-tags' );  ?>
