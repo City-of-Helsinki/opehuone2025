@@ -18,11 +18,6 @@
                     ?>
                 </div>
 
-                <?php
-                if ( has_post_thumbnail() ) : ?>
-                    <div class="single-post__featured-image"><?php the_post_thumbnail('full' ); ?></div>
-                <?php endif; ?>
-
                 <?php the_content(); ?>
 
                 <?php get_template_part( 'partials/sidebar/training-theme-tags' );  ?>
