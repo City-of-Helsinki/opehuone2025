@@ -58,9 +58,8 @@ $theme_class = $theme_color ? 'theme__' . esc_attr( $theme_color ) : '';
 				<?php get_template_part( 'partials/landing-quick-links' ); ?>
 			</div>
 
-            <!-- Post Thumbnail & Content -->
+            <!-- Content -->
 			<?php
-                the_post_thumbnail( 'large', [ 'class' => 'single-post__featured-image' ] );
                 the_content();
                 get_template_part( 'partials/components/landing-page-link-element-box');
             ?>

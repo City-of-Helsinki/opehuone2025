@@ -20,7 +20,6 @@ use function \Opehuone\TemplateFunctions\get_top_parent_page_title;
 						<?php echo get_the_excerpt(); ?>
 					</p>
 				<?php endif; ?>
-				<?php the_post_thumbnail( 'large', [ 'class' => 'featured-image' ] ); ?>
 				<?php the_content(); ?>
                 <?php
                 $top_parent_title = get_top_parent_page_title();
