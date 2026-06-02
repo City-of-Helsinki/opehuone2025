@@ -165,3 +165,10 @@ add_action( 'template_redirect', function() {
         add_action( 'helsinki_content_body_after', 'helsinki_feedback_buttons', 21 );
     }
 }, 20 );
+
+// Remove featured image support from pages and trainings.
+function opehuone_remove_featured_image_support() {
+   remove_post_type_support('page', 'thumbnail');
+   remove_post_type_support('training', 'thumbnail');
+}
+add_action('init', 'opehuone_remove_featured_image_support');
