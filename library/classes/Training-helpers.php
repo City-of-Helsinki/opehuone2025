@@ -66,6 +66,38 @@ class TrainingHelpers {
 		return $theme;
 	}
 
+	// Function to get the most used training theme color from the categories. If tie --> use first one. If no categories or colors, return default color which is 'suomenlinna'
+	public static function get_training_card_color( $categories ) {
+		if ( empty( $categories ) ) {
+			return 'suomenlinna';
+		}
+
+		$categories = (array) $categories;
+		$color_theme_counts = [];
+
+		foreach ( $categories as $category ) {
+			$term_id = is_object( $category )
+				? (int) $category->term_id
+				: (int) $category;
+
+			if ( $term_id <= 0 ) {
+				continue;
+			}
+
+			$color_theme = get_term_meta( $term_id, 'button_color_theme', true ) ?: 'suomenlinna';
+
+			$color_theme_counts[ $color_theme ] = ($color_theme_counts[ $color_theme ] ?? 0) + 1;
+		}
+
+		if ( empty( $color_theme_counts ) ) {
+			return 'suomenlinna';
+		}
+
+		arsort( $color_theme_counts );
+
+		return array_key_first( $color_theme_counts );
+	}
+
 	public static function get_training_type_svg( $type ) {
 		if ( empty( $type ) ) {
 			return 'company';
