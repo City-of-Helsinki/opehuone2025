@@ -9,11 +9,11 @@ $block_categories = isset( $args['categories'] ) ? $args['categories'] : [];
 
 $date          = TrainingHelpers::get_training_date( $args['start_datetime'], $args['end_datetime'] );
 $readable_type = TrainingHelpers::get_training_type( $args['type'] );
-$theme         = TrainingHelpers::get_training_theme( $args['theme'] );
+$theme_color   = TrainingHelpers::get_training_card_color( $block_categories );
 $type_svg      = TrainingHelpers::get_training_type_svg( $args['type'] );
 ?>
 <div class="b-training-post">
-	<div class="b-training-post__wrapper b-training-post__wrapper--has-theme-<?php echo esc_attr( $theme ); ?>">
+	<div class="b-training-post__wrapper b-training-post__wrapper--has-theme-<?php echo esc_attr( $theme_color ); ?>">
 		<?php if ( ! empty( $block_url ) && ! empty( $block_title ) ) : ?>
 			<a href="<?php echo esc_url( $block_url ); ?>" class="b-training-post__title">
 				<?php echo esc_html( $block_title ); ?>

@@ -24,6 +24,14 @@
 	line-height: 1.5;
 	min-height: $height;
 
+	svg {
+		path {
+			-webkit-transition: 0.3s;
+			transition: 0.3s;
+			fill: $font-color;
+		}
+	}
+
 	@if $is_full_width {
 		width: 100%;
 		display: flex; // Ensure full-width buttons behave correctly in flex containers
@@ -33,6 +41,11 @@
 		color: $bg-color;
 		background-color: transparent;
 		text-decoration: none;
+		svg {
+			path {
+				fill: $bg-color;
+			}
+		}
 	}
 
 	&:focus {
