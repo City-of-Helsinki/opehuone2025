@@ -29,10 +29,12 @@
 			}
 		}
 
-		.profile-opener-wrapper {
+		.profile-opener-wrapper,
+		.login-wrapper {
 			grid-area: profile;
 
-			.profile-opener {
+			.profile-opener,
+			.login-button {
 				padding-left: var(--spacing-m);
 				padding-right: var(--spacing-m);
 				height: 100%;
@@ -41,6 +43,9 @@
 					padding-left: var(--spacing-2-xs);
 					padding-right: var(--spacing-2-xs);
 				}
+			}
+			.login-button span {
+				text-align: center;
 			}
 		}
 

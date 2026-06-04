@@ -89,8 +89,7 @@
 	}
 	&__sub-button {
 		.button {
-			background-color: #000;
-			border-color: #000;
+			@include create-button();
 
 			@include hover-focus {
 				background-color: transparent;
@@ -123,7 +122,8 @@
 		}
 
 		.sidebar-box__sub-links ul {
-			margin-bottom: var(--spacing-layout-2-xs);
+			padding: 0;
+			margin: var(--spacing-layout-2-xs) 0;
 		}
 	}
 }

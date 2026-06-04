@@ -20,6 +20,12 @@
 		}
 	}
 
+	&__buttons {
+		.button {
+			@include create-button();
+		}
+	}
+
 	.break-corner-box__button span {
 		flex-grow: 1; /* make text take available space */
 	}
@@ -108,20 +114,5 @@
 		display: inline-flex;
 		flex-direction: column;
 		gap: 1.5rem;
-		.button {
-			@include hover-focus {
-				background-color: transparent;
-				color: #000;
-				border-color: #000;
-
-				svg {
-					path {
-						-webkit-transition: 0.3s;
-						transition: 0.3s;
-						fill: #000;
-					}
-				}
-			}
-		}
 	}
 }
