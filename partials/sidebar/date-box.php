@@ -42,7 +42,7 @@ $swedish_names_list = $day_service->get_names_by_type( $day_info_service_data, '
     <div class="date-box-col date-box-texts">
         <span class="date-box-month">
             <span class="date-box-month-fi"><?php echo Utils\get_month_info()['month_finnish']; ?></span>
-            <span class="date-box-month-sv date-box-sv"><?php echo Utils\get_month_info()['month_swedish']; ?></span>
+            <span class="date-box-month-sv date-box-sv"><em><?php echo Utils\get_month_info()['month_swedish']; ?></em></span>
         </span>
         <span class="date-box-day-number"><?php echo Utils\get_month_info()['day']; ?></span>
 
@@ -52,7 +52,7 @@ $swedish_names_list = $day_service->get_names_by_type( $day_info_service_data, '
             <?php endif; ?>
 
             <?php if ( ! empty( $swedish_names_list ) ): ?>
-                <span class="date-box-info__name-day-sv"><?php echo esc_html( implode( ', ', $swedish_names_list ) ); ?></span>
+                <span class="date-box-info__name-day-sv"><em><?php echo esc_html( implode( ', ', $swedish_names_list ) ); ?></em></span>
             <?php endif; ?>
         </div>
         <?php if ( ! empty( $day_info_service_data['flag_day'] ) ): ?>
@@ -62,7 +62,7 @@ $swedish_names_list = $day_service->get_names_by_type( $day_info_service_data, '
                 </div>
                 <div>
                     <span class="date-box-info__name-day-fi"><?php echo $day_info_service_data['flag_day']['fi']; ?></span>
-                    <span class="date-box-info__name-day-sv date-box-sv"><?php echo $day_info_service_data['flag_day']['sv']; ?></span>
+                    <span class="date-box-info__name-day-sv date-box-sv"><em><?php echo $day_info_service_data['flag_day']['sv']; ?></em></span>
                 </div>
             </div>
         <?php endif; ?>
@@ -75,7 +75,7 @@ $swedish_names_list = $day_service->get_names_by_type( $day_info_service_data, '
             <span class="date-box-day-fi"><?php echo esc_html( $days['fi'][$weekday_number] ); ?></span>
             <span class="date-box-day-sv date-box-sv"><?php echo esc_html( $days['sv'][$weekday_number] ); ?></span>
         </span>
-        <span class="date-box-week"><?php echo esc_html( $week_number ); ?>. viikko <span class="date-box-sv">vecka</span></span>
+        <span class="date-box-week"><?php echo esc_html( $week_number ); ?>. viikko <span class="date-box-sv"><em>vecka</em></span></span>
     </div>
     <div class="date-box-col holiday-countdown">
         <?php get_template_part( 'partials/time-until' ); ?>
