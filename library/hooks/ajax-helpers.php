@@ -64,6 +64,12 @@ function ajax_update_user_oppiaste_settings() {
 
 add_action( 'wp_ajax_update_users_oppiaste_settings', __NAMESPACE__ . '\\ajax_update_user_oppiaste_settings' );
 
+function get_user_favorites_box_markup() {
+	ob_start();
+	get_template_part( 'partials/sidebar/favorites-box' );
+	return ob_get_clean();
+}
+
 /**
  * Add post to favs
  */
@@ -85,7 +91,11 @@ function ajax_favs_add() {
 		update_user_meta( $user_id, 'opehuone_favs', $posts );
 	}
 
-	wp_send_json_success( [ 'message' => 'suosikki lisätty', 'postID' => $post_id ] );
+	wp_send_json_success( [
+		'message'           => 'suosikki lisätty',
+		'postID'            => $post_id,
+		'favoritesBoxMarkup' => get_user_favorites_box_markup(),
+	] );
 }
 
 add_action( 'wp_ajax_favs_add', __NAMESPACE__ . '\\ajax_favs_add' );
@@ -113,10 +123,34 @@ function ajax_favs_remove() {
 
 	update_user_meta( $user_id, 'opehuone_favs', $new_array );
 
-	wp_send_json_success( [ 'message' => 'Suosikki poistettu', 'postID' => $post_id ] );
+	wp_send_json_success( [
+		'message'           => 'Suosikki poistettu',
+		'postID'            => $post_id,
+		'favoritesBoxMarkup' => get_user_favorites_box_markup(),
+	] );
 }
 
 add_action( 'wp_ajax_favs_remove', __NAMESPACE__ . '\\ajax_favs_remove' );
+
+/**
+ * Update user favs list order
+ */
+function ajax_favs_update_order() {
+	verify_logged_in_request( $_POST['nonce'] );
+
+	$new_order = json_decode(stripslashes($_POST['newOrder']), true);
+	$user_id   = $_POST['userId'];
+
+	if ( !is_array( $new_order ) ) {
+		wp_send_json_error('Virheellinen data');
+	}
+
+	update_user_meta( $user_id, 'opehuone_favs', $new_order );
+
+	wp_send_json_success( [ 'message' => 'Suosikkien järjestys päivitetty', 'newOrder' => $new_order ] );
+}
+
+add_action( 'wp_ajax_favs_update_order', __NAMESPACE__ . '\\ajax_favs_update_order' );
 
 /**
  * Update tutor page schools
