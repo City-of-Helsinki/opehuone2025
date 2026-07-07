@@ -24,7 +24,7 @@ if ( ! is_user_logged_in() ) {
             <?php esc_html_e( 'Löydät tallenna-napin jokaisen sisältösivun ja uutiskortin oikeasta yläkulmasta.', 'helsinki-universal' ); ?>
         </p>
 		<div class="user-favs-list__sub-buttons">
-			<button disabled class="user-favs-list__sub-buttons__button edit-favs-button" id="own-favorites-edit">
+			<button disabled class="user-favs-list__sub-buttons__button edit-favs-button">
 				<span><?php esc_html_e( 'Ei tallennettuja sisältöjä', 'helsinki-universal' ); ?></span>
 				<div class="button-svg"><?php the_svg( 'icons/settings' ); ?></div>
 			</button>
@@ -65,7 +65,7 @@ if ( ! is_user_logged_in() ) {
 					<div class="button-svg button-svg__down"><?php the_svg( 'icons/angle-down' ); ?></div>
 				</button>
 			<?php endif; ?>
-			<button class="user-favs-list__sub-buttons__button edit-favs-button" id="own-favorites-edit">
+			<button class="user-favs-list__sub-buttons__button edit-favs-button">
 				<span><?php esc_html_e( 'Muokkaa', 'helsinki-universal' ); ?></span>
 				<div class="button-svg"><?php the_svg( 'icons/settings' ); ?></div>
 			</button>
