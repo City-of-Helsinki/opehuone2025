@@ -79,8 +79,15 @@
 		.hero__container {
 			.hero__content {
 				.hero-text-content {
+					#breadcrumbs {
+						* {
+							color: #ffffff;
+							fill: #ffffff;
+						}
+					}
 					.hero__title {
 						color: #ffffff !important;
+						margin-bottom: 0;
 					}
 				}
 			}
