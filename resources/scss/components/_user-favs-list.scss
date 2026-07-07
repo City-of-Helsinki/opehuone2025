@@ -1,3 +1,70 @@
+.user-favs-box {
+	&__modification-ongoing {
+		.user-favs-list {
+			&__item {
+				display: block !important;
+
+				&:nth-child(5) {
+					&::after {
+						content: "";
+						display: block;
+						position: absolute;
+						top: -11px;
+						left: 0;
+						width: 100%;
+						height: 1px;
+						background-color: #000;
+					}
+				}
+
+				&:hover {
+					background-color: #fff;
+					cursor: grab;
+					&:active {
+						background-color: #fff;
+						cursor: grabbing;
+					}
+				}
+
+				&.sortable-chosen,
+				&.sortable-drag,
+				&.sortable-ghost {
+					background-color: #fff;
+					cursor: grabbing;
+				}
+				button.remove-fav-button {
+					display: block;
+				}
+			}
+
+			&.user-favs-list--dragging {
+				.user-favs-list__item:hover {
+					background-color: transparent;
+					cursor: grabbing;
+				}
+
+				.user-favs-list__item.sortable-chosen,
+				.user-favs-list__item.sortable-drag,
+				.user-favs-list__item.sortable-ghost {
+					background-color: #fff;
+				}
+			}
+
+			&__link {
+				pointer-events: none;
+				cursor: default;
+				text-decoration: none;
+			}
+
+			&__sub-buttons {
+				button.show-all-favs {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
 .user-favs-list {
 	list-style-type: none;
 	margin: 0 0 var(--opehuone--spacing--medium) 0;
@@ -17,9 +84,20 @@
 		}
 	}
 
+	&--show-all {
+		.user-favs-list__item {
+			display: block !important;
+		}
+	}
+
 	&__item {
 		position: relative;
 		padding-left: rem(20px);
+
+		// hide after four items
+		&:nth-child(n + 5) {
+			display: none;
+		}
 
 		&:before {
 			content: "";
@@ -29,6 +107,22 @@
 			width: 8px;
 			height: 100%;
 			background-color: var(--color-tram);
+		}
+
+		button.remove-fav-button {
+			display: none;
+			position: absolute;
+			top: 0;
+			right: 0;
+			background: none;
+			border: none;
+			padding: 0;
+			cursor: pointer;
+
+			svg {
+				width: 24px;
+				height: 24px;
+			}
 		}
 	}
 
@@ -54,21 +148,69 @@
 		font-weight: 500;
 	}
 
-	&__edit-link {
-		display: inline-flex;
-		align-items: center;
-		justify-content: flex-start;
-		flex-wrap: nowrap;
-		gap: rem(10px);
-		background: none;
-		border: none;
-		font-size: var(--opehuone--font-size--medium);
-		font-weight: 700;
-		text-decoration: none;
-		padding: 0;
+	&__sub-buttons {
+		display: flex;
+		flex-direction: column;
+		gap: var(--opehuone--spacing--small);
 
-		@include hover-focus {
-			text-decoration: underline;
+		&__button {
+			display: flex;
+			align-items: center;
+			flex-wrap: nowrap;
+			background-color: transparent;
+			border: none;
+
+			&[disabled] {
+				cursor: default;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+
+			&:hover {
+				text-decoration: underline;
+			}
+
+			&.edit-favs-button {
+				justify-content: flex-end;
+			}
+
+			> span {
+				font-size: 14px;
+				line-height: 1;
+				font-weight: bold;
+				padding-right: 5px;
+
+				@include media-breakpoint-up(lg) {
+					font-size: 17px;
+				}
+			}
+
+			div.button-svg > svg {
+				height: 24px;
+				width: auto;
+
+				@include media-breakpoint-up(lg) {
+					height: 28px;
+				}
+			}
+
+			&[aria-expanded="true"] {
+				div.button-svg__up {
+					display: block;
+				}
+				div.button-svg__down {
+					display: none;
+				}
+			}
+			&[aria-expanded="false"] {
+				div.button-svg__up {
+					display: none;
+				}
+				div.button-svg__down {
+					display: block;
+				}
+			}
 		}
 	}
 }
