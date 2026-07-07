@@ -54,7 +54,9 @@ $theme_image = get_field('profile_hero_image', 'options');
                                         alt="<?php pll_esc_html_e( 'Microsoft-tilin profiilikuva' ); ?>">
                                 <?php
                             } else {
-                                pll_esc_html_e( 'Sinulla ei ole Microsoft-tiliin tallennettua profiilikuvaa. Tähän joku ohje käyttäjille, miten sen saa käyttöön?!?' );
+                                ?>
+                                <span class="o365-profile-picture__placeholder"><?php echo esc_html( strtoupper( substr( $current_user->user_firstname, 0, 1 ) . substr( $current_user->user_lastname, 0, 1 ) ) ); ?></span>
+                                <?php
                             }
                             ?>
                         </div>

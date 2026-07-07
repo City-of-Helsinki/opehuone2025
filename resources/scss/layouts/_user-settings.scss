@@ -39,6 +39,24 @@
 				display: flex;
 				flex-direction: column;
 				align-items: center;
+
+				.o365-profile-picture {
+					margin: 0 0 1.75rem;
+
+					.o365-profile-picture__placeholder {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						width: rem(62px);
+						height: rem(62px);
+						border-radius: 50%;
+						color: #fff;
+						background: var(--color-bus);
+						border: none;
+						font-weight: 500;
+						font-size: var(--opehuone--font-size--medium);
+					}
+				}
 			}
 		}
 	}
