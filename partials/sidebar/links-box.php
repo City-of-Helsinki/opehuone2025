@@ -11,33 +11,36 @@ $all_links = \User_settings::get_sorted_links_for_user( $user_id );
 <div class="sidebar-box sidebar-box--tram-light side-links-list-box">
 	<h3 class="sidebar-box__sub-title">Omat pikalinkit</h3>
 
-	<ul class="side-links-list">
-		<?php foreach ( $all_links as $link ) : ?>
-			<li class="side-links-list__item">
-				<a href="<?php echo esc_url( $link['url'] ); ?>"
-				   class="side-links-list__link"
-				   target="_blank">
-					<?php echo esc_html( $link['title'] ); ?>
-				</a>
-				<?php if ( $link['type'] === 'default' ) : ?>
-					<button class="side-links-list__remove-btn side-links-list__remove-btn--default"
-							aria-label="<?php esc_html_e( 'Poista tämä linkki', 'helsinki-universal' ); ?>"
-							data-link-url="<?php echo esc_url( $link['url'] ); ?>">
-						<?php Helpers\the_svg( 'icons/cross-circle-fill' ); ?>
-					</button>
-				<?php else : ?>
-					<button class="side-links-list__remove-btn side-links-list__remove-btn--custom"
-							aria-label="<?php esc_html_e( 'Poista tämä linkki', 'helsinki-universal' ); ?>"
-							data-custom-link-name="<?php echo esc_attr( $link['title'] ); ?>"
-							data-custom-link-url="<?php echo esc_url( $link['url'] ); ?>">
-						<?php Helpers\the_svg( 'icons/cross-circle-fill' ); ?>
-					</button>
-				<?php endif; ?>
-			</li>
-		<?php endforeach; ?>
-	</ul>
-
-	<?php if ( is_user_logged_in() ) : ?>
+	<?php if ( ! is_user_logged_in() ) : ?>
+        <div class="sidebar-box__login-message">
+			<p><?php esc_html_e( 'Kirjaudu sisään nähdäksesi omat pikalinkkisi.', 'helsinki-universal' ); ?></p>
+        </div>
+	<?php else : ?>
+		<ul class="side-links-list">
+			<?php foreach ( $all_links as $link ) : ?>
+				<li class="side-links-list__item">
+					<a href="<?php echo esc_url( $link['url'] ); ?>"
+					class="side-links-list__link"
+					target="_blank">
+						<?php echo esc_html( $link['title'] ); ?>
+					</a>
+					<?php if ( $link['type'] === 'default' ) : ?>
+						<button class="side-links-list__remove-btn side-links-list__remove-btn--default"
+								aria-label="<?php esc_html_e( 'Poista tämä linkki', 'helsinki-universal' ); ?>"
+								data-link-url="<?php echo esc_url( $link['url'] ); ?>">
+							<?php Helpers\the_svg( 'icons/cross-circle-fill' ); ?>
+						</button>
+					<?php else : ?>
+						<button class="side-links-list__remove-btn side-links-list__remove-btn--custom"
+								aria-label="<?php esc_html_e( 'Poista tämä linkki', 'helsinki-universal' ); ?>"
+								data-custom-link-name="<?php echo esc_attr( $link['title'] ); ?>"
+								data-custom-link-url="<?php echo esc_url( $link['url'] ); ?>">
+							<?php Helpers\the_svg( 'icons/cross-circle-fill' ); ?>
+						</button>
+					<?php endif; ?>
+				</li>
+			<?php endforeach; ?>
+		</ul>
 		<div class="side-links-list__own-links-functions">
 			<div class="side-links-list__form-wrapper">
 				<form class="side-links-list__form" id="own-links__add-new-form">
