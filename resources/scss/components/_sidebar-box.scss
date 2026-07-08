@@ -88,18 +88,43 @@
 		}
 	}
 	&__sub-button {
+		display: inline-flex;
+		flex-direction: column;
+		gap: 1.5rem;
+
 		.button {
-			@include create-button();
+			@include create-button(true);
 
 			@include hover-focus {
 				background-color: transparent;
 				color: #000;
 				border-color: #000;
 
+				&:focus {
+					outline: #000 solid 3px;
+					outline-color: inherit;
+				}
+
 				svg {
 					path {
 						-webkit-transition: 0.3s;
 						transition: 0.3s;
+						fill: #000;
+					}
+				}
+			}
+			&--secondary {
+				justify-content: flex-start;
+				background: transparent;
+				color: #000;
+				padding: 0.625rem 1rem;
+
+				svg {
+					&:last-child {
+						margin-inline-end: 1rem !important;
+						margin-inline-start: 0 !important;
+					}
+					path {
 						fill: #000;
 					}
 				}

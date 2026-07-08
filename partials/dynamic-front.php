@@ -13,6 +13,7 @@
 		<aside class="sidebar-boxes">
 			<?php
 			get_template_part( 'partials/sidebar/intra-box' );
+			get_template_part( 'partials/sidebar/school-info-box' );
 			get_template_part( 'partials/sidebar/date-box' );
 			get_template_part( 'partials/sidebar/links-box' );
 			get_template_part( 'partials/sidebar/favorites-box' );
