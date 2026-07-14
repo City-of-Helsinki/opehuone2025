@@ -2,6 +2,7 @@
 
 use Opehuone\Utils;
 use function \Opehuone\TemplateFunctions\display_time_until_holidays;
+use function \Opehuone\TemplateFunctions\hide_holiday_counter;
 
 $day = new \DateTime();
 $day->setTimezone( new \DateTimeZone( 'Europe/Helsinki' ) );
@@ -78,6 +79,10 @@ $swedish_names_list = $day_service->get_names_by_type( $day_info_service_data, '
         <span class="date-box-week"><?php echo esc_html( $week_number ); ?>. viikko <span class="date-box-sv"><em>vecka</em></span></span>
     </div>
     <div class="date-box-col holiday-countdown">
-        <?php get_template_part( 'partials/time-until' ); ?>
+        <?php 
+        if ( ! hide_holiday_counter( 'date-box' ) ) {
+            get_template_part( 'partials/time-until' );
+        } 
+        ?>
     </div>
 </div>

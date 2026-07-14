@@ -7,6 +7,7 @@ if ( ! is_user_logged_in() ) {
 use function \Opehuone\TemplateFunctions\get_cornerlabels_without_default_value;
 use function \Opehuone\TemplateFunctions\displayBannerWaveLineSvg;
 use function Opehuone\TemplateFunctions\displayHeroAngledKorosSvg;
+use function \Opehuone\TemplateFunctions\hide_holiday_counter;
 
 $current_user = wp_get_current_user();
 $cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
@@ -28,7 +29,11 @@ $theme_image = get_field('profile_hero_image', 'options');
                 <div class="hero-text-content">
                     <h1 class="hero__title"><?php echo esc_html( sprintf( 'Moi %s!', $current_user->user_firstname ) ); ?></h1>
                     <p class="hero__excerpt excerpt size-xl">
-                        <?php get_template_part( 'partials/time-until' ); ?>
+                    <?php 
+                    if ( ! hide_holiday_counter( 'user-settings' ) ) {
+                        get_template_part( 'partials/time-until' );
+                    } 
+                    ?>
                     </p>
                     <?php displayBannerWaveLineSvg(); ?>
                 </div>

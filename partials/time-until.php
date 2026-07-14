@@ -1,10 +1,16 @@
 <?php
+use function \Opehuone\TemplateFunctions\hide_holiday_counter;
 // Check if we wanna show holidays...hide from ammattikoulu & varhaiskasvatus
 $current_user       = wp_get_current_user();
 $school_abbrevation = get_user_meta( $current_user->ID, 'user_data', true );
 
 if ( OppiSchoolPicker\is_ammattikoulu( $school_abbrevation ) || OppiSchoolPicker\is_varhaiskasvatus( $school_abbrevation ) || OppiSchoolPicker\is_virasto( $school_abbrevation ) ) {
 	return;
+}
+
+// Check if we wanna show holidays...hide from cornerlabels selected at ACF options "Opehuone asetukset"
+if ( hide_holiday_counter() ) {
+	return; 
 }
 
 $is_sv = OppiSchoolPicker\is_ruotsinkielinen( $school_abbrevation );
