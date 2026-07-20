@@ -278,6 +278,9 @@ const initArchiveFiltering = (form, pageFilters, action, container) => {
 	// Pre-select checkboxes from the URL when navigating to the page for the first time
 	checkCheckboxesFromUrl(form, pageFilters);
 
+	// Keep the URL aligned with the checked state so AJAX requests reuse the same filters
+	updateUrlParams(form, pageFilters);
+
 	// Update button text for all filters initially
 	pageFilters.forEach((filter) => {
 		const wrapper = form
