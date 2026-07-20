@@ -151,7 +151,7 @@
 
 .header-search-box-container {
 	margin-top: 2rem;
-	margin-bottom: 4rem;
+	margin-bottom: 1.5rem;
 
 	.search-title {
 		margin-bottom: 2rem;
@@ -161,6 +161,50 @@
 		display: block;
 		font-size: 1rem;
 		margin-bottom: 0.25rem;
+	}
+	.fdk-tabs {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		gap: 15px;
+		margin-top: 1.5rem;
+
+		.fdk-tabs-button {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
+			font-weight: 500;
+			color: #000;
+			background-color: #fff;
+			text-align: center;
+			text-decoration: none;
+			white-space: normal;
+			vertical-align: middle;
+			user-select: none;
+			border: 2px solid #000;
+			padding: 10px 32px;
+			font-size: 1rem;
+			border-radius: 0;
+			line-height: 1.5;
+			min-height: 56px;
+			cursor: pointer;
+
+			&:hover {
+				background-color: #000;
+				color: #fff;
+			}
+
+			&.active {
+				background-color: #000;
+				color: #fff;
+
+				&:hover {
+					background-color: #fff;
+					color: #000;
+				}
+			}
+		}
 	}
 }
 
