@@ -191,6 +191,56 @@ function the_services_row( bool $is_active, \User_services $user_services ) {
     }
 }
 
+/**
+ * To echo tools row filtered and ordered by user settings
+ *
+ * @param bool $is_active Active or inactive tools row
+ */
+function the_tools_row( bool $is_active ) {
+    $user_tools_obj  = new \User_tools();
+    $all_tools       = $user_tools_obj->get_all_tools();
+    $active_tool_ids = $user_tools_obj->get_user_active_tools();
+
+    if ( empty( $all_tools ) ) {
+        return;
+    }
+
+    $tools_by_id = [];
+    foreach ( $all_tools as $post ) {
+        $tools_by_id[ $post->ID ] = $post;
+    }
+
+    if ( $is_active ) {
+        foreach ( $active_tool_ids as $tool_id ) {
+            if ( isset( $tools_by_id[ $tool_id ] ) ) {
+                render_tool_item( $tools_by_id[ $tool_id ], true );
+            }
+        }
+    } else {
+        foreach ( $all_tools as $post ) {
+            if ( ! in_array( $post->ID, $active_tool_ids, true ) ) {
+                render_tool_item( $post, false );
+            }
+        }
+    }
+}
+
+function render_tool_item( \WP_Post $post, bool $is_active ) {
+    $icon = get_field( 'tool_icon', $post->ID );
+
+    $args = [
+        'id'          => $post->ID,
+        'post_id'     => $post->ID,
+        'title'       => get_the_title( $post ),
+        'url'         => get_field( 'tool_url', $post->ID ),
+        'icon_url'    => $icon['url'] ?? '',
+        'icon_alt'    => ( $icon['alt'] ?? '' ) ?: get_the_title( $post ),
+        'active_tool' => $is_active,
+    ];
+
+    get_template_part( 'partials/blocks/b-tool-item', '', $args );
+}
+
 function get_open_new_tab_text() {
 //    return esc_html( ' ' . pll__( '( Linkki avautuu uuteen ikkunaan )' ) );
     return 'Linkki avautuu uuteen ikkunaan';
