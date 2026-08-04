@@ -1,4 +1,4 @@
-FROM helsinki.azurecr.io/ubi9/openshift-wordpress-base:7.0.2-php83
+FROM helsinki.azurecr.io/ubi9/openshift-wordpress-base:6.9.5-php83
 
 COPY .user.ini wordfence-waf.php /opt/app-root/src/
 
