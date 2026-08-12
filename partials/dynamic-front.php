@@ -3,8 +3,10 @@
 	<div class="opehuone-grid">
 		<main>
 			<?php
-            get_template_part('partials/components/services');
-            get_template_part( 'partials/modals/add-new-service');
+            // get_template_part('partials/components/services');
+            // get_template_part( 'partials/modals/add-new-service');
+			get_template_part( 'partials/components/tools' );
+            get_template_part( 'partials/modals/edit-tools' );
 			get_template_part( 'partials/front-page-news' );
 			get_template_part( 'partials/empty' );
 			get_template_part( 'partials/front-page-training' );

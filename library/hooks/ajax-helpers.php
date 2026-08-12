@@ -573,6 +573,41 @@ function ajax_pin_own_service() {
 
 add_action( 'wp_ajax_pin_own_service', __NAMESPACE__ . '\\ajax_pin_own_service' );
 
+/**
+ * New Ajax handler for saving user tools
+ */
+function ajax_save_own_tools() {
+    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+
+    if ( ! wp_verify_nonce( $nonce, 'opehuone_nonce' ) ) {
+        wp_send_json_error( [ 'message' => __( 'Käyttäjää ei pystytty tunnistamaan.' ) ], 403 );
+    }
+
+    if ( ! is_user_logged_in() ) {
+        wp_send_json_error( [ 'message' => __( 'Kirjaudu sisään.' ) ], 401 );
+    }
+
+    $raw_ids = isset( $_POST['activeToolIds'] ) ? (array) wp_unslash( $_POST['activeToolIds'] ) : [];
+
+    $user_tools_obj = new \User_tools();
+    $user_tools_obj->save_user_active_tools( $raw_ids );
+
+    ob_start();
+    \Opehuone\Utils\the_tools_row( true );
+    $active_html = ob_get_clean();
+
+    ob_start();
+    \Opehuone\Utils\the_tools_row( false );
+    $inactive_html = ob_get_clean();
+
+    wp_send_json_success( [
+        'message'       => __( 'Omat työkalut päivitetty' ),
+        'active_html'   => $active_html,
+        'inactive_html' => $inactive_html,
+    ] );
+}
+add_action( 'wp_ajax_save_own_tools', __NAMESPACE__ . '\\ajax_save_own_tools' );
+
 function ajax_update_front_page_posts() {
     $cornerlabel_ids = $_POST['cornerLabels'] ?? [];
 

@@ -11,6 +11,7 @@ import {
 	servicesToggler,
 	updateButtonClicks,
 } from '../lib/services';
+import { allToolsToggler, saveOwnTools } from '../lib/tools';
 import { concentrationFunctions } from '../lib/concentration';
 import { ownServices } from '../lib/ownServices';
 import { findkitUI } from '../lib/findkit';
@@ -66,6 +67,10 @@ export default {
 			concentrationFunctions();
 			// Break corner box functions
 			breakCornerBoxFunctions();
+
+			// Tools functions
+			allToolsToggler();
+			saveOwnTools();
 
 			jQuery('.dock-toggler').on('click', (e) => {
 				e.preventDefault();
