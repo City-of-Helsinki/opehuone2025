@@ -237,3 +237,18 @@ add_filter( 'get_the_excerpt', function ( $excerpt, $post ) {
 
     return wp_trim_words( $excerpt, 35, '...' );
 }, 10, 2);
+
+/**
+ * Add cornerlabels to meta for Findkit search
+ */
+add_filter( 'findkit_page_meta', function ( $meta, $post ) {
+    
+    $cornerlabels = get_the_terms( $post->ID, 'cornerlabels' );
+    if ( $cornerlabels && !is_wp_error( $cornerlabels ) ) {
+        foreach ( $cornerlabels as $cornerlabel ) {
+            $meta['tags'][] = 'opehuone-cornerlabel/' . $cornerlabel->slug;
+        }
+    }
+
+	return $meta;
+}, 10, 2 );

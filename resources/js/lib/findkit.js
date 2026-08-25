@@ -5,26 +5,30 @@ const findkitUI = new FindkitUI({
 	container: '.findkit-overlay-container',
 	infiniteScroll: false,
 	header: false,
+	router: 'memory',
 	groups: [
 		{
+			id: 'pages-tab',
 			title: 'Sisältösivut',
-			previewSize: 3,
 			params: {
 				tagQuery: [['wp_post_type/page']],
+				size: 10,
 			},
 		},
 		{
+			id: 'posts-tab',
 			title: 'Uutiset',
-			previewSize: 3,
 			params: {
 				tagQuery: [['wp_post_type/post']],
+				size: 10,
 			},
 		},
 		{
+			id: 'trainings-tab',
 			title: 'Koulutukset',
-			previewSize: 3,
 			params: {
 				tagQuery: [['wp_post_type/training']],
+				size: 10,
 			},
 		},
 	],
@@ -56,7 +60,6 @@ const findkitUI = new FindkitUI({
 			const tags = props.hit.tags
 				.filter((tag) => tag.startsWith('opehuone-search-label/'))
 				.map((tag) => tag.replace('opehuone-search-label/', ''));
-
 			return html`
 				<div>
 					${tags.length > 0 &&
@@ -77,20 +80,16 @@ const findkitUI = new FindkitUI({
 		},
 		Results(props) {
 			return html`
-                <${props.parts.BackLink} ...${props}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 23 18" fill="none">
-                        <g transform="scale(-1, 1) translate(-23, 0)"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.6666 0.332031L11.6666 2.33203L16.9999 7.66536H0.333252V10.332H16.9999L11.6666 15.6654L13.6666 17.6654L22.3333 8.9987L13.6666 0.332031Z" fill="black"/></g>
-                    </svg>
-
-                    <div class="findkit--link-text">
-                        Takaisin
-                    </div>
-                </${props.parts.BackLink}>
-                <h2 class="findkit--group-title">${props.title}</h2>
-                <p class="findkit-total-results-count">${props.total} hakutulosta</p>
-                <${props.parts.Hits} />
-                <${props.parts.Footer} />
-            `;
+				<h2 class="findkit--group-title">${props.title}</h2>
+				<p
+					class="findkit-total-results-count"
+					data-results-count="${props.total}"
+				>
+					${props.total} hakutulosta
+				</p>
+				<${props.parts.Hits} />
+				<${props.parts.Footer} />
+			`;
 		},
 	},
 	css: css`
@@ -128,17 +127,18 @@ const findkitUI = new FindkitUI({
 			color: #1a1a1a;
 			font-size: 20px;
 			font-style: normal;
-			font-weight: 500;
+			font-weight: 700;
 			line-height: 150%;
 		}
 
 		.findkit--hit h2 > a {
 			color: #1a1a1a;
-			text-decoration: none;
+			text-decoration: underline;
+			text-decoration-thickness: 1px;
 		}
 
 		.findkit--hit h2 > a:hover {
-			text-decoration: underline;
+			text-decoration-thickness: 2px;
 		}
 
 		.findkit--group-title {
@@ -165,20 +165,6 @@ const findkitUI = new FindkitUI({
 			font-weight: 400;
 			font-size: 1.3rem;
 			margin-bottom: 2.5rem;
-		}
-
-		.findkit--back-link {
-			border-bottom: none;
-			margin-left: 0;
-			margin-bottom: 2rem;
-			padding-top: 2rem;
-			padding-left: 0;
-
-			.findkit--link-text {
-				font-weight: 500;
-				margin-right: 0;
-				margin-left: 1rem;
-			}
 		}
 
 		.findkit--content {
@@ -243,6 +229,68 @@ const findkitUI = new FindkitUI({
 });
 
 findkitUI.bindInput('#header-search-input');
+
+// "Hidden" instance, which is only used to get the counts for each group. Counts are shown in the tabs buttons for each group.
+const countsUI = new FindkitUI({
+	instanceId: 'fdk-counts',
+	publicToken: 'pLZGwMPvn:eu-north-1',
+	container: '#findkit-counts-hidden',
+	header: false,
+	router: 'memory',
+	groups: [
+		{
+			id: 'pages-tab',
+			params: {
+				tagQuery: [['wp_post_type/page']],
+				size: 1,
+			},
+		},
+		{
+			id: 'posts-tab',
+			params: {
+				tagQuery: [['wp_post_type/post']],
+				size: 1,
+			},
+		},
+		{
+			id: 'trainings-tab',
+			params: {
+				tagQuery: [['wp_post_type/training']],
+				size: 1,
+			},
+		},
+	],
+	slots: {
+		Group(props) {
+			const btn = document.querySelector(
+				`.fdk-tabs button[data-group="${props.id}"]`
+			);
+			const countEl = btn?.querySelector('.results-count');
+			if (countEl) {
+				const terms = countsUI.terms?.trim();
+
+				if (!terms) {
+					countEl.textContent = '0 kpl';
+				} else {
+					countEl.textContent = props.total + ' kpl';
+				}
+			}
+			return null;
+		},
+	},
+	css: css`
+		#findkit-counts-hidden {
+			position: absolute;
+			width: 0;
+			height: 0;
+			overflow: hidden;
+			opacity: 0;
+			pointer-events: none;
+		}
+	`,
+});
+
+countsUI.bindInput('#header-search-input');
 
 const searchToggle = document.getElementById('header-search-toggle');
 const mobilePanelToggle = document.getElementById('mobile-panel-toggle');
@@ -316,5 +364,48 @@ function handleSearchWindowVisibility() {
 		footerSvg.style.backgroundColor = '#FFFFFF';
 	}
 }
+
+/**
+ * Search results tabs functionality.
+ */
+const tabsButtons = document.querySelectorAll('.fdk-tabs button');
+
+function setActiveTab(group) {
+	tabsButtons.forEach((b) => {
+		const isActive = b.dataset.group === group;
+		b.classList.toggle('active', isActive);
+		b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+		b.setAttribute('tabindex', isActive ? '0' : '-1');
+	});
+}
+
+tabsButtons.forEach((btn, index) => {
+	btn.addEventListener('click', () => {
+		findkitUI.activateGroup(btn.dataset.group);
+		setActiveTab(btn.dataset.group);
+	});
+
+	btn.addEventListener('keydown', (e) => {
+		let newIndex = null;
+		if (e.key === 'ArrowRight') newIndex = (index + 1) % tabsButtons.length;
+		if (e.key === 'ArrowLeft')
+			newIndex = (index - 1 + tabsButtons.length) % tabsButtons.length;
+
+		if (newIndex !== null) {
+			e.preventDefault();
+			const newBtn = tabsButtons[newIndex];
+			newBtn.focus();
+			findkitUI.activateGroup(newBtn.dataset.group);
+			setActiveTab(newBtn.dataset.group);
+		}
+	});
+});
+
+/**
+ * "Activate" first tab (pages) as default
+ */
+findkitUI.on('open', () => {
+	findkitUI.activateGroup('pages-tab');
+});
 
 export { findkitUI };
