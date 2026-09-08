@@ -1,10 +1,12 @@
-.single-post,
 .single-training {
 	#main-menu {
 		border-bottom: 1px solid #000;
 	}
 }
 .single-post {
+	article.content {
+		padding-top: var(--spacing-layout-xs);
+	}
 	&__title {
 		margin-top: 0;
 		margin-bottom: 1rem;

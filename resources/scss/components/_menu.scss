@@ -79,7 +79,8 @@
 					text-decoration-thickness: 10%;
 				}
 			}
-			&.menu__item--active {
+			&.menu__item--active,
+			&.current_page_parent {
 				.link-wrap {
 					border-bottom: none;
 					text-decoration: underline;
