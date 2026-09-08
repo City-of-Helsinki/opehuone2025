@@ -44,6 +44,12 @@ function init_taxonomy() {
 		'show_in_nav_menus'  => true,
 		'show_tagcloud'      => false,
 		'show_in_rest'       => true,
+		'capabilities'       => [
+            'manage_terms' => 'manage_options',
+            'edit_terms'   => 'manage_options',
+            'delete_terms' => 'manage_options',
+            'assign_terms' => 'edit_posts',
+        ],
 	);
 	register_taxonomy( 'cornerlabels', [ 'post', 'training', 'page', 'links', 'services' ], $args );
 
