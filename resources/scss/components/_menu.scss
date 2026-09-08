@@ -48,6 +48,9 @@
 	&.coat-of-arms {
 		background-color: var(--color-coat-of-arms-light);
 	}
+	&.theme-gold {
+		background-color: var(--color-gold-light);
+	}
 	#main-menu {
 		width: 100%;
 		padding-right: 146px;
@@ -170,6 +173,9 @@
 	}
 	&.theme-vihrea {
 		background-color: var(--color-vihrea-medium-light);
+	}
+	&.theme-gold {
+		background-color: var(--color-gold-medium-light);
 	}
 }
 

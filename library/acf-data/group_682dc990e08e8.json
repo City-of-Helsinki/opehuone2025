@@ -24,7 +24,8 @@
                 "fog": "Sumu",
                 "bus": "Bussi",
                 "summer": "Kesä",
-                "metro": "Metro"
+                "metro": "Metro",
+                "gold": "Kulta"
             },
             "default_value": "vihrea",
             "return_format": "value",
@@ -103,5 +104,8 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1757937174
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1788861986
 }
