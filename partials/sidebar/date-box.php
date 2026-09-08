@@ -77,7 +77,9 @@ $swedish_names_list = $day_service->get_names_by_type( $day_info_service_data, '
         </span>
         <span class="date-box-week"><?php echo esc_html( $week_number ); ?>. viikko <span class="date-box-sv"><em>vecka</em></span></span>
     </div>
-    <div class="date-box-col holiday-countdown">
-        <?php get_template_part( 'partials/time-until' ); ?>
-    </div>
+    <?php if ( is_user_logged_in() ) : ?>
+        <div class="date-box-col holiday-countdown">
+            <?php get_template_part( 'partials/time-until' ); ?>
+        </div>
+    <?php endif; ?>
 </div>
