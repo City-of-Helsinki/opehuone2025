@@ -9,7 +9,17 @@ $user_services  = new User_services();
     <h3 class="services-wrapper__dock-title"><?php esc_html_e( 'Omat työkalut' ); ?></h3>
     <?php if ( ! is_user_logged_in() ) : ?>
         <div class="services-wrapper__login-message">
-           <p><?php esc_html_e( 'Kirjaudu sisään Opehuoneeseen hel.edu.fi -tunnuksilla nähdäksesi omat opetuksen työkalusi.', 'helsinki-universal' ); ?></p>
+           <p>
+                <a href="javascript:void(0)" onclick="window.wpo365.pintraRedirect.toMsOnline()" class="login-link">
+                    <?php esc_html_e( 'Kirjaudu sisään', 'helsinki-universal' ); ?>
+                </a>
+                <?php printf(
+                esc_html__( ' Opehuoneeseen %1$sedu.hel.fi%2$s tunnuksillasi nähdäksesi opetuksen sovellukset.', 'helsinki-universal' ),
+                    '<a href="' . esc_url( 'https://edu.hel.fi' ) . '" target="_blank" rel="noopener noreferrer">',
+                    '</a>'
+                );
+                ?>
+            </p>
         </div>
     <?php else : ?>
         <!-- Show all active services -->
