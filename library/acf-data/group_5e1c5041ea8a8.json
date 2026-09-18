@@ -252,6 +252,77 @@
             "bidirectional_target": []
         },
         {
+            "key": "field_6aab8bc6e1ffc",
+            "label": "Sallitut upotukset",
+            "name": "allowed_embeds",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Huom! Syötä tähän pelkkä domain - ei koko url-osoitetta.\r\nEsimerkkinä: thinglink.com",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Lisää rivi",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_6aab8c06e1ffd",
+                    "label": "Source (url)",
+                    "name": "source_url",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6aab8bc6e1ffc"
+                },
+                {
+                    "key": "field_6aab8c10e1ffe",
+                    "label": "Tyyppi",
+                    "name": "tag_type",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "iframe": "iFrame",
+                        "script": "Script"
+                    },
+                    "default_value": "iframe : iFrame",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "horizontal",
+                    "parent_repeater": "field_6aab8bc6e1ffc"
+                }
+            ]
+        },
+        {
             "key": "field_5e2ac0be17809",
             "label": "404 sisältö",
             "name": "",
@@ -709,7 +780,7 @@
         },
         {
             "key": "field_5ef58a5e2f710",
-            "label": "Päiviä jäljellä",
+            "label": "Loma-aikalaskuri",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -724,6 +795,82 @@
             "placement": "top",
             "endpoint": 0,
             "selected": 0
+        },
+        {
+            "key": "field_6a548c5dbdf07",
+            "label": "Piilota laskuri koulutusasteilta",
+            "name": "hide_counter_from_cornerlabels",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "cornerlabels",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "field_type": "checkbox",
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "allow_null": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_6a548ce0d6400",
+            "label": "Piilota laskuri elementeistä",
+            "name": "hide_counter_from_elements",
+            "aria-label": "",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "date-box": "Etusivun kalenterilaatikossa",
+                "profile-opener": "Käyttäjävalikossa",
+                "user-settings": "Oma profiili -sivulla"
+            },
+            "default_value": [
+                "date-box",
+                "profile-opener",
+                "user-settings"
+            ],
+            "return_format": "value",
+            "allow_custom": 0,
+            "allow_in_bindings": 0,
+            "layout": "vertical",
+            "toggle": 0,
+            "save_custom": 0,
+            "custom_choice_button_text": "Lisää uusi valinta"
+        },
+        {
+            "key": "field_6a548c4dbdf06",
+            "label": "Suomenkieliset koulut",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
             "key": "field_5ef9a87c15993",
@@ -1817,5 +1964,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1783494781
+    "modified": 1789627877
 }
