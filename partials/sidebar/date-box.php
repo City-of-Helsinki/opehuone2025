@@ -39,59 +39,64 @@ $swedish_names_list = $day_service->get_names_by_type( $day_info_service_data, '
 
 ?>
 <div class="sidebar-box date-box sidebar-box--suomenlinna-light">
-    <div class="date-box-header">
+    <div class="date-box-row date-box-header">
         <span class="date-box-month">
             <span class="date-box-month-fi"><?php echo Utils\get_month_info()['month_finnish']; ?></span>
+                                <span class="separator">/</span>
             <span class="date-box-month-sv date-box-sv"><em><?php echo Utils\get_month_info()['month_swedish']; ?></em></span>
         </span>
-        <span class="date-box-week"><?php echo esc_html( $week_number ); ?>. viikko <span class="date-box-sv"><em>vecka</em></span></span>
+        <span class="date-box-week"><?php echo esc_html( $week_number ); ?>. viikko<span class="separator">/</span><span class="date-box-sv"><em>vecka</em></span></span>
     </div>
-     <div class="date-box-row">
-        <div class="date-box-col">
-            <span class="date-box-day-number"><?php echo Utils\get_month_info()['day']; ?></span>
-            <span class="date-box-day">
-                <span class="date-box-day-fi"><?php echo esc_html( $days['fi'][$weekday_number] ); ?></span>
-                <span class="date-box-day-sv date-box-sv"><?php echo esc_html( $days['sv'][$weekday_number] ); ?></span>
-            </span>
-            
-            <?php if ( ! empty( $finnish_names_list ) ): ?>
-                <span class="date-box-info__name-day-fi"><?php echo esc_html( implode( ', ', $finnish_names_list ) ); ?></span>
-            <?php endif; ?>
+    <div class="date-box-content">
+        
+        <div class="date-box-row date-box-grid">
+            <div class="date-box-col">
+                <span class="date-box-day-number"><?php echo Utils\get_month_info()['day']; ?></span>
+                <span class="date-box-day">
+                    <span class="date-box-day-fi"><?php echo esc_html( $days['fi'][$weekday_number] ); ?></span>
+                    <span class="date-box-day-sv date-box-sv"><?php echo esc_html( $days['sv'][$weekday_number] ); ?></span>
+                </span>
+                
+                <?php if ( ! empty( $finnish_names_list ) ): ?>
+                    <span class="date-box-info__name-day-fi"><?php echo esc_html( implode( ', ', $finnish_names_list ) ); ?></span>
+                <?php endif; ?>
 
-            <?php if ( ! empty( $swedish_names_list ) ): ?>
-                <span class="date-box-info__name-day-sv"><em><?php echo esc_html( implode( ', ', $swedish_names_list ) ); ?></em></span>
-            <?php endif; ?>
+                <?php if ( ! empty( $swedish_names_list ) ): ?>
+                    <span class="date-box-info__name-day-sv"><em><?php echo esc_html( implode( ', ', $swedish_names_list ) ); ?></em></span>
+                <?php endif; ?>
+            </div>
+            <div class="date-box-col">
+                <?php if ( ! empty( $finnish_names_list ) ): ?>
+                    <span class="date-box-info__name-day-fi"><?php echo esc_html( implode( ', ', $finnish_names_list ) ); ?></span>
+                <?php endif; ?>
+
+                <?php if ( ! empty( $swedish_names_list ) ): ?>
+                    <span class="date-box-info__name-day-sv"><em><?php echo esc_html( implode( ', ', $swedish_names_list ) ); ?></em></span>
+                <?php endif; ?>
+
+                <?php if ( ! empty( $day_info_service_data['flag_day'] ) ): ?>
+                    <div class="date-box-info date-box-info__flag-days">
+                        <div>
+                            <?php \Opehuone\Helpers\the_svg( 'icons/flag'); ?>
+                        </div>
+                        <div>
+                            <span class="date-box-info__name-day-fi"><?php echo $day_info_service_data['flag_day']['fi']; ?></span>
+                            <span class="date-box-info__name-day-sv date-box-sv"><em><?php echo $day_info_service_data['flag_day']['sv']; ?></em></span>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <div class="date-box-col date-box-weather">
+                <?php echo Utils\get_current_weather_minified(); ?>
+            </div>
         </div>
-        <div class="date-box-col">
-            <?php if ( ! empty( $finnish_names_list ) ): ?>
-                <span class="date-box-info__name-day-fi"><?php echo esc_html( implode( ', ', $finnish_names_list ) ); ?></span>
-            <?php endif; ?>
-
-            <?php if ( ! empty( $swedish_names_list ) ): ?>
-                <span class="date-box-info__name-day-sv"><em><?php echo esc_html( implode( ', ', $swedish_names_list ) ); ?></em></span>
-            <?php endif; ?>
-
-            <?php if ( ! empty( $day_info_service_data['flag_day'] ) ): ?>
-                <div class="date-box-info date-box-info__flag-days">
-                    <div>
-                        <?php \Opehuone\Helpers\the_svg( 'icons/flag'); ?>
-                    </div>
-                    <div>
-                        <span class="date-box-info__name-day-fi"><?php echo $day_info_service_data['flag_day']['fi']; ?></span>
-                        <span class="date-box-info__name-day-sv date-box-sv"><em><?php echo $day_info_service_data['flag_day']['sv']; ?></em></span>
-                    </div>
+        <div class="date-box-row date-box-footer">
+            <?php if ( is_user_logged_in() ) : ?>
+                <div class="date-box-col holiday-countdown">
+                    <?php get_template_part( 'partials/time-until' ); ?>
                 </div>
             <?php endif; ?>
         </div>
-         <div class="date-box-col date-box-weather">
-            <?php echo Utils\get_current_weather_minified(); ?>
-        </div>
-     </div>
-     <div class="date-box-row">
-        <?php if ( is_user_logged_in() ) : ?>
-            <div class="date-box-col holiday-countdown">
-                <?php get_template_part( 'partials/time-until' ); ?>
-            </div>
-        <?php endif; ?>
-     </div>
+
+    </div>
 </div>

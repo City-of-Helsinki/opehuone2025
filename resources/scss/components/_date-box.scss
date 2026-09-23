@@ -1,82 +1,111 @@
 .sidebar-box.date-box {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 20px 10px;
-}
-
-.date-box-weather {
-	font-size: var(--opehuone--font-size--medium);
-	font-weight: 700;
-	text-align: center;
-
-	img {
-		width: 80px;
-		height: 80px;
-		object-fit: contain;
-	}
-	.front-side__weather__location {
-		display: block;
-	}
-}
-
-.date-box-texts {
-	text-align: center;
-
-	.date-box-month,
-	.date-box-day {
-		display: block;
-		font-size: var(--opehuone--font-size--medium);
-		font-weight: 700;
-	}
-
-	.date-box-day-number {
-		font-size: var(--opehuone--font-size--3-x-large);
-		font-weight: 700;
-		line-height: 1;
-	}
-
-	.date-box-week {
-		display: block;
-		font-size: var(--opehuone--font-size--medium);
-	}
-
-	.date-box-sv {
-		font-style: italic;
-	}
-}
-
-.holiday-countdown {
-	text-align: center;
-	display: block;
-	font-size: var(--opehuone--font-size--medium);
-
-	.holiday {
-		font-weight: 700;
-	}
-}
-
-.date-box-info {
-	padding-left: 1.5rem;
-	display: block;
-	font-weight: 500;
-	font-size: var(--opehuone--font-size--small);
-
-	span {
-		display: block;
-	}
-
-	&__name-day-sv {
-		font-style: italic;
-	}
-
-	&__flag-days {
+	padding: 0;
+	.date-box-header {
+		background-color: var(--color-suomenlinna);
 		display: flex;
-		gap: 0.5rem;
-		padding-left: 0;
-		margin-top: var(--opehuone--font-size--small);
+		align-items: center;
+		justify-content: space-between;
+		gap: 15px;
+		padding: 0.5rem 1.25rem;
+		.date-box-month,
+		.date-box-week {
+			display: block;
+			font-size: var(--opehuone--font-size--small);
+			font-weight: 500;
+		}
+	}
+	.date-box-content {
+		padding: 13px;
+		.date-box-row {
+			&.date-box-grid {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(
+						0,
+						1fr
+					);
+			}
+			.date-box-col {
+				text-align: center;
+				position: relative;
+				&:first-child {
+					&::after {
+						content: "";
+						display: block;
+						position: absolute;
+						right: 0;
+						top: 10%;
+						width: 1px;
+						height: 80%;
+						background-color: #b0b8bf;
+					}
+				}
+				&.date-box-weather {
+					font-size: var(--opehuone--font-size--small);
+					font-weight: 700;
+					text-align: center;
 
-		svg {
-			margin-top: 3px;
+					img {
+						width: 55px;
+						height: 55px;
+						object-fit: contain;
+					}
+					.front-side__weather__location {
+						display: block;
+					}
+				}
+
+				.date-box-day {
+					display: block;
+					font-size: var(--opehuone--font-size--small);
+					font-weight: 700;
+				}
+
+				.date-box-day-number {
+					font-size: var(--opehuone--font-size--3-x-large);
+					font-weight: 700;
+					line-height: 1;
+				}
+
+				.date-box-sv {
+					font-style: italic;
+				}
+
+				.holiday-countdown {
+					text-align: center;
+					display: block;
+					font-size: var(--opehuone--font-size--small);
+
+					.holiday {
+						font-weight: 700;
+					}
+				}
+
+				.date-box-info {
+					padding-left: 1.5rem;
+					display: block;
+					font-weight: 500;
+					font-size: var(--opehuone--font-size--small);
+
+					span {
+						display: block;
+					}
+
+					&__name-day-sv {
+						font-style: italic;
+					}
+
+					&__flag-days {
+						display: flex;
+						gap: 0.5rem;
+						padding-left: 0;
+						margin-top: var(--opehuone--font-size--small);
+
+						svg {
+							margin-top: 3px;
+						}
+					}
+				}
+			}
 		}
 	}
 }
