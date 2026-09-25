@@ -44,6 +44,12 @@ function init_taxonomy() {
 		'show_in_rest'       => true,
 		'show_in_nav_menus'  => true,
 		'show_tagcloud'      => false,
+		'capabilities'       => [
+            'manage_terms' => 'manage_options',
+            'edit_terms'   => 'manage_options',
+            'delete_terms' => 'manage_options',
+            'assign_terms' => 'edit_posts',
+        ],
 	);
 	register_taxonomy( 'training_theme', [ 'training' ], $args );
 

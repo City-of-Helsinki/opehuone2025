@@ -30,6 +30,7 @@
 		display: grid;
 		grid-template-columns: auto;
 		gap: var(--opehuone--spacing--small);
+		column-gap: var(--opehuone--spacing--2-x-large);
 
 		@include media-breakpoint-up(sm) {
 			grid-template-columns: repeat(2, 1fr);
@@ -41,11 +42,6 @@
 
 		@include media-breakpoint-up(xl) {
 			grid-template-columns: repeat(2, 1fr);
-		}
-
-		// Viimeinen elementti omalle riville
-		& > *:last-child {
-			grid-column-start: 1;
 		}
 	}
 
@@ -80,6 +76,8 @@
 
 	&__filters-submit {
 		@include create-button(true);
+		height: 56px;
+		margin-top: auto;
 	}
 
 	&__number-of-posts {

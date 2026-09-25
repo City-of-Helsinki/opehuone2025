@@ -166,9 +166,20 @@ add_action( 'template_redirect', function() {
     }
 }, 20 );
 
-// Remove featured image support from pages and trainings.
-function opehuone_remove_featured_image_support() {
-   remove_post_type_support('page', 'thumbnail');
-   remove_post_type_support('training', 'thumbnail');
+// Remove featured image support from pages and trainings admin for non-admin/-editor users.
+function opehuone_remove_thumbnail_support( $current_screen ) {
+
+    $post_types    = array( 'page', 'training' );
+    $allowed_roles = array( 'administrator', 'editor' );
+
+    if ( ! isset( $current_screen->post_type ) || ! in_array( $current_screen->post_type, $post_types, true ) ) {
+        return;
+    }
+
+    $user = wp_get_current_user();
+
+    if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
+        remove_post_type_support( $current_screen->post_type, 'thumbnail' );
+    }
 }
-add_action('init', 'opehuone_remove_featured_image_support');
+add_action( 'current_screen', 'opehuone_remove_thumbnail_support' );

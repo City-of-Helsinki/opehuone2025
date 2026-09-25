@@ -28,8 +28,9 @@ if ( ! empty( $sticky_posts ) ) {
     $sticky_query_args = [
             'post_type'      => 'post',
             'posts_per_page' => $max_posts,
-            'post__in'      => $sticky_posts,
-            'orderby' => 'post__in'
+            'post__in'       => $sticky_posts,
+            'orderby'        => 'date', // order by date to show the most recent sticky posts first
+			'order'          => 'DESC',
     ];
 
     $sticky_query_args['tax_query'] = $tax_query;

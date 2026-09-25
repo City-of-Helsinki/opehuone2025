@@ -1,1897 +1,1994 @@
 {
-    "key": "group_5e1c5041ea8a8",
-    "title": "Opehuone asetukset",
-    "fields": [
-        {
-            "key": "field_5e1c50babc45e",
-            "label": "Yleiset asetukset",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_5e1c50d3bc45f",
-            "label": "Julkaisun oletuskuva",
-            "name": "post_default_image",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "preview_size": "medium",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": ""
-        },
-        {
-            "key": "field_684ef3f81a61f",
-            "label": "Koulutukset sivu",
-            "name": "trainings_page",
-            "aria-label": "",
-            "type": "post_object",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "page"
-            ],
-            "post_status": [
-                "publish"
-            ],
-            "taxonomy": "",
-            "return_format": "id",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "bidirectional": 0,
-            "ui": 1,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_5e1c544c5492d",
-            "label": "Suosikit sivu",
-            "name": "favorites_page",
-            "aria-label": "",
-            "type": "post_object",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "page"
-            ],
-            "taxonomy": "",
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_628cd6945f71d",
-            "label": "Pin ikonin väri",
-            "name": "pin_color_theme",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "metro": "Metro",
-                "hopea": "Hopea",
-                "kesa": "Kesä",
-                "sumu": "Sumu",
-                "suomenlinna": "Suomenlinna"
-            },
-            "default_value": "metro",
-            "allow_null": 0,
-            "multiple": 0,
-            "ui": 0,
-            "return_format": "value",
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
-            "key": "field_5fbb9e15f7e02",
-            "label": "Käyttäjä asetukset sivu",
-            "name": "user_settings_page",
-            "aria-label": "",
-            "type": "post_object",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "page"
-            ],
-            "taxonomy": "",
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_5fc1109136eb3",
-            "label": "Dock asetukset sivu",
-            "name": "dock_settings_page",
-            "aria-label": "",
-            "type": "post_object",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "page"
-            ],
-            "taxonomy": "",
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_5fbb9e32f7e03",
-            "label": "Tietoja sivusta -sivu",
-            "name": "about_page",
-            "aria-label": "",
-            "type": "post_object",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "page"
-            ],
-            "taxonomy": "",
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "id",
-            "ui": 1,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_67c56a5f692f3",
-            "label": "Ota yhteyttä -sivu",
-            "name": "contact_page",
-            "aria-label": "",
-            "type": "post_object",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "relevanssi_exclude": 0,
-            "post_type": [
-                "page"
-            ],
-            "post_status": "",
-            "taxonomy": "",
-            "return_format": "id",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 1,
-            "bidirectional": 0,
-            "ui": 1,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_5e1c5102bc460",
-            "label": "Etusivun julkaisunostot",
-            "name": "front_page_post_lifts",
-            "aria-label": "",
-            "type": "post_object",
-            "instructions": "Valitse etusivun yläosassa näkyvät julkaisut (jos usea, niin karuselli muodostuu automaattisesti).",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": "",
-            "taxonomy": "",
-            "allow_null": 0,
-            "multiple": 1,
-            "return_format": "id",
-            "ui": 1,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_5e2ac0be17809",
-            "label": "404 sisältö",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_5e2ac0cd1780a",
-            "label": "404 sivun sisältö",
-            "name": "404_page_content",
-            "aria-label": "",
-            "type": "wysiwyg",
-            "instructions": "Sivun vasemmalla puolen oleva sisältö. Kissa ilmestyy automaattisesti oikealle puolelle.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
-        {
-            "key": "field_5ebce8126d69a",
-            "label": "Häiriötiedote",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_67b9b159b93af",
-            "label": "Häiriötiedotteen otsikko",
-            "name": "service_fault_title",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "relevanssi_exclude": 0,
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_5ebce84b6d69b",
-            "label": "Häiriötiedotteen viesti",
-            "name": "service_fault_message",
-            "aria-label": "",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
-        {
-            "key": "field_5ebce8636d69c",
-            "label": "Häiriötiedotteen viesti, lue lisää",
-            "name": "service_fault_message_read_more",
-            "aria-label": "",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
-        {
-            "key": "field_5ebce8926d69d",
-            "label": "Häiriötiedotteen teema",
-            "name": "service_fault_theme",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "relevanssi_exclude": 0,
-            "choices": {
-                "info": "Info",
-                "error": "Häiriö"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 1,
-            "allow_in_bindings": 1,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
-            "key": "field_5ebce9286d69e",
-            "label": "Häiriötiedote päällä",
-            "name": "service_fault_message_status",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5ebce95143918",
-            "label": "Ajastettu häiriötiedote",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_67b9b183b93b0",
-            "label": "Ajastetun häiriötiedotteen otsikko",
-            "name": "timed_service_fault_title",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "relevanssi_exclude": 0,
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_5ebce97543919",
-            "label": "Ajastetun häiriötiedotteen viesti",
-            "name": "timed_service_fault_message",
-            "aria-label": "",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
-        {
-            "key": "field_5ebce9874391a",
-            "label": "Ajastetun häiriötiedotteen viesti, lue lisää",
-            "name": "timed_service_fault_message_read_more",
-            "aria-label": "",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
-        {
-            "key": "field_5ebce9af4391b",
-            "label": "Ajastetun häiriötiedotteen teema",
-            "name": "timed_service_fault_theme",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "relevanssi_exclude": 0,
-            "choices": {
-                "info": "Info",
-                "error": "Häiriö"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 1,
-            "allow_in_bindings": 1,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
-            "key": "field_5ebce9e71694c",
-            "label": "Ajastettu häiriötiedote alkaa (päivä)",
-            "name": "timed_service_fault_time_start_date",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "d\/m\/Y",
-            "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
-        },
-        {
-            "key": "field_5ebcebce5a789",
-            "label": "Ajastettu häiriötiedote alkaa (aika)",
-            "name": "timed_service_fault_time_start_time",
-            "aria-label": "",
-            "type": "time_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "H:i",
-            "return_format": "H:i"
-        },
-        {
-            "key": "field_5ebceba91694d",
-            "label": "Ajastettu häiriötiedote loppuu (päivä)",
-            "name": "timed_service_fault_time_end_date",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "d\/m\/Y",
-            "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
-        },
-        {
-            "key": "field_5ebcec035a78a",
-            "label": "Ajastettu häiriötiedote loppuu (aika)",
-            "name": "timed_service_fault_time_end_time",
-            "aria-label": "",
-            "type": "time_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "H:i",
-            "return_format": "H:i"
-        },
-        {
-            "key": "field_5ebcec475a78b",
-            "label": "Dock",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_5ebcec58b1aa8",
-            "label": "Dock osiot",
-            "name": "dock_items",
-            "aria-label": "",
-            "type": "repeater",
-            "instructions": "Näytetään oletuksena ensimmäiset kahdeksan.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "Lisää",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_5ebceca1b1aa9",
-                    "label": "Otsikko",
-                    "name": "dock_title",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": "",
-                    "parent_repeater": "field_5ebcec58b1aa8"
-                },
-                {
-                    "key": "field_5ebcecaeb1aaa",
-                    "label": "Ikoni",
-                    "name": "dock_icon",
-                    "aria-label": "",
-                    "type": "image",
-                    "instructions": "Valinnainen. Jos ei asetettu, näytetään otsikon ensimmäinen kirjain.",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "id",
-                    "preview_size": "thumbnail",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "parent_repeater": "field_5ebcec58b1aa8"
-                },
-                {
-                    "key": "field_5ebcecd6b1aab",
-                    "label": "URL",
-                    "name": "dock_url",
-                    "aria-label": "",
-                    "type": "url",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "parent_repeater": "field_5ebcec58b1aa8"
-                }
-            ]
-        },
-        {
-            "key": "field_5ef58a5e2f710",
-            "label": "Loma-aikalaskuri",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_6a548c5dbdf07",
-            "label": "Piilota laskuri koulutusasteilta",
-            "name": "hide_counter_from_cornerlabels",
-            "aria-label": "",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "cornerlabels",
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "field_type": "checkbox",
-            "allow_in_bindings": 0,
-            "bidirectional": 0,
-            "multiple": 0,
-            "allow_null": 0,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_6a548ce0d6400",
-            "label": "Piilota laskuri elementeistä",
-            "name": "hide_counter_from_elements",
-            "aria-label": "",
-            "type": "checkbox",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "date-box": "Etusivun kalenterilaatikossa",
-                "profile-opener": "Käyttäjävalikossa",
-                "user-settings": "Oma profiili -sivulla"
-            },
-            "default_value": [
-                "date-box",
-                "profile-opener",
-                "user-settings"
-            ],
-            "return_format": "value",
-            "allow_custom": 0,
-            "allow_in_bindings": 0,
-            "layout": "vertical",
-            "toggle": 0,
-            "save_custom": 0,
-            "custom_choice_button_text": "Lisää uusi valinta"
-        },
-        {
-            "key": "field_6a548c4dbdf06",
-            "label": "Suomenkieliset koulut",
-            "name": "",
-            "aria-label": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "new_lines": "wpautop",
-            "esc_html": 0
-        },
-        {
-            "key": "field_5ef9a87c15993",
-            "label": "Näytä syysloman alkuun?",
-            "name": "show_until_autumn",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5ef58aba2f712",
-            "label": "Syysloma alkaa",
-            "name": "holiday_starts_autumn",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5ef9a87c15993",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "d\/m\/Y",
-            "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
-        },
-        {
-            "key": "field_5ef9ba11f4679",
-            "label": "Näytä joululoman alkuun?",
-            "name": "show_until_christmas",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5ef58af52f713",
-            "label": "Joululoma alkaa",
-            "name": "holiday_starts_christmas",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5ef9ba11f4679",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "d\/m\/Y",
-            "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
-        },
-        {
-            "key": "field_5ef9ba29f467a",
-            "label": "Näytä talviloman alkuun?",
-            "name": "show_until_winter",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5ef58b092f714",
-            "label": "Talviloma alkaa",
-            "name": "holiday_starts_winter",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5ef9ba29f467a",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "d\/m\/Y",
-            "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
-        },
-        {
-            "key": "field_5ef9ba43f467b",
-            "label": "Näytä kesäloman alkuun?",
-            "name": "show_until_summer",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5ef58a6e2f711",
-            "label": "Kesäloma alkaa",
-            "name": "holiday_starts_summer",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5ef9ba43f467b",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "d\/m\/Y",
-            "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
-        },
-        {
-            "key": "field_5f3ccc84ad642",
-            "label": "Ruotsinkieliset koulut",
-            "name": "",
-            "aria-label": "",
-            "type": "message",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "new_lines": "wpautop",
-            "esc_html": 0
-        },
-        {
-            "key": "field_5f3ccbcead63a",
-            "label": "Näytä syysloman alkuun? (ruotsinkielinen)",
-            "name": "show_until_autumn_sv",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5f3ccbd2ad63b",
-            "label": "Syysloma alkaa (ruotsinkielinen)",
-            "name": "holiday_starts_autumn_sv",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5f3ccbcead63a",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "d\/m\/Y",
-            "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
-        },
-        {
-            "key": "field_5f3ccbd6ad63c",
-            "label": "Näytä joululoman alkuun? (ruotsinkielinen)",
-            "name": "show_until_christmas_sv",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5f3ccbdaad63d",
-            "label": "Joululoma alkaa (ruotsinkielinen)",
-            "name": "holiday_starts_christmas_sv",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5f3ccbd6ad63c",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "d\/m\/Y",
-            "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
-        },
-        {
-            "key": "field_5f3ccbe4ad63e",
-            "label": "Näytä talviloman alkuun? (ruotsinkielinen)",
-            "name": "show_until_winter_sv",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5f3ccbe8ad63f",
-            "label": "Talviloma alkaa (ruotsinkielinen)",
-            "name": "holiday_starts_winter_sv",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5f3ccbe4ad63e",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "d\/m\/Y",
-            "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
-        },
-        {
-            "key": "field_5f3ccbecad640",
-            "label": "Näytä kesäloman alkuun? (ruotsinkielinen)",
-            "name": "show_until_summer_sv",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_5f3ccbf0ad641",
-            "label": "Kesäloma alkaa (ruotsinkielinen)",
-            "name": "holiday_starts_summer_sv",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5f3ccbecad640",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "d\/m\/Y",
-            "return_format": "Y-m-d",
-            "first_day": 1,
-            "default_to_current_date": 0
-        },
-        {
-            "key": "field_5fc11224adc92",
-            "label": "Ajaltelmat",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_5fc11235adc93",
-            "label": "Ajatelmat",
-            "name": "student_aphorism",
-            "aria-label": "",
-            "type": "repeater",
-            "instructions": "Etusivulla näkyvät ajatelmat. Näistä näytetään satunnaisesti yksi.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "Lisää ajatelma",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_5fc11281adc94",
-                    "label": "Ajatelma",
-                    "name": "aphorism",
-                    "aria-label": "",
-                    "type": "textarea",
-                    "instructions": "Kirjoita tähän ajatelma",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "maxlength": "",
-                    "rows": "",
-                    "new_lines": "",
-                    "parent_repeater": "field_5fc11235adc93"
-                },
-                {
-                    "key": "field_5fc11290adc95",
-                    "label": "Kenen?",
-                    "name": "by_who",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "esim. koululainen",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": "",
-                    "parent_repeater": "field_5fc11235adc93"
-                }
-            ]
-        },
-        {
-            "key": "field_625672704dd02",
-            "label": "Oppiaste-asetukset",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_625672844dd03",
-            "label": "Peruskoulu kategoria",
-            "name": "oppiaste_term_peruskoulu",
-            "aria-label": "",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "cornerlabels",
-            "field_type": "select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "multiple": 0,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_625672be4dd04",
-            "label": "Lukio kategoria",
-            "name": "oppiaste_term_lukio",
-            "aria-label": "",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "cornerlabels",
-            "field_type": "select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "multiple": 0,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_625672d74dd05",
-            "label": "Ammattikoulu kategoria",
-            "name": "oppiaste_term_ammattikoulu",
-            "aria-label": "",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "cornerlabels",
-            "field_type": "select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "multiple": 0,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_6278c38f35c5d",
-            "label": "Varhaiskasvatus kategoria",
-            "name": "oppiaste_term_varhaiskasvatus",
-            "aria-label": "",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "cornerlabels",
-            "field_type": "select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "multiple": 0,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_62ea2b5996e8b",
-            "label": "Vapaan sivistystyön kategoria",
-            "name": "oppiaste_term_vapaa_sivistystyo",
-            "aria-label": "",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "cornerlabels",
-            "field_type": "select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "multiple": 0,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_6278c3b435c5e",
-            "label": "Hallinnon kategoria",
-            "name": "oppiaste_term_virasto",
-            "aria-label": "",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "cornerlabels",
-            "field_type": "select",
-            "allow_null": 0,
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "multiple": 0,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_625673004dd06",
-            "label": "Oletuskategoria",
-            "name": "oppiaste_term_default",
-            "aria-label": "",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "taxonomy": "cornerlabels",
-            "add_term": 0,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "field_type": "select",
-            "allow_null": 1,
-            "allow_in_bindings": 1,
-            "bidirectional": 0,
-            "multiple": 0,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_6892028207db3",
-            "label": "Intra",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_6892036a2026f",
-            "label": "Otsikko",
-            "name": "intrabox_title",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_689204a320270",
-            "label": "Sisältö",
-            "name": "intrabox_content",
-            "aria-label": "",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "allow_in_bindings": 0,
-            "tabs": "all",
-            "toolbar": "basic",
-            "media_upload": 0,
-            "delay": 0
-        },
-        {
-            "key": "field_689204f920271",
-            "label": "Taustakuva",
-            "name": "intrabox_bgimage",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "url",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0,
-            "preview_size": "medium"
-        },
-        {
-            "key": "field_6892052a20272",
-            "label": "Linkit",
-            "name": "intrabox_links",
-            "aria-label": "",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "layout": "row",
-            "pagination": 0,
-            "min": 0,
-            "max": 0,
-            "collapsed": "",
-            "button_label": "Lisää rivi",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_6892054a20273",
-                    "label": "Linkki",
-                    "name": "intrabox_link",
-                    "aria-label": "",
-                    "type": "link",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array",
-                    "allow_in_bindings": 0,
-                    "parent_repeater": "field_6892052a20272"
-                }
-            ]
-        },
-        {
-            "key": "field_6892057320274",
-            "label": "Kirjautumisnappi",
-            "name": "intrabox_loginbtn",
-            "aria-label": "",
-            "type": "link",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "allow_in_bindings": 0
-        },
-        {
-            "key": "field_68ac589748b9f",
-            "label": "Etusivu",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_68ac58c148ba0",
-            "label": "Heron otsikko",
-            "name": "home_hero_title",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_68ac58db48ba1",
-            "label": "Heron alaotsikko",
-            "name": "home_hero_subtitle",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_68aec419b7ad7",
-            "label": "Heron alaotsikko (rivi 2)",
-            "name": "home_hero_subtitle_2",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_68ac58fa48ba2",
-            "label": "Heron kuva",
-            "name": "home_hero_image",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0,
-            "preview_size": "medium"
-        },
-        {
-            "key": "field_68ac594c48ba4",
-            "label": "Heron väri",
-            "name": "home_hero_color",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "primary": "Oletus",
-                "suomenlinna": "Suomenlinna",
-                "engel": "Engel",
-                "copper": "Kupari",
-                "fog": "Sumu",
-                "bus": "Bussi"
-            },
-            "default_value": "vihrea",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 1,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
-            "key": "field_68b8271f1f7a4",
-            "label": "Uutiset",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_68b8271e1f7a3",
-            "label": "Heron otsikko",
-            "name": "news_hero_title",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_68b8271d1f7a2",
-            "label": "Heron alaotsikko",
-            "name": "news_hero_subtitle",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_68b827171f7a1",
-            "label": "Heron kuva",
-            "name": "news_hero_image",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0,
-            "preview_size": "medium"
-        },
-        {
-            "key": "field_68b827141f7a0",
-            "label": "Heron väri",
-            "name": "news_hero_color",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "primary": "Oletus",
-                "suomenlinna": "Suomenlinna",
-                "engel": "Engel",
-                "copper": "Kupari",
-                "fog": "Sumu",
-                "bus": "Bussi",
-                "coat-of-arms": "Vaakuna"
-            },
-            "default_value": "vihrea",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 1,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "acf-options-opehuone-asetukset"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "show_in_rest": 0,
-    "display_title": "",
-    "allow_ai_access": false,
-    "ai_description": "",
-    "modified": 1784007921
+	"key": "group_5e1c5041ea8a8",
+	"title": "Opehuone asetukset",
+	"fields": [
+		{
+			"key": "field_5e1c50babc45e",
+			"label": "Yleiset asetukset",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_5e1c50d3bc45f",
+			"label": "Julkaisun oletuskuva",
+			"name": "post_default_image",
+			"aria-label": "",
+			"type": "image",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"return_format": "array",
+			"preview_size": "medium",
+			"library": "all",
+			"min_width": "",
+			"min_height": "",
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": ""
+		},
+		{
+			"key": "field_684ef3f81a61f",
+			"label": "Koulutukset sivu",
+			"name": "trainings_page",
+			"aria-label": "",
+			"type": "post_object",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": ["page"],
+			"post_status": ["publish"],
+			"taxonomy": "",
+			"return_format": "id",
+			"multiple": 0,
+			"allow_null": 0,
+			"allow_in_bindings": 0,
+			"bidirectional": 0,
+			"ui": 1,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_5e1c544c5492d",
+			"label": "Suosikit sivu",
+			"name": "favorites_page",
+			"aria-label": "",
+			"type": "post_object",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": ["page"],
+			"taxonomy": "",
+			"allow_null": 0,
+			"multiple": 0,
+			"return_format": "id",
+			"ui": 1,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_628cd6945f71d",
+			"label": "Pin ikonin väri",
+			"name": "pin_color_theme",
+			"aria-label": "",
+			"type": "select",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"metro": "Metro",
+				"hopea": "Hopea",
+				"kesa": "Kesä",
+				"sumu": "Sumu",
+				"suomenlinna": "Suomenlinna"
+			},
+			"default_value": "metro",
+			"allow_null": 0,
+			"multiple": 0,
+			"ui": 0,
+			"return_format": "value",
+			"ajax": 0,
+			"placeholder": "",
+			"create_options": 0,
+			"save_options": 0
+		},
+		{
+			"key": "field_5fbb9e15f7e02",
+			"label": "Käyttäjä asetukset sivu",
+			"name": "user_settings_page",
+			"aria-label": "",
+			"type": "post_object",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": ["page"],
+			"taxonomy": "",
+			"allow_null": 0,
+			"multiple": 0,
+			"return_format": "id",
+			"ui": 1,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_5fc1109136eb3",
+			"label": "Dock asetukset sivu",
+			"name": "dock_settings_page",
+			"aria-label": "",
+			"type": "post_object",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": ["page"],
+			"taxonomy": "",
+			"allow_null": 0,
+			"multiple": 0,
+			"return_format": "id",
+			"ui": 1,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_5fbb9e32f7e03",
+			"label": "Tietoja sivusta -sivu",
+			"name": "about_page",
+			"aria-label": "",
+			"type": "post_object",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": ["page"],
+			"taxonomy": "",
+			"allow_null": 0,
+			"multiple": 0,
+			"return_format": "id",
+			"ui": 1,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_67c56a5f692f3",
+			"label": "Ota yhteyttä -sivu",
+			"name": "contact_page",
+			"aria-label": "",
+			"type": "post_object",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"relevanssi_exclude": 0,
+			"post_type": ["page"],
+			"post_status": "",
+			"taxonomy": "",
+			"return_format": "id",
+			"multiple": 0,
+			"allow_null": 0,
+			"allow_in_bindings": 1,
+			"bidirectional": 0,
+			"ui": 1,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_5e1c5102bc460",
+			"label": "Etusivun julkaisunostot",
+			"name": "front_page_post_lifts",
+			"aria-label": "",
+			"type": "post_object",
+			"instructions": "Valitse etusivun yläosassa näkyvät julkaisut (jos usea, niin karuselli muodostuu automaattisesti).",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"post_type": "",
+			"taxonomy": "",
+			"allow_null": 0,
+			"multiple": 1,
+			"return_format": "id",
+			"ui": 1,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_6aab8bc6e1ffc",
+			"label": "Sallitut upotukset",
+			"name": "allowed_embeds",
+			"aria-label": "",
+			"type": "repeater",
+			"instructions": "Huom! Syötä tähän pelkkä domain - ei koko url-osoitetta.\r\nEsimerkkinä: thinglink.com",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"layout": "table",
+			"pagination": 0,
+			"min": 0,
+			"max": 0,
+			"collapsed": "",
+			"button_label": "Lisää rivi",
+			"rows_per_page": 20,
+			"sub_fields": [
+				{
+					"key": "field_6aab8c06e1ffd",
+					"label": "Source (url)",
+					"name": "source_url",
+					"aria-label": "",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"maxlength": "",
+					"allow_in_bindings": 0,
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"parent_repeater": "field_6aab8bc6e1ffc"
+				},
+				{
+					"key": "field_6aab8c10e1ffe",
+					"label": "Tyyppi",
+					"name": "tag_type",
+					"aria-label": "",
+					"type": "button_group",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"choices": {
+						"iframe": "iFrame",
+						"script": "Script"
+					},
+					"default_value": "iframe : iFrame",
+					"return_format": "value",
+					"allow_null": 0,
+					"allow_in_bindings": 0,
+					"layout": "horizontal",
+					"parent_repeater": "field_6aab8bc6e1ffc"
+				}
+			]
+		},
+		{
+			"key": "field_5e2ac0be17809",
+			"label": "404 sisältö",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_5e2ac0cd1780a",
+			"label": "404 sivun sisältö",
+			"name": "404_page_content",
+			"aria-label": "",
+			"type": "wysiwyg",
+			"instructions": "Sivun vasemmalla puolen oleva sisältö. Kissa ilmestyy automaattisesti oikealle puolelle.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
+		{
+			"key": "field_5ebce8126d69a",
+			"label": "Häiriötiedote",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_67b9b159b93af",
+			"label": "Häiriötiedotteen otsikko",
+			"name": "service_fault_title",
+			"aria-label": "",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"relevanssi_exclude": 0,
+			"default_value": "",
+			"maxlength": "",
+			"allow_in_bindings": 0,
+			"placeholder": "",
+			"prepend": "",
+			"append": ""
+		},
+		{
+			"key": "field_5ebce84b6d69b",
+			"label": "Häiriötiedotteen viesti",
+			"name": "service_fault_message",
+			"aria-label": "",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
+		{
+			"key": "field_5ebce8636d69c",
+			"label": "Häiriötiedotteen viesti, lue lisää",
+			"name": "service_fault_message_read_more",
+			"aria-label": "",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
+		{
+			"key": "field_5ebce8926d69d",
+			"label": "Häiriötiedotteen teema",
+			"name": "service_fault_theme",
+			"aria-label": "",
+			"type": "select",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"relevanssi_exclude": 0,
+			"choices": {
+				"info": "Info",
+				"error": "Häiriö"
+			},
+			"default_value": false,
+			"return_format": "value",
+			"multiple": 0,
+			"allow_null": 1,
+			"allow_in_bindings": 1,
+			"ui": 0,
+			"ajax": 0,
+			"placeholder": "",
+			"create_options": 0,
+			"save_options": 0
+		},
+		{
+			"key": "field_5ebce9286d69e",
+			"label": "Häiriötiedote päällä",
+			"name": "service_fault_message_status",
+			"aria-label": "",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_5ebce95143918",
+			"label": "Ajastettu häiriötiedote",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_67b9b183b93b0",
+			"label": "Ajastetun häiriötiedotteen otsikko",
+			"name": "timed_service_fault_title",
+			"aria-label": "",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"relevanssi_exclude": 0,
+			"default_value": "",
+			"maxlength": "",
+			"allow_in_bindings": 0,
+			"placeholder": "",
+			"prepend": "",
+			"append": ""
+		},
+		{
+			"key": "field_5ebce97543919",
+			"label": "Ajastetun häiriötiedotteen viesti",
+			"name": "timed_service_fault_message",
+			"aria-label": "",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
+		{
+			"key": "field_5ebce9874391a",
+			"label": "Ajastetun häiriötiedotteen viesti, lue lisää",
+			"name": "timed_service_fault_message_read_more",
+			"aria-label": "",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"tabs": "all",
+			"toolbar": "full",
+			"media_upload": 1,
+			"delay": 0
+		},
+		{
+			"key": "field_5ebce9af4391b",
+			"label": "Ajastetun häiriötiedotteen teema",
+			"name": "timed_service_fault_theme",
+			"aria-label": "",
+			"type": "select",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"relevanssi_exclude": 0,
+			"choices": {
+				"info": "Info",
+				"error": "Häiriö"
+			},
+			"default_value": false,
+			"return_format": "value",
+			"multiple": 0,
+			"allow_null": 1,
+			"allow_in_bindings": 1,
+			"ui": 0,
+			"ajax": 0,
+			"placeholder": "",
+			"create_options": 0,
+			"save_options": 0
+		},
+		{
+			"key": "field_5ebce9e71694c",
+			"label": "Ajastettu häiriötiedote alkaa (päivä)",
+			"name": "timed_service_fault_time_start_date",
+			"aria-label": "",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "d\/m\/Y",
+			"return_format": "Y-m-d",
+			"first_day": 1,
+			"default_to_current_date": 0
+		},
+		{
+			"key": "field_5ebcebce5a789",
+			"label": "Ajastettu häiriötiedote alkaa (aika)",
+			"name": "timed_service_fault_time_start_time",
+			"aria-label": "",
+			"type": "time_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "H:i",
+			"return_format": "H:i"
+		},
+		{
+			"key": "field_5ebceba91694d",
+			"label": "Ajastettu häiriötiedote loppuu (päivä)",
+			"name": "timed_service_fault_time_end_date",
+			"aria-label": "",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "d\/m\/Y",
+			"return_format": "Y-m-d",
+			"first_day": 1,
+			"default_to_current_date": 0
+		},
+		{
+			"key": "field_5ebcec035a78a",
+			"label": "Ajastettu häiriötiedote loppuu (aika)",
+			"name": "timed_service_fault_time_end_time",
+			"aria-label": "",
+			"type": "time_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "H:i",
+			"return_format": "H:i"
+		},
+		{
+			"key": "field_5ebcec475a78b",
+			"label": "Dock",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_5ebcec58b1aa8",
+			"label": "Dock osiot",
+			"name": "dock_items",
+			"aria-label": "",
+			"type": "repeater",
+			"instructions": "Näytetään oletuksena ensimmäiset kahdeksan.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"collapsed": "",
+			"min": 0,
+			"max": 0,
+			"layout": "table",
+			"button_label": "Lisää",
+			"rows_per_page": 20,
+			"sub_fields": [
+				{
+					"key": "field_5ebceca1b1aa9",
+					"label": "Otsikko",
+					"name": "dock_title",
+					"aria-label": "",
+					"type": "text",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"parent_repeater": "field_5ebcec58b1aa8"
+				},
+				{
+					"key": "field_5ebcecaeb1aaa",
+					"label": "Ikoni",
+					"name": "dock_icon",
+					"aria-label": "",
+					"type": "image",
+					"instructions": "Valinnainen. Jos ei asetettu, näytetään otsikon ensimmäinen kirjain.",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"return_format": "id",
+					"preview_size": "thumbnail",
+					"library": "all",
+					"min_width": "",
+					"min_height": "",
+					"min_size": "",
+					"max_width": "",
+					"max_height": "",
+					"max_size": "",
+					"mime_types": "",
+					"parent_repeater": "field_5ebcec58b1aa8"
+				},
+				{
+					"key": "field_5ebcecd6b1aab",
+					"label": "URL",
+					"name": "dock_url",
+					"aria-label": "",
+					"type": "url",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"parent_repeater": "field_5ebcec58b1aa8"
+				}
+			]
+		},
+		{
+			"key": "field_5ef58a5e2f710",
+			"label": "Loma-aikalaskuri",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_6a548c5dbdf07",
+			"label": "Piilota laskuri koulutusasteilta",
+			"name": "hide_counter_from_cornerlabels",
+			"aria-label": "",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "cornerlabels",
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"field_type": "checkbox",
+			"allow_in_bindings": 0,
+			"bidirectional": 0,
+			"multiple": 0,
+			"allow_null": 0,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_6a548ce0d6400",
+			"label": "Piilota laskuri elementeistä",
+			"name": "hide_counter_from_elements",
+			"aria-label": "",
+			"type": "checkbox",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"date-box": "Etusivun kalenterilaatikossa",
+				"profile-opener": "Käyttäjävalikossa",
+				"user-settings": "Oma profiili -sivulla"
+			},
+			"default_value": ["date-box", "profile-opener", "user-settings"],
+			"return_format": "value",
+			"allow_custom": 0,
+			"allow_in_bindings": 0,
+			"layout": "vertical",
+			"toggle": 0,
+			"save_custom": 0,
+			"custom_choice_button_text": "Lisää uusi valinta"
+		},
+		{
+			"key": "field_6a548c4dbdf06",
+			"label": "Suomenkieliset koulut",
+			"name": "",
+			"aria-label": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"new_lines": "wpautop",
+			"esc_html": 0
+		},
+		{
+			"key": "field_5ef9a87c15993",
+			"label": "Näytä syysloman alkuun?",
+			"name": "show_until_autumn",
+			"aria-label": "",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_5ef58aba2f712",
+			"label": "Syysloma alkaa",
+			"name": "holiday_starts_autumn",
+			"aria-label": "",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_5ef9a87c15993",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "d\/m\/Y",
+			"return_format": "Y-m-d",
+			"first_day": 1,
+			"default_to_current_date": 0
+		},
+		{
+			"key": "field_5ef9ba11f4679",
+			"label": "Näytä joululoman alkuun?",
+			"name": "show_until_christmas",
+			"aria-label": "",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_5ef58af52f713",
+			"label": "Joululoma alkaa",
+			"name": "holiday_starts_christmas",
+			"aria-label": "",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_5ef9ba11f4679",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "d\/m\/Y",
+			"return_format": "Y-m-d",
+			"first_day": 1,
+			"default_to_current_date": 0
+		},
+		{
+			"key": "field_5ef9ba29f467a",
+			"label": "Näytä talviloman alkuun?",
+			"name": "show_until_winter",
+			"aria-label": "",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_5ef58b092f714",
+			"label": "Talviloma alkaa",
+			"name": "holiday_starts_winter",
+			"aria-label": "",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_5ef9ba29f467a",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "d\/m\/Y",
+			"return_format": "Y-m-d",
+			"first_day": 1,
+			"default_to_current_date": 0
+		},
+		{
+			"key": "field_5ef9ba43f467b",
+			"label": "Näytä kesäloman alkuun?",
+			"name": "show_until_summer",
+			"aria-label": "",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_5ef58a6e2f711",
+			"label": "Kesäloma alkaa",
+			"name": "holiday_starts_summer",
+			"aria-label": "",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_5ef9ba43f467b",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "d\/m\/Y",
+			"return_format": "Y-m-d",
+			"first_day": 1,
+			"default_to_current_date": 0
+		},
+		{
+			"key": "field_5f3ccc84ad642",
+			"label": "Ruotsinkieliset koulut",
+			"name": "",
+			"aria-label": "",
+			"type": "message",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"new_lines": "wpautop",
+			"esc_html": 0
+		},
+		{
+			"key": "field_5f3ccbcead63a",
+			"label": "Näytä syysloman alkuun? (ruotsinkielinen)",
+			"name": "show_until_autumn_sv",
+			"aria-label": "",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_5f3ccbd2ad63b",
+			"label": "Syysloma alkaa (ruotsinkielinen)",
+			"name": "holiday_starts_autumn_sv",
+			"aria-label": "",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_5f3ccbcead63a",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "d\/m\/Y",
+			"return_format": "Y-m-d",
+			"first_day": 1,
+			"default_to_current_date": 0
+		},
+		{
+			"key": "field_5f3ccbd6ad63c",
+			"label": "Näytä joululoman alkuun? (ruotsinkielinen)",
+			"name": "show_until_christmas_sv",
+			"aria-label": "",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_5f3ccbdaad63d",
+			"label": "Joululoma alkaa (ruotsinkielinen)",
+			"name": "holiday_starts_christmas_sv",
+			"aria-label": "",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_5f3ccbd6ad63c",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "d\/m\/Y",
+			"return_format": "Y-m-d",
+			"first_day": 1,
+			"default_to_current_date": 0
+		},
+		{
+			"key": "field_5f3ccbe4ad63e",
+			"label": "Näytä talviloman alkuun? (ruotsinkielinen)",
+			"name": "show_until_winter_sv",
+			"aria-label": "",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_5f3ccbe8ad63f",
+			"label": "Talviloma alkaa (ruotsinkielinen)",
+			"name": "holiday_starts_winter_sv",
+			"aria-label": "",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_5f3ccbe4ad63e",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "d\/m\/Y",
+			"return_format": "Y-m-d",
+			"first_day": 1,
+			"default_to_current_date": 0
+		},
+		{
+			"key": "field_5f3ccbecad640",
+			"label": "Näytä kesäloman alkuun? (ruotsinkielinen)",
+			"name": "show_until_summer_sv",
+			"aria-label": "",
+			"type": "true_false",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"message": "",
+			"default_value": 0,
+			"ui": 0,
+			"ui_on_text": "",
+			"ui_off_text": ""
+		},
+		{
+			"key": "field_5f3ccbf0ad641",
+			"label": "Kesäloma alkaa (ruotsinkielinen)",
+			"name": "holiday_starts_summer_sv",
+			"aria-label": "",
+			"type": "date_picker",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": [
+				[
+					{
+						"field": "field_5f3ccbecad640",
+						"operator": "==",
+						"value": "1"
+					}
+				]
+			],
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"display_format": "d\/m\/Y",
+			"return_format": "Y-m-d",
+			"first_day": 1,
+			"default_to_current_date": 0
+		},
+		{
+			"key": "field_5fc11224adc92",
+			"label": "Ajaltelmat",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_5fc11235adc93",
+			"label": "Ajatelmat",
+			"name": "student_aphorism",
+			"aria-label": "",
+			"type": "repeater",
+			"instructions": "Etusivulla näkyvät ajatelmat. Näistä näytetään satunnaisesti yksi.",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"collapsed": "",
+			"min": 0,
+			"max": 0,
+			"layout": "table",
+			"button_label": "Lisää ajatelma",
+			"rows_per_page": 20,
+			"sub_fields": [
+				{
+					"key": "field_5fc11281adc94",
+					"label": "Ajatelma",
+					"name": "aphorism",
+					"aria-label": "",
+					"type": "textarea",
+					"instructions": "Kirjoita tähän ajatelma",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"maxlength": "",
+					"rows": "",
+					"new_lines": "",
+					"parent_repeater": "field_5fc11235adc93"
+				},
+				{
+					"key": "field_5fc11290adc95",
+					"label": "Kenen?",
+					"name": "by_who",
+					"aria-label": "",
+					"type": "text",
+					"instructions": "esim. koululainen",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"default_value": "",
+					"placeholder": "",
+					"prepend": "",
+					"append": "",
+					"maxlength": "",
+					"parent_repeater": "field_5fc11235adc93"
+				}
+			]
+		},
+		{
+			"key": "field_625672704dd02",
+			"label": "Oppiaste-asetukset",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_625672844dd03",
+			"label": "Peruskoulu kategoria",
+			"name": "oppiaste_term_peruskoulu",
+			"aria-label": "",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "cornerlabels",
+			"field_type": "select",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"multiple": 0,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_625672be4dd04",
+			"label": "Lukio kategoria",
+			"name": "oppiaste_term_lukio",
+			"aria-label": "",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "cornerlabels",
+			"field_type": "select",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"multiple": 0,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_625672d74dd05",
+			"label": "Ammattikoulu kategoria",
+			"name": "oppiaste_term_ammattikoulu",
+			"aria-label": "",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "cornerlabels",
+			"field_type": "select",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"multiple": 0,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_6278c38f35c5d",
+			"label": "Varhaiskasvatus kategoria",
+			"name": "oppiaste_term_varhaiskasvatus",
+			"aria-label": "",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "cornerlabels",
+			"field_type": "select",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"multiple": 0,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_62ea2b5996e8b",
+			"label": "Vapaan sivistystyön kategoria",
+			"name": "oppiaste_term_vapaa_sivistystyo",
+			"aria-label": "",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "cornerlabels",
+			"field_type": "select",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"multiple": 0,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_6278c3b435c5e",
+			"label": "Hallinnon kategoria",
+			"name": "oppiaste_term_virasto",
+			"aria-label": "",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "cornerlabels",
+			"field_type": "select",
+			"allow_null": 0,
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"multiple": 0,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_625673004dd06",
+			"label": "Oletuskategoria",
+			"name": "oppiaste_term_default",
+			"aria-label": "",
+			"type": "taxonomy",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"taxonomy": "cornerlabels",
+			"add_term": 0,
+			"save_terms": 0,
+			"load_terms": 0,
+			"return_format": "id",
+			"field_type": "select",
+			"allow_null": 1,
+			"allow_in_bindings": 1,
+			"bidirectional": 0,
+			"multiple": 0,
+			"bidirectional_target": []
+		},
+		{
+			"key": "field_6892028207db3",
+			"label": "Intra",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_6892036a2026f",
+			"label": "Otsikko",
+			"name": "intrabox_title",
+			"aria-label": "",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"maxlength": "",
+			"allow_in_bindings": 0,
+			"placeholder": "",
+			"prepend": "",
+			"append": ""
+		},
+		{
+			"key": "field_689204a320270",
+			"label": "Sisältö",
+			"name": "intrabox_content",
+			"aria-label": "",
+			"type": "wysiwyg",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"allow_in_bindings": 0,
+			"tabs": "all",
+			"toolbar": "basic",
+			"media_upload": 0,
+			"delay": 0
+		},
+		{
+			"key": "field_689204f920271",
+			"label": "Taustakuva",
+			"name": "intrabox_bgimage",
+			"aria-label": "",
+			"type": "image",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"return_format": "url",
+			"library": "all",
+			"min_width": "",
+			"min_height": "",
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "",
+			"allow_in_bindings": 0,
+			"preview_size": "medium"
+		},
+		{
+			"key": "field_6892052a20272",
+			"label": "Linkit",
+			"name": "intrabox_links",
+			"aria-label": "",
+			"type": "repeater",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"layout": "row",
+			"pagination": 0,
+			"min": 0,
+			"max": 0,
+			"collapsed": "",
+			"button_label": "Lisää rivi",
+			"rows_per_page": 20,
+			"sub_fields": [
+				{
+					"key": "field_6892054a20273",
+					"label": "Linkki",
+					"name": "intrabox_link",
+					"aria-label": "",
+					"type": "link",
+					"instructions": "",
+					"required": 0,
+					"conditional_logic": 0,
+					"wrapper": {
+						"width": "",
+						"class": "",
+						"id": ""
+					},
+					"return_format": "array",
+					"allow_in_bindings": 0,
+					"parent_repeater": "field_6892052a20272"
+				}
+			]
+		},
+		{
+			"key": "field_6892057320274",
+			"label": "Kirjautumisnappi",
+			"name": "intrabox_loginbtn",
+			"aria-label": "",
+			"type": "link",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"return_format": "array",
+			"allow_in_bindings": 0
+		},
+		{
+			"key": "field_68ac589748b9f",
+			"label": "Etusivu",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_68ac58c148ba0",
+			"label": "Heron otsikko",
+			"name": "home_hero_title",
+			"aria-label": "",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"maxlength": "",
+			"allow_in_bindings": 0,
+			"placeholder": "",
+			"prepend": "",
+			"append": ""
+		},
+		{
+			"key": "field_68ac58db48ba1",
+			"label": "Heron alaotsikko",
+			"name": "home_hero_subtitle",
+			"aria-label": "",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"maxlength": "",
+			"allow_in_bindings": 0,
+			"placeholder": "",
+			"prepend": "",
+			"append": ""
+		},
+		{
+			"key": "field_68aec419b7ad7",
+			"label": "Heron alaotsikko (rivi 2)",
+			"name": "home_hero_subtitle_2",
+			"aria-label": "",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"maxlength": "",
+			"allow_in_bindings": 0,
+			"placeholder": "",
+			"prepend": "",
+			"append": ""
+		},
+		{
+			"key": "field_68ac58fa48ba2",
+			"label": "Heron kuva",
+			"name": "home_hero_image",
+			"aria-label": "",
+			"type": "image",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"return_format": "array",
+			"library": "all",
+			"min_width": "",
+			"min_height": "",
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "",
+			"allow_in_bindings": 0,
+			"preview_size": "medium"
+		},
+		{
+			"key": "field_68ac594c48ba4",
+			"label": "Heron väri",
+			"name": "home_hero_color",
+			"aria-label": "",
+			"type": "select",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"primary": "Oletus",
+				"suomenlinna": "Suomenlinna",
+				"engel": "Engel",
+				"copper": "Kupari",
+				"fog": "Sumu",
+				"bus": "Bussi"
+			},
+			"default_value": "vihrea",
+			"return_format": "value",
+			"multiple": 0,
+			"allow_null": 0,
+			"allow_in_bindings": 1,
+			"ui": 0,
+			"ajax": 0,
+			"placeholder": "",
+			"create_options": 0,
+			"save_options": 0
+		},
+		{
+			"key": "field_68b8271f1f7a4",
+			"label": "Uutiset",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_68b8271e1f7a3",
+			"label": "Heron otsikko",
+			"name": "news_hero_title",
+			"aria-label": "",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"maxlength": "",
+			"allow_in_bindings": 0,
+			"placeholder": "",
+			"prepend": "",
+			"append": ""
+		},
+		{
+			"key": "field_68b8271d1f7a2",
+			"label": "Heron alaotsikko",
+			"name": "news_hero_subtitle",
+			"aria-label": "",
+			"type": "text",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"default_value": "",
+			"maxlength": "",
+			"allow_in_bindings": 0,
+			"placeholder": "",
+			"prepend": "",
+			"append": ""
+		},
+		{
+			"key": "field_68b827171f7a1",
+			"label": "Heron kuva",
+			"name": "news_hero_image",
+			"aria-label": "",
+			"type": "image",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"return_format": "array",
+			"library": "all",
+			"min_width": "",
+			"min_height": "",
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "",
+			"allow_in_bindings": 0,
+			"preview_size": "medium"
+		},
+		{
+			"key": "field_68b827141f7a0",
+			"label": "Heron väri",
+			"name": "news_hero_color",
+			"aria-label": "",
+			"type": "select",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "50",
+				"class": "",
+				"id": ""
+			},
+			"choices": {
+				"primary": "Oletus",
+				"suomenlinna": "Suomenlinna",
+				"engel": "Engel",
+				"copper": "Kupari",
+				"fog": "Sumu",
+				"bus": "Bussi",
+				"coat-of-arms": "Vaakuna"
+			},
+			"default_value": "vihrea",
+			"return_format": "value",
+			"multiple": 0,
+			"allow_null": 0,
+			"allow_in_bindings": 1,
+			"ui": 0,
+			"ajax": 0,
+			"placeholder": "",
+			"create_options": 0,
+			"save_options": 0
+		},
+		{
+			"key": "field_6ab3c661bb5a9",
+			"label": "Oma profiili",
+			"name": "",
+			"aria-label": "",
+			"type": "tab",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"placement": "top",
+			"endpoint": 0,
+			"selected": 0
+		},
+		{
+			"key": "field_6ab3c667bb5aa",
+			"label": "Heron kuva",
+			"name": "profile_hero_image",
+			"aria-label": "",
+			"type": "image",
+			"instructions": "",
+			"required": 0,
+			"conditional_logic": 0,
+			"wrapper": {
+				"width": "",
+				"class": "",
+				"id": ""
+			},
+			"return_format": "array",
+			"library": "all",
+			"min_width": "",
+			"min_height": "",
+			"min_size": "",
+			"max_width": "",
+			"max_height": "",
+			"max_size": "",
+			"mime_types": "",
+			"allow_in_bindings": 0,
+			"preview_size": "medium"
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "acf-options-opehuone-asetukset"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "",
+	"show_in_rest": 0,
+	"display_title": "",
+	"allow_ai_access": false,
+	"ai_description": "",
+	"modified": 1790166644
 }
