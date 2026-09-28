@@ -86,7 +86,7 @@ $swedish_names_list = $day_service->get_names_by_type( $day_info_service_data, '
             </div>
         </div>
 
-        <?php if ( is_user_logged_in() ) : ?>
+        <?php if ( is_user_logged_in() && ! hide_holiday_counter( 'date-box' ) ) : ?>
             <div class="date-box-row">
                 <div class="date-box-col holiday-countdown">
                     <?php get_template_part( 'partials/time-until' ); ?>
