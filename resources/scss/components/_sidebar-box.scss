@@ -90,7 +90,7 @@
 	&__sub-button {
 		display: inline-flex;
 		flex-direction: column;
-		gap: 1.5rem;
+		gap: var(--opehuone--spacing--x-small);
 
 		.button {
 			@include create-button(true);
@@ -113,11 +113,30 @@
 					}
 				}
 			}
+
 			&--secondary {
 				justify-content: flex-start;
 				background: transparent;
 				color: #000;
 				padding: 0.625rem 1rem;
+
+				@include hover-focus {
+					background-color: #000;
+					color: #fff;
+					border-color: #000;
+
+					&:focus {
+						outline: #000 solid 3px;
+					}
+
+					svg {
+						path {
+							-webkit-transition: 0.3s;
+							transition: 0.3s;
+							fill: #fff;
+						}
+					}
+				}
 
 				svg {
 					&:last-child {

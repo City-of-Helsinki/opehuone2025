@@ -7,10 +7,10 @@ use Opehuone\Helpers;
 $current_user          = wp_get_current_user();
 $cornerlabels          = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
 $user_data             = get_user_meta( $current_user->ID, 'user_data', true );
-$school_name           = OppiSchoolPicker\get_school_name( $user_data );
-$school_url            = OppiSchoolPicker\get_school_url( $user_data );
-$school_lunch_url      = OppiSchoolPicker\get_lounas_url ( $user_data );
-$school_sharepoint_url = ""; // This needs to be added. Atm. can't get from School-picker plugin?
+$school_name           = function_exists( 'OppiSchoolPicker\\get_school_name' ) ? OppiSchoolPicker\get_school_name( $user_data ) : '';
+$school_url            = function_exists( 'OppiSchoolPicker\\get_school_url' ) ? OppiSchoolPicker\get_school_url( $user_data ) : '';
+$school_lunch_url      = function_exists( 'OppiSchoolPicker\\get_lounas_url' ) ? OppiSchoolPicker\get_lounas_url( $user_data ) : '';
+$school_internal_url   = function_exists( 'OppiSchoolPicker\\get_staff_internal_link' ) ? OppiSchoolPicker\get_staff_internal_link( $user_data ) : '';
 
 if ( empty( $user_data ) ) {
 	return;
@@ -39,8 +39,8 @@ if ( empty( $user_data ) ) {
 				<?php Helpers\the_svg( 'icons/arrow-top-right' ); ?>
 			</a>
 		<?php endif; ?>
-		<?php if ( ! empty( $school_sharepoint_url ) ) : ?>
-			<a href="<?php echo $school_sharepoint_url; ?>" class="button button--secondary" target="_blank">
+		<?php if ( ! empty( $school_internal_url ) ) : ?>
+			<a href="<?php echo $school_internal_url; ?>" class="button button--secondary" target="_blank">
 				<?php Helpers\the_svg( 'icons/speechbubble-text' ); ?>
 				<?php esc_html_e( 'Sisäinen sivusto', 'helsinki-universal' ); ?>
 				<?php Helpers\the_svg( 'icons/arrow-top-right' ); ?>
