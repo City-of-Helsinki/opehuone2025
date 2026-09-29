@@ -9,7 +9,6 @@ use function \Opehuone\TemplateFunctions\get_favorite_article_button;
 		<?php get_template_part( 'partials/breadcrumbs' ); ?>
 		<div class="opehuone-grid">
 			<section>
-				<h1 class="single-post__title"><?php the_title(); ?></h1>
                 <?php
                 $cornerlabels = wp_get_post_terms( get_the_ID(), 'cornerlabels' );
 
@@ -22,6 +21,7 @@ use function \Opehuone\TemplateFunctions\get_favorite_article_button;
                     echo '</div>';
                 }
                 ?>
+				<h1 class="single-post__title"><?php the_title(); ?></h1>
 				<?php get_template_part('partials/page-meta' ); ?>
 				<?php if ( has_excerpt() ) : ?>
 					<p class="single-post__excerpt">

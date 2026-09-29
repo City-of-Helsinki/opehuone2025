@@ -22,6 +22,11 @@
 		}
 	}
 
+	&__login-message {
+		padding-left: rem(10px);
+		padding-bottom: 1.5rem;
+	}
+
 	&.services-wrapper--no-bg {
 		background: none;
 	}
