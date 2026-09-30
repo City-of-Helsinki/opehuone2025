@@ -54,6 +54,11 @@ Helpers\require_files( dirname( __FILE__ ) . '/library/utils' );
 Helpers\require_files( dirname( __FILE__ ) . '/library/acf-options' );
 
 /**
+ * Require acf blocks
+ */
+Helpers\require_files( dirname( __FILE__ ) . '/library/acf-blocks' );
+
+/**
  * Require custom post types and taxonomies
  */
 Helpers\require_files( dirname( __FILE__ ) . '/library/custom-posts' );
