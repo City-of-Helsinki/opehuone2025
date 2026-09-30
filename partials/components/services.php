@@ -14,9 +14,7 @@ $user_services  = new User_services();
                     <?php esc_html_e( 'Kirjaudu sisään', 'helsinki-universal' ); ?>
                 </a>
                 <?php printf(
-                esc_html__( ' Opehuoneeseen %1$sedu.hel.fi%2$s tunnuksillasi nähdäksesi opetuksen sovellukset.', 'helsinki-universal' ),
-                    '<a href="' . esc_url( 'https://edu.hel.fi' ) . '" target="_blank" rel="noopener noreferrer">',
-                    '</a>'
+                    esc_html__( ' Opehuoneeseen edu.hel.fi -tunnuksillasi nähdäksesi opetuksen sovellukset.', 'helsinki-universal' )
                 );
                 ?>
             </p>

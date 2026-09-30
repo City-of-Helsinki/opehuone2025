@@ -7,11 +7,13 @@ if ( ! is_user_logged_in() ) {
 use function \Opehuone\TemplateFunctions\get_cornerlabels_without_default_value;
 use function \Opehuone\TemplateFunctions\displayBannerWaveLineSvg;
 use function Opehuone\TemplateFunctions\displayHeroAngledKorosSvg;
+use function \Opehuone\TemplateFunctions\hide_holiday_counter;
 
 $current_user = wp_get_current_user();
 $cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
 $user_data    = get_user_meta( $current_user->ID, 'user_data', true );
-$school_name  = OppiSchoolPicker\get_school_name( $user_data );
+$school_name   = OppiSchoolPicker\get_school_name( $user_data );
+$profile_pic_url = ""; // Lets add this later. Now every user will have placeholder element.
 
 $user_favs = get_user_meta( get_current_user_id(), 'opehuone_favs', true );
 
@@ -26,9 +28,15 @@ $theme_image = get_field('profile_hero_image', 'options');
 		<div class="hds-container hds-container--wide hero__container">
 			<div class="hero__content">
                 <div class="hero-text-content">
-                    <h1 class="hero__title"><?php echo esc_html( sprintf( 'Moi %s!', $current_user->user_firstname ) ); ?></h1>
+                    <?php get_template_part( 'partials/breadcrumbs' ); ?>
+                    <h1 class="hero__title"><?php esc_html_e( 'Oma profiili', 'helsinki-universal' ); ?></h1>
+                    <h2 class="hero__title"><?php echo esc_html( sprintf( 'Moi %s!', $current_user->user_firstname ) ); ?></h2>
                     <p class="hero__excerpt excerpt size-xl">
-                        <?php get_template_part( 'partials/time-until' ); ?>
+                    <?php 
+                    if ( ! hide_holiday_counter( 'user-settings' ) ) {
+                        get_template_part( 'partials/time-until' );
+                    } 
+                    ?>
                     </p>
                     <?php displayBannerWaveLineSvg(); ?>
                 </div>
@@ -41,15 +49,25 @@ $theme_image = get_field('profile_hero_image', 'options');
 	</div>
     
 	<div class="content__container hds-container">
-		<div class="user-settings-page">
-			<h2 class="user-settings-page__main-title">
-				<?php esc_html_e( 'Oma profiili', 'helsinki-universal' ); ?>
-			</h2>
-            <p><?php esc_html_e('Oma profiili -sivulla voit vaihtaa koulutusastettasi, jonka mukaan Opehuoneen sisällöt sinulle ensisijaisesti suodatetaan. Täältä voit myös hallinnoida etusivulla näkyvää Omat tallennetut sisällöt -osiota.'); ?></p>
+		<div class="user-settings-page">            <p><?php esc_html_e('Oma profiili -sivulla voit vaihtaa koulutusastettasi, jonka mukaan Opehuoneen sisällöt sinulle ensisijaisesti suodatetaan.', 'helsinki-universal'); ?></p>
             <div class="user-settings-page__settings">
-                <h3 class="user-settings-page__settings-title"><?php esc_html_e('Omat tiedot'); ?></h3>
                 <div class="user-settings-page__settings-row">
-                    <div>
+                    <div class="user-settings-page__settings-row__left-col">
+                        <h3 class="user-settings-page__settings-title"><?php esc_html_e('Omat tiedot', 'helsinki-universal'); ?></h3>
+                        <div class="o365-profile-picture">
+                            <?php
+                            if ( $profile_pic_url ) {
+                                ?>
+                                <img src="<?php echo esc_url( $profile_pic_url ); ?>"
+                                        alt="<?php pll_esc_html_e( 'Microsoft-tilin profiilikuva' ); ?>">
+                                <?php
+                            } else {
+                                ?>
+                                <span class="o365-profile-picture__placeholder"><?php echo esc_html( strtoupper( substr( $current_user->user_firstname, 0, 1 ) . substr( $current_user->user_lastname, 0, 1 ) ) ); ?></span>
+                                <?php
+                            }
+                            ?>
+                        </div>
                         <p>
                             <?php echo esc_html( $current_user->user_firstname . ' ' . $current_user->user_lastname ); ?>
                             <br>
@@ -58,8 +76,14 @@ $theme_image = get_field('profile_hero_image', 'options');
                         <p>
                             <?php echo $school_name; ?>
                         </p>
+                        <p>
+                            <span class="subtitle"><?php echo esc_html__( 'Koulutusasteesi:', 'helsinki-universal' ); ?></span> <?php echo ( ! empty( $cornerlabels ) ? implode( ', ', array_map( function ( $term_id ) {
+                                $term = get_term( $term_id );
+                                return $term ? $term->name : '';
+                            }, $cornerlabels ) ) : esc_html__( 'Ei määritetty', 'helsinki-universal' ) ); ?>
+                        </p>
                     </div>
-                    <div>
+                    <div class="user-settings-page__settings-row__right-col">
                         <form class="user-settings-form" id="user-settings">
                             <p><?php esc_html_e( 'Muokkaa koulutusastettasi', 'helsinki-universal' ); ?></p>
                             <span><?php esc_html_e('Valitse koulutusaste tai -asteet, joiden sisällöt haluat nähdä ensisijaisesti. Voit muokata koulutusastetta aina halutessasi.', 'helsinki-universal'); ?></span>
@@ -87,7 +111,7 @@ $theme_image = get_field('profile_hero_image', 'options');
                     </div>
                 </div>
             </div>
-			<div class="user-settings-page__favorites-wrapper">
+            <div class="user-settings-page__favorites-wrapper">
                 <div class="user-settings-page__favorites-wrapper-info">
                     <h2 class="user-settings-page__secondary-title">
                         <?php esc_html_e( 'Omat tallennetut sisällöt', 'helsinki-universal' ); ?>
