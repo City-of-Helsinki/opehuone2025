@@ -79,10 +79,12 @@
 		.hero__container {
 			.hero__content {
 				.hero-text-content {
-					#breadcrumbs {
-						* {
-							color: #ffffff;
-							fill: #ffffff;
+					nav {
+						#breadcrumbs {
+							* {
+								color: #ffffff;
+								fill: #ffffff;
+							}
 						}
 					}
 					.hero__title {
