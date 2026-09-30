@@ -7,6 +7,7 @@ if ( ! is_user_logged_in() ) {
 use function \Opehuone\TemplateFunctions\get_cornerlabels_without_default_value;
 use function \Opehuone\TemplateFunctions\displayBannerWaveLineSvg;
 use function Opehuone\TemplateFunctions\displayHeroAngledKorosSvg;
+use function \Opehuone\TemplateFunctions\hide_holiday_counter;
 
 $current_user = wp_get_current_user();
 $cornerlabels = Opehuone_user_settings_reader::get_user_settings_key( 'cornerlabels' );
@@ -27,9 +28,14 @@ $theme_image = get_field('profile_hero_image', 'options');
 		<div class="hds-container hds-container--wide hero__container">
 			<div class="hero__content">
                 <div class="hero-text-content">
-                    <?php get_template_part( 'partials/breadcrumbs' ); ?>
-                    <h1 class="hero__title"><?php esc_html_e( 'Oma profiili', 'helsinki-universal' ); ?></h1>
-                    <h2 class="hero__title"><?php echo esc_html( sprintf( 'Moi %s!', $current_user->user_firstname ) ); ?></h2>
+                    <h1 class="hero__title"><?php echo esc_html( sprintf( 'Moi %s!', $current_user->user_firstname ) ); ?></h1>
+                    <p class="hero__excerpt excerpt size-xl">
+                    <?php 
+                    if ( ! hide_holiday_counter( 'user-settings' ) ) {
+                        get_template_part( 'partials/time-until' );
+                    } 
+                    ?>
+                    </p>
                     <?php displayBannerWaveLineSvg(); ?>
                 </div>
                 <?php if( !empty( $theme_image ) ): ?>

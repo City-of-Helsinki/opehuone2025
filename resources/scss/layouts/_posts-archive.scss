@@ -18,7 +18,7 @@
 		display: grid;
 		grid-template-columns: auto;
 		gap: var(--opehuone--spacing--small);
-        margin-bottom: 3rem;
+		margin-bottom: 3rem;
 
 		@include media-breakpoint-up(sm) {
 			grid-template-columns: repeat(2, 1fr);
@@ -65,9 +65,9 @@
 
 	&__filters-submit {
 		@include create-button();
-        grid-column: 1;
-        grid-row: auto;
-        width: 100%;
+		width: 100%;
+		height: 56px;
+		margin-top: auto;
 	}
 
 	&__number-of-posts {
@@ -79,11 +79,11 @@
 
 	&__load-more-wrapper {
 		margin-top: var(--opehuone--spacing--small);
-        text-align: center;
+		text-align: center;
 	}
 
 	&__load-more-btn {
 		@include create-button();
-        width: 14rem;
+		width: 14rem;
 	}
 }

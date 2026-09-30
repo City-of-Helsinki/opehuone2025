@@ -376,15 +376,34 @@
 			}
 		}
 
-		&__gold {
-			&.link-element-box {
-				border-color: var(--color-gold);
-			}
-		}
-
 		&__tram {
 			&.link-element-box {
 				border-color: var(--color-tram);
+			}
+		}
+
+		&__gold {
+			&.hero {
+				background-color: var(--color-gold);
+				.hero-angled-koros-inner {
+					background-color: var(--color-gold);
+				}
+				.hds-koros {
+					path {
+						fill: var(--color-gold);
+					}
+				}
+			}
+
+			&.quick-links-container {
+				.quick-links-box {
+					background-color: var(--color-gold-light);
+					border-left: 6px solid var(--color-gold);
+				}
+			}
+
+			&.link-element-box {
+				border-color: var(--color-gold);
 			}
 		}
 	}

@@ -43,7 +43,6 @@ function init_taxonomy() {
 		'show_in_rest'       => true,
 		'show_in_nav_menus'  => false,
 		'show_tagcloud'      => false,
-		'show_admin_column'  => true,
 		'capabilities' => array(
             'manage_terms' => 'manage_options',
             'edit_terms'   => 'manage_options',

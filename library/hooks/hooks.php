@@ -65,6 +65,36 @@ function redirect_non_logged_in() {
 
 //add_action( 'template_redirect', __NAMESPACE__ . '\\redirect_non_logged_in' );
 
+/**
+ * Remove WordPress default logged out notice so only custom message is shown.
+ *
+ * @param \WP_Error $errors Login error container.
+ * @return \WP_Error
+ */
+function remove_default_loggedout_message( $errors ) {
+    if ( isset( $_GET['loggedout'] ) && 'true' === $_GET['loggedout'] ) {
+        $errors->remove( 'loggedout' );
+    }
+
+    return $errors;
+}
+add_filter( 'wp_login_errors', __NAMESPACE__ . '\remove_default_loggedout_message' );
+
+/**
+ * Custom logged out message with link to login page
+ * 
+ * @param string $message The existing login message.
+ * @return string Modified login message.
+ */
+function custom_logged_out_message( $message ) {
+    if ( isset( $_GET['loggedout'] ) && 'true' === $_GET['loggedout'] ) {
+        return '<div class="custom-login-message notice notice-info message"><p>Olet nyt kirjautunut ulos Opehuoneesta. <a href="' . esc_url( wp_login_url() ) . '">Tästä</a> linkistä pääset takaisin kirjautumaan.</p></div>';
+    }
+
+    return $message;
+}
+add_filter( 'login_message', __NAMESPACE__ . '\custom_logged_out_message' );
+
 function render_dock_updater_button_in_acf( $field ) {
     echo '<h3>Päivitä käyttäjien dockit tästä</h3>';
     echo '<button id="dock-update-btn">Päivitä</button>';

@@ -166,6 +166,10 @@ function get_training_posts_query( $isAjax = false ): WP_Query {
     foreach( $filters as $filter ) {
         $values = get_URL_parameter_values($filter, $isAjax);
 
+        if ( ! $isAjax && $filter === 'cornerlabels' && empty( $values ) ) {
+            $values = get_user_cornerlabels_with_added_default_value();
+        }
+
         if ( ! empty( $values ) ) {
             $tax_query[] = [
                 'taxonomy' => $filter,
@@ -220,6 +224,11 @@ function get_URL_parameter_values(string $filter, mixed $isAjax): mixed {
 }
 
 function display_time_until_holidays(): void {
+
+    if ( hide_holiday_counter( 'profile-opener' ) ) {
+        return;
+    }
+    
     $holidays = [
         'autumn'   => 'Aikaa syyslomaan',
         'christmas'=> 'Aikaa joululomaan',
@@ -395,6 +404,11 @@ function get_post_archive_query( $isAjax = false ): WP_Query {
 
     foreach ( $filters as $filter ) {
         $values = get_URL_parameter_values($filter, $isAjax);
+
+        if ( ! $isAjax && $filter === 'cornerlabels' && empty( $values ) ) {
+            $values = get_user_cornerlabels_with_added_default_value();
+        }
+
         // Sanitize term IDs (convert to integers)
         if ( ! empty( $values ) ) {
             $tax_query[] = [
@@ -495,6 +509,55 @@ function display_archive_multi_select_filters( $filters ): void {
     }
 }
 
+function display_archive_multi_select_checkbox_filters( $filters, $user_cornerlabels ): void {
+    foreach ( $filters as $filter ) {
+        ?>
+        <div class="posts-archive__single-filter single-filter__checkboxes-row">
+            <label for="posts-archive-<?php echo esc_attr( $filter['taxonomy'] ); ?>"
+                   class="posts-archive__filter-label">
+                <?php echo esc_html( $filter['name'] ); ?>
+            </label>
+            <div class="checkbox-filter__checkboxes-wrapper <?php echo esc_html( strtolower($filter['name']) ); ?>">
+                <?php
+                $terms = get_terms( [
+                    'taxonomy'   => $filter['taxonomy'],
+                    'orderby' => 'term_order', 
+                    'hide_empty' => true,
+                ] );
+
+                if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+                    foreach ( $terms as $term ) {
+                        if ( $term->parent == 0 ) {
+                        ?>
+                        <label class="checkbox-filter__checkbox-label">
+                            <input type="checkbox" class="checkbox-filter__checkbox-input"
+                                    name="<?php echo esc_attr( $filter['taxonomy'] ); ?>[]"
+                                    value="<?php echo esc_attr( $term->term_id ); ?>" <?php echo in_array( $term->term_id, $user_cornerlabels ) ? ' checked' : ''; ?>>
+                            <?php echo esc_html( $term->name ); ?>
+                        </label>
+                            <?php
+                            foreach ( $terms as $child_term ) {
+                                if ( $child_term->parent == $term->term_id ) {
+                                    ?>
+                                    <label class="checkbox-filter__checkbox-label checkbox-filter__checkbox-label--child">
+                                        <input type="checkbox" class="checkbox-filter__checkbox-input"
+                                            name="<?php echo esc_attr( $filter['taxonomy'] ); ?>[]"
+                                            value="<?php echo esc_attr( $child_term->term_id ); ?>" <?php echo in_array( $child_term->term_id, $user_cornerlabels ) ? ' checked' : ''; ?>>
+                                        <?php echo esc_html( $child_term->name ); ?>
+                                    </label>
+                                    <?php
+                                }
+                            }
+                        }
+                    }
+                }
+                ?>
+            </div>
+        </div>
+        <?php
+    }
+}
+
 function display_load_more_button( $found_posts, $offset ): void {
     ?>
     <div class="posts-archive__load-more-wrapper">
@@ -529,3 +592,36 @@ add_action('save_post_page', function ($post_id, $post, $update) {
     update_post_meta( $post_id, '_wp_page_template', $default_template) ;
 
 }, 10, 3);
+
+/**
+ * Check if the holiday counter should be hidden based on ACF options (user cornerlabels and/or elements/templates)
+ * Template names are atm: date-box, profile-opener and user-settings
+ * 
+ * @param string $template Elements name that is used to check visibility
+ * @return bool true = hide, false = show
+ */
+function hide_holiday_counter( string|null $template = null ): bool {
+    $hide_counter_from_cornerlabels = get_field( 'hide_counter_from_cornerlabels', 'option' );
+    $hide_counter_from_elements     = get_field( 'hide_counter_from_elements', 'option' );
+    $user_cornerlabels              = get_user_cornerlabels_with_added_default_value();
+
+    // 1. Check for cornerlabels
+    if ( ! empty( $hide_counter_from_cornerlabels ) && ! empty( $user_cornerlabels ) ) {
+        $hide_counter_from_cornerlabels = array_map( 'intval', $hide_counter_from_cornerlabels );
+        $user_cornerlabels              = array_map( 'intval', $user_cornerlabels );
+        foreach ( $user_cornerlabels as $user_cornerlabel ) {
+            if ( in_array( $user_cornerlabel, $hide_counter_from_cornerlabels, true ) ) {
+                return true; // hide holiday counter
+            }
+        }
+    }
+
+    // 2. Check for elements/templates
+    if ( ! empty( $hide_counter_from_elements ) && ! empty( $template ) ) {
+        if ( in_array( $template, $hide_counter_from_elements, true ) ) {
+            return true; // hide holiday counter
+        }
+    }
+
+    return false; // show holiday counter
+}

@@ -616,7 +616,8 @@ function ajax_update_front_page_posts() {
         $sticky_query_args = wp_parse_args( [
             'post__in'       => $sticky_posts,
             'posts_per_page' => $max_posts, // important: cap stickies to max_posts
-            'orderby'        => 'post__in',
+            'orderby'        => 'date', // order by date to show the most recent sticky posts first
+			'order'          => 'DESC',
         ], $query_args );
 
         $sticky_query = new \WP_Query( $sticky_query_args );
