@@ -5,7 +5,7 @@
  *
  * @package Opehuone
  *
- * Template Name: Laskeutumissivu Opehuone
+ * Template Name: Laskeutumissivu
  */
 
 get_header();
