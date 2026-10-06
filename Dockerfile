@@ -13,7 +13,7 @@ ARG WP_PLUGIN_VERSION_SIMPLE_COMMENT_EDITING=""
 ARG WP_PLUGIN_VERSION_SAFE_SVG=""
 ARG WP_PLUGIN_VERSION_SIMPLE_PAGE_ORDERING=""
 ARG WP_PLUGIN_VERSION_WPO365_LOGIN=""
-ARG WP_PLUGIN_VERSION_WPO365_SAMESITE=""
+ARG WP_PLUGIN_VERSION_WPO365_INTEGRATE=""
 ARG WP_PLUGIN_VERSION_TAXONOMY_TERMS_ORDER=""
 ARG WP_PLUGIN_VERSION_WP_SENTRY_INTEGRATION=""
 ARG WP_PLUGIN_VERSION_WP_SECURITY_AUDIT_LOG=""
@@ -49,7 +49,7 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer config repositories.advanced-custom-fields-pro vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-advanced-custom-fields-pro && \
     composer require acf/advanced-custom-fields-pro && \
     composer config repositories.wpo365-integrate vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-wpo365-integrate && \
-    composer require wpo365/wpo365-integrate && \
+    composer require wpo365/wpo365-integrate:$WP_PLUGIN_VERSION_WPO365_INTEGRATE && \
     composer config repositories.tablepress vcs https://github.com/City-of-Helsinki/wordpress-helfi-plugin-tablepress-premium && \
     composer require tablepress/tablepress-premium:$WP_PLUGIN_VERSION_TABLEPRESS_PREMIUM && \
     composer config repositories.servicenow-tablepress-sync vcs https://github.com/City-of-Helsinki/servicenow-tablepress-sync && \
@@ -61,7 +61,6 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require wpackagist-plugin/simple-comment-editing:$WP_PLUGIN_VERSION_SIMPLE_COMMENT_EDITING && \
     composer require wpackagist-plugin/safe-svg:$WP_PLUGIN_VERSION_SAFE_SVG && \
     composer require wpackagist-plugin/wpo365-login:$WP_PLUGIN_VERSION_WPO365_LOGIN && \
-    composer require wpackagist-plugin/wpo365-samesite:$WP_PLUGIN_VERSION_WPO365_SAMESITE && \
     composer require wpackagist-plugin/taxonomy-terms-order:$WP_PLUGIN_VERSION_TAXONOMY_TERMS_ORDER && \
     composer require wpackagist-plugin/wp-sentry-integration:$WP_PLUGIN_VERSION_WP_SENTRY_INTEGRATION && \
     composer require wpackagist-plugin/wp-security-audit-log:$WP_PLUGIN_VERSION_WP_SECURITY_AUDIT_LOG && \
