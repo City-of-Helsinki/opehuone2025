@@ -45,9 +45,9 @@ function init_taxonomy() {
 		'show_in_nav_menus'  => true,
 		'show_tagcloud'      => false,
 		'capabilities'       => [
-            'manage_terms' => 'manage_options',
-            'edit_terms'   => 'manage_options',
-            'delete_terms' => 'manage_options',
+            'manage_terms' => 'manage_categories',
+            'edit_terms'   => 'manage_categories',
+            'delete_terms' => 'manage_categories',
             'assign_terms' => 'edit_posts',
         ],
 	);
