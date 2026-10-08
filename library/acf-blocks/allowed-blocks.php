@@ -24,10 +24,34 @@ add_action( 'acf/init', function() {
     ) );
 } );
 
+// Remove unnecessary core & helsinki -blocks from the editor
+add_filter( 'allowed_block_types_all', function( $allowed_blocks, $context ) {
+
+	$removed_blocks = array(
+        'core/video',
+		'core/nextpage',
+		'core/social-links',
+		'core/social-link',
+        'hds-wp/rss-feed',
+        'hds-wp/recent-posts',
+	);
+
+	if ( true === $allowed_blocks ) {
+		$allowed_blocks = array_keys( WP_Block_Type_Registry::get_instance()->get_all_registered() );
+	}
+
+	if ( ! is_array( $allowed_blocks ) ) {
+		return $allowed_blocks;
+	}
+
+	return array_values( array_diff( $allowed_blocks, $removed_blocks ) );
+}, 998, 2 );
+
 // Allowed blocks
 add_filter( 'allowed_block_types_all', function( $allowed_blocks, $context ) {
     if ( is_array( $allowed_blocks ) ) {
         $allowed_blocks[] = 'acf/opehuone-embed';
+        $allowed_blocks[] = 'core/embed';
     }
     return $allowed_blocks;
 }, 999, 2 );
