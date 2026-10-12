@@ -1,8 +1,4 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
-
 // Require widget files
 require_once __DIR__ . '/dashboard-widgets/instructions.php';
 require_once __DIR__ . '/dashboard-widgets/welcome.php';

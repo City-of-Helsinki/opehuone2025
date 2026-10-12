@@ -17,6 +17,12 @@ $trainings = get_posts( array(
         <p class="info-message"><?php esc_html_e( 'Sinulla ei ole vielä julkaistuja koulutuksia.' ); ?></p>
     <?php else : ?>
         <table>
+            <thead>
+                <tr>
+                    <th scope="col"><?php esc_html_e( 'Päivämäärä' ); ?></th>
+                    <th scope="col"><?php esc_html_e( 'Koulutus' ); ?></th>
+                </tr>
+            </thead>
             <?php foreach ( $trainings as $post ) : ?>
                 <tr>
                     <td class="col-date"><?php echo esc_html( get_the_date( '', $post ) ); ?></td>

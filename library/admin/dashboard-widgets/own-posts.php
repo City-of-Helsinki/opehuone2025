@@ -19,6 +19,12 @@ $own_posts = get_posts( array(
         <p class="info-message"><?php esc_html_e( 'Sinulla ei ole vielä julkaistuja artikkeleita.' ); ?></p>
     <?php else : ?>
         <table>
+            <thead>
+                <tr>
+                    <th scope="col"><?php esc_html_e( 'Päivämäärä' ); ?></th>
+                    <th scope="col"><?php esc_html_e( 'Artikkeli' ); ?></th>
+                </tr>
+            </thead>
             <?php foreach ( $own_posts as $post ) : ?>
                 <tr>
                     <td class="col-date"><?php echo esc_html( get_the_date( '', $post ) ); ?></td>
