@@ -101,6 +101,23 @@ function enqueue_login_assets() {
 add_action( 'login_enqueue_scripts', __NAMESPACE__ . '\\enqueue_login_assets' );
 
 /**
+ * Enqueue assets for the WordPress dashboard (widgets etc.)
+ *
+ * @return void
+ */
+function enqueue_dashboard_assets() {
+	$style_asset = require_once \get_theme_file_path( 'build/css/dashboard.asset.php' );
+
+	\wp_enqueue_style(
+		'opehuone-dashboard',
+		\get_theme_file_uri( 'build/css/dashboard.css' ),
+		$style_asset['dependencies'],
+		$style_asset['version']
+	);
+}
+
+add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\\enqueue_dashboard_assets' );
+/**
  * Remove jquery-migrate from front end
  *
  * @param object $scripts Scripts object

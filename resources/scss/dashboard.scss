@@ -1,0 +1,78 @@
+// Globals
+.opehuone-widgets {
+	.info-message {
+		padding: 15px;
+	}
+
+	ul {
+		list-style: disc;
+		margin: 0;
+		padding-left: 25px;
+	}
+	table {
+		width: 100%;
+		border-collapse: collapse;
+
+		thead {
+			tr {
+				th {
+					padding: 15px;
+					text-align: left;
+				}
+			}
+		}
+		tbody {
+			tr:nth-child(odd) {
+				background-color: #f7f7f8;
+			}
+			td {
+				padding: 15px;
+			}
+			.col-date {
+				width: 100px;
+			}
+		}
+	}
+}
+
+// Welcome widget
+#opehuone-welcome {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+
+	.left-block {
+		img {
+			width: 150px;
+			height: 150px;
+			object-fit: contain;
+		}
+	}
+}
+
+// Instructions widget
+#opehuone-instructions {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+
+	.right-block {
+		img {
+			width: 150px;
+			height: 150px;
+			object-fit: contain;
+			position: absolute;
+			bottom: 0;
+			right: 10px;
+		}
+	}
+}
+
+#opehuone_own_pages,
+#opehuone_own_posts,
+#opehuone_latest_trainings {
+	.inside {
+		padding: 0;
+		margin: 0;
+	}
+}
