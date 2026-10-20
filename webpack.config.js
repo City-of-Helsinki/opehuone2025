@@ -79,6 +79,11 @@ module.exports = {
 				'resources/scss',
 				'login.scss'
 			),
+			'css/dashboard': path.resolve(
+				process.cwd(),
+				'resources/scss',
+				'dashboard.scss'
+			),
 		},
 		plugins: [
 			// Include WP plugin config.
@@ -94,7 +99,7 @@ module.exports = {
 				patterns: [
 					//{ fonts already in main theme..
 					//	from: 'resources/fonts/*',
-          //	to: 'fonts/[name][ext]',
+					//	to: 'fonts/[name][ext]',
 					//	force: true,
 					//},
 					{
