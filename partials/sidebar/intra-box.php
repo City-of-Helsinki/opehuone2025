@@ -45,7 +45,7 @@ if( $intrabox_title || $intrabox_content ):
 			<a class="button" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>">
 				<?php echo esc_html( $link_title );
 				if( $link_target === "_self" ) :
-					Helpers\the_svg( 'icons/arrow-right' );
+					Helpers\the_svg( 'icons/arrow-right-lg' );
 				else :
 					Helpers\the_svg( 'icons/arrow-top-right' );
 				endif;

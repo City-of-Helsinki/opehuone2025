@@ -570,29 +570,6 @@ function display_load_more_button( $found_posts, $offset ): void {
 <?php
 }
 
-// Set default page template (page-with-sidemenu) for new pages created by editor role
-add_action('save_post_page', function ($post_id, $post, $update) {
-
-    // Only set for new pages 
-    if ( $update ) {
-        return;
-    }
-
-    // Only for editor (päätoimittaja) user role
-    if ( ! current_user_can( 'editor' ) ) {
-        return;
-    }
-
-    $default_template = 'custom-templates/with-sidemenu.php';
-
-    if ( locate_template( $default_template ) === '' ) {
-        return;
-    }
-
-    update_post_meta( $post_id, '_wp_page_template', $default_template) ;
-
-}, 10, 3);
-
 /**
  * Check if the holiday counter should be hidden based on ACF options (user cornerlabels and/or elements/templates)
  * Template names are atm: date-box, profile-opener and user-settings
