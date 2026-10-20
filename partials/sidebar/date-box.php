@@ -38,6 +38,13 @@ $finnish_names_list = $day_service->get_names_by_type( $day_info_service_data, '
 $swedish_names_list = $day_service->get_names_by_type( $day_info_service_data, 'ruotsi' );
 
 
+// Helper to check if the holiday countdown should be displayed and get its HTML content
+function get_time_until_html(): string {
+    ob_start();
+    get_template_part( 'partials/time-until' );
+    return trim( ob_get_clean() );
+}
+
 ?>
 <div class="sidebar-box date-box sidebar-box--suomenlinna-light">
     <div class="date-box-header">
@@ -86,10 +93,14 @@ $swedish_names_list = $day_service->get_names_by_type( $day_info_service_data, '
             </div>
         </div>
 
-        <?php if ( is_user_logged_in() && ! hide_holiday_counter( 'date-box' ) ) : ?>
+        <?php
+        // Check if the holiday countdown should be displayed and get the HTML for it.
+        $holidays_html = is_user_logged_in() && ! hide_holiday_counter( 'date-box' ) ? get_time_until_html() : '';
+        ?>
+        <?php if ( $holidays_html ) : ?>
             <div class="date-box-row">
                 <div class="date-box-col holiday-countdown">
-                    <?php get_template_part( 'partials/time-until' ); ?>
+                    <?php echo $holidays_html; ?>
                 </div>
             </div>
         <?php endif; ?>
