@@ -70,6 +70,13 @@ Helpers\require_files( dirname( __FILE__ ) . '/library/taxonomies' );
 Helpers\require_files( dirname( __FILE__ ) . '/library/hooks' );
 
 /**
+ * Require admin functions and widgets
+ */
+if ( is_admin() ) {
+    Helpers\require_files( dirname( __FILE__ ) . '/library/admin' );
+}
+
+/**
  * Register local ACF-json
  */
 add_filter( 'acf/settings/save_json', function () {
