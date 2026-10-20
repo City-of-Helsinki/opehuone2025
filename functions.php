@@ -171,10 +171,10 @@ add_filter('wp_sentry_before_send', function (\Sentry\Event $event, ?\Sentry\Eve
 }, 100, 2);
 
 // Add Askem to post content
+// Changed this to use new Askem feedback buttons setup & rendering (parent theme version 4.40.0 --> )
 add_action( 'template_redirect', function() {
     if ( is_singular( 'post' ) && apply_filters( 'helsinki_feedback_enabled', false ) ) {
-        add_filter( 'body_class', 'helsinki_feedback_buttons_body_class', 10 );
-        add_action( 'helsinki_content_body_after', 'helsinki_feedback_buttons', 21 );
+        add_action( 'helsinki_content_body_after', 'CityOfHelsinki\WordPress\Helsinki\Theme\Integrations\Askem\provide_feedback_buttons', 21 );
     }
 }, 20 );
 
