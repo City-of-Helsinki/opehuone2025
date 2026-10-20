@@ -86,7 +86,7 @@ $theme_image = get_field('profile_hero_image', 'options');
                     <div class="user-settings-page__settings-row__right-col">
                         <form class="user-settings-form" id="user-settings">
                             <p><?php esc_html_e( 'Muokkaa koulutusastettasi', 'helsinki-universal' ); ?></p>
-                            <span><?php esc_html_e('Valitse koulutusaste tai -asteet, joiden sisällöt haluat nähdä ensisijaisesti. Voit muokata koulutusastetta aina halutessasi.', 'helsinki-universal'); ?></span>
+                            <span><?php esc_html_e('Valitse koulutusaste tai -asteet, joiden sisällöt haluat nähdä ensisijaisesti. Voit muokata koulutusastetta aina halutessasi. Valitessasi perusopetuksen tai lukiokoulutuksen, sinulle näytetään lomalaskuri.', 'helsinki-universal'); ?></span>
                             <div class="front-page-posts-filter__checkboxes-row">
                                 <?php
                                 $terms = get_cornerlabels_without_default_value();
