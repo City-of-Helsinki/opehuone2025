@@ -178,3 +178,14 @@ function opehuone_editor_restrict_admin_screens( $screen ) {
 	}
 }
 add_action( 'current_screen', 'opehuone_editor_restrict_admin_screens' );
+
+// Enable codeEditing for admins and editors (HDS plugin disables this as default)
+add_filter( 'block_editor_settings_all', function( $settings ) {
+    $user          = wp_get_current_user();
+    $allowed_roles = array( 'administrator', 'editor' );
+
+    if ( array_intersect( $allowed_roles, (array) $user->roles ) ) {
+        $settings['codeEditingEnabled'] = true;
+    }
+    return $settings;
+}, 999 );
