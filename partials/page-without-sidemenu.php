@@ -27,4 +27,5 @@ use function \Opehuone\TemplateFunctions\get_top_parent_page_title;
 			</div>
 		</div>
 	</div>
+	<?php do_action( 'opehuone_askem' ); ?>
 </article>
