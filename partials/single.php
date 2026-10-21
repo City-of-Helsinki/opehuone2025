@@ -50,4 +50,5 @@ use function \Opehuone\TemplateFunctions\get_favorite_article_button;
 			</aside>
 		</div>
 	</div>
+	<?php do_action( 'opehuone_askem' ); ?>
 </article>
