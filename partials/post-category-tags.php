@@ -11,7 +11,7 @@ $post_type = get_post_type();
 $archive_url = get_post_type_archive_link( $post_type );
 
 ?>
-<h3><?php esc_html_e( 'Lue lisää aiheesta', 'helsinki-universal' ); ?></h3>
+<h3><?php esc_html_e( 'Lisää luettavia uutisaiheita', 'helsinki-universal' ); ?></h3>
 
 <ul class="post-tags post-tags--is-lg">
 	<?php
