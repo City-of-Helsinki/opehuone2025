@@ -45,9 +45,22 @@
 	max-width: none;
 }
 
+body.has-rns {
+	article {
+		.content__container,
+		.opehuone-content-container {
+			padding-bottom: var(--spacing-layout-xl);
+		}
+	}
+}
+
 .rns-container {
-	margin-left: 0 !important;
-	margin-right: 0 !important;
-	width: 100% !important;
-	max-width: 100% !important;
+	background-color: var(--color-silver-light);
+	padding-top: var(--opehuone--spacing--medium);
+	padding-bottom: var(--opehuone--spacing--medium);
+	padding-left: var(--opehuone--container--padding);
+	padding-right: var(--opehuone--container--padding);
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
 }
