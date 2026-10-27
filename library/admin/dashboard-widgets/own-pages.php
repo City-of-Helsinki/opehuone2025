@@ -35,7 +35,7 @@ $edited_pages = get_posts( array(
         <table>
             <thead>
                 <tr>
-                    <th colspan="2"><?php esc_html_e( 'Julkaistut sivut' ); ?></th>
+                    <th colspan="2"><?php esc_html_e( 'Julkaistut' ); ?></th>
                 </tr>
             </thead>
             <?php foreach ( $own_pages as $page ) : ?>
@@ -57,7 +57,7 @@ $edited_pages = get_posts( array(
         <table>
             <thead>
                 <tr>
-                    <th colspan="2"><?php esc_html_e( 'Muokatut sivut' ); ?></th>
+                    <th colspan="2"><?php esc_html_e( 'Muokatut' ); ?></th>
                 </tr>
             </thead>
             <?php foreach ( $edited_pages as $page ) : ?>

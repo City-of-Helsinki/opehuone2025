@@ -21,8 +21,8 @@ add_action( 'wp_dashboard_setup', function () {
     wp_add_dashboard_widget( 'opehuone_instructions', 'Ohjeet', 'opehuone_instructions_render' );
     wp_add_dashboard_widget( 'opehuone_welcome', 'Tervetuloa Opehuoneeseen', 'opehuone_welcome_render' );
     wp_add_dashboard_widget( 'opehuone_need_help', 'Tarvitsetko apua?', 'opehuone_need_help_render' );
-    wp_add_dashboard_widget( 'opehuone_own_pages', 'Omat sivut', 'opehuone_own_pages_render' );
-    wp_add_dashboard_widget( 'opehuone_own_posts', 'Omat artikkelit', 'opehuone_own_posts_render' );
+    wp_add_dashboard_widget( 'opehuone_own_pages', 'Viimeisimmät omat sivut', 'opehuone_own_pages_render' );
+    wp_add_dashboard_widget( 'opehuone_own_posts', 'Viimeisimmät omat artikkelit', 'opehuone_own_posts_render' );
     wp_add_dashboard_widget( 'opehuone_latest_trainings', 'Viimeisimmät koulutukset', 'opehuone_latest_trainings_render' );
 
     if ( current_user_can( 'administrator' ) || current_user_can( 'editor' ) ) {
