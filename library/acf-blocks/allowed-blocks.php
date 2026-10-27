@@ -51,7 +51,6 @@ add_filter( 'allowed_block_types_all', function( $allowed_blocks, $context ) {
 add_filter( 'allowed_block_types_all', function( $allowed_blocks, $context ) {
     if ( is_array( $allowed_blocks ) ) {
         $allowed_blocks[] = 'acf/opehuone-embed';
-        $allowed_blocks[] = 'core/embed';
     }
     return $allowed_blocks;
 }, 999, 2 );

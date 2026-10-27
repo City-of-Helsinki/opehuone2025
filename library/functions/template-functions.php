@@ -580,9 +580,15 @@ function display_load_more_button( $found_posts, $offset ): void {
 function hide_holiday_counter( string|null $template = null ): bool {
     $hide_counter_from_cornerlabels = get_field( 'hide_counter_from_cornerlabels', 'option' );
     $hide_counter_from_elements     = get_field( 'hide_counter_from_elements', 'option' );
-    $user_cornerlabels              = get_user_cornerlabels_with_added_default_value();
+    $user_cornerlabels              = \Opehuone_user_settings_reader::get_user_settings_key('cornerlabels');
 
-    // 1. Check for cornerlabels
+    // 1. Check if user doesn't have any cornerlabels --> hide counter from everywhere.
+    $user_cornerlabels = array_diff( (array) $user_cornerlabels, [ 'undefined', '' ] );
+    if ( empty( $user_cornerlabels ) ) {
+        return true; // hide holiday counter
+    }
+
+    // 2. Check for cornerlabels visibility based on user settings and ACF options
     if ( ! empty( $hide_counter_from_cornerlabels ) && ! empty( $user_cornerlabels ) ) {
         $hide_counter_from_cornerlabels = array_map( 'intval', $hide_counter_from_cornerlabels );
         $user_cornerlabels              = array_map( 'intval', $user_cornerlabels );
@@ -593,7 +599,7 @@ function hide_holiday_counter( string|null $template = null ): bool {
         }
     }
 
-    // 2. Check for elements/templates
+    // 3. Check for elements/templates visibility based on ACF options
     if ( ! empty( $hide_counter_from_elements ) && ! empty( $template ) ) {
         if ( in_array( $template, $hide_counter_from_elements, true ) ) {
             return true; // hide holiday counter
