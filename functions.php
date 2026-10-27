@@ -170,11 +170,17 @@ add_filter('wp_sentry_before_send', function (\Sentry\Event $event, ?\Sentry\Eve
     return $event; // keep everything else
 }, 100, 2);
 
-// Add Askem to post content
-// Changed this to use new Askem feedback buttons setup & rendering (parent theme version 4.40.0 --> )
+// Remove Askem from default parent theme hooks
 add_action( 'template_redirect', function() {
-    if ( is_singular( 'post' ) && apply_filters( 'helsinki_feedback_enabled', false ) ) {
-        add_action( 'helsinki_content_body_after', 'CityOfHelsinki\WordPress\Helsinki\Theme\Integrations\Askem\provide_feedback_buttons', 21 );
+    remove_action( 'helsinki_content_body_after', 'CityOfHelsinki\WordPress\Helsinki\Theme\Integrations\Askem\provide_feedback_buttons', 21 );
+    remove_action( 'helsinki_content', 'CityOfHelsinki\WordPress\Helsinki\Theme\Integrations\Askem\provide_feedback_buttons', 30 );
+}, 20 );
+
+// Add Askem with own custom hook: opehuone_askem
+// Used atm. at partials/page-with-sidemenu.php, partials/page-without-sidemenu.php, and partials/single.php
+add_action( 'template_redirect', function() {
+    if ( apply_filters( 'helsinki_feedback_enabled', false ) ) {
+        add_action( 'opehuone_askem', 'CityOfHelsinki\WordPress\Helsinki\Theme\Integrations\Askem\provide_feedback_buttons', 21 );
     }
 }, 20 );
 
