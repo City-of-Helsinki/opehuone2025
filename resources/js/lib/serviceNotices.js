@@ -31,6 +31,29 @@ const toggleReadMore = () => {
 	});
 };
 
+const closeServiceNotice = () => {
+	const getKey = (notice) =>
+		'opehuone_service_notice_' + notice.dataset.noticeId;
+
+	// Sivun latautuessa: poista jo suljetut
+	document.querySelectorAll('.service-notice').forEach((notice) => {
+		if (localStorage.getItem(getKey(notice)) === 'closed') {
+			notice.remove();
+		}
+	});
+
+	// Suljettaessa: tallenna ja poista
+	document.addEventListener('click', (event) => {
+		const closeButton = event.target.closest('.service-notice__close');
+		if (!closeButton) return;
+
+		const notice = closeButton.closest('.service-notice');
+		localStorage.setItem(getKey(notice), 'closed');
+		notice.remove();
+	});
+};
+
 export const serviceNotice = () => {
 	toggleReadMore();
+	closeServiceNotice();
 };
