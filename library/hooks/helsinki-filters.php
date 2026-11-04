@@ -46,6 +46,16 @@ add_filter( 'body_class', function ( $classes ) {
 	return $classes;
 }, 999 );
 
+// Add class to basic page template, page.php (because of sidemenus JS routing)
+add_filter( 'body_class', function ( $classes ) {
+	if ( is_page() && ! is_page_template() && ! is_front_page() ) {
+		$classes = array_merge( $classes, [ 'page-template-with-sidemenu' ] );
+	}
+	return $classes;
+} );
+
+
+
 add_filter( 'helsinki_hero_layout_style', function ( $style, $post_id ) {
 	if ( is_front_page() ) {
 		$style = 'has-front-page';
