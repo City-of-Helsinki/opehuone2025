@@ -1,7 +1,25 @@
 {
     "key": "group_6ae47e820f5e5",
-    "title": "Poikkeusilmoitus",
+    "title": "Poikkeusilmoitukset",
     "fields": [
+        {
+            "key": "field_6af18936a3682",
+            "label": "Ohjeita ilmoitusten luontiin",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Täällä voit luoda yhden tai useita yhtä aikaan näytettäviä poikkeusilmoituksia Opehuoneen käyttäjille.  Ilmoitukset tulostetaan jokaiselle sivutyypille päänavigaation alle.\r\n\r\nIlmoitukselle voit valita tyypin seuraavista vaihtoehdoista: \r\n- \"Ilmoitus\" (sininen ilme, info -ikonilla)\r\n- \"Huomio\" (keltainen ilme, huutomerkki -ikonilla) tai \r\n- \"Varoitus\" (punainen ilme, varoituskolmio -ikonilla. Huom! Tätä ilmoitusta käyttäjät eivät voi sulkea näkyviltä!).\r\n\r\nVoit myös ajastaa ilmoituksen valitsemalla sille alku- ja\/tai loppuajankohdan tai kohdistaa ilmoituksen näyttääksesi sen tietyn koulutusasteen käyttäjille. Kun ajastetun ilmoituksen loppuajankohta saavutetaan --> poistuu ilmoitus näkyviltä sivuston puolella. Tästä hallintanäkymästä ilmoitukset eivät poistu automaattisesti!\r\n\r\nHuom! Jos ilmoituksen sisältöä muutetaan (otsikko, tekstit tai tyyppi) nousee ilmoitus uudestaan näkyville, vaikka käyttäjä olisi sen sulkenut. Jos siis haluat päivitetyn ilmoituksen kaikkien näkyville, voit kirjoittaa esimerkiksi \"aikaleiman\" tekstikenttään (esim. \"ilmoitusta päivitetty 9.11.2026\")",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
         {
             "key": "field_6ae47f0418ef5",
             "label": "Poikkeusilmoitukset",
@@ -270,5 +288,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1793797244
+    "modified": 1794219850
 }

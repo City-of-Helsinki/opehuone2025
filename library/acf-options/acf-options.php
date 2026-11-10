@@ -13,6 +13,7 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 	// Poikkeusilmoitus -options page
 	acf_add_options_page( [
 		'page_title'      => __( 'Poikkeusilmoitukset', 'helsinki-universal' ),
+		'menu_title'      => __( 'Poikkeus&shy;ilmoitukset', 'helsinki-universal' ),
 		'menu_slug'       => 'poikkeusilmoitukset-asetukset',
 		'update_button'   => __( 'Päivitä poikkeusilmoitukset', 'helsinki-universal' ),
 		'updated_message' => __( 'Poikkeusilmoitukset päivitetty', 'helsinki-universal' ),
