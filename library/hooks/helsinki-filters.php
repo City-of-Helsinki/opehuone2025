@@ -97,3 +97,16 @@ add_action( 'add_meta_boxes', function() {
         'normal'
     );
 }, 20 );
+
+// Remove parent theme's notifications and related scripts
+function remove_helsinki_notifications() {
+    remove_action( 'helsinki_main_top', 'helsinki_notifications', 20 );
+    remove_action( 'helsinki_notification_scripts', 'helsinki_notification_scripts', 10 );
+}
+add_action( 'wp_head', __NAMESPACE__ . '\\remove_helsinki_notifications' );
+
+// Remove the notification panel from the Customizer
+add_filter( 'helsinki_customizer_config', function ( $config ) {
+    unset( $config['helsinki_notification'] );
+    return $config;
+} );
