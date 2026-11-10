@@ -11,6 +11,15 @@ if ( ! is_front_page() && is_home() || is_singular( 'post' ) ) {
 	$nav_color = get_field( 'news_hero_color', 'options' );
 }
 
+// Check for single-training nav color )
+if ( is_singular( 'training' ) ) {
+	$training_page_id = get_field( 'trainings_page', 'options');
+
+	if ( $training_page_id ) {
+		$theme_color = get_field('theme_color', $training_page_id) ? get_field('theme_color', $training_page_id) : '';
+		$nav_color   = 'theme-' . $theme_color;
+	}
+}
 ?>
 <nav id="main-menu-nav" class="navigation__menu show-for-l <?php echo esc_attr( $nav_color ); ?>" aria-labelledby="main-menu-nav-label">
 	<span id="main-menu-nav-label" class="screen-reader-text">
