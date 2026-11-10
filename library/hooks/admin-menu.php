@@ -189,3 +189,29 @@ add_filter( 'block_editor_settings_all', function( $settings ) {
     }
     return $settings;
 }, 999 );
+
+
+// ************ Poikkeusilmoitukset: access by capability ************
+
+function opehuone_service_notices_capability() {
+	
+	// Roles that can manage service notices
+	$allowed_roles = array( 'administrator', 'editor', 'ilmoittaja' );
+	$all_roles     = array( 'administrator', 'editor', 'ilmoittaja', 'author', 'subscriber' );
+
+	foreach ( $all_roles as $role_name ) {
+		$role = get_role( $role_name );
+		if ( ! $role ) {
+			continue;
+		}
+
+		$should_have = in_array( $role_name, $allowed_roles, true );
+
+		if ( $should_have && ! $role->has_cap( 'manage_service_notices' ) ) {
+			$role->add_cap( 'manage_service_notices' );
+		} elseif ( ! $should_have && $role->has_cap( 'manage_service_notices' ) ) {
+			$role->remove_cap( 'manage_service_notices' );
+		}
+	}
+}
+add_action( 'init', 'opehuone_service_notices_capability' );

@@ -101,7 +101,7 @@
                     "name": "service_notice_text",
                     "aria-label": "",
                     "type": "wysiwyg",
-                    "instructions": "",
+                    "instructions": "Huom! Maksimissaan 500 merkkiä.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -288,5 +288,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1794219850
+    "modified": 1794308036
 }

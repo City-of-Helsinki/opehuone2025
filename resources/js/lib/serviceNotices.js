@@ -35,14 +35,14 @@ const closeServiceNotice = () => {
 	const getKey = (notice) =>
 		'opehuone_service_notice_' + notice.dataset.noticeId;
 
-	// Sivun latautuessa: poista jo suljetut
+	// On page load: remove already closed notices
 	document.querySelectorAll('.service-notice').forEach((notice) => {
 		if (localStorage.getItem(getKey(notice)) === 'closed') {
 			notice.remove();
 		}
 	});
 
-	// Suljettaessa: tallenna ja poista
+	// On close button click: save and remove the notice
 	document.addEventListener('click', (event) => {
 		const closeButton = event.target.closest('.service-notice__close');
 		if (!closeButton) return;

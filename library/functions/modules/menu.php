@@ -184,6 +184,26 @@ function add_custom_menu_active_class($classes, $item) {
             $classes[] = 'menu__item--active';
         }
     }
+
+	// 4. For single training
+    if ( is_singular( 'training' ) && $item->object === 'page' ) {
+        $object_id     = (int) $item->object_id;
+        $posts_page_id = (int) get_option( 'page_for_posts' );
+
+        $trainings_page    = function_exists( 'get_field' ) ? get_field( 'trainings_page', 'option' ) : 0;
+        $trainings_page_id = is_object( $trainings_page ) ? (int) $trainings_page->ID : (int) $trainings_page;
+
+        // Remove the core class from the posts page
+        if ( $object_id === $posts_page_id ) {
+            $classes = array_diff( $classes, array( 'current_page_parent', 'menu__item--active' ) );
+        }
+
+        // Add the active classes to the trainings page
+        if ( $trainings_page_id && $object_id === $trainings_page_id ) {
+            $classes[] = 'current_page_parent';
+            $classes[] = 'menu__item--active';
+        }
+    }
     
     return $classes;
 }
