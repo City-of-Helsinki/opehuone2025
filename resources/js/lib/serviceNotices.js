@@ -35,23 +35,12 @@ const closeServiceNotice = () => {
 	const getKey = (notice) =>
 		'opehuone_service_notice_' + notice.dataset.noticeId;
 
-	// Remove empty notices wrapper if there are no more service notices inside it
-	const removeEmptyWrapper = () => {
-		const wrapper = document.querySelector('.service-notices');
-		if (wrapper && !wrapper.querySelector('.service-notice')) {
-			console.log('Removing empty service notices wrapper');
-			wrapper.remove();
-		}
-	};
-
 	// On page load: remove already closed notices
 	document.querySelectorAll('.service-notice').forEach((notice) => {
 		if (localStorage.getItem(getKey(notice)) === 'closed') {
 			notice.remove();
 		}
 	});
-
-	removeEmptyWrapper();
 
 	// On close button click: save and remove the notice
 	document.addEventListener('click', (event) => {
@@ -61,7 +50,6 @@ const closeServiceNotice = () => {
 		const notice = closeButton.closest('.service-notice');
 		localStorage.setItem(getKey(notice), 'closed');
 		notice.remove();
-		removeEmptyWrapper();
 	});
 };
 
