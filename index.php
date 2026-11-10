@@ -7,6 +7,7 @@ get_header();
  */
 do_action( 'helsinki_loop_before' );
 
+get_template_part( 'partials/components/service-notices' ); 
 ?>
 
 <div class="content">

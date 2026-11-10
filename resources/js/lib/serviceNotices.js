@@ -1,0 +1,59 @@
+/**
+ * Function to toggle read more div visibility
+ *
+ * Looks for click event for button .service-notice__toggler
+ * When clicked, look for parent .service-notice and toggle class .service-notice--read-more-open for that element
+ *
+ */
+const toggleReadMore = () => {
+	document.addEventListener('click', (event) => {
+		const toggler = event.target.closest('.service-notice__toggler');
+
+		if (!toggler) return;
+
+		const serviceNoticeElement = toggler.closest('.service-notice');
+		if (serviceNoticeElement) {
+			serviceNoticeElement.classList.toggle(
+				'service-notice--read-more-open'
+			);
+			const togglerText = toggler.querySelector(
+				'.service-notice__toggler-text'
+			);
+			if (togglerText) {
+				togglerText.textContent =
+					serviceNoticeElement.classList.contains(
+						'service-notice--read-more-open'
+					)
+						? 'Sulje'
+						: 'Lue lisää';
+			}
+		}
+	});
+};
+
+const closeServiceNotice = () => {
+	const getKey = (notice) =>
+		'opehuone_service_notice_' + notice.dataset.noticeId;
+
+	// Sivun latautuessa: poista jo suljetut
+	document.querySelectorAll('.service-notice').forEach((notice) => {
+		if (localStorage.getItem(getKey(notice)) === 'closed') {
+			notice.remove();
+		}
+	});
+
+	// Suljettaessa: tallenna ja poista
+	document.addEventListener('click', (event) => {
+		const closeButton = event.target.closest('.service-notice__close');
+		if (!closeButton) return;
+
+		const notice = closeButton.closest('.service-notice');
+		localStorage.setItem(getKey(notice), 'closed');
+		notice.remove();
+	});
+};
+
+export const serviceNotice = () => {
+	toggleReadMore();
+	closeServiceNotice();
+};

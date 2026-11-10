@@ -1,3 +1,8 @@
+
+<?php 
+get_template_part( 'partials/components/service-notices' ); 
+?>
+
 <article class="content">
     <div class="content__container hds-container">
         <?php get_template_part( 'partials/breadcrumbs' ); ?>

@@ -1,0 +1,292 @@
+{
+    "key": "group_6ae47e820f5e5",
+    "title": "Poikkeusilmoitukset",
+    "fields": [
+        {
+            "key": "field_6af18936a3682",
+            "label": "Ohjeita ilmoitusten luontiin",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Täällä voit luoda yhden tai useita yhtä aikaan näytettäviä poikkeusilmoituksia Opehuoneen käyttäjille.  Ilmoitukset tulostetaan jokaiselle sivutyypille päänavigaation alle.\r\n\r\nIlmoitukselle voit valita tyypin seuraavista vaihtoehdoista: \r\n- \"Ilmoitus\" (sininen ilme, info -ikonilla)\r\n- \"Huomio\" (keltainen ilme, huutomerkki -ikonilla) tai \r\n- \"Varoitus\" (punainen ilme, varoituskolmio -ikonilla. Huom! Tätä ilmoitusta käyttäjät eivät voi sulkea näkyviltä!).\r\n\r\nVoit myös ajastaa ilmoituksen valitsemalla sille alku- ja\/tai loppuajankohdan tai kohdistaa ilmoituksen näyttääksesi sen tietyn koulutusasteen käyttäjille. Kun ajastetun ilmoituksen loppuajankohta saavutetaan --> poistuu ilmoitus näkyviltä sivuston puolella. Tästä hallintanäkymästä ilmoitukset eivät poistu automaattisesti!\r\n\r\nHuom! Jos ilmoituksen sisältöä muutetaan (otsikko, tekstit tai tyyppi) nousee ilmoitus uudestaan näkyville, vaikka käyttäjä olisi sen sulkenut. Jos siis haluat päivitetyn ilmoituksen kaikkien näkyville, voit kirjoittaa esimerkiksi \"aikaleiman\" tekstikenttään (esim. \"ilmoitusta päivitetty 9.11.2026\")",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_6ae47f0418ef5",
+            "label": "Poikkeusilmoitukset",
+            "name": "service_notices",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Lisää poikkeusilmoitus",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_6ae47e8218ef4",
+                    "label": "Ilmoituksen otsikko",
+                    "name": "service_notice_title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "70",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6ae47f0418ef5"
+                },
+                {
+                    "key": "field_6ae47fb1e68e9",
+                    "label": "Ilmoituksen tyyppi",
+                    "name": "service_notice_type",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "info": "Ilmoitus",
+                        "alert": "Huomio",
+                        "error": "Varoitus"
+                    },
+                    "default_value": "info",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0,
+                    "parent_repeater": "field_6ae47f0418ef5"
+                },
+                {
+                    "key": "field_6ae47f6ea9941",
+                    "label": "Ilmoituksen teksti",
+                    "name": "service_notice_text",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0,
+                    "parent_repeater": "field_6ae47f0418ef5"
+                },
+                {
+                    "key": "field_6ae480c512064",
+                    "label": "Ilmoituksen teksti, lue lisää",
+                    "name": "service_notice_text_read_more",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0,
+                    "parent_repeater": "field_6ae47f0418ef5"
+                },
+                {
+                    "key": "field_6ae486aaa35c8",
+                    "label": "Linkki",
+                    "name": "service_notice_link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "allow_in_bindings": 0,
+                    "parent_repeater": "field_6ae47f0418ef5"
+                },
+                {
+                    "key": "field_6ae4879b38d97",
+                    "label": "Kohdista ilmoitus",
+                    "name": "service_notice_assigned",
+                    "aria-label": "",
+                    "type": "taxonomy",
+                    "instructions": "Ilmoitus näkyy ainoastaan käyttäjillä, joilla on asetettuna valittu koulutusaste. Jos mitään ei ole valittu - ilmoitus näkyy kaikilla sivuston käyttäjillä.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "cornerlabels",
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "field_type": "checkbox",
+                    "allow_in_bindings": 0,
+                    "bidirectional": 0,
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "bidirectional_target": [],
+                    "parent_repeater": "field_6ae47f0418ef5"
+                },
+                {
+                    "key": "field_6ae486cfa35c9",
+                    "label": "Ajasta ilmoitus?",
+                    "name": "timed_service_notice",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "allow_in_bindings": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "ui": 1,
+                    "parent_repeater": "field_6ae47f0418ef5"
+                },
+                {
+                    "key": "field_6ae48700a35ca",
+                    "label": "Ajastus alkaa",
+                    "name": "timed_service_notice_start",
+                    "aria-label": "",
+                    "type": "date_time_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_6ae486cfa35c9",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "display_format": "d.m.Y H:i",
+                    "return_format": "Y-m-d H:i",
+                    "first_day": 1,
+                    "default_to_current_date": 0,
+                    "allow_in_bindings": 0,
+                    "parent_repeater": "field_6ae47f0418ef5"
+                },
+                {
+                    "key": "field_6ae4874ca35cb",
+                    "label": "Ajastus päättyy",
+                    "name": "timed_service_notice_end",
+                    "aria-label": "",
+                    "type": "date_time_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_6ae486cfa35c9",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "display_format": "d.m.Y H:i",
+                    "return_format": "Y-m-d H:i",
+                    "first_day": 1,
+                    "default_to_current_date": 0,
+                    "allow_in_bindings": 0,
+                    "parent_repeater": "field_6ae47f0418ef5"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "poikkeusilmoitukset-asetukset"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1794219850
+}

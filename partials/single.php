@@ -2,6 +2,7 @@
 
 use function \Opehuone\TemplateFunctions\get_favorite_article_button;
 
+get_template_part( 'partials/components/service-notices' );
 ?>
 
 <article class="content">

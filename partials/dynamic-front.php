@@ -1,3 +1,4 @@
+<?php get_template_part( 'partials/components/service-notices' ); ?>
 <div class="opehuone-content-container">
 	<?php get_template_part( 'partials/error-notifications' ); ?>
 	<div class="opehuone-grid">

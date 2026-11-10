@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Error notifications
+ *
+ * @deprecated 1.4.0 Replaced by the new functionality service-notices.php
+ */
+
 use Opehuone\Helpers;
 
 $timed_service = new Timed_service_message();
