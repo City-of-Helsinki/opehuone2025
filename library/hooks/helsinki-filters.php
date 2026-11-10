@@ -46,6 +46,16 @@ add_filter( 'body_class', function ( $classes ) {
 	return $classes;
 }, 999 );
 
+// Add class to basic page template, page.php (because of sidemenus JS routing)
+add_filter( 'body_class', function ( $classes ) {
+	if ( is_page() && ! is_page_template() && ! is_front_page() ) {
+		$classes = array_merge( $classes, [ 'page-template-with-sidemenu' ] );
+	}
+	return $classes;
+} );
+
+
+
 add_filter( 'helsinki_hero_layout_style', function ( $style, $post_id ) {
 	if ( is_front_page() ) {
 		$style = 'has-front-page';
@@ -87,3 +97,16 @@ add_action( 'add_meta_boxes', function() {
         'normal'
     );
 }, 20 );
+
+// Remove parent theme's notifications and related scripts
+function remove_helsinki_notifications() {
+    remove_action( 'helsinki_main_top', 'helsinki_notifications', 20 );
+    remove_action( 'helsinki_notification_scripts', 'helsinki_notification_scripts', 10 );
+}
+add_action( 'wp_head', __NAMESPACE__ . '\\remove_helsinki_notifications' );
+
+// Remove the notification panel from the Customizer
+add_filter( 'helsinki_customizer_config', function ( $config ) {
+    unset( $config['helsinki_notification'] );
+    return $config;
+} );
