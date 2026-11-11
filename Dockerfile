@@ -26,6 +26,7 @@ ARG WP_THEME_VERSION_HELSINKITEEMA=""
 ARG WP_THEME_VERSION_OPEHUONE=""
 ARG WP_PLUGIN_VERSION_WP_CRONTROL=""
 ARG WP_PLUGIN_VERSION_FILEBIRD=""
+ARG WP_PLUGIN_VERSION_DUPLICATE_POST=""
 
 RUN mkdir -m 777 /tmp/wflogs
 
@@ -67,4 +68,5 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require wpackagist-plugin/wp-piwik:$WP_PLUGIN_VERSION_CONNECT_MATOMO && \
     composer require wpackagist-plugin/wp-crontrol:$WP_PLUGIN_VERSION_WP_CRONTROL && \
     composer require wpackagist-plugin/filebird:$WP_PLUGIN_VERSION_FILEBIRD && \
+    composer require wpackagist-plugin/duplicate-post:$WP_PLUGIN_VERSION_DUPLICATE_POST \
     rm -f /opt/app-root/src/.config/composer/auth.json
