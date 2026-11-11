@@ -68,5 +68,5 @@ RUN composer config repositories.opehuone vcs https://github.com/City-of-Helsink
     composer require wpackagist-plugin/wp-piwik:$WP_PLUGIN_VERSION_CONNECT_MATOMO && \
     composer require wpackagist-plugin/wp-crontrol:$WP_PLUGIN_VERSION_WP_CRONTROL && \
     composer require wpackagist-plugin/filebird:$WP_PLUGIN_VERSION_FILEBIRD && \
-    composer require wpackagist-plugin/duplicate-post:$WP_PLUGIN_VERSION_DUPLICATE_POST \
+    composer require wpackagist-plugin/duplicate-post:$WP_PLUGIN_VERSION_DUPLICATE_POST && \
     rm -f /opt/app-root/src/.config/composer/auth.json
