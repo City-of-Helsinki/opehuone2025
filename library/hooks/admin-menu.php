@@ -76,6 +76,7 @@ function opehuone_author_admin_menu() {
 	remove_menu_page( 'edit.php?post_type=links' );
 	remove_menu_page( 'edit.php?post_type=concentration' );
 	remove_menu_page( 'edit.php?post_type=services' );
+	remove_menu_page( 'tablepress' ); // TablePress plugin
 
 }
 add_action( 'admin_menu', 'opehuone_author_admin_menu', 999 );
@@ -91,6 +92,7 @@ function opehuone_author_admin_bar( $wp_admin_bar ) {
 	$wp_admin_bar->remove_node( 'new-links' );
 	$wp_admin_bar->remove_node( 'new-concentration' );
 	$wp_admin_bar->remove_node( 'new-services' );
+	$wp_admin_bar->remove_node( 'new-tablepress-table' );
 }
 add_action( 'admin_bar_menu', 'opehuone_author_admin_bar', 999 );
 
@@ -113,7 +115,25 @@ function opehuone_author_restrict_admin_screens( $screen ) {
 		'services',
 	);
 
-	if ( in_array( $screen->id, $restricted_screens, true ) || in_array( $screen->post_type, $restricted_post_types, true ) ) {
+	// Plugin pages are matched by the "page" query parameter prefix (includes subpages).
+	$restricted_page_prefixes = array(
+		'tablepress', // TablePress plugin
+	);
+
+	$is_restricted = in_array( $screen->id, $restricted_screens, true ) || in_array( $screen->post_type, $restricted_post_types, true );
+
+	if ( ! $is_restricted && isset( $_GET['page'] ) ) {
+		$page = sanitize_text_field( wp_unslash( $_GET['page'] ) );
+
+		foreach ( $restricted_page_prefixes as $prefix ) {
+			if ( 0 === strpos( $page, $prefix ) ) {
+				$is_restricted = true;
+				break;
+			}
+		}
+	}
+
+	if ( $is_restricted ) {
 		wp_safe_redirect( admin_url() );
 		exit;
 	}
@@ -135,6 +155,7 @@ function opehuone_editor_admin_menu() {
 	remove_menu_page( 'edit.php?post_type=links' );
 	remove_menu_page( 'edit.php?post_type=concentration' );
 	remove_menu_page( 'edit.php?post_type=services' );
+	remove_menu_page( 'tablepress' ); // TablePress plugin
 
 }
 add_action( 'admin_menu', 'opehuone_editor_admin_menu', 999 );
@@ -150,6 +171,7 @@ function opehuone_editor_admin_bar( $wp_admin_bar ) {
 	$wp_admin_bar->remove_node( 'new-links' );
 	$wp_admin_bar->remove_node( 'new-concentration' );
 	$wp_admin_bar->remove_node( 'new-services' );
+	$wp_admin_bar->remove_node( 'new-tablepress-table' );
 }
 add_action( 'admin_bar_menu', 'opehuone_editor_admin_bar', 999 );
 
@@ -172,7 +194,25 @@ function opehuone_editor_restrict_admin_screens( $screen ) {
 		'services',
 	);
 
-	if ( in_array( $screen->id, $restricted_screens, true ) || in_array( $screen->post_type, $restricted_post_types, true ) ) {
+	// Plugin pages are matched by the "page" query parameter prefix (includes subpages).
+	$restricted_page_prefixes = array(
+		'tablepress', // TablePress plugin
+	);
+
+	$is_restricted = in_array( $screen->id, $restricted_screens, true ) || in_array( $screen->post_type, $restricted_post_types, true );
+
+	if ( ! $is_restricted && isset( $_GET['page'] ) ) {
+		$page = sanitize_text_field( wp_unslash( $_GET['page'] ) );
+
+		foreach ( $restricted_page_prefixes as $prefix ) {
+			if ( 0 === strpos( $page, $prefix ) ) {
+				$is_restricted = true;
+				break;
+			}
+		}
+	}
+
+	if ( $is_restricted ) {
 		wp_safe_redirect( admin_url() );
 		exit;
 	}
