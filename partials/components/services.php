@@ -18,6 +18,16 @@ $user_services  = new User_services();
                 );
                 ?>
             </p>
+            <ul>
+                <li>
+                    <?php printf( esc_html__( 'Oletko unohtanut edu.hel.fi -salasanasi?', 'helsinki-universal' ) ); ?>
+                    <a href="https://tunnukset.asti.hel.fi/" target="_blank"><?php printf( esc_html__( 'Käy vaihtamassa se Tunnukset-järjestelmässä.', 'helsinki-universal' ) ); ?></a>
+                </li>
+                <li>
+                    <?php printf( esc_html__( 'Lue lisää', 'helsinki-universal' ) ); ?>
+                    <a href="https://opehuone.edu.hel.fi/digi/tunnukset-ja-kirjautuminen/?fdk_q="><?php printf( esc_html__( 'Kaskon tunnuksista.', 'helsinki-universal' ) ); ?></a>
+                </li>
+            </ul>
         </div>
     <?php else : ?>
         <!-- Show all active services -->
