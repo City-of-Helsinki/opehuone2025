@@ -25,6 +25,11 @@
 	&__login-message {
 		padding-left: rem(10px);
 		padding-bottom: 1.5rem;
+
+		ul {
+			margin: 0.5rem 0;
+			padding-inline-start: 1.25rem;
+		}
 	}
 
 	&.services-wrapper--no-bg {
