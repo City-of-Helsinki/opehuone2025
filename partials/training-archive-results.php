@@ -14,6 +14,27 @@ $trainings_query = get_training_posts_query();
     <?php if ( $trainings_query->have_posts() ) : ?>
         <?php while ( $trainings_query->have_posts() ) : $trainings_query->the_post(); ?>
             <?php
+            // Extra dates (JSON string)
+            $extra_dates = [];
+            $extra_raw   = get_post_meta( get_the_ID(), 'training_extra_dates', true );
+
+            if ( ! empty( $extra_raw ) ) {
+                $decoded = json_decode( $extra_raw, true );
+
+                if ( is_array( $decoded ) ) {
+                    foreach ( $decoded as $extra ) {
+                        // Skip rows that are missing a start time
+                        if ( empty( $extra['start'] ) ) {
+                            continue;
+                        }
+
+                        $extra_dates[] = [
+                            'start' => $extra['start'],
+                            'end'   => $extra['end'] ?? '',
+                        ];
+                    }
+                }
+            }
             $block_args = [
                 'url'            => get_the_permalink(),
                 'title'          => get_the_title(),
@@ -21,6 +42,7 @@ $trainings_query = get_training_posts_query();
                 'theme'          => get_post_meta( get_the_ID(), 'training_theme_color', true ),
                 'start_datetime' => get_post_meta( get_the_ID(), 'training_start_datetime', true ),
                 'end_datetime'   => get_post_meta( get_the_ID(), 'training_end_datetime', true ),
+                'extra_dates'    => $extra_dates,
                 'excerpt'        => get_the_excerpt(),
                 'categories'     => get_the_terms( get_the_ID(), 'training_theme' ),
             ];

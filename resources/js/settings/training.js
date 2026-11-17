@@ -1,9 +1,11 @@
 import {
+	Button,
 	DateTimePicker,
 	PanelBody,
 	TextControl,
 	TextareaControl,
 	SelectControl,
+	ToggleControl,
 } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
@@ -29,6 +31,7 @@ const editorSettings = () => {
 	// Meta fields to target
 	const startTime = 'training_start_datetime';
 	const endTime = 'training_end_datetime';
+	const showTime = 'training_show_time';
 	const draftTime = 'training_draft_datetime';
 	const trainingType = 'training_type';
 	const themeColor = 'training_theme_color';
@@ -44,6 +47,32 @@ const editorSettings = () => {
 			...meta,
 			[key]: value,
 		});
+
+	const extraDatesKey = 'training_extra_dates';
+
+	let extraDates = [];
+	try {
+		const parsed = JSON.parse(meta[extraDatesKey] || '[]');
+		extraDates = Array.isArray(parsed) ? parsed : [];
+	} catch (e) {
+		extraDates = [];
+	}
+
+	const setExtraDates = (next) =>
+		setPostMeta(extraDatesKey, JSON.stringify(next));
+
+	const addExtraDate = () =>
+		setExtraDates([...extraDates, { start: '', end: '' }]);
+
+	const updateExtraDate = (index, field, value) =>
+		setExtraDates(
+			extraDates.map((d, i) =>
+				i === index ? { ...d, [field]: value } : d
+			)
+		);
+
+	const removeExtraDate = (index) =>
+		setExtraDates(extraDates.filter((_, i) => i !== index));
 
 	return (
 		<>
@@ -85,6 +114,17 @@ const editorSettings = () => {
 						onChange={(value) => setPostMeta(trainingType, value)}
 					/>
 				</PanelBody>
+				<div style={{ padding: '16px' }}>
+					<ToggleControl
+						label="Näytä kellonaika"
+						checked={getPostMeta(showTime) === '1'}
+						onChange={(value) =>
+							setPostMeta(showTime, value ? '1' : '')
+						}
+						help="Kun päällä, sivulla näytetään päivämäärän lisäksi kellonaika. Kun pois päältä, näytetään vain päivämäärä."
+						__nextHasNoMarginBottom
+					/>
+				</div>
 				<PanelBody title="Aloitusaika" initialOpen={false}>
 					<DateTimePicker
 						id="training_start_datetime"
@@ -101,7 +141,62 @@ const editorSettings = () => {
 						startOfWeek={1}
 					/>
 				</PanelBody>
-				<PanelBody title="Ajankohta" initialOpen={false}>
+				<PanelBody
+					title={
+						extraDates.length
+							? `Lisäpäivämäärät (${extraDates.length})`
+							: 'Lisäpäivämäärät'
+					}
+					initialOpen={extraDates.length > 0}
+				>
+					{extraDates.map((date, index) => (
+						<div
+							key={index}
+							style={{
+								marginBottom: '16px',
+								border: '1px solid #ddd',
+							}}
+						>
+							<PanelBody
+								title={`Aloitusaika ${index + 2}`}
+								initialOpen={false}
+							>
+								<DateTimePicker
+									currentDate={date.start || null}
+									onChange={(value) =>
+										updateExtraDate(index, 'start', value)
+									}
+									startOfWeek={1}
+								/>
+							</PanelBody>
+							<PanelBody
+								title={`Loppumisaika ${index + 2}`}
+								initialOpen={false}
+							>
+								<DateTimePicker
+									currentDate={date.end || null}
+									onChange={(value) =>
+										updateExtraDate(index, 'end', value)
+									}
+									startOfWeek={1}
+								/>
+							</PanelBody>
+							<div style={{ padding: '8px' }}>
+								<Button
+									variant="link"
+									isDestructive
+									onClick={() => removeExtraDate(index)}
+								>
+									Poista päivämäärä {index + 2}
+								</Button>
+							</div>
+						</div>
+					))}
+					<Button variant="secondary" onClick={addExtraDate}>
+						+ Lisää koulutuksen päivämäärät
+					</Button>
+				</PanelBody>
+				<PanelBody title="Ajankohta, lisätiedot" initialOpen={false}>
 					<TextControl
 						label={'Ajankohta (päivä(t) ja aika)'}
 						value={getPostMeta(trainingSchedule)}

@@ -7,26 +7,38 @@ class TrainingHelpers {
 	 * if start and end are on same day, then return start_date date like 'd.m.Y h:i - h:i of the end date', example 02.02.2025 12:00 - 14:00
 	 * if starte and end date are not on same day, then return d.m. - d.m.Y, example 02.02. - 05.02.2025
 	 *
-	 * @param $start_datetime datetimezone string example 2025-03-23T17:15:00
-	 * @param $end_datetime datetimezone string example 2025-03-23T17:15:00
+	 * @param string $start_datetime datetimezone string example 2025-03-23T17:15:00
+	 * @param string $end_datetime datetimezone string example 2025-03-23T17:15:00
+	 * @param bool   $show_time show the time (linebreak before "klo HH:MM - HH:MM")
 	 *
 	 * @return string
 	 */
-	public static function get_training_date( $start_datetime, $end_datetime ) {
-		// Convert input datetime strings to DateTime objects
+	public static function get_training_date( $start_datetime, $end_datetime = '', $show_time = false ) {
 		$start = new DateTime( $start_datetime );
-		$end   = new DateTime( $end_datetime );
+		$end   = ! empty( $end_datetime ) ? new DateTime( $end_datetime ) : null;
 
-		// Check if the start and end dates are on the same day
-		if ( $start->format( 'Y-m-d' ) === $end->format( 'Y-m-d' ) ) {
-			// Format: d.m.Y h:i - h:i
-			return $start->format( 'd.m.Y H:i' ) . ' - ' . $end->format( 'H:i' );
+		$same_day = $end && $start->format( 'Y-m-d' ) === $end->format( 'Y-m-d' );
+
+		// Date
+		if ( ! $end || $same_day ) {
+			$date = $start->format( 'd.m.Y' );
 		} else {
-			// Format: d.m. - d.m.Y
-			return $start->format( 'd.m.' ) . ' - ' . $end->format( 'd.m.Y' );
+			$date = $start->format( 'd.m.' ) . ' - ' . $end->format( 'd.m.Y' );
 		}
-	}
 
+		if ( ! $show_time ) {
+			return $date;
+		}
+
+		// Time
+		$time = 'klo ' . $start->format( 'H:i' );
+
+		if ( $end ) {
+			$time .= ' - ' . $end->format( 'H:i' );
+		}
+
+		return $date . "\n" . $time;
+	}
 	public static function get_single_date( $datetime ) {
 		if ( empty( $datetime ) ) {
 			return '';

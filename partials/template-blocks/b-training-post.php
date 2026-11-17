@@ -6,6 +6,7 @@ $block_title      = isset( $args['title'] ) ? $args['title'] : null;
 $block_url        = isset( $args['url'] ) ? $args['url'] : null;
 $block_excerpt    = isset( $args['excerpt'] ) ? $args['excerpt'] : null;
 $block_categories = isset( $args['categories'] ) ? $args['categories'] : [];
+$extra_dates      = isset( $args['extra_dates'] ) ? $args['extra_dates'] : [];
 
 $date          = TrainingHelpers::get_training_date( $args['start_datetime'], $args['end_datetime'] );
 $readable_type = TrainingHelpers::get_training_type( $args['type'] );
@@ -22,7 +23,13 @@ $type_svg      = TrainingHelpers::get_training_type_svg( $args['type'] );
 		<div class="b-training-post__icon-rows">
 			<div class="b-training-post__icon-row">
 				<?php Helpers\the_svg( 'icons/calendar-clock' ); ?>
-				<?php echo esc_html( $date ); ?>
+				<span>
+					<?php echo esc_html( $date ); ?>
+					<?php foreach ( $extra_dates as $extra ) : ?>
+						<br>
+						<?php echo esc_html( TrainingHelpers::get_training_date( $extra['start'], $extra['end'] ?? '' ) ); ?>
+					<?php endforeach; ?>
+				</span>
 			</div>
 			<div class="b-training-post__icon-row">
 				<?php Helpers\the_svg( 'icons/' . $type_svg ); ?>

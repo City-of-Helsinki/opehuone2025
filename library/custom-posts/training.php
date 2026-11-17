@@ -89,6 +89,8 @@ function get_meta_fields(): array {
 		// Add needed post meta here...
 		[ 'key' => 'training_start_datetime' ],
 		[ 'key' => 'training_end_datetime' ],
+		[ 'key' => 'training_extra_dates' ],
+		[ 'key' => 'training_show_time' ],
 		[ 'key' => 'training_draft_datetime' ],
 		[ 'key' => 'training_theme_color' ],
 		[ 'key' => 'training_type' ],
