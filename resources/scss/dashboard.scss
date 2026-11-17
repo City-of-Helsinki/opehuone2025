@@ -76,3 +76,57 @@
 		margin: 0;
 	}
 }
+
+// Styles for poikkeusilmoitukset options page
+.toplevel_page_poikkeusilmoitukset-asetukset {
+	.acf-postbox {
+		.acf-field-repeater {
+			.acf-table {
+				.acf-row {
+					td {
+						border-bottom: 8px solid #1e1e1e;
+						background-color: #f7f7f8;
+					}
+					&:nth-child(even) {
+						td {
+							background-color: #fff;
+						}
+					}
+				}
+				.acf-row {
+					.acf-row-handle {
+						vertical-align: top !important;
+
+						.acf-row-number {
+							font-size: 2rem;
+							font-weight: bold;
+							color: #000;
+
+							&::after {
+								content: ".";
+							}
+						}
+					}
+					.acf-field[data-name="service_notice_type"] {
+						.acf-input {
+							.select2-selection__rendered {
+								span {
+									font-weight: 500;
+								}
+								&[title="Ilmoitus"] {
+									background-color: #e5eff8;
+								}
+								&[title="Huomio"] {
+									background-color: #fff4b4;
+								}
+								&[title="Varoitus"] {
+									background-color: #f6e2e6;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
