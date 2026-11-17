@@ -13,11 +13,18 @@ $user_services  = new User_services();
                 <a href="javascript:void(0)" onclick="window.wpo365.pintraRedirect.toMsOnline()" class="login-link">
                     <?php esc_html_e( 'Kirjaudu sisään', 'helsinki-universal' ); ?>
                 </a>
-                <?php printf(
-                    esc_html__( ' Opehuoneeseen edu.hel.fi -tunnuksillasi nähdäksesi opetuksen sovellukset.', 'helsinki-universal' )
-                );
-                ?>
+                <?php esc_html_e( ' Opehuoneeseen edu.hel.fi -tunnuksillasi nähdäksesi opetuksen sovellukset.', 'helsinki-universal' ); ?>
             </p>
+            <ul>
+                <li>
+                    <?php esc_html_e( 'Oletko unohtanut edu.hel.fi -salasanasi?', 'helsinki-universal' ); ?>
+                    <a href="https://tunnukset.asti.hel.fi/" target="_blank"><?php esc_html_e( 'Käy vaihtamassa se Tunnukset-järjestelmässä.', 'helsinki-universal' ); ?></a>
+                </li>
+                <li>
+                    <?php esc_html_e( 'Lue lisää', 'helsinki-universal' ); ?>
+                    <a href="https://opehuone.edu.hel.fi/digi/tunnukset-ja-kirjautuminen/?fdk_q="><?php esc_html_e( 'Kaskon tunnuksista.', 'helsinki-universal' ); ?></a>
+                </li>
+            </ul>
         </div>
     <?php else : ?>
         <!-- Show all active services -->
