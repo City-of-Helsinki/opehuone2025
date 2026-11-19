@@ -170,19 +170,23 @@ add_filter('wp_sentry_before_send', function (\Sentry\Event $event, ?\Sentry\Eve
     return $event; // keep everything else
 }, 100, 2);
 
-// Remove Askem from default parent theme hooks
-add_action( 'template_redirect', function() {
-    remove_action( 'helsinki_content_body_after', 'CityOfHelsinki\WordPress\Helsinki\Theme\Integrations\Askem\provide_feedback_buttons', 21 );
-    remove_action( 'helsinki_content', 'CityOfHelsinki\WordPress\Helsinki\Theme\Integrations\Askem\provide_feedback_buttons', 30 );
-}, 20 );
-
-// Add Askem with own custom hook: opehuone_askem
+// Move Askem feedback buttons from the parent theme's default hook to our own hook: opehuone_askem
 // Used atm. at partials/page-with-sidemenu.php, partials/page-without-sidemenu.php, and partials/single.php
-add_action( 'template_redirect', function() {
-    if ( apply_filters( 'helsinki_feedback_enabled', false ) ) {
-        add_action( 'opehuone_askem', 'CityOfHelsinki\WordPress\Helsinki\Theme\Integrations\Askem\provide_feedback_buttons', 21 );
-    }
-}, 20 );
+add_action( 'helsinki_feedback_buttons_layout', function ( $layout ) {
+    add_action( 'template_redirect', function () use ( $layout ) {
+        $callback = array( $layout, 'render' );
+
+        // Check if the layout is actually registered in the parent theme
+        if ( false === has_action( $layout->hook_name(), $callback ) ) {
+            return;
+        }
+
+        remove_action( $layout->hook_name(), $callback, $layout->hook_priority() );
+
+        // Add the layout to the custom hook "opehuone_askem"
+        add_action( 'opehuone_askem', $callback, 21 );
+    }, 20 );
+} );
 
 // Remove featured image support from pages and trainings admin for non-admin/-editor users.
 function opehuone_remove_thumbnail_support( $current_screen ) {
